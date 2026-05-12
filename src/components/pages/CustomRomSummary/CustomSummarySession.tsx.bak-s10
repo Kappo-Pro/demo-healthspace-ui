@@ -1,0 +1,392 @@
+import { Button,
+  Checkbox,
+  Dropdown,
+  Flex,
+  Menu,
+  Pagination,
+  Space,
+  Spin,
+  Tooltip,
+  message, Typography } from 'antd';
+import { ActivityFeedSkeleton } from '@atoms/Skeletons';
+import { ResponsiveImage } from '@atoms/ResponsiveImage';
+
+const { Title } = Typography;
+import { useEffect, useState } from 'react';
+import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { getCustomRomSessionById, setSelectedRom } from '@stores/clinical/rom/customRom';
+import {
+  CustomRomSession,
+  CustonRomSessionPaginated,
+  OnchangeStatus,
+  IstatusIcon,
+  Status,
+} from '@types';
+import { addReportId, deleteReportId } from '@stores/content/report/reports';
+import { useNavigate } from 'react-router-dom';
+import { StatusNormalized, URL_PATH } from '@stores/constants';
+import { updateOmniRomSessionStatus as updateOmniRomSessionStatusOutOfParams } from '@stores/patients/triage/outOfParams';
+import { updateOmniRomSessionStatus as updateOmniRomSessionStatusPendingReview } from '@stores/patients/triage/pendingReview';
+import { updateOmniRomSessionStatus as updateOmniRomSessionStatusReviewed } from '@stores/patients/triage/reviewed';
+import { updateOmniRomSessionStatus as updateOmniRomSessionStatusEscalationRequired } from '@stores/patients/triage/escalationRequired';
+import { updateOmniRomSessionStatus as updateOmniRomSessionStatusFollowUpRequired } from '@stores/patients/triage/followUpRequired';
+import { SummaryResultReportDownloader } from './SummaryResultReportDownloader';
+import { getRomEmailTemplate } from '@stores/shared/settings/settings';
+import { FilterLines } from '@vitalflow-icons/general/filterLines';
+
+interface ICustomSummarySession {
+  session: string;
+  programId?: string;
+}
+
+const CustomSummarySession = (props: ICustomSummarySession) => {
+  const { session } = props;
+  const { t } = useTranslation();
+  const [selectedButton, setSelectedButton] = useState<string>('completed');
+  const [completedStatus, setCompletedStatus] = useState<boolean>(true);
+
+  const options = [
+    {
+      label: t('Admin.data.menu.userRoles.filter'),
+      value: 'filter',
+      icon: <FilterLines color="stroke-black" width={20} height={18} />,
+    },
+    { label: t('Admin.data.survey.completed'), value: 'completed' },
+    { label: t('Admin.data.menu.userRoles.inCompleted'), value: 'incompleted' },
+  ];
+  const dispatch = useTypedDispatch();
+  const [customRomSessionExercise, setCustomRomSessionExercise] =
+    useState<CustonRomSessionPaginated>();
+  const [isLoading, setLoading] = useState(false);
+
+  const fetchSessionData = async (
+    sessionId: string,
+    page: number,
+    completed: boolean,
+  ) => {
+    setLoading(true);
+    const data = await dispatch(
+      getCustomRomSessionById({ customRomId: sessionId, page, completed }),
+    );
+    setCustomRomSessionExercise(data.payload as CustonRomSessionPaginated);
+    setLoading(false);
+  };
+
+  const navigate = useNavigate();
+  const user = useTypedSelector(state => state.user);
+  const { selectedUser } = useTypedSelector(state => state.contacts.main);
+
+  const statusIcons: IstatusIcon = {
+    outOfParams: <StatusBadge color="var(--color-gray-900)" />,
+    pendingReview: <StatusBadge color="var(--color-warning-500)" />,
+    reviewed: <StatusBadge color="var(--color-success-500)" />,
+    escalationRequired: <StatusBadge color="var(--color-error-600)" />,
+    followUpRequired: <StatusBadge color="var(--color-warning-600)" />,
+  };
+
+  type IUpdatePostureSessionStatus = Omit<
+    Record<Status, unknown>,
+    'newPatients'
+  >;
+
+  const updateOmniRomStatus: IUpdatePostureSessionStatus = {
+    outOfParams: updateOmniRomSessionStatusOutOfParams,
+    pendingReview: updateOmniRomSessionStatusPendingReview,
+    reviewed: updateOmniRomSessionStatusReviewed,
+    escalationRequired: updateOmniRomSessionStatusEscalationRequired,
+    followUpRequired: updateOmniRomSessionStatusFollowUpRequired,
+  };
+
+  const onChangeStatus = async (params: OnchangeStatus, item: unknown, completed: boolean) => {
+    const { sessionId, status } = params;
+    message.loading({
+      content: t('Admin.data.menu.patientDetail.aiAssistantRomSummary.saving'),
+      key: sessionId,
+    });
+    await dispatch(
+      updateOmniRomStatus[item.status as keyof IUpdatePostureSessionStatus]({
+        sessionId,
+        body: { status },
+      }),
+    );
+    message.success({
+      content: t(
+        'Admin.data.menu.patientDetail.aiAssistantRomSummary.statusSuccess',
+      ),
+      key: sessionId,
+      duration: 3,
+    });
+    const data = await dispatch(
+      getCustomRomSessionById({
+        customRomId: session,
+        page: customRomSessionExercise?.pagination?.currentPage || 1,
+        completed: completed
+      }),
+    );
+    setCustomRomSessionExercise(data.payload as CustonRomSessionPaginated);
+  };
+
+  const onPageChange = async (pageNumber: number) => {
+    setLoading(true);
+    fetchSessionData(session, pageNumber, completedStatus);
+    setLoading(false);
+  };
+  useEffect(() => {
+    fetchSessionData(session, 1, completedStatus);
+  }, [session]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    await dispatch(getRomEmailTemplate());
+  };
+
+  const reportIds = useTypedSelector(state => state.reports.reportIds);
+
+  const healthStatus = (session: { id: string; status: Status }) => {
+    const menu = (
+      <Menu>
+        {Object.entries(StatusNormalized)
+          .filter(([key]) => key !== session.status)
+          .map(([status, label]) => {
+            return (
+              <Menu.Item
+                key={status}
+                onClick={() => {
+                  onChangeStatus(
+                    { sessionId: session.id, status: status as Status },
+                    session,
+                    completedStatus
+                  );
+                }}>
+                <Space>
+                  <span className="dropdown-badge">
+                    {statusIcons[status as keyof IstatusIcon]}
+                  </span>
+                  <span>{label}</span>
+                </Space>
+              </Menu.Item>
+            );
+          })}
+      </Menu>
+    );
+    return (
+      <Flex gap={12} style={{ paddingRight: 0 }}>
+        {session?.romPatientResults?.length >= 1 && <>
+        <Tooltip
+          title={t('Admin.data.menu.patientDetail.aiAssistantRomSummary.edit')}>
+          <span>
+            <SummaryResultReportDownloader
+              selectedRom={session}
+              completedStatus={completedStatus}
+              fetchSessionData={fetchSessionData}
+              user={user.isPhysioterapist ? selectedUser : user}
+              reportType="edit"
+              color="black"
+            />
+          </span>
+        </Tooltip>
+        {completedStatus &&
+        <>
+        <Tooltip
+          title={t('Admin.data.menu.patientDetail.aiAssistantRomSummary.qrCode')}>
+          <span>
+            <SummaryResultReportDownloader
+              selectedRom={session}
+              completedStatus={completedStatus}
+              user={user.isPhysioterapist ? selectedUser : user}
+              reportType="qr"
+              color="black"
+            />
+          </span>
+        </Tooltip>
+        <Tooltip
+          title={t(
+            'Admin.data.menu.patientDetail.aiAssistantRomSummary.sendEmail',
+          )}>
+          <span>
+            <SummaryResultReportDownloader
+              selectedRom={session}
+              completedStatus={completedStatus}
+              user={user.isPhysioterapist ? selectedUser : user}
+              reportType="email"
+              color="black"
+            />
+          </span>
+        </Tooltip>
+        <Tooltip
+          title={t(
+            'Admin.data.menu.patientDetail.aiAssistantRomSummary.download',
+          )}>
+          <span>
+            <SummaryResultReportDownloader
+              selectedRom={session}
+              user={user.isPhysioterapist ? selectedUser : user}
+              reportType="download"
+              color="black"
+              completedStatus={completedStatus}
+            />
+          </span>
+        </Tooltip></>}</>}
+        <div className="posture-dropdown-section" style={{ paddingRight: 0 }}>
+          {user.isPhysioterapist ? (
+            <Dropdown menu={menu}>
+              <a onClick={e => e.stopPropagation()}>
+                {statusIcons[session.status as keyof IstatusIcon]}
+              </a>
+            </Dropdown>
+          ) : (
+            ''
+          )}
+        </div>
+        <div
+          style={{ paddingRight: 0 }}
+          onClick={event => {
+            event.stopPropagation();
+          }}>
+          <Checkbox
+            checked={reportIds?.romSessionsIds?.includes(session.id)}
+            disabled={session?.romPatientResults?.length <= 0}
+            className="report-checkbox"
+            onChange={e => {
+              if (e.target.checked) {
+                dispatch(
+                  addReportId({
+                    type: 'romSessionsIds',
+                    id: session.id,
+                  }),
+                );
+              } else {
+                dispatch(
+                  deleteReportId({
+                    type: 'romSessionsIds',
+                    id: session.id,
+                  }),
+                );
+              }
+            }}
+          />
+        </div>
+      </Flex>
+    );
+  };
+  return (
+    <>
+      {isLoading ? (
+        <ActivityFeedSkeleton count={6} />
+      ) : (
+        <>
+          <div className="select-none posture-collapse bg-gray-100">
+            <Flex justify="flex-end" style={{ width: '100%', padding: '10px' }}>
+              <Button.Group>
+              {options.map(item => {
+                const isSelected = selectedButton === item.value;
+                return (
+                  <Button
+                    key={item.label}
+                    icon={item.icon}
+                    style={{
+                      borderColor: 'inherit',
+                      borderRadius: '0px',
+                      backgroundColor: isSelected ? 'var(--border-default)' : 'white',
+                      color: 'var(--color-gray-900)',
+                    }}
+                    onClick={() => {
+                      if (item.value != 'filter') {
+                        setSelectedButton(item.value);
+                        if (!completedStatus && item.value === 'completed') {
+                          setCompletedStatus(true);
+                          fetchSessionData(session, 1, true);
+                        } else if (
+                          completedStatus &&
+                          item.value === 'incompleted'
+                        ) {
+                          setCompletedStatus(false);
+                          fetchSessionData(session, 1, false);
+                        }
+                      }
+                    }}>
+                    {item.label}
+                  </Button>
+                );
+              })}
+              </Button.Group>
+            </Flex>
+            // TODO: Consider using length ?? defaultValue or length?.property instead of length!
+            {(customRomSessionExercise?.data?.length ?? 0) > 0 ? (
+              <>
+                {customRomSessionExercise?.data?.map(
+                  (session: CustomRomSession) => {
+                    return (
+                      <Flex justify="space-between" align="center" className="header-panel !bg-white !border !border-gray-200 !rounded-lg my-1.5 p-3"
+                        title={session?.romPatientResults.length < 1 ? t('Admin.data.addToReports.noData') : ''}
+                          style={{ cursor: session?.romPatientResults.length >= 1 ? 'pointer' : 'not-allowed' }}
+                      >
+                        <span
+                          onClick={e => {
+                            if (session?.romPatientResults.length >= 1){
+                            e.stopPropagation();
+                            dispatch(setSelectedRom(session));
+                            navigate(
+                              `/${user.isPhysioterapist ? selectedUser.id : user.id}/${URL_PATH.ROM}/${session?.id}/${URL_PATH.SCAN_RESULT}`,
+                              {
+                                state: {
+                                  status: completedStatus,
+                                },
+                              },
+                            );
+                          }
+                          }}>
+                          {session?.title ||
+                            moment(session?.createdAt).local().format('LLLL')}
+                        </span>
+                        <span>{healthStatus(session)}</span>
+                      </Flex>
+                    );
+                  },
+                )}
+              </>
+            ) : (
+              <div className="coach-rom-summary-container-row-div">
+                <ResponsiveImage
+                  className="w-25 h-25 coach-rom-summary-container-row-div-img"
+                  src="/images/NoExe.png"
+                  alt="No Exercises Image"
+                />
+                <Title level={1} className="coach-rom-summary-container-row-div-h1">
+                  {t('Patient.data.myProgress.omniRom.empty')}
+                </Title>
+              </div>
+            )}
+          </div>
+
+          // TODO: Consider using totalCount ?? defaultValue or totalCount?.property instead of totalCount!
+          {(customRomSessionExercise?.pagination?.totalCount ?? 0) >= 5 && (
+            <Flex justify="center">
+              <Pagination
+                current={customRomSessionExercise?.pagination?.currentPage}
+                showSizeChanger={false}
+                onChange={onPageChange}
+                total={customRomSessionExercise?.pagination?.totalCount}
+              />
+            </Flex>
+          )}
+        </>
+      )}
+    </>
+  );
+};
+
+const StatusBadge = ({ color }: { color: string }) => (
+  <span className="inline-block" style={{
+    width: '16px',
+    height: '16px',
+    borderRadius: '50%',
+    backgroundColor: color
+  }} />
+);
+export default CustomSummarySession;

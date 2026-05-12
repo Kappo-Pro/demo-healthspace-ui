@@ -1,0 +1,383 @@
+import RadarChart from './RadarChart';
+import ContentRomResult from './ContentRomTableResult';
+import ContentRomResultSides from './ContentROMTableResultSides';
+import { Flex, Row, Col, Typography, Tooltip, Button } from 'antd';
+import { DashboardSkeleton } from '@atoms/Skeletons';
+
+const { Paragraph } = Typography;
+import './style.css';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { useEffect, useState } from 'react';
+import { router } from '@routers/routers';
+import { setActiveTab, setStateId } from '@stores/shared/patientDetail/patientDetail';
+// REMOVED: import { getUserById } from '@stores/activity/contacts/contacts';
+import { ArrowLeft } from '@vitalflow-icons/arrows/arrowLeft';
+import { useTranslation } from 'react-i18next';
+import moment from 'moment';
+import { SummaryResultReportDownloader } from '@pages/CustomRomSummary/SummaryResultReportDownloader';
+import { ACTIVETAB, getMobilityData, PLANS } from '@stores/constants';
+import { getRomActivityStreamById } from '@stores/activity/activityStream/activityStream';
+import { CustomRomSession } from '@types';
+import MobilityPersonas from './MobilityPersonna';
+import MobilityOverview from './MobilityOverview';
+import { evalScore } from './jointsTemplateData';
+import PieChart from './PieChart';
+import OldRadarChart from './OldRadarChart';
+import { FilterLines } from '@vitalflow-icons/general/filterLines';
+
+const { Text } = Typography;
+
+interface ICScreen {
+	isDashboard?: boolean;
+}
+
+const AiAssistantCustomRomScanResult = (props: ICScreen) => {
+	const { isDashboard } = props;
+	const [selectedButton, setSelectedButton] = useState<string>('pie');
+
+	const { state } = useLocation();
+	const { t } = useTranslation();
+	const [avgScore, setAvgScore] = useState(0);
+	const mobilityOptions = getMobilityData(Math.round(avgScore), t);
+	const persona = mobilityOptions.find(option => option.active);
+	const navigate = useNavigate();
+	const dispatch = useTypedDispatch();
+	const { selectedRom } = useTypedSelector(state => state.rom.customRom);
+	const user = useTypedSelector(state => state.user);
+	const { selectedUser } = useTypedSelector(state => state.contacts.main);
+	const userId = user.isPhysioterapist ? selectedUser?.id : user?.id;
+	const userPlans = useTypedSelector(
+		state => state.settings?.plans?.savedUserPlans,
+	);
+	const isPlanOne = userPlans?.planType === PLANS?.SCREENING;
+	const [isLoading, setLoading] = useState(true);
+	const [sessionData, setSessionData] = useState<CustomRomSession | null>(
+		{} as CustomRomSession,
+	);
+	const editRecord = useTypedSelector(state => state.rom.main.editRecord)
+	const getColorForCategory = (score: number) => {
+		if (Math.round(score) >= 90) return 'var(--color-success-600)';
+		if (Math.round(score) >= 75 && Math.round(score) <= 89) return 'var(--color-success-400)';
+		if (Math.round(score) >= 60 && Math.round(score) <= 74) return 'var(--color-warning-600)';
+		if (Math.round(score) >= 40 && Math.round(score) <= 59) return 'var(--color-warning-500)';
+		if (Math.round(score) >= 20 && Math.round(score) <= 39) return 'var(--color-error-500)';
+		return '#d9363e';
+	};
+
+	const getCategoryName = (score: number) => {
+		if (score >= 90) return t('Patient.data.omnirom.optimalMobility');
+		if (score >= 75) return t('Patient.data.omnirom.functionalMobility');
+		if (score >= 60) return t('Patient.data.omnirom.moderateRestriction');
+		if (score >= 40) return t('Patient.data.omnirom.restrictedMobility');
+		if (score >= 20) return t('Patient.data.omnirom.severelyRestricted');
+		return t('Patient.data.omnirom.criticallyImpaired');
+	};
+
+	useEffect(() => {
+		if (sessionData?.romPatientResults) {
+			const totalScore = sessionData?.romPatientResults?.reduce((sum, item) => {
+				const itemScore = item?.results?.reduce((innerSum, result) => {
+					const score = Math.round(evalScore(result));
+					return innerSum + score;
+				}, 0);
+				return sum + (itemScore || 0);
+			}, 0);
+			const totalResultsLength = sessionData?.romPatientResults?.reduce(
+				(total, { results }) => total + (results?.length || 0),
+				0,
+			);
+
+			setAvgScore(Math.round(totalScore / totalResultsLength));
+		}
+	}, [sessionData]);
+
+	const getCategoryDesc = (score: number) => {
+		if (score >= 90) return t('Patient.data.omnirom.optimalMobilityDesc');
+		if (score >= 75) return t('Patient.data.omnirom.functionalMobilityDesc');
+		if (score >= 60) return t('Patient.data.omnirom.moderateRestrictionDesc');
+		if (score >= 40) return t('Patient.data.omnirom.limitedMobilityDesc');
+		if (score >= 20) return t('Patient.data.omnirom.restrictedMobilityDesc');
+		return t('Patient.data.omnirom.criticallyImpairedDesc');
+	};
+
+	const isIpad =
+		/iPad|Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
+
+	useEffect(() => {
+		if (isIpad) {
+			sessionStorage.setItem('freshEntry', 'true');
+		}
+	}, []);
+
+	useEffect(() => {
+		const pathParts = window.location.pathname.split('/');
+		const romIndex = pathParts.indexOf('rom');
+		if (romIndex !== -1 && pathParts.length > romIndex + 1) {
+			const romId = pathParts[romIndex + 1];
+			if (!selectedRom?.id && romId) {
+				dispatch(setActiveTab(ACTIVETAB.ROM_SCAN_RESULTS));
+				fetchData(romId);
+			}
+		}
+		if (selectedRom?.id) {
+			fetchData(selectedRom?.id);
+		}
+	}, [selectedRom, user, selectedUser, editRecord]);
+
+	const fetchData = async (romId: string) => {
+		setLoading(true);
+		if(romId) {
+		const sessionData = await dispatch(getRomActivityStreamById({ romId }));
+		setSessionData(sessionData.payload as CustomRomSession);
+		}
+		setLoading(false);
+	};
+
+	const handleArrowClick = async () => {
+		navigate(`/${sessionData?.userId}${router.AIASSISTANT_ROM_SUMMARY}`, {
+			state: {
+				sessionId: sessionData?.romProgramId,
+			},
+		});
+		dispatch(setActiveTab('romSummary'));
+		dispatch(setStateId(sessionData?.id));
+	};
+
+	{
+		if (isLoading) {
+			return <DashboardSkeleton />;
+		}
+	}
+
+	const options = [
+		{
+			label: '',
+			value: 'filter',
+			icon: <FilterLines color="stroke-black" width={20} height={18} />,
+		},
+		{ label: t('Pie Chart'), value: 'pie' },
+		{ label: t('Radar Chart'), value: 'radar' },
+	];
+
+	return (
+		<Flex
+			vertical
+			style={{
+				padding: '5px 25px 25px',
+				backgroundColor: 'var(--summary-bg-colors)',
+			}}>
+			<Flex
+				align="end"
+				justify="space-between"
+				gap={10}
+				wrap="wrap"
+				style={{
+					marginBottom: '10px',
+				}}>
+				<Flex
+					align="end"
+					gap={10}
+					wrap="wrap"
+					style={{
+						color: 'var(--text-color-root)',
+						fontWeight: 'bold',
+						fontSize: '20px',
+					}}>
+					{location.pathname != '/' &&
+						!location.pathname.includes(router.PATIENTVIEW) && (
+							<span onClick={handleArrowClick} className="cursor-pointer">
+								<ArrowLeft color="stroke-[--text-color-root]" />
+							</span>
+						)}
+					<Paragraph>{t('Patient.data.omnirom.romMobilityReport')} - {sessionData?.romProgram?.title}</Paragraph>
+					{!state?.status ? (
+						<>
+							<Tooltip
+								title={t(
+									'Admin.data.menu.patientDetail.aiAssistantRomSummary.download',
+								)}>
+								<span>
+									<SummaryResultReportDownloader
+										chartType={selectedButton}
+										selectedRom={sessionData || null}
+										user={user.isPhysioterapist ? selectedUser : user}
+										reportType="edit"
+										completedStatus={state?.status}
+									/>
+								</span>
+							</Tooltip>
+						</>
+					) : (
+						<>
+							{!isDashboard && (
+								<>
+									<Tooltip
+										title={t(
+											'Admin.data.menu.patientDetail.aiAssistantRomSummary.edit',
+										)}>
+										<span>
+											<SummaryResultReportDownloader
+												selectedRom={sessionData || null}
+												chartType={selectedButton}
+												user={user.isPhysioterapist ? selectedUser : user}
+												reportType="edit"
+												completedStatus={state?.status}
+											/>
+										</span>
+									</Tooltip>
+									<Tooltip
+										title={t(
+											'Admin.data.menu.patientDetail.aiAssistantRomSummary.qrCode',
+										)}>
+										<span>
+											<SummaryResultReportDownloader
+												selectedRom={sessionData || ({} as CustomRomSession)}
+												user={user.isPhysioterapist ? selectedUser : user}
+												reportType="qr"
+												chartType={selectedButton}
+												completedStatus={state?.status}
+											/>
+										</span>
+									</Tooltip>
+									<Tooltip
+										title={t(
+											'Admin.data.menu.patientDetail.aiAssistantRomSummary.sendEmail',
+										)}>
+										<span>
+											<SummaryResultReportDownloader
+												selectedRom={sessionData || ({} as CustomRomSession)}
+												user={user.isPhysioterapist ? selectedUser : user}
+												reportType="email"
+												chartType={selectedButton}
+												completedStatus={state?.status}
+											/>
+										</span>
+									</Tooltip>
+								</>
+							)}
+							<Tooltip
+								title={t(
+									'Admin.data.menu.patientDetail.aiAssistantRomSummary.download',
+								)}>
+								<span>
+									<SummaryResultReportDownloader
+										selectedRom={sessionData || ({} as CustomRomSession)}
+										user={user.isPhysioterapist ? selectedUser : user}
+										reportType="download"
+										chartType={selectedButton}
+										completedStatus={state?.status}
+									/>
+								</span>
+							</Tooltip>
+						</>
+					)}
+				</Flex>
+				<Text
+					type="secondary"
+					style={{
+						color: 'var(--text-color-root)',
+					}}>
+					{moment(selectedRom?.createdAt).local().format('LLL')}
+				</Text>
+			</Flex>
+			<div style={{ marginLeft: '10px', marginRight: '10px' }}>
+				<Row gutter={[24, 16]} className='flex-wrapper-row'>
+				<Col
+					xs={24}
+					sm={24}
+					md={24}
+					lg={10}
+					xl={10}
+					style={{
+					padding: '10px',
+					backgroundColor: 'white',
+					borderRadius: '14px',
+					}}
+				>
+						<div
+							className="mobility-outer-container"
+							style={{ backgroundColor: 'var(--color-gray-100)' }}>
+							<div className="mobility-icon">
+								<img src={persona?.selectedIcon} alt={persona?.title} />
+							</div>
+							<div className="mobility-text">
+								<div
+									className="mobility-title-text"
+									style={{ color: persona?.color }}>
+									{t('Patient.data.mobilityReport.youAre')} "
+									{persona?.title?.toUpperCase()}"
+								</div>
+								<div className="mobility-description">{persona?.range}</div>
+							</div>
+						</div>
+						<Flex justify="flex-end" style={{ width: '100%', padding: '10px' }}>
+							<Button.Group>
+							{options.map(item => {
+								const isSelected = selectedButton === item.value;
+								return (
+									<Button
+										key={item.label}
+										icon={item.icon}
+										style={{
+											borderColor: 'inherit',
+											borderRadius: '0px',
+											backgroundColor: isSelected ? 'var(--border-default)' : 'white',
+											color: 'var(--color-gray-900)',
+										}}
+										onClick={() => {
+											if (item.value != 'filter') {
+												setSelectedButton(item.value);
+											}
+										}}>
+										{item.label}
+									</Button>
+								);
+							})}
+							</Button.Group>
+						</Flex>
+						{selectedButton === 'radar' ? (
+							<OldRadarChart
+								selectedRom={sessionData}
+								// TODO: Consider using persona ?? defaultValue or persona?.property instead of persona!
+								persona={persona!}
+								avgScore={avgScore}
+							/>
+						) : (
+							<PieChart
+								selectedRom={sessionData}
+								// TODO: Consider using persona ?? defaultValue or persona?.property instead of persona!
+								persona={persona!}
+								avgScore={avgScore}
+							/>
+						)}
+					</Col>
+					<Col
+    xs={24}
+    sm={24}
+    md={24}
+    lg={14}
+    xl={14}
+		className='flex-wrapper-col'
+  >
+						<ContentRomResultSides
+							selectedRom={sessionData || ({} as CustomRomSession)}
+							getColorForCategory={getColorForCategory}
+							getCategoryName={getCategoryName}
+							getCategoryDesc={getCategoryDesc}
+						/>
+					</Col>
+				</Row>
+			</div>
+			// TODO: Consider using persona ?? defaultValue or persona?.property instead of persona!
+			<MobilityOverview persona={persona!} isPdf={false} />
+			<ContentRomResult
+				selectedRom={sessionData || ({} as CustomRomSession)}
+				getColorForCategory={getColorForCategory}
+				getCategoryName={getCategoryName}
+			/>
+			<MobilityPersonas avgScore={avgScore} isPdf={false} />
+		</Flex>
+	);
+};
+export default AiAssistantCustomRomScanResult;

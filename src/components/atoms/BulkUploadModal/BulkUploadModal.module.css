@@ -1,0 +1,58 @@
+/* BulkUploadModal - Styles for bulk upload modal */
+
+.bulkUploadModal :global(.ant-modal-content) {
+	padding: 0;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+}
+
+.bulkUploadModal :global(.ant-modal-header) {
+	padding: var(--spacing-4) var(--spacing-6);
+	margin: 0;
+	border-bottom: 1px solid var(--border-color);
+	background: var(--bg-secondary);
+}
+
+.bulkUploadModal :global(.ant-modal-title) {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+}
+
+.bulkUploadModal :global(.ant-modal-body) {
+	padding: 0;
+}
+
+.bulkUploadModal :global(.ant-modal-close) {
+	top: var(--spacing-3);
+	right: var(--spacing-4);
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+/* User header section styling override */
+.content :global(.triage-user-header) {
+	padding: var(--spacing-4) var(--spacing-6);
+	border-bottom: 1px solid var(--border-color);
+	background: var(--bg-secondary);
+}
+
+.uploadSection {
+	padding: var(--spacing-6);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+	.bulkUploadModal :global(.ant-modal) {
+		max-width: calc(100vw - var(--spacing-8));
+		margin: var(--spacing-4);
+	}
+
+	.uploadSection {
+		padding: var(--spacing-4);
+	}
+}

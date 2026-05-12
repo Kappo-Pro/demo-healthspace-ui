@@ -1,0 +1,128 @@
+.posture-top-bar {
+	position: absolute;
+	top: var(--spacing-7);
+	left: var(--spacing-7);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	background-color: var(--surface-primary);
+	padding: var(--spacing-3) var(--spacing-5);
+	border-radius: var(--radius-full);
+	box-shadow: var(--shadow-sm);
+	z-index: 100;
+	pointer-events: auto;
+	/* Match posture-progress-card width */
+	max-width: 280px;
+	overflow: hidden;
+}
+
+/* Fill animation container */
+.posture-top-bar-fill {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	background: linear-gradient(
+		90deg,
+		var(--color-green-8, #237804) 0%,
+		var(--color-green-7, #389e0d) 50%,
+		var(--color-green-6, #52c41a) 100%
+	);
+	border-radius: var(--radius-full);
+	z-index: 0;
+	animation: fillProgress 3s linear forwards;
+}
+
+@keyframes fillProgress {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+/* Counting state - ensure content is above fill */
+.posture-top-bar--counting .posture-top-bar-button,
+.posture-top-bar--counting .posture-top-bar-text {
+	position: relative;
+	z-index: 1;
+}
+
+/* Text and icon color transition to white during countdown */
+.posture-top-bar--counting .posture-top-bar-text,
+.posture-top-bar--counting .posture-top-bar-button {
+	animation: colorToWhite 3s linear forwards;
+}
+
+@keyframes colorToWhite {
+	0% {
+		color: var(--text-secondary);
+	}
+	100% {
+		color: var(--color-white);
+	}
+}
+
+.posture-top-bar-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: var(--spacing-2);
+	min-width: 32px;
+	min-height: 32px;
+	border-radius: var(--radius-md);
+	transition: background-color var(--motion-duration-fast) var(--motion-ease-in-out);
+	pointer-events: auto;
+	position: relative;
+	color: var(--text-secondary);
+}
+
+.posture-top-bar-button:hover {
+	background-color: var(--surface-secondary);
+}
+
+.posture-top-bar-button:active {
+	background-color: var(--surface-tertiary);
+}
+
+.posture-top-bar-text {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-normal);
+	color: var(--text-secondary);
+	line-height: var(--line-height-normal);
+	white-space: nowrap;
+	margin-left: var(--spacing-2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+	.posture-top-bar {
+		/* Match posture-progress-card responsive width */
+		max-width: 240px;
+	}
+
+	.posture-top-bar-text {
+		font-size: var(--font-size-sm);
+	}
+}
+
+@media (max-width: 768px) {
+	.posture-top-bar {
+		position: static;
+		transform: none;
+		width: 100%;
+		margin-bottom: var(--spacing-3);
+		flex-direction: column;
+		gap: var(--spacing-2);
+	}
+
+	.posture-top-bar-text {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}

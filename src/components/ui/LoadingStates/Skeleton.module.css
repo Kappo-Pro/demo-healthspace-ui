@@ -1,0 +1,192 @@
+/**
+ * Skeleton Component Styles
+ *
+ * Loading placeholder styles with shimmer animation
+ */
+
+/* ============================================
+   BASE SKELETON
+   ============================================ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-secondary) 0%,
+    var(--surface-tertiary) 50%,
+    var(--surface-secondary) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: var(--radius-md);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* ============================================
+   SKELETON VARIANTS
+   ============================================ */
+
+.text {
+  height: 1em;
+  margin-bottom: 0.5em;
+  border-radius: var(--radius-sm);
+}
+
+.title {
+  height: 1.5em;
+  width: 60%;
+  margin-bottom: 0.5em;
+  border-radius: var(--radius-sm);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+}
+
+.button {
+  height: 40px;
+  width: 120px;
+  border-radius: var(--radius-md);
+}
+
+.card {
+  height: 200px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
+.rectangle {
+  width: 100%;
+  height: 40px;
+  border-radius: var(--radius-md);
+}
+
+/* ============================================
+   NAVIGATION SKELETON
+   ============================================ */
+
+.navigationSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.navigationItem {
+  height: 40px;
+  background: linear-gradient(
+    90deg,
+    var(--surface-secondary) 0%,
+    var(--surface-tertiary) 50%,
+    var(--surface-secondary) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: var(--radius-md);
+  opacity: 0;
+  animation: shimmer 2s infinite linear, fadeIn 300ms ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   CARD GRID SKELETON
+   ============================================ */
+
+.cardGrid {
+  display: grid;
+  gap: var(--spacing-6);
+}
+
+.cardSkeleton {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.cardImage {
+  height: 160px;
+  background: linear-gradient(
+    90deg,
+    var(--surface-secondary) 0%,
+    var(--surface-tertiary) 50%,
+    var(--surface-secondary) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+.cardContent {
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/* ============================================
+   TABLE SKELETON
+   ============================================ */
+
+.tableSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: var(--spacing-4);
+  padding: var(--spacing-3);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-md);
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: var(--spacing-4);
+  padding: var(--spacing-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ============================================
+   FORM SKELETON
+   ============================================ */
+
+.formSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton,
+  .navigationItem,
+  .cardImage {
+    animation: none;
+  }
+}

@@ -1,0 +1,28 @@
+/**
+ * ContinueSessionButton Styles
+ *
+ * Provides hover effects and responsive behavior for the
+ * continue session call-to-action button.
+ */
+
+.continue-session-button {
+	font-weight: var(--font-weight-semibold);
+	box-shadow: var(--shadow-md);
+	transition: all var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.continue-session-button:hover:not(:disabled) {
+	box-shadow: var(--shadow-lg);
+	transform: translateY(-2px);
+}
+
+.continue-session-button:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+/* Responsive: Full-width on mobile */
+@media (max-width: 768px) {
+	.continue-session-button {
+		width: 100%;
+	}
+}

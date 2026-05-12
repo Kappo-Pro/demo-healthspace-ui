@@ -1,0 +1,67 @@
+import { Image03 } from '@vitalflow-icons/files/image03';
+import { Edit05 } from '@vitalflow-icons/general/edit05';
+import { Flex, Modal } from 'antd';
+import { useState } from 'react';
+import './AddCoverImage.css';
+import { useTranslation } from 'react-i18next';
+import AddCoverUpload from './AddCoverUpload';
+import { IAddCoverImageProps } from '@types';
+
+export default function AddCoverImage(props: IAddCoverImageProps) {
+	const { openCoverImage, setOpenCoverImage } = props;
+	const { t } = useTranslation();
+
+	const headerButton = [
+		{
+			id: '1',
+			name: t('Admin.data.menu.aiAssistant.aiAssistantPrograms.uploadLabel'),
+			icon: <Image03 width={20} height={20} color="stroke-gray-600" />,
+		},
+	];
+
+	const [selected, setSelected] = useState('Upload');
+
+	return (
+		<Modal
+			title={
+				<>
+					<Flex gap={16}>
+						<span>
+							<Edit05 width={20} height={20} color="stroke-primary-600" />
+						</span>
+						<span className="titleStyle">
+							{t('Admin.data.menu.aiAssistant.aiAssistantPrograms.coverImage')}
+						</span>
+					</Flex>
+				</>
+			}
+			onOk={() => setOpenCoverImage(false)}
+			open={openCoverImage}
+			style={{ top: 20 }}
+			onCancel={() => setOpenCoverImage(false)}
+			footer={false}
+			width={900}
+			className="select-none"
+			maskClosable={false}>
+			<hr />
+			<Flex gap={20} align="center" className="h-16">
+				{headerButton?.map((item, index) => {
+					return (
+						<button
+							key={index}
+							className={`${selected === item?.name ? 'bg-gray-200 p-2 rounded-lg' : ''}`}>
+							<Flex gap={8} onClick={() => {
+								setSelected(item?.name);
+							}}>
+								<span>{item.icon}</span>
+								<span>{item.name}</span>
+							</Flex>
+						</button>
+					);
+				})}
+			</Flex>
+			<hr />
+			{selected === 'Upload' && <AddCoverUpload {...props} />}
+		</Modal>
+	);
+}

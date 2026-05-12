@@ -1,0 +1,52 @@
+.mini-banner-container {
+	border-radius: var(--radius-xl);
+	background: linear-gradient(
+		130deg,
+		var(--reference-bg) 1.45%,
+		rgba(36, 255, 114, 0.92) 138.49%
+	);
+	margin: 15px 0 5px;
+}
+.bg-squares {
+	border-radius: var(--radius-xl);
+	background-image: url('../../../../public/images/squares-bg.png');
+	background-size: 550px;
+	background-position-x: -175px;
+	background-position-y: -144px;
+	background-repeat: no-repeat;
+	padding: 15px;
+}
+
+.bg-pattern {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 0.3;
+	z-index: 0;
+}
+
+.woman-image {
+	width: 100%;
+}
+
+.banner-title {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	margin-bottom: var(--spacing-2);
+}
+
+.banner-description {
+	margin-bottom: 15px;
+	font-style: normal;
+	font-weight: var(--font-weight-normal);
+	line-height: normal;
+}
+
+.start-button {
+	box-shadow: none !important;
+	font-weight: var(--font-weight-semibold);
+	width: 100%;
+}

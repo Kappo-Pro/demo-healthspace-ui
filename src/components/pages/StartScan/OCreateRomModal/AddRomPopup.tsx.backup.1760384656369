@@ -1,0 +1,244 @@
+import { Edit05 } from '@vitalflow-icons/general/edit05'
+import { Flex, message, Modal } from 'antd'
+import { useState } from 'react'
+import AddRomItem from './AddRomItem'
+import { postRomTemplates, updateCustomRom } from '@stores/rom/customRom';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { BodyPoint, DeleteExerciseIds, ICustomRomBodyPoints, ICustomRomTemplate, IRomProgramExercise } from '@types';
+import { AddRomLibraryExercise } from './AddRomLibraryExercise';
+import { postRomExercises } from '@stores/rom/romTemplates';
+import { useTranslation } from 'react-i18next';
+
+interface IAddRomPopup {
+  isVisible: boolean;
+  onCancel: () => void;
+  refresh: boolean;
+  setRefresh: (refresh: boolean) => void;
+  onOk: () => void;
+  selectedExercises: IRomProgramExercise[];
+  setSelectedExercises: (value: IRomProgramExercise[]) => void;
+  selectedRom: ICustomRomTemplate;
+  subActiveKey: string
+  setSubActiveKey: (val: string) => void
+  outerModal: () => void
+  isEdit?: boolean
+}
+
+const AddRomPopup = ({ isEdit, refresh, setRefresh, selectedRom, isVisible, onOk, onCancel, selectedExercises, setSelectedExercises, subActiveKey, setSubActiveKey, outerModal }: IAddRomPopup) => {
+  const [deleteArray, setDeleteArray] = useState<DeleteExerciseIds[]>([])
+  const [romName, setRomName] = useState(selectedRom?.title)
+  const [romDescription, setRomDescription] = useState(selectedRom?.description)
+  const [isSaveTemplate, setSaveTemplate] = useState(false)
+  const [isLibraryModalVisible, SetLibraryModalVisible] = useState(false)
+  const customRom = useTypedSelector(state => state.rom.customRom.customRom)
+  const { selectedUser } = useTypedSelector((state) => state.contacts.main)
+  const dispatch = useTypedDispatch()
+
+  const handleRemoveExercise = (id: number | string) => {
+    setSelectedExercises(selectedExercises.filter((exercise: { id: string | number }) => exercise?.id != id))
+    const selected = selectedExercises.find((exercise: { id: string | number }) => exercise?.id === id)!
+    const deleteData: DeleteExerciseIds[] = [...deleteArray]
+    if (selected?.id) {
+			deleteData.push({
+				id: selected.id,
+			});
+		}
+    setDeleteArray(deleteData)
+  };
+  
+  const { t } = useTranslation()
+
+  const handleCreateProgramTemplate = async () => {
+    const exercises = []
+    selectedExercises?.map((exercise, index: number) => {
+      const bodyPoint = exercise?.bodyPoint ? exercise?.bodyPoint : exercise?.bodypoint;
+
+      if (bodyPoint) {
+        const tempExercise = bodyPoint.map((bodyPoint: BodyPoint) => ({
+          exerciseLibraryId: exercise?.exerciseLibraryId || null,
+          strapiOmniRomExerciseId: exercise?.strapiOmniRomExerciseId ? exercise?.strapiOmniRomExerciseId : exercise?.strapiLibraryId || null,
+          transitionTime: exercise.transitionTime,
+          normal: bodyPoint.normal,
+          wfl: bodyPoint.wfl,
+          min: bodyPoint.min,
+          max: bodyPoint.max,
+          order: index + 1,
+        }))
+
+        exercises.push(...tempExercise);
+      } else {
+        const tempExercise = {
+          exerciseLibraryId: exercise?.exerciseLibraryId || null,
+          strapiOmniRomExerciseId: exercise?.strapiOmniRomExerciseId ? exercise?.strapiOmniRomExerciseId : exercise?.strapiLibraryId || exercise?.OmniRomExerciseId?.id || null,
+          transitionTime: exercise.transitionTime || 3,
+          normal: exercise.normal || exercise?.OmniRomExerciseId?.reference?.normal || 0,
+          wfl: exercise.wfl || exercise?.OmniRomExerciseId?.reference?.wfl || 0,
+          min: exercise.min || exercise?.OmniRomExerciseId?.reference?.min || 0,
+          max: exercise.max || exercise?.OmniRomExerciseId?.reference?.max || 0,
+          order: index + 1,
+        }
+        exercises.push({ ...tempExercise });
+      }
+    });
+
+    const payload = {
+      title: romName,
+      description: romDescription,
+      exercises: { create: exercises }
+    };
+    const data = await dispatch(postRomTemplates(payload));
+    if (data?.payload) {
+      message.success(t('Patient.data.omnirom.romTemplateCreation'))
+      setRefresh(!refresh)
+      setSelectedExercises([])
+    }
+  };
+
+  const handleUpdateRomProgram = async () => {
+    const create: unknown[] = [];
+    const update: unknown[] = [];
+    let index = 1;
+    if (!selectedExercises || selectedExercises.length === 0) {
+      message.warning(t('Patient.data.omnirom.noExercisesSelected'));
+      return;
+    }
+    selectedExercises.forEach((exercise, pos) => {
+      const bodyPoint = exercise?.bodyPoint || exercise?.bodypoint;
+      if (bodyPoint && Array.isArray(bodyPoint)) {
+        const tempExercise = bodyPoint.map((bodyPoint: ICustomRomBodyPoints) => ({
+          normal: bodyPoint.normal,
+          exerciseLibraryId: exercise?.exerciseLibraryId || null,
+          strapiOmniRomExerciseId: exercise?.strapiOmniRomExerciseId || exercise?.strapiLibraryId || null,
+          transitionTime: exercise.transitionTime,
+          wfl: bodyPoint.wfl,
+          min: bodyPoint.min,
+          max: bodyPoint.max,
+          order: index++,
+        }));
+        if (tempExercise.length > 0) create.push(...tempExercise);
+      } else if (exercise?.id) {
+        const existingExercise = customRom?.data?.find(rom => selectedRom?.id == rom?.id)?.exercises.find(
+          (ex) => ex.id === exercise?.id
+        );
+        if (existingExercise) {
+          const updatedExercise = {
+            id: exercise?.id,
+            active: true,
+            transitionTime: exercise.transitionTime,
+            order: index++,
+          };
+          if (JSON.stringify(existingExercise) !== JSON.stringify(updatedExercise)) {
+            update.push(updatedExercise);
+          }
+        }
+      }
+    });
+    const payload = {
+      title: romName,
+      description: romDescription,
+      exercises: {
+        create: create.length > 0 ? create : [],
+        update: update.length > 0 ? update : [],
+        delete: deleteArray
+      },
+    };
+    try {
+      const data = await dispatch(updateCustomRom({ programId: selectedRom?.id, programData: payload }));
+      if (data?.payload) {
+        message.success(t('Patient.data.omnirom.romTemplateUpdation'));
+        setRefresh(!refresh);
+        onOk();
+        setSelectedExercises([]);
+      }
+    } catch (error) {
+      message.error(t('Patient.data.omnirom.updateFailed'));
+    }
+  };
+  
+  const handleCreateRomProgram = async () => {
+    onCancel();
+    const exercises = []
+    selectedExercises?.map((exercise, index: number) => {
+      const bodyPoint = exercise?.bodyPoint ? exercise?.bodyPoint : exercise?.bodypoint;
+      if (bodyPoint) {
+        const tempExercise = bodyPoint.map((bodyPoint: BodyPoint) => ({
+          exerciseLibraryId: exercise?.exerciseLibraryId || null,
+          strapiOmniRomExerciseId: exercise?.strapiOmniRomExerciseId ? exercise?.strapiOmniRomExerciseId : bodyPoint?.strapiOmniRomExerciseId || null,
+          transitionTime: exercise.transitionTime,
+          normal: bodyPoint.normal,
+          wfl: bodyPoint.wfl,
+          min: bodyPoint.min,
+          max: bodyPoint.max,
+          order: index + 1,
+        }))
+        exercises.push(...tempExercise);
+      } else {
+        const tempExercise = {
+          exerciseLibraryId: exercise?.exerciseLibraryId || null,
+          strapiOmniRomExerciseId: exercise?.strapiOmniRomExerciseId ? exercise?.strapiOmniRomExerciseId : bodyPoint?.strapiOmniRomExerciseId || exercise?.OmniRomExerciseId?.id || null,
+          transitionTime: exercise.transitionTime || 3,
+          normal: exercise.normal || exercise?.OmniRomExerciseId?.reference?.normal || 0,
+          wfl: exercise.wfl || exercise?.OmniRomExerciseId?.reference?.wfl || 0,
+          min: exercise.min || exercise?.OmniRomExerciseId?.reference?.min || 0,
+          max: exercise.max || exercise?.OmniRomExerciseId?.reference?.max || 0,
+          order: index + 1,
+        }
+        exercises.push({ ...tempExercise });
+      }
+    });
+
+    const payload = {
+      title: romName,
+      description: romDescription,
+      exercises: { create: exercises },
+      userId: selectedUser?.id
+    };
+    const data = await dispatch(postRomExercises(payload));
+    if (data?.payload) {
+      message.success(t('Patient.data.omnirom.romCreation'))
+      setRefresh(!refresh)
+      outerModal();
+      setSelectedExercises([])
+    }
+  }
+
+  return <Modal
+    title={<>
+      <Flex gap={4}>
+        <span>
+          <Edit05 width={20} height={20} color="stroke-primary-600" />
+        </span>
+        {isEdit ? <span className="titleStyle">{t('Patient.data.omnirom.editRom')}</span>: <span className="titleStyle">{t('Patient.data.omnirom.createRom')}</span>}
+      </Flex>
+    </>}
+    style={{ top: 20 }}
+    onOk={onOk}
+    open={isVisible}
+    onCancel={onCancel}
+    footer={false}
+    width={900}
+    className='select-none'
+  >
+    <AddRomItem
+      selectedExercises={selectedExercises}
+      setSelectedExercises={setSelectedExercises}
+      handleRemoveExercise={handleRemoveExercise}
+      romName={romName}
+      romDescription={romDescription}
+      setRomName={setRomName}
+      setRomDescription={setRomDescription}
+      isSaveTemplate={isSaveTemplate}
+      setSaveTemplate={setSaveTemplate}
+      handleCreateProgramTemplate={handleCreateProgramTemplate}
+      SetLibraryModalVisible={SetLibraryModalVisible}
+      handleCreateRomProgram={handleCreateRomProgram}
+      handleUpdateRomProgram={handleUpdateRomProgram}
+      isEdit={isEdit || false}
+    />
+    <AddRomLibraryExercise isVisible={isLibraryModalVisible} onOk={() => SetLibraryModalVisible(false)}
+      onCancel={() => SetLibraryModalVisible(false)} selectedExercises={selectedExercises} setSelectedExercises={setSelectedExercises}
+      subActiveKey={subActiveKey!} setSubActiveKey={setSubActiveKey!} />
+  </Modal>
+}
+
+export default AddRomPopup

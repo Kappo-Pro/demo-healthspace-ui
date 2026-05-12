@@ -1,0 +1,63 @@
+.medical-container {
+	text-align: center;
+	margin-top: var(--spacing-4);
+}
+
+.medical-subcontainer {
+	width: 627px;
+	display: inline-block;
+}
+
+.content-div-associated {
+	height: 490px;
+	overflow: auto;
+	margin-top: var(--spacing-4);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-5);
+}
+
+.assessment-title-label {
+	font-family: var(--font-family-body);
+	font-size: 2rem;
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	line-height: var(--line-height-tight);
+	letter-spacing: var(--letter-spacing-tighter);
+	margin-bottom: var(--spacing-2);
+}
+
+.assessment-sub-title-label {
+	font-family: var(--font-family-body);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-normal);
+	color: var(--text-secondary);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-tightest);
+	margin: 0;
+}
+
+.assesment-buttons-css {
+	margin-top: var(--spacing-2);
+	width: 590px;
+	display: flex;
+	align-items: flex-end;
+	gap: var(--spacing-2);
+}
+
+.back-button-css {
+	margin-top: var(--spacing-2);
+	background-color: var(--surface-secondary);
+	color: var(--brand-primary-hover);
+	border-radius: var(--radius-full);
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-tight);
+}
+
+.next-button-css {
+	border-radius: var(--radius-full);
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-tight);
+}

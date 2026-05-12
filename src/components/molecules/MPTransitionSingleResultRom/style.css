@@ -1,0 +1,257 @@
+.single-result {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--text-color-on-dark);
+	text-align: center;
+}
+
+.single-result-content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-4);
+}
+
+.completed-title,
+.view-title {
+	font-family: 'Poppins', sans-serif;
+	font-weight: var(--font-weight-bold);
+	color: var(--text-on-dark);
+	text-align: center;
+	margin: 0;
+	font-size: 48px;
+	line-height: 1.2;
+}
+
+.view-title {
+	background: var(--success-600);
+	padding: var(--spacing-2) var(--spacing-6);
+	border-radius: 50px;
+}
+
+.processing-spinner {
+	margin-top: var(--spacing-4);
+}
+
+.processing-spinner .ant-spin-dot-item {
+	background-color: var(--text-on-dark);
+}
+
+.single-result-container {
+	width: 80%;
+	text-align: center;
+}
+
+.result-title {
+	color: var(--text-color-on-dark);
+	font-size: 22px;
+	font-weight: 400;
+	max-width: 60%;
+	margin: 10px auto;
+	background: var(--success-600);
+	border-radius: 50px;
+	padding: 10px;
+}
+
+.result-title.invalid,
+.result-number.invalid {
+	background: var(--error-600);
+}
+
+.result-subtitle {
+	color: var(--text-color-on-dark);
+	font-weight: 700;
+	font-size: 34px;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+.result-subtitle.invalid {
+	font-size: 18px;
+}
+
+p.result-text {
+	color: var(--text-color-on-dark);
+	max-width: 30%;
+	margin: 15px auto;
+	font-size: 19px;
+}
+
+.result-number {
+	font-size: 27px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: var(--text-color-on-dark);
+	margin: 0 0 0 15px;
+}
+
+@media screen and (max-width: 1080px) {
+	p.result-text {
+		max-width: 50%;
+		font-size: 16px;
+	}
+
+	.result-title,
+	.result-number {
+		font-size: 18px;
+		max-width: 60%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.single-result-container img {
+		width: 200px;
+	}
+
+	.result-title {
+		font-size: 42px;
+	}
+
+	.result-subtitle {
+		font-size: 17px;
+	}
+
+	p.result-text {
+		max-width: 70%;
+		font-size: 14px;
+	}
+
+	.result-title,
+	.result-number {
+		font-size: 18px;
+		max-width: 60%;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.single-result-container img {
+		width: 150px;
+	}
+
+	.result-title {
+		font-size: 32px;
+	}
+
+	p.result-text {
+		max-width: 70%;
+		font-size: 14px;
+	}
+
+	.result-title,
+	.result-number {
+		font-size: 18px;
+		max-width: 80%;
+	}
+}
+
+.single-result .btn-solid-red {
+	background: var(--error-600);
+}
+
+.single-result .btn-solid-green,
+.single-result .btn-solid-red {
+	border-radius: 0 !important;
+	border: none !important;
+	padding: 5px 10px 3px 10px;
+	color: var(--text-color-on-dark);
+	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: 700;
+	font-size: 16px;
+}
+
+.single-result button.btn-solid-red:hover {
+	background: var(--error-700);
+}
+
+.rom-header {
+	background: var(--bg-page-dark);
+	width: 100%;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	z-index: 101;
+	text-align: right;
+	border-left: 1px solid var(--border-secondary) !important;
+	vertical-align: bottom;
+}
+
+.rom-header button.btn-fullscreen,
+.rom-header button.btn-invert-cam,
+.rom-header button.btn-switch-video,
+.ant-btn-circle.ant-btn-lg {
+	background: none !important;
+	border: none !important;
+	padding: 2px 2px 2px 10px !important;
+	height: auto;
+	width: auto;
+	min-width: 0;
+	margin-right: 10px;
+	border-left: 1px solid var(--border-secondary) !important;
+	border-radius: 0;
+	vertical-align: top;
+}
+
+.rom-header-left-wrapper button.btn-icon.btn-menu {
+	position: relative;
+}
+
+.button-icon.discard img {
+	width: 15px;
+	height: 14px;
+	position: relative;
+	top: -3px;
+	left: 1px;
+}
+
+.upload-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.upload-label {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 20px;
+	font-weight: bold;
+  color: var(--text-color-on-dark);
+}
+
+.upload-bar {
+  width: 100%;
+  margin-top: 30px;
+  height: 25px;
+  border-radius: 9999px;
+	padding: 2px;
+	border: 1px solid var(--border-primary-on-dark);
+  overflow: hidden;
+  position: relative;
+}
+
+.upload-progress {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--success-600),
+    var(--success-400),
+    var(--success-600)
+  );
+  border-radius: 9999px;
+  animation: shimmer 7s infinite linear;
+  transition: width 0.3s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}

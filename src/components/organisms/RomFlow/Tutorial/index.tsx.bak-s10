@@ -1,0 +1,69 @@
+import { useEffect, useRef, useState } from 'react'
+import { Content } from 'antd/lib/layout/layout'
+import { Button, Flex, Spin } from 'antd'
+import { useTypedDispatch } from '@stores/index'
+import { useTranslation } from 'react-i18next'
+
+interface ITutorialProps {
+	onToggleTutorial: () => void
+}
+
+const Tutorial = (props: ITutorialProps) => {
+	const { onToggleTutorial } = props
+	const [loading, setLoading] = useState(true)
+	const videoRef = useRef<HTMLVideoElement>(null)
+	const dispatch = useTypedDispatch()
+	const { t } = useTranslation()
+
+	useEffect(() => {
+		if (videoRef.current) {
+			videoRef.current.currentTime = 0
+			videoRef.current.load()
+			videoRef.current.onloadedmetadata = () => {
+				setLoading(false)
+			}
+			videoRef.current.onended = () => {
+				setLoading(false)
+				onToggleTutorial()
+			}
+		}
+
+		return () => {
+			setLoading(true)
+		}
+	}, [onToggleTutorial, videoRef, dispatch])
+
+	return (
+		<Content
+			style={{ position: 'relative', aspectRatio: '16:9', overflow: 'hidden', zIndex: 10 }}
+		>
+			<Flex
+				justify="center"
+				align="center"
+				style={{
+					backgroundColor: '#ffffffb8',
+					aspectRatio: '16/9',
+					width: '100%',
+				}}
+			>
+				<Spin spinning={loading} size={'large'} />
+			</Flex>
+			<video
+				width={'100%'}
+				height={'100%'}
+				ref={videoRef}
+				autoPlay
+				preload="metadata"
+				src="https://risecxlibrary.blob.core.windows.net/coach/tutorial.mp4"
+			/>
+			<Button
+				onClick={onToggleTutorial}
+				style={{ position: 'absolute', top: 30, left: 30 }}
+			>
+				{t('Patient.data.omnirom.skipTutorial')}
+			</Button>
+		</Content>
+	)
+}
+
+export default Tutorial

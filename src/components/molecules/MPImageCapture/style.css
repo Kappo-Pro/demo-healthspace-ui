@@ -1,0 +1,12 @@
+.video-record-item {
+	position: relative;
+	background: var(--color-black);
+}
+
+.video-record-item.full-height {
+	height: 100vh;
+}
+
+.video-record-item video {
+	display: block;
+}

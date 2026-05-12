@@ -1,0 +1,50 @@
+.code-label {
+	padding: var(--spacing-2);
+	font-size: var(--font-size-base);
+	line-height: var(--spacing-6);
+	font-weight: var(--font-weight-bold);
+	text-align: center;
+}
+
+.input-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.input-label {
+	font-size: var(--font-size-sm);
+	line-height: var(--spacing-5);
+	font-weight: var(--font-weight-normal);
+	color: var(--text-secondary);
+}
+
+.input-label-container {
+	display: inline-block;
+	width: 20%;
+	padding: 5px;
+}
+
+.input-right-label-container {
+	display: inline-block;
+	width: 80%;
+	padding: 5px;
+}
+
+.code-container {
+	background-color: var(--surface-tertiary);
+	margin-bottom: 5px;
+	border-radius: var(--radius-lg) 8px 0 0;
+}
+
+.custom-margin-icd {
+	margin-top: 5px;
+}
+
+.custom-padding {
+	padding: 5px 0 5px 0;
+}
+
+.report-option-class .ant-select-item-option-selected {
+	background-color: var(--settings-plans-option-bg-color) !important;
+}

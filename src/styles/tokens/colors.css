@@ -1,0 +1,333 @@
+/**
+ * Design System Colors
+ * Generated: 2025-10-21T23:16:25.375Z
+ * Source: /Users/fusuma/Downloads/export.json
+ *
+ * DO NOT EDIT MANUALLY - This file is auto-generated
+ * Run: npm run generate:css-vars
+ */
+
+:root {
+	/* ========================================
+     Base Colors - Neutrals (Warm Cream Tints from Figma)
+     Updated: 2025-11-30 from Figma Design System
+     ======================================== */
+	--color-neutral-50: #fffef7; /* gray-1: Warm white */
+	--color-neutral-100: #f6f2e9; /* gray-2 */
+	--color-neutral-200: #f1ece1; /* gray-3: Background layout */
+	--color-neutral-400: #e8e2d7; /* gray-4: Border secondary */
+	--color-neutral-500: #9d989f; /* gray-5: Border primary */
+	--color-neutral-600: #635d65; /* gray-6: Text secondary */
+	--color-neutral-700: #59545b; /* gray-7 */
+	--color-neutral-800: #4f4a51; /* gray-8 */
+	--color-neutral-900: #4a464c; /* gray-9 */
+	--color-neutral-1000: #3b383d; /* gray-10 */
+	--color-neutral-1100: #353337; /* gray-11 */
+	--color-neutral-1200: #2d2a2d; /* gray-12 */
+	--color-neutral-1300: #232123; /* gray-13: Darkest */
+
+	/* Legacy purple neutrals (kept for backwards compatibility) */
+	--color-neutral-purple-800: #542972;
+	--color-neutral-purple-900: #421264;
+	--color-neutral-purple-1000: #300b4a;
+
+	/* ========================================
+     Base Colors - Brand
+     ======================================== */
+	--color-brand-main: var(--brand-primary);
+	--color-brand-main-soft: #c797e9;
+	--color-brand-main80: rgba(159, 37, 244, 0.8);
+	--color-brand-main60: rgba(159, 37, 244, 0.6);
+	--color-brand-main40: rgba(159, 37, 244, 0.4);
+	--color-brand-second: #69e8f9;
+	--color-brand-third: #60e561;
+	--color-brand-fourth: #ebd749;
+	--color-brand-fifth: #ef5f5f;
+	--color-brand-sixth: #ffffff;
+
+	/* ========================================
+     Base Colors - Opacity Variants
+     ======================================== */
+	--color-neutral-800-20: rgba(84, 41, 114, 0.2);
+	--color-neutral-800-40: rgba(84, 41, 114, 0.4);
+	--color-neutral-800-60: rgba(84, 41, 114, 0.6);
+	--color-neutral-800-80: rgba(84, 41, 114, 0.8);
+
+	/* ========================================
+     Utility Colors
+     ======================================== */
+	--color-transparent: rgba(255, 255, 255, 0);
+	--color-frost-light: rgba(255, 255, 255, 0.1);
+	--color-frost-mid: rgba(255, 255, 255, 0.6);
+	--color-frost-thick: rgba(255, 255, 255, 0.9);
+
+	/* ========================================
+     Semantic Colors - Categories (Light Mode Default)
+     ======================================== */
+	--color-category-body: #d75ba1;
+	--color-category-mind: #de594f;
+	--color-category-mobility: #ed9356;
+	--color-category-activity: #e5bf2d;
+	--color-category-diet: #a7be5a;
+	--color-category-sleep: #5bcbd7;
+	--color-category-medical: #5785e2;
+	--color-category-social: #9565e2;
+
+	/* ========================================
+     Semantic Colors - Status
+     ======================================== */
+	--color-status-warning: #ef5f5f;
+	--color-status-warning-light: rgba(239, 95, 95, 0.8);
+	--color-status-success: #60e561;
+	--color-status-success-light: rgba(96, 229, 97, 0.8);
+
+	/* ========================================
+     Gradients
+     ======================================== */
+	--gradient-main-start: var(--color-neutral-100);
+	--gradient-main-end: var(--color-brand-main);
+	--gradient-second-start: var(--color-brand-second);
+	--gradient-second-end: var(--color-brand-third);
+
+	/* ========================================
+     Shadow Colors
+     ======================================== */
+	--shadow-light-sm: rgba(0, 0, 0, 0.1);
+	--shadow-light-lg: rgba(0, 0, 0, 0.05);
+	--shadow-dark-umbra: rgba(0, 0, 0, 0.3);
+	--shadow-dark-penumbra: rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   Light Theme (Default)
+   ======================================== */
+[data-theme='light'],
+[data-theme='default'],
+.theme-light,
+.theme-default {
+	--color-bg: var(--color-neutral-100);
+	--color-bg-darker: var(--color-neutral-200);
+	--color-bg-darkest: var(--color-neutral-400);
+	--color-bg-fourth: var(--color-neutral-500);
+	--color-bg-lighter: var(--color-neutral-50);
+	--color-bg-inverse: var(--color-neutral-900);
+	--color-bg-inverse-80: var(--color-neutral-800-80);
+	--color-bg-inverse-60: var(--color-neutral-800-60);
+	--color-bg-inverse-40: var(--color-neutral-800-40);
+	--color-bg-inverse-20: var(--color-neutral-800-20);
+	--color-text: var(--color-neutral-900);
+	--color-text-second: var(--color-neutral-600);
+	--color-text-third: var(--color-neutral-400);
+	--color-text-inverse: var(--color-neutral-100);
+	--color-border: var(--color-neutral-400);
+	--color-border-second: var(--color-neutral-200);
+	--color-border-third: var(--color-neutral-50);
+	--color-border-inverse: var(--color-neutral-800);
+	--color-button-main-bg: var(--color-brand-main);
+	--color-button-main-text: var(--color-neutral-100);
+	--color-button-main-border: var(--color-brand-main);
+	--color-button-main-hover: var(--color-neutral-50);
+	--color-button-main-hover-text: var(--color-neutral-900);
+	--color-button-main-hover-border: var(--color-neutral-900);
+	--color-button-accent-bg: var(--color-brand-second);
+	--color-button-accent-text: var(--color-neutral-800);
+	--color-button-accent-border: var(--color-neutral-800);
+	--color-button-accent-hover: var(--color-neutral-50);
+	--color-button-accent-hover-text: var(--color-neutral-900);
+	--color-button-accent-hover-border: var(--color-neutral-900);
+	--color-button-focus: var(--color-brand-main);
+	--color-button-second-bg: rgba(255, 255, 255, 0.01);
+	--color-button-second-text: var(--color-neutral-900);
+	--color-button-second-border: var(--color-neutral-900);
+	--color-button-second-hover: var(--color-brand-main);
+	--color-button-second-hover-text: var(--color-neutral-100);
+	--color-button-second-hover-border: var(--color-brand-main);
+	--color-button-link-bg: rgba(255, 255, 255, 0.01);
+	--color-button-link-text: var(--color-neutral-900);
+	--color-button-link-hover: var(--color-transparent);
+	--color-button-link-hover-text: var(--color-brand-main);
+	--color-button-link-border: var(--color-transparent);
+	--color-input-bg: var(--color-neutral-50);
+	--color-input-border: var(--color-neutral-500);
+	--color-input-border-focus: var(--color-neutral-900);
+	--color-input-text-second: var(--color-neutral-500);
+	--color-input-text: var(--color-neutral-900);
+	--color-input-placeholder: var(--color-neutral-500);
+	--color-disabled-text: var(--color-neutral-200);
+	--color-disabled-button-bg: var(--color-neutral-200);
+	--color-disabled-button-border: var(--color-neutral-500);
+	--color-disabled-button-text: var(--color-neutral-500);
+	--color-disabled-input: var(--color-neutral-200);
+	--color-disabled-input-border: var(--color-neutral-400);
+	--color-shadow-umbra: rgba(0, 0, 0, 0.15);
+	--color-shadow-penumbra: rgba(0, 0, 0, 0.08);
+	--color-frost: var(--color-frost-mid);
+	--color-body: #d75ba1;
+	--color-mind: #de594f;
+	--color-mobility: #ed9356;
+	--color-activity: #e5bf2d;
+	--color-diet: #a7be5a;
+	--color-sleep: #5bcbd7;
+	--color-medical: #5785e2;
+	--color-social: #9565e2;
+
+	/* Page background */
+	--bg-page: #f8f6ec;
+}
+
+/* ========================================
+   Dark Theme
+   ======================================== */
+[data-theme='dark'],
+.theme-dark {
+	--color-bg: var(--color-neutral-1000);
+	--color-bg-darker: var(--color-neutral-800);
+	--color-bg-darkest: var(--color-neutral-600);
+	--color-bg-fourth: var(--color-neutral-500);
+	--color-bg-lighter: var(--color-neutral-900);
+	--color-bg-inverse: var(--color-neutral-100);
+	--color-bg-inverse-80: var(--color-neutral-100);
+	--color-bg-inverse-60: var(--color-neutral-100);
+	--color-bg-inverse-40: var(--color-neutral-100);
+	--color-bg-inverse-20: var(--color-neutral-100);
+	--color-text: var(--color-neutral-100);
+	--color-text-second: var(--color-neutral-200);
+	--color-text-third: var(--color-neutral-400);
+	--color-text-inverse: var(--color-neutral-900);
+	--color-border: var(--color-neutral-500);
+	--color-border-second: var(--color-neutral-600);
+	--color-border-third: var(--color-neutral-800);
+	--color-border-inverse: var(--color-neutral-100);
+	--color-button-main-bg: var(--color-brand-main);
+	--color-button-main-text: var(--color-neutral-100);
+	--color-button-main-border: var(--color-brand-main);
+	--color-button-main-hover: var(--color-neutral-50);
+	--color-button-main-hover-text: var(--color-neutral-900);
+	--color-button-main-hover-border: var(--color-neutral-900);
+	--color-button-accent-bg: var(--color-brand-second);
+	--color-button-accent-text: var(--color-neutral-800);
+	--color-button-accent-border: var(--color-brand-second);
+	--color-button-accent-hover: var(--color-neutral-50);
+	--color-button-accent-hover-text: var(--color-neutral-900);
+	--color-button-accent-hover-border: var(--color-neutral-900);
+	--color-button-focus: var(--color-brand-main);
+	--color-button-second-bg: rgba(255, 255, 255, 0.01);
+	--color-button-second-text: var(--color-neutral-100);
+	--color-button-second-border: var(--color-neutral-100);
+	--color-button-second-hover: var(--color-brand-second);
+	--color-button-second-hover-text: var(--color-neutral-100);
+	--color-button-second-hover-border: var(--color-brand-second);
+	--color-button-link-bg: rgba(255, 255, 255, 0.01);
+	--color-button-link-text: var(--color-neutral-100);
+	--color-button-link-hover: var(--color-transparent);
+	--color-button-link-hover-text: var(--color-brand-second);
+	--color-button-link-border: var(--color-transparent);
+	--color-input-bg: var(--color-neutral-100);
+	--color-input-border: var(--color-neutral-600);
+	--color-input-border-focus: var(--color-neutral-100);
+	--color-input-text-second: var(--color-neutral-500);
+	--color-input-text: var(--color-neutral-900);
+	--color-input-placeholder: var(--color-neutral-500);
+	--color-disabled-text: var(--color-neutral-600);
+	--color-disabled-button-bg: var(--color-neutral-800);
+	--color-disabled-button-border: var(--color-neutral-600);
+	--color-disabled-button-text: var(--color-neutral-500);
+	--color-disabled-input: var(--color-neutral-800);
+	--color-disabled-input-border: var(--color-neutral-600);
+	--color-shadow-umbra: rgba(0, 0, 0, 0.25);
+	--color-shadow-penumbra: rgba(255, 255, 255, 0.08);
+	--color-frost: var(--color-frost-mid);
+	--color-body: #d75ba1;
+	--color-mind: #de594f;
+	--color-mobility: #ed9356;
+	--color-activity: #f5e4a2;
+	--color-diet: #a7be5a;
+	--color-sleep: #5bcbd7;
+	--color-medical: #5785e2;
+	--color-social: #9565e2;
+
+	/* Category colors (dark mode) */
+	--color-category-body: #d75ba1;
+	--color-category-mind: #de594f;
+	--color-category-mobility: #ed9356;
+	--color-category-activity: #f5e4a2;
+	--color-category-diet: #a7be5a;
+	--color-category-sleep: #5bcbd7;
+	--color-category-medical: #5785e2;
+	--color-category-social: #9565e2;
+
+	/* Page background */
+	--bg-page: #300b4a;
+}
+
+/* ========================================
+   Accent Theme
+   ======================================== */
+[data-theme='accent'],
+.theme-accent {
+	--color-bg: var(--color-neutral-100);
+	--color-bg-darker: var(--color-neutral-200);
+	--color-bg-darkest: var(--color-neutral-400);
+	--color-bg-fourth: var(--color-neutral-500);
+	--color-bg-lighter: var(--color-neutral-50);
+	--color-bg-inverse: var(--color-neutral-900);
+	--color-bg-inverse-80: var(--color-neutral-900);
+	--color-bg-inverse-60: var(--color-neutral-900);
+	--color-bg-inverse-40: var(--color-neutral-900);
+	--color-bg-inverse-20: var(--color-neutral-900);
+	--color-text: var(--color-neutral-900);
+	--color-text-second: var(--color-neutral-600);
+	--color-text-third: var(--color-neutral-200);
+	--color-text-inverse: var(--color-neutral-100);
+	--color-border: var(--color-neutral-400);
+	--color-border-second: var(--color-neutral-200);
+	--color-border-third: var(--color-neutral-50);
+	--color-border-inverse: var(--color-neutral-800);
+	--color-button-main-bg: var(--color-brand-main);
+	--color-button-main-text: var(--color-neutral-100);
+	--color-button-main-border: var(--color-brand-main);
+	--color-button-main-hover: var(--color-neutral-50);
+	--color-button-main-hover-text: var(--color-neutral-900);
+	--color-button-main-hover-border: var(--color-neutral-900);
+	--color-button-accent-bg: var(--color-brand-main);
+	--color-button-accent-text: var(--color-neutral-100);
+	--color-button-accent-border: var(--color-brand-main);
+	--color-button-accent-hover: var(--color-neutral-50);
+	--color-button-accent-hover-text: var(--color-neutral-900);
+	--color-button-accent-hover-border: var(--color-neutral-900);
+	--color-button-focus: var(--color-brand-main);
+	--color-button-second-bg: rgba(255, 255, 255, 0.01);
+	--color-button-second-text: var(--color-neutral-900);
+	--color-button-second-border: var(--color-neutral-900);
+	--color-button-second-hover: var(--color-brand-main);
+	--color-button-second-hover-text: var(--color-neutral-100);
+	--color-button-second-hover-border: var(--color-brand-main);
+	--color-button-link-bg: rgba(255, 255, 255, 0.01);
+	--color-button-link-text: var(--color-neutral-900);
+	--color-button-link-hover: var(--color-transparent);
+	--color-button-link-hover-text: var(--color-brand-main);
+	--color-button-link-border: var(--color-transparent);
+	--color-input-bg: var(--color-neutral-50);
+	--color-input-border: var(--color-neutral-200);
+	--color-input-border-focus: var(--color-neutral-200);
+	--color-input-text-second: var(--color-neutral-500);
+	--color-input-text: var(--color-neutral-900);
+	--color-input-placeholder: var(--color-neutral-500);
+	--color-disabled-text: var(--color-neutral-200);
+	--color-disabled-button-bg: var(--color-neutral-200);
+	--color-disabled-button-border: var(--color-neutral-400);
+	--color-disabled-button-text: var(--color-neutral-500);
+	--color-disabled-input: var(--color-neutral-200);
+	--color-disabled-input-border: var(--color-neutral-200);
+	--color-shadow-umbra: rgba(0, 0, 0, 0.15);
+	--color-shadow-penumbra: rgba(0, 0, 0, 0.08);
+	--color-frost: var(--color-frost-mid);
+	--color-body: #ffffff;
+	--color-mind: #ffffff;
+	--color-mobility: #ffffff;
+	--color-activity: #ffffff;
+	--color-diet: #ffffff;
+	--color-sleep: #ffffff;
+	--color-medical: #ffffff;
+	--color-social: #ffffff;
+}

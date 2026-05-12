@@ -1,0 +1,55 @@
+import { Typography } from 'antd';
+
+const { Title } = Typography;
+import { getMobilityData } from '@stores/constants';
+import './MobilityPersonas.css';
+import { useTranslation } from 'react-i18next';
+
+interface IMobilityPersona {
+  avgScore: number
+  isPdf: boolean
+}
+
+const MobilityPersonas = (props: IMobilityPersona) => {
+  const {avgScore, isPdf} = props
+  const {t} = useTranslation()
+  const mobilityData = getMobilityData(Math.round(avgScore), t);
+
+ return (
+    <div className={`mobility-container ${isPdf ? 'pdf-section' : ''}`}>
+      <Title level={2} className='font-inter-bold-18'>{t('Patient.data.mobilityReport.mobilityPersonas')}</Title>
+      <div className="mobility-list">
+        {mobilityData.map((persona, index) => (
+          <div
+            className={`mobility-card ${persona.className} ${persona.active ? 'highlight' : ''}`}
+            key={index}
+          >
+            <div className="mobility-label" 
+            style={persona.active ? { backgroundColor: persona.color, color: 'var(--text-on-dark)' } : {}}
+            
+            >
+              <p className={`${isPdf ? 'pdf-margin' : ''}`}>{persona.range}</p>
+            </div>
+            <div className="connector-line" 
+            style={persona.active ? { backgroundColor: persona.color, color: 'var(--text-on-dark)'  } : {}}
+            
+            />
+            <div className="mobility-body" 
+            style={persona.active ? { backgroundColor: persona.color , color: 'var(--text-on-dark)' } : {}}
+            >
+              <div className="mobility-icon">
+                <img src={persona.active ? persona.selectedIcon : persona.icon} alt={persona.title} />
+              </div>
+              <div className="mobility-text">
+                <div className={`mobility-title ${isPdf ? 'pdf-margin' : ''}`} style={persona.active ? { color: 'var(--text-on-dark)' } : {}}>{persona.title}</div>
+                <div className={`mobility-description ${isPdf ? 'pdf-margin' : ''}`} style={persona.active ? { color: 'var(--text-on-dark)' } : {}}>{persona.description}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default MobilityPersonas;

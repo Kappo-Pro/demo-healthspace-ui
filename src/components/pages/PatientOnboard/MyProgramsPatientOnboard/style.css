@@ -1,0 +1,230 @@
+.my-program-patient-main-container {
+	padding: var(--spacing-6);
+	border-radius: var(--radius-2xl);
+}
+
+.my-program-patient-header {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: var(--spacing-4);
+	font-size: var(--font-size-2xl);
+	font-weight: var(--font-weight-bold);
+}
+
+@media (min-width: 640px) {
+	.my-program-patient-header {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
+
+.my-program-patient-subtext {
+	color: var(--text-secondary);
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-normal);
+}
+
+.my-program-patient-image-navigation {
+	position: relative;
+}
+
+.my-program-patient-horizontal-scroll {
+	display: flex;
+	gap: var(--spacing-4);
+	overflow-x: auto;
+	padding-bottom: var(--spacing-4);
+	scroll-behavior: smooth;
+}
+
+.my-program-patient-card {
+	flex-shrink: 0;
+	border-radius: var(--radius-lg);
+	background-color: var(--surface-primary);
+	transition: all var(--motion-duration-base) var(--motion-ease-out);
+	cursor: pointer;
+}
+
+.my-program-patient-card-active {
+	width: 330px;
+	height: 330px;
+}
+
+.my-program-patient-card-inactive {
+	width: 300px;
+	height: 300px;
+}
+
+.my-program-patient-image-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.my-program-patient-image {
+	width: 100%;
+	height: 200px;
+	border-top-left-radius: var(--radius-lg);
+	border-top-right-radius: var(--radius-lg);
+	object-fit: cover;
+	filter: saturate(1.2);
+}
+
+.my-program-patient-video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: var(--radius-lg);
+	filter: saturate(1.2);
+}
+
+.my-program-patient-overlay {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: var(--spacing-3);
+	background: linear-gradient(to top, var(--color-black-alpha-70), transparent);
+	color: var(--text-on-dark);
+	text-align: left;
+	border-bottom-left-radius: var(--radius-lg);
+	border-bottom-right-radius: var(--radius-lg);
+}
+
+.my-program-patient-title {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-medium);
+}
+
+.my-program-patient-title-active {
+	margin-bottom: var(--spacing-2);
+}
+
+.my-program-patient-hover-details {
+	font-size: var(--font-size-sm);
+	margin-bottom: var(--spacing-2);
+	z-index: 10;
+}
+
+.my-program-patient-extra-details {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.my-program-patient-history-button {
+	background: transparent !important;
+	border: none !important;
+	color: var(--text-on-dark);
+	font-size: var(--font-size-xs);
+}
+
+.my-program-patient-start-button {
+	font-weight: var(--font-weight-semibold);
+	padding: var(--spacing-1);
+	margin: var(--spacing-2) 0;
+	width: 100%;
+	z-index: 10;
+}
+
+.my-program-patient-hover-stats {
+	display: flex;
+	flex-direction: column;
+	font-size: var(--font-size-base);
+}
+
+.my-program-patient-exercise-count,
+.my-program-patient-duration {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
+}
+
+.my-program-patient-navigation-buttons {
+	position: relative;
+}
+
+.my-program-patient-left-arrow,
+.my-program-patient-right-arrow {
+	padding: var(--spacing-2);
+	background-color: var(--overlay-light, rgba(0, 0, 0, 0.35));
+	border-radius: var(--radius-full);
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
+.my-program-patient-left-arrow {
+	left: var(--spacing-3);
+}
+
+.my-program-patient-right-arrow {
+	right: var(--spacing-3);
+}
+
+.my-program-patient-empty-state {
+	display: flex;
+	gap: var(--spacing-4);
+	padding-bottom: var(--spacing-2);
+	justify-content: center;
+	align-items: center;
+}
+
+.my-program-patient-empty-text {
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-secondary);
+	width: 369px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.horizontal-scroll-container-wrapper {
+	position: relative;
+}
+
+.empty-program-text {
+	color: #475467; /* gray-600 or similar to text-gray-blue-700 */
+}
+
+/* Banner overlay for paused programs */
+.program-unavailable-banner {
+	position: absolute;
+	inset: 0;
+	z-index: 1000;
+	background-color: color-mix(in srgb, var(--color-black) 80%, transparent);
+	border-radius: var(--radius-2xl);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-6);
+	backdrop-filter: blur(2px);
+}
+
+.program-unavailable-content-inner {
+	color: var(--text-on-dark);
+	text-align: left;
+	max-width: 800px;
+}
+
+.program-unavailable-title {
+	color: var(--color-error-500);
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-bold);
+	margin-bottom: var(--spacing-2);
+}
+
+.program-unavailable-description {
+	font-size: var(--font-size-lg);
+	color: var(--text-on-dark);
+	font-weight: var(--font-weight-normal);
+	margin-top: var(--spacing-2-5);
+}
+
+/* Cleanup existing classes if they were intended for this component */
+.my-program-patient-main-container {
+	padding: var(--spacing-6);
+	border-radius: var(--radius-2xl);
+	position: relative;
+}

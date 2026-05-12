@@ -1,0 +1,486 @@
+.form-outer-div {
+	text-align: center;
+}
+
+.form-div-onboard {
+	text-align: center;
+	width: 646px;
+	display: inline-block;
+}
+
+.form-container-onboard {
+	padding-left: var(--spacing-5);
+	padding-right: var(--spacing-5);
+	padding-top: var(--spacing-5);
+	padding-bottom: 1px;
+	margin-top: var(--spacing-5);
+	border-radius: var(--radius-md);
+	gap: var(--spacing-5);
+}
+
+h1.complete-profile-heading,
+h2.complete-profile-heading,
+h3.complete-profile-heading,
+h4.complete-profile-heading,
+h5.complete-profile-heading,
+h6.complete-profile-heading,
+.ant-typography.complete-profile-heading,
+h1.ant-typography.complete-profile-heading {
+	color: var(--text-primary);
+	font-family: 'Inter', sans-serif;
+	font-size: 32px;
+	font-weight: var(--font-weight-semibold);
+	line-height: 28px;
+	letter-spacing: -0.96px;
+}
+
+.form-container-inner-div {
+	text-align: left;
+	margin-bottom: var(--spacing-4);
+}
+
+/* Two column row for first/last name */
+.form-row-two-col {
+	display: flex;
+	gap: var(--spacing-4);
+	margin-bottom: var(--spacing-4);
+}
+
+.form-row-two-col .form-col {
+	flex: 1;
+	text-align: left;
+}
+
+/* Field label */
+.form-field-label {
+	display: block;
+	text-align: left;
+	margin-bottom: var(--spacing-2);
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+}
+
+.form-error-text {
+	color: var(--text-error);
+	font-size: var(--font-size-sm);
+	margin-top: var(--spacing-1);
+}
+
+.form-conatiner-date-div {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-bottom: var(--spacing-4);
+}
+
+.form-container-date-inner-div {
+	display: flex;
+	gap: var(--spacing-2);
+	width: 100%;
+}
+
+.form-container-date-inner-div > * {
+	flex: 1;
+}
+
+.form-birthdate-error {
+	color: var(--text-error);
+	font-size: var(--font-size-sm);
+	text-align: start;
+	margin-top: var(--spacing-1);
+}
+
+.form-weight-input {
+	display: flex;
+	align-items: center;
+	height: var(--spacing-11);
+}
+
+.custom-select-input-item {
+	border: 1px;
+	border-color: var(--border-default);
+	border-left-width: var(--spacing-0);
+	border-top-left-radius: var(--spacing-0);
+	border-bottom-left-radius: var(--spacing-0);
+	border-radius: var(--radius-full);
+	background-color: transparent;
+}
+
+.suffix-height-heading {
+	display: flex;
+	gap: var(--spacing-4);
+}
+
+.middle-line-css {
+	color: var(--text-tertiary);
+}
+
+.consent-policy-heading {
+	text-decoration-line: underline;
+	text-decoration-color: var(--onboard-button-color);
+	text-decoration-thickness: 2px;
+	cursor: pointer;
+}
+
+.button-div-css {
+	margin-top: var(--spacing-5);
+	margin-bottom: var(--spacing-5);
+}
+
+.save-button-css {
+	border-radius: var(--radius-full);
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-tight);
+}
+
+.onboard-footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: var(--bg-page); /* Figma: colorBgLayout #1a1527 */
+	padding: 15px 0;
+	z-index: 100;
+}
+
+.onboard-button-container {
+	width: 646px;
+	margin: 0 auto;
+}
+
+.onboard-continue-btn {
+	width: 100%;
+	border-radius: var(--radius-full);
+}
+
+.button-row {
+	width: 100%;
+}
+
+/* ============================================
+   ONBOARD FORM INPUT STATES
+   Based on Figma design system (node 1460:55335)
+   Uses semantic tokens from themes/dark.css & themes/light.css
+   ============================================ */
+
+/* Default state - uses semantic input tokens */
+.form-container-onboard .ant-input-affix-wrapper {
+	height: var(--spacing-11);
+	border-radius: var(--radius-xl);
+	transition:
+		border-color var(--motion-duration-fast) var(--motion-ease-out),
+		box-shadow var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+/* Hover state for inputs - use focus color for visibility */
+.form-container-onboard .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+	border-color: var(--input-border-focus);
+}
+
+/* Override Ant Design's default select background - needs specificity to beat :where() */
+.form-container-onboard .ant-select-selector,
+.form-container-onboard
+	.ant-select-outlined:not(.ant-select-customize-input)
+	.ant-select-selector {
+	border-radius: var(--radius-xl);
+
+	border: 1px solid var(--input-border);
+	transition:
+		border-color var(--motion-duration-fast) var(--motion-ease-out),
+		box-shadow var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+/* Hover state for selects - use focus color for visibility */
+.form-container-onboard .ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.form-container-onboard
+	.ant-select-outlined:not(.ant-select-customize-input):not(.ant-select-disabled):hover
+	.ant-select-selector {
+	border-color: var(--input-border-focus);
+}
+
+/* Focus state - purple border with focus ring */
+.form-container-onboard .ant-input-affix-wrapper:focus,
+.form-container-onboard .ant-input-affix-wrapper:focus-within,
+.form-container-onboard .ant-input-affix-wrapper-focused {
+	border-color: var(--input-border-focus);
+	box-shadow: var(--input-focus-ring);
+}
+
+.form-container-onboard .ant-select-focused .ant-select-selector {
+	border-color: var(--input-border-focus);
+	box-shadow: var(--input-focus-ring);
+}
+
+/* Disabled state - overlay effect using semantic tokens */
+.form-container-onboard .ant-input-affix-wrapper-disabled {
+	background: linear-gradient(
+			var(--input-disabled-overlay),
+			var(--input-disabled-overlay)
+		),
+		var(--input-bg-disabled);
+	border-color: var(--input-border);
+	cursor: not-allowed;
+}
+
+.form-container-onboard .ant-select-disabled .ant-select-selector {
+	background: linear-gradient(
+			var(--input-disabled-overlay),
+			var(--input-disabled-overlay)
+		),
+		var(--input-bg-disabled);
+	border-color: var(--input-border);
+	cursor: not-allowed;
+}
+
+/* Placeholder text styling */
+.form-container-onboard .ant-input::placeholder,
+.form-container-onboard .ant-input-affix-wrapper input::placeholder {
+	color: var(--input-text-placeholder);
+}
+
+.form-container-onboard .ant-select-selection-placeholder {
+	color: var(--input-text-placeholder);
+}
+
+/* Input icon styling */
+.form-container-onboard .ant-input-prefix {
+	color: var(--input-icon);
+}
+
+.form-container-onboard .ant-input-suffix {
+	color: var(--input-icon);
+}
+
+/* Space.Compact input+select height matching - increased specificity to avoid !important */
+.form-container-onboard .ant-space-compact .ant-select.ant-select {
+	height: var(--spacing-11);
+}
+
+.form-container-onboard .ant-space-compact .ant-select .ant-select-selector {
+	height: var(--spacing-11);
+	border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+}
+
+.form-container-onboard
+	.ant-space-compact
+	.ant-input-affix-wrapper:first-child {
+	border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+}
+
+.form-container-onboard
+	.ant-space-compact
+	.ant-input-affix-wrapper:not(:first-child):not(:last-child),
+.form-container-onboard
+	.ant-space-compact
+	.ant-input-affix-wrapper.ant-input-compact-item:not(:first-child) {
+	border-radius: 0;
+}
+
+/* Onboard form input/select utilities */
+.onboard-input-flex {
+	flex: 1;
+}
+
+.onboard-unit-select {
+	width: 60px;
+}
+
+/* Unit select - right side of compact group */
+.form-container-onboard .onboard-unit-select.ant-select .ant-select-selector {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	background-color: var(--input-bg);
+}
+
+.onboard-date-select {
+	width: 152px;
+	height: var(--spacing-11);
+	text-align: start;
+}
+
+.onboard-date-select .ant-select-selector,
+.onboard-gender-select .ant-select-selector {
+	background-color: var(--input-bg);
+}
+
+.onboard-gender-select {
+	width: 100%;
+	height: var(--spacing-11);
+}
+
+.onboard-consent-link {
+	color: var(--text-secondary);
+	cursor: pointer;
+}
+
+.onboard-footer-spacer {
+	margin-top: 100px;
+}
+
+/* ============================================
+   VALIDATION STATES - ERROR
+   Red border for invalid inputs
+   ============================================ */
+
+/* Input error state */
+.form-container-onboard .ant-input-affix-wrapper.has-error,
+.form-container-onboard .ant-input.has-error,
+.form-container-onboard .has-error .ant-input-affix-wrapper,
+.form-container-onboard .has-error .ant-input {
+	border-color: var(--border-error);
+}
+
+/* Input error focus state */
+.form-container-onboard .ant-input-affix-wrapper.has-error:focus,
+.form-container-onboard .ant-input-affix-wrapper.has-error:focus-within,
+.form-container-onboard .ant-input.has-error:focus,
+.form-container-onboard .has-error .ant-input-affix-wrapper:focus,
+.form-container-onboard .has-error .ant-input-affix-wrapper:focus-within {
+	border-color: var(--border-error);
+	box-shadow: 0 0 0 2px var(--color-error-alpha-20);
+}
+
+/* Select error state */
+.form-container-onboard .ant-select.has-error .ant-select-selector,
+.form-container-onboard .has-error .ant-select-selector {
+	border-color: var(--border-error);
+}
+
+/* Select error focus state */
+.form-container-onboard
+	.ant-select.has-error.ant-select-focused
+	.ant-select-selector,
+.form-container-onboard .has-error .ant-select-focused .ant-select-selector {
+	border-color: var(--border-error);
+	box-shadow: 0 0 0 2px var(--color-error-alpha-20);
+}
+
+/* Space.Compact error state */
+.form-container-onboard .ant-space-compact.has-error .ant-input-affix-wrapper,
+.form-container-onboard .ant-space-compact.has-error .ant-input,
+.form-container-onboard .ant-space-compact.has-error .ant-select-selector {
+	border-color: var(--border-error);
+}
+
+/* ============================================
+   VALIDATION STATES - WARNING
+   Orange/gold border for warning inputs
+   ============================================ */
+
+/* Input warning state */
+.form-container-onboard .ant-input-affix-wrapper.has-warning,
+.form-container-onboard .ant-input.has-warning,
+.form-container-onboard .has-warning .ant-input-affix-wrapper,
+.form-container-onboard .has-warning .ant-input {
+	border-color: var(--border-warning);
+}
+
+/* Input warning focus state */
+.form-container-onboard .ant-input-affix-wrapper.has-warning:focus,
+.form-container-onboard .ant-input-affix-wrapper.has-warning:focus-within,
+.form-container-onboard .ant-input.has-warning:focus,
+.form-container-onboard .has-warning .ant-input-affix-wrapper:focus,
+.form-container-onboard .has-warning .ant-input-affix-wrapper:focus-within {
+	border-color: var(--border-warning);
+	box-shadow: 0 0 0 2px var(--color-warning-alpha-20);
+}
+
+/* Select warning state */
+.form-container-onboard .ant-select.has-warning .ant-select-selector,
+.form-container-onboard .has-warning .ant-select-selector {
+	border-color: var(--border-warning);
+}
+
+/* Select warning focus state */
+.form-container-onboard
+	.ant-select.has-warning.ant-select-focused
+	.ant-select-selector,
+.form-container-onboard .has-warning .ant-select-focused .ant-select-selector {
+	border-color: var(--border-warning);
+	box-shadow: 0 0 0 2px var(--color-warning-alpha-20);
+}
+
+/* Warning text color */
+.form-warning-text {
+	color: var(--text-warning);
+	font-size: var(--font-size-sm);
+	margin-top: var(--spacing-1);
+}
+
+/* ============================================
+   VALIDATION STATES - SUCCESS
+   Green border for valid inputs
+   ============================================ */
+
+/* Input success state */
+.form-container-onboard .ant-input-affix-wrapper.has-success,
+.form-container-onboard .ant-input.has-success,
+.form-container-onboard .has-success .ant-input-affix-wrapper {
+	border-color: var(--border-success);
+}
+
+/* Select success state */
+.form-container-onboard .ant-select.has-success .ant-select-selector,
+.form-container-onboard .has-success .ant-select-selector {
+	border-color: var(--border-success);
+}
+
+/* Success text color */
+.form-success-text {
+	color: var(--text-success);
+	font-size: var(--font-size-sm);
+	margin-top: var(--spacing-1);
+}
+
+/* ============================================
+   DATE SELECT ERROR STATES
+   ============================================ */
+
+/* Date select error state */
+.form-container-date-inner-div.has-error
+	.onboard-date-select
+	.ant-select-selector {
+	border-color: var(--border-error);
+}
+
+/* Date select error focus state */
+.form-container-date-inner-div.has-error
+	.onboard-date-select.ant-select-focused
+	.ant-select-selector {
+	border-color: var(--border-error);
+	box-shadow: 0 0 0 2px var(--color-error-alpha-20);
+}
+
+/* ============================================
+   SKELETON LOADING STATES
+   Theme-aware skeleton colors for onboard form
+   ============================================ */
+
+/* Base skeleton styling for onboard form */
+.onboard-profile-form .ant-skeleton-input,
+.onboard-profile-form .ant-skeleton-avatar {
+	background: var(--surface-secondary) !important;
+}
+
+/* Active (animated) skeleton - gradient shimmer */
+.onboard-profile-form .ant-skeleton.ant-skeleton-active .ant-skeleton-input,
+.onboard-profile-form .ant-skeleton.ant-skeleton-active .ant-skeleton-avatar {
+	background: linear-gradient(
+		90deg,
+		var(--surface-secondary) 25%,
+		var(--surface-tertiary) 50%,
+		var(--surface-secondary) 75%
+	) !important;
+	background-size: 400% 100% !important;
+	animation: skeleton-shimmer 1.5s ease infinite !important;
+}
+
+@keyframes skeleton-shimmer {
+	0% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

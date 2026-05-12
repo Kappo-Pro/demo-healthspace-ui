@@ -1,0 +1,185 @@
+/**
+ * IconMenu Styles
+ *
+ * Tier 1 navigation: vertical icon-only menu.
+ * Design: No background, icons render directly on page background.
+ * Theme-aware colors from design system.
+ */
+
+.icon-menu {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0; /* No padding needed, parent .sidebar handles spacing */
+	flex-shrink: 0; /* Don't shrink when sidebar collapses */
+	height: 100%; /* Full height to allow bottom positioning */
+	justify-content: space-between; /* Space items with user menu at bottom */
+	overflow: visible; /* Allow dropdown to extend beyond */
+}
+
+/* Logo section at top */
+.icon-menu__logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: var(--spacing-6);
+	padding-bottom: var(--spacing-4);
+	border-bottom: 1px solid var(--border-secondary);
+}
+
+.icon-menu__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-8);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.icon-menu__item {
+	margin: 0;
+	padding: 0;
+}
+
+.icon-menu__button {
+	/* Reset button styles */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: var(--spacing-2);
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	transition: opacity var(--motion-duration-fast) var(--motion-ease-out);
+
+	/* Icon color: theme-aware via design system */
+	color: var(--text-secondary);
+
+	/* Accessibility: focus visible */
+	&:focus-visible {
+		outline: 2px solid var(--brand-primary);
+		outline-offset: 2px;
+		border-radius: var(--radius-sm);
+	}
+
+	/* Hover state: subtle opacity change */
+	&:hover:not(:disabled) {
+		opacity: 0.8;
+	}
+
+	/* Active/pressed state */
+	&:active:not(:disabled) {
+		opacity: 0.6;
+	}
+
+	/* Icon size: 16px for all navigation icons */
+	& svg {
+		width: var(--control-icon-md);
+		height: var(--control-icon-md);
+	}
+}
+
+.icon-menu__button--selected {
+	/* Selected state: surface tertiary text on brand primary background */
+	color: var(--surface-tertiary);
+	background-color: var(--brand-primary);
+	border-radius: var(--radius-full);
+}
+
+.icon-menu__button--disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+/* Avatar button variant (for selected user) */
+.icon-menu__button--avatar {
+	padding: 0;
+	background: transparent;
+	border-radius: var(--radius-full);
+}
+
+.icon-menu__button--avatar.icon-menu__button--selected {
+	background: transparent;
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .icon-menu__button {
+	color: var(--text-secondary);
+}
+
+[data-theme='dark'] .icon-menu__button--selected {
+	color: var(--surface-tertiary);
+	background-color: var(--brand-primary);
+}
+
+/* Bottom section: Settings + User menu */
+.icon-menu__bottom {
+	margin-top: auto; /* Push to bottom */
+	padding-top: var(--spacing-4);
+	border-top: 1px solid var(--border-secondary);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-3);
+	overflow: visible; /* Allow dropdown to extend beyond */
+}
+
+/* Settings button (footer items) */
+.icon-menu__settings-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-2);
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	transition: opacity var(--motion-duration-fast) var(--motion-ease-out);
+	color: var(--text-secondary);
+	border-radius: var(--radius-sm);
+
+	/* Icon size: same as navigation icons */
+	& svg {
+		width: var(--control-icon-md);
+		height: var(--control-icon-md);
+	}
+}
+
+/* Settings button selected state */
+.icon-menu__settings-button.icon-menu__button--selected {
+	color: var(--surface-tertiary);
+	background-color: var(--brand-primary);
+	border-radius: var(--radius-full);
+}
+
+.icon-menu__settings-button:hover {
+	opacity: 0.8;
+}
+
+.icon-menu__settings-button:active {
+	opacity: 0.6;
+}
+
+.icon-menu__settings-button:focus-visible {
+	outline: 2px solid var(--brand-primary);
+	outline-offset: 2px;
+}
+
+/* User menu container */
+.icon-menu__user {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: relative; /* Position context for dropdown */
+	overflow: visible; /* Allow dropdown to extend beyond */
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.icon-menu__button {
+		transition: none;
+	}
+}

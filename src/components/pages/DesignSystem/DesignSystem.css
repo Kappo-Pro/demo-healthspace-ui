@@ -1,0 +1,315 @@
+/**
+ * Design System Page Styles
+ *
+ * Styles for the Design System demo page layout.
+ * Uses CSS custom properties from design-system.css for theming.
+ */
+
+/* ============================================
+   Page Layout
+   ============================================ */
+
+.design-system-page {
+	min-height: 100vh;
+	background: var(--surface-primary, var(--surface-primary));
+	transition: background-color 200ms ease-in-out;
+}
+
+.design-system-page[data-theme='dark'] {
+	background: var(--surface-primary-dark, var(--color-gray-900));
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.design-system-header {
+	background: var(--color-surface-primary, var(--surface-primary));
+	border-bottom: 1px solid var(--color-border-primary, var(--border-default));
+	padding: 0 var(--spacing-6);
+	height: var(--spacing-16);
+	line-height: var(--spacing-16);
+	display: flex;
+	align-items: center;
+	transition: all var(--motion-duration-fast) var(--motion-ease-in-out);
+	box-shadow: var(--shadow-sm);
+}
+
+.design-system-page[data-theme='dark'] .design-system-header {
+	background: var(--color-surface-primary-dark, var(--color-gray-800));
+	border-bottom-color: var(--color-border-primary-dark, var(--color-gray-700));
+}
+
+.design-system-header-content {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.design-system-title {
+	margin: 0 !important;
+	color: var(--color-text-primary, var(--text-primary));
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	transition: color 200ms ease-in-out;
+}
+
+.design-system-page[data-theme='dark'] .design-system-title {
+	color: var(--color-text-primary-dark, var(--color-white));
+}
+
+.design-system-actions {
+	display: flex;
+	gap: var(--spacing-2);
+}
+
+/* ============================================
+   Main Layout
+   ============================================ */
+
+.design-system-layout {
+	min-height: calc(100vh - var(--spacing-16));
+	background: var(--surface-primary, var(--surface-primary));
+	transition: background-color 200ms ease-in-out;
+}
+
+.design-system-page[data-theme='dark'] .design-system-layout {
+	background: var(--surface-primary-dark, var(--color-gray-900));
+}
+
+/* ============================================
+   Sidebar
+   ============================================ */
+
+.design-system-sider {
+	background: var(--color-surface-secondary, var(--surface-secondary));
+	border-right: 1px solid var(--color-border-primary, var(--border-default));
+	transition: all var(--motion-duration-fast) var(--motion-ease-in-out);
+	overflow-y: auto;
+}
+
+.design-system-page[data-theme='dark'] .design-system-sider {
+	background: var(--color-surface-secondary-dark, var(--color-gray-800));
+	border-right-color: var(--color-border-primary-dark, var(--color-gray-700));
+}
+
+.design-system-sider-content {
+	padding: var(--spacing-6);
+}
+
+.placeholder-controls {
+	padding: var(--spacing-4);
+	background: var(--color-surface-primary, var(--surface-primary));
+	border: 1px dashed var(--color-border-secondary, var(--border-subtle));
+	border-radius: var(--border-radius-md, 8px);
+	text-align: center;
+	transition: all var(--motion-duration-fast) var(--motion-ease-in-out);
+}
+
+.design-system-page[data-theme='dark'] .placeholder-controls {
+	background: var(--color-surface-primary-dark, var(--color-gray-800));
+	border-color: var(--color-border-secondary-dark, var(--color-gray-600));
+}
+
+.placeholder-controls h4 {
+	margin-bottom: var(--spacing-2);
+	color: var(--color-text-primary, var(--text-primary));
+	transition: color 200ms ease-in-out;
+}
+
+.design-system-page[data-theme='dark'] .placeholder-controls h4 {
+	color: var(--color-text-primary-dark, var(--color-white));
+}
+
+/* ============================================
+   Content Area
+   ============================================ */
+
+.design-system-content {
+	padding: var(--spacing-6);
+	background: var(--surface-primary, var(--surface-primary));
+	transition: background-color 200ms ease-in-out;
+}
+
+.design-system-page[data-theme='dark'] .design-system-content {
+	background: var(--surface-primary-dark, var(--color-gray-900));
+}
+
+.design-system-tabs {
+	background: transparent;
+}
+
+.design-system-tabs .ant-tabs-nav {
+	margin-bottom: var(--spacing-6);
+}
+
+.design-system-tab-content {
+	padding: var(--spacing-6);
+	background: var(--color-surface-primary, var(--surface-primary));
+	border-radius: var(--border-radius-lg, 12px);
+	min-height: 400px;
+	transition: all var(--motion-duration-fast) var(--motion-ease-in-out);
+	box-shadow: var(--shadow-sm);
+}
+
+.design-system-page[data-theme='dark'] .design-system-tab-content {
+	background: var(--color-surface-primary-dark, var(--color-gray-800));
+}
+
+.design-system-tab-content h2 {
+	margin-top: 0;
+	color: var(--color-text-primary, var(--text-primary));
+	transition: color 200ms ease-in-out;
+}
+
+.design-system-page[data-theme='dark'] .design-system-tab-content h2 {
+	color: var(--color-text-primary-dark, var(--color-white));
+}
+
+.placeholder-content {
+	padding: var(--spacing-12) var(--spacing-6);
+	text-align: center;
+	background: var(--color-surface-secondary, var(--surface-secondary));
+	border: 2px dashed var(--color-border-secondary, var(--border-subtle));
+	border-radius: var(--border-radius-md, 8px);
+	transition: all var(--motion-duration-fast) var(--motion-ease-in-out);
+}
+
+.design-system-page[data-theme='dark'] .placeholder-content {
+	background: var(--color-surface-secondary-dark, var(--color-gray-800));
+	border-color: var(--color-border-secondary-dark, var(--color-gray-600));
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+	.design-system-header {
+		padding: 0 var(--spacing-4);
+	}
+
+	.design-system-title {
+		font-size: var(--font-size-base);
+	}
+
+	.design-system-actions {
+		flex-wrap: wrap;
+	}
+
+	.design-system-actions button span {
+		display: none;
+	}
+
+	.design-system-content {
+		padding: var(--spacing-4);
+	}
+
+	.design-system-tab-content {
+		padding: var(--spacing-4);
+	}
+
+	.design-system-tabs .ant-tabs-nav {
+		margin-bottom: var(--spacing-4);
+	}
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+	.design-system-header {
+		padding: 0 var(--spacing-3);
+		height: var(--spacing-14);
+		line-height: var(--spacing-14);
+	}
+
+	.design-system-title {
+		font-size: var(--font-size-sm);
+	}
+
+	.design-system-layout {
+		min-height: calc(100vh - var(--spacing-14));
+	}
+
+	.design-system-content {
+		padding: var(--spacing-3);
+	}
+
+	.design-system-tab-content {
+		padding: var(--spacing-3);
+		min-height: 300px;
+	}
+
+	.placeholder-content {
+		padding: var(--spacing-6) var(--spacing-3);
+	}
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+/* Focus states */
+.design-system-page button:focus-visible,
+.design-system-page .ant-tabs-tab:focus-visible {
+	outline: 2px solid var(--color-purple-600, var(--border-focus));
+	outline-offset: 2px;
+}
+
+.design-system-page[data-theme='dark'] button:focus-visible,
+.design-system-page[data-theme='dark'] .ant-tabs-tab:focus-visible {
+	outline-color: var(--color-purple-400);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.design-system-header {
+		border-bottom-width: var(--spacing-0-5);
+	}
+
+	.design-system-sider {
+		border-right-width: var(--spacing-0-5);
+	}
+
+	.placeholder-content,
+	.placeholder-controls {
+		border-width: var(--border-width-2);
+	}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.design-system-page,
+	.design-system-header,
+	.design-system-layout,
+	.design-system-sider,
+	.design-system-content,
+	.design-system-tab-content,
+	.placeholder-content,
+	.placeholder-controls,
+	.design-system-title {
+		transition: none;
+	}
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+	.design-system-header,
+	.design-system-sider,
+	.design-system-actions {
+		display: none;
+	}
+
+	.design-system-content {
+		padding: 0;
+	}
+
+	.design-system-tab-content {
+		box-shadow: none;
+		border: 1px solid var(--color-black);
+	}
+}

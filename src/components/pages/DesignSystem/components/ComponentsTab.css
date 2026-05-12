@@ -1,0 +1,293 @@
+/**
+ * ComponentsTab Styles
+ *
+ * Styling for the component showcase with theme-aware design.
+ */
+
+/* ========== CONTAINER ========== */
+.components-tab {
+	padding: var(--spacing-6) 0;
+	min-height: 600px;
+}
+
+.components-tab-header {
+	margin-bottom: var(--spacing-8);
+	padding: 0 var(--spacing-6);
+}
+
+.components-tab-content {
+	padding: 0 var(--spacing-6);
+}
+
+/* ========== COMPONENT GROUPS ========== */
+.component-groups-collapse {
+	background: transparent;
+	border: none;
+}
+
+.component-groups-collapse .ant-collapse-item {
+	margin-bottom: var(--spacing-6);
+	border: 1px solid var(--border-primary, var(--border-default));
+	border-radius: var(--radius-lg);
+	background: var(--surface-primary);
+}
+
+.component-groups-collapse .ant-collapse-header {
+	padding: var(--spacing-4) var(--spacing-5) !important;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	background: var(--surface-secondary);
+	border-radius: var(--radius-lg) 8px 0 0 !important;
+}
+
+.component-groups-collapse .ant-collapse-content-box {
+	padding: var(--spacing-6) !important;
+	background: var(--surface-primary);
+}
+
+/* ========== COMPONENT CARD ========== */
+.component-showcase-card {
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-sm);
+	transition: all var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.component-showcase-card:hover {
+	box-shadow: var(--shadow-md);
+}
+
+.component-showcase-card .ant-card-head {
+	border-bottom: 1px solid var(--border-primary, var(--border-default));
+	padding: var(--spacing-4) var(--spacing-5);
+}
+
+.component-showcase-card .ant-card-body {
+	padding: var(--spacing-5);
+}
+
+/* ========== PREVIEW AREA ========== */
+.component-preview-container {
+	min-height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--surface-secondary);
+	border: 1px dashed var(--border-primary, var(--border-default));
+	border-radius: var(--radius-sm);
+	padding: var(--spacing-6);
+}
+
+.component-live-preview {
+	width: 100%;
+	padding: var(--spacing-6);
+	background: var(--surface-primary);
+	border-radius: var(--radius-sm);
+}
+
+.component-screenshot-placeholder {
+	width: 100%;
+	text-align: center;
+}
+
+/* ========== CODE EXAMPLE ========== */
+.component-code-example {
+	/* Intentional hardcoded color: VS Code Dark theme for syntax highlighting */
+	background: #282c34;
+	border-radius: var(--radius-sm);
+	overflow: auto;
+	max-height: 400px;
+}
+
+.component-code-example pre {
+	margin: 0;
+	padding: var(--spacing-4);
+	/* Intentional hardcoded color: VS Code syntax color for readability */
+	color: #abb2bf;
+	font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+	font-size: 13px;
+	line-height: var(--line-height-relaxed);
+	overflow-x: auto;
+}
+
+.component-code-example code {
+	/* Intentional hardcoded color: VS Code syntax color for readability */
+	color: #abb2bf;
+	font-family: inherit;
+}
+
+/* Code syntax highlighting (basic) */
+.component-code-example pre code {
+	display: block;
+	white-space: pre;
+}
+
+/* ========== PROPS TABLE ========== */
+.component-props-table {
+	overflow-x: auto;
+}
+
+.component-props-table .ant-table {
+	font-size: 13px;
+}
+
+.component-props-table code {
+	padding: var(--spacing-0-5) var(--spacing-1-5);
+	background: var(--surface-secondary);
+	border: 1px solid var(--border-primary, var(--border-default));
+	border-radius: 3px;
+	font-size: var(--font-size-xs);
+	font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+.component-prop-type {
+	color: var(--color-primary, var(--text-link));
+}
+
+/* ========== THEME VARIATIONS ========== */
+.theme-variations-section {
+	margin-top: var(--spacing-4);
+	padding-top: var(--spacing-4);
+	border-top: 1px solid var(--border-primary, var(--border-default));
+}
+
+.theme-variation-preview {
+	min-height: var(--spacing-20);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-2);
+}
+
+/* Theme-specific backgrounds for variations - demonstrating actual theme values */
+.theme-variation-preview[data-theme='default'] {
+	/* Intentional hardcoded colors: Demonstrating default theme values */
+	background: var(--color-white);
+	color: var(--color-black);
+}
+
+.theme-variation-preview[data-theme='dark'] {
+	/* Intentional hardcoded colors: Demonstrating dark theme values */
+	background: var(--color-gray-900);
+	color: var(--color-white);
+	border-color: var(--color-gray-700) !important;
+}
+
+.theme-variation-preview[data-theme='vibrant'] {
+	/* Intentional hardcoded gradient: Demonstrating vibrant theme visual style */
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: var(--color-white);
+}
+
+/* ========== DARK MODE ========== */
+[data-theme='dark'] .components-tab,
+[data-theme='vibrant'] .components-tab {
+	color: var(--text-primary, var(--color-white));
+}
+
+[data-theme='dark'] .component-groups-collapse .ant-collapse-item,
+[data-theme='vibrant'] .component-groups-collapse .ant-collapse-item {
+	background: var(--surface-primary, var(--color-gray-900));
+	border-color: var(--border-primary, var(--color-gray-700));
+}
+
+[data-theme='dark'] .component-groups-collapse .ant-collapse-header,
+[data-theme='vibrant'] .component-groups-collapse .ant-collapse-header {
+	background: var(--surface-secondary, var(--color-gray-800));
+	color: var(--text-primary, var(--color-white));
+}
+
+[data-theme='dark'] .component-showcase-card,
+[data-theme='vibrant'] .component-showcase-card {
+	background: var(--surface-primary, var(--color-gray-900));
+	border-color: var(--border-primary, var(--color-gray-700));
+}
+
+[data-theme='dark'] .component-preview-container,
+[data-theme='vibrant'] .component-preview-container {
+	background: var(--surface-secondary, var(--color-gray-800));
+	border-color: var(--border-primary, var(--color-gray-700));
+}
+
+[data-theme='dark'] .component-live-preview,
+[data-theme='vibrant'] .component-live-preview {
+	background: var(--surface-primary, var(--color-gray-900));
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+	.components-tab-header {
+		padding: 0 var(--spacing-4);
+	}
+
+	.components-tab-content {
+		padding: 0 var(--spacing-4);
+	}
+
+	.component-groups-collapse .ant-collapse-content-box {
+		padding: var(--spacing-4) !important;
+	}
+
+	.component-showcase-card .ant-card-body {
+		padding: var(--spacing-4);
+	}
+
+	.theme-variation-preview {
+		min-height: 60px;
+	}
+}
+
+@media (max-width: 576px) {
+	.components-tab-header .ant-row {
+		flex-direction: column;
+		gap: var(--spacing-3);
+	}
+
+	.components-tab-header .ant-col {
+		width: 100% !important;
+	}
+}
+
+/* ========== ACCESSIBILITY ========== */
+.component-showcase-card:focus-within {
+	outline: 2px solid var(--color-primary, var(--border-focus));
+	outline-offset: 2px;
+}
+
+.component-code-example:focus-within {
+	outline: 2px solid var(--color-primary, var(--border-focus));
+	outline-offset: 2px;
+}
+
+/* ========== ANIMATIONS ========== */
+.component-showcase-card {
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+	.component-preview-container,
+	.theme-variations-section {
+		display: none;
+	}
+
+	.component-code-example {
+		background: var(--color-white);
+		border: 1px solid var(--color-black);
+	}
+
+	.component-code-example pre {
+		color: var(--color-black);
+	}
+}

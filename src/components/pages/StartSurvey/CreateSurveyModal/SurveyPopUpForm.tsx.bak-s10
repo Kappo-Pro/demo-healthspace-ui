@@ -1,0 +1,214 @@
+import { Button, Input, Select, message, Typography } from 'antd'
+
+const { Paragraph } = Typography;
+import { useRef, useState } from 'react'
+import { MdAddCircleOutline, MdOutlineAssignment } from "react-icons/md";
+import { LayerSingle } from "@vitalflow-icons/layoult/layerSingle";
+import { LayersThree02 } from "@vitalflow-icons/layoult/layersThree02";
+import { FaceHappy } from "@vitalflow-icons/users/faceHappy";
+import { Image03 } from '@vitalflow-icons/files/image03';
+import { useTranslation } from 'react-i18next';
+import { SurevyPopupFormProps } from '@types';
+
+const { Option } = Select
+const { TextArea } = Input
+
+export default function SurveyPopUpForm(props: SurevyPopupFormProps) {
+  const { survey, setImgFile, imgFile, surveyTitle, surveyInstructions, setSurveyInstructions, surveyResultFeedback, setSurveyResultFeedback, setSurveyTitle, surveyDescription, setSurveyDescription, questionValue, setQuestionValue, setQuestionType, questionType, setQuestionList, questionList } = props
+  const { t } = useTranslation()
+  const imgInputRef = useRef<HTMLInputElement>(null);
+  const [imgHover, setImgHover] = useState(false)
+  const [idCounter, setIdCounter] = useState(1);
+  const [isScored, setIsScored] = useState(false);
+
+  const handleClickScore = () => {
+    setIsScored(!isScored);
+  };
+
+  const handleImgChange = (e: { target: { files: unknown; }; }) => {
+    const files = e.target.files;
+    message.success(t('Patient.data.activityStream.imageSelected'));
+    if (files[0]) {
+      setImgFile([files[0]]);
+    }
+  };
+
+  const handleQuestion = () => {
+    if (!questionValue.trim()) {
+      message.warning(t("Admin.data.survey.errQuestionTitle"));
+      return;
+    }
+    if (!questionType) {
+      message.warning(t("Admin.data.survey.errQuestionTitle"));
+      return;
+    }
+    const newQuestion = {
+      id: idCounter.toString(),
+      title: questionValue,
+      description: "Description",
+      questionType: questionType,
+      scored: isScored
+    }
+    setQuestionList([...questionList, newQuestion])
+    setQuestionValue("");
+    setQuestionType(undefined);
+    setIdCounter(idCounter + 1)
+  };
+
+  return (
+    <div className='survey-popup-form'>
+      <div className="image-upload imageUpload">
+        {!survey?.id ?
+          <label
+            className="image-upload-label"
+            onMouseOver={() => setImgHover(true)}
+            onMouseOut={() => setImgHover(false)}
+          >
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              ref={imgInputRef}
+              onChange={handleImgChange}
+            />
+            {
+              survey?.image
+                ? <div className="image-preview">
+                  <div style={{ opacity: imgHover ? 100 : 0 }} className="image-hover">
+                    <span className="text">{t('Admin.data.survey.changeImage')}</span>
+                  </div>
+                  // TODO: Consider using imgFile ?? defaultValue or imgFile?.property instead of imgFile!
+                  <img src={imgFile![0] ? URL.createObjectURL(imgFile![0]) : survey?.image} className="image" />
+                </div>
+                : <div className="upload-placeholder">
+                  <div style={{ opacity: imgHover ? 100 : 0 }} className={`image-hover`}>
+                    // TODO: Consider using imgFile ?? defaultValue or imgFile?.property instead of imgFile!
+                    <span className="text">{imgFile![0] ? <>{t('Admin.data.survey.changeImage')}</> : <>{t('Admin.data.survey.upload')}</>}</span>
+                  </div>
+                  // TODO: Consider using imgFile ?? defaultValue or imgFile?.property instead of imgFile!
+                  {!imgFile![0] ? <div className="upload-instructions"><Image03 width={50} height={50} color="stroke-gray-200" />
+                    // TODO: Consider using imgFile ?? defaultValue or imgFile?.property instead of imgFile!
+                    <Paragraph>{t('Admin.data.survey.uploadImage')}</Paragraph></div> : <><img src={URL.createObjectURL(imgFile![0])} width={154} height={154} /></>}
+                </div>
+            }
+          </label>:<label
+            className="image-upload-label"
+          >
+            {
+              survey?.image
+                ? <div className="image-preview">
+                  // TODO: Consider using imgFile ?? defaultValue or imgFile?.property instead of imgFile!
+                  <img src={imgFile![0] ? URL.createObjectURL(imgFile![0]) : survey?.image} className="image" />
+                </div>
+                : <div className="upload-placeholder">
+                  // TODO: Consider using imgFile ?? defaultValue or imgFile?.property instead of imgFile!
+                  {!imgFile![0] ? <div className="upload-instructions"><Image03 width={50} height={50} color="stroke-gray-200" />
+                    // TODO: Consider using imgFile ?? defaultValue or imgFile?.property instead of imgFile!
+                    <Paragraph>{t('Admin.data.survey.uploadImage')}</Paragraph></div> : <><img src={URL.createObjectURL(imgFile![0])} width={154} height={154} /></>}
+                </div>
+            }
+          </label>
+        }
+        <div className='hearder-input-div'>
+          <Paragraph className='header-title-css'>{t('Admin.data.survey.surveyTitle')}</Paragraph>
+          <Input
+            className='survey-title'
+            value={surveyTitle}
+            readOnly={survey?.clinicallyValidated}
+            onChange={(e) => setSurveyTitle(e.target.value)}
+          />
+          <Paragraph className='header-title-css'>{t('Admin.data.survey.surveyDescription')}</Paragraph>
+          {survey?.clinicallyValidated ? (
+        <TextArea
+          className='survey-title'
+          value={surveyDescription}
+          readOnly
+          autoSize={{ minRows: 1.6, maxRows: 5 }}
+        />
+      ) : (
+          <TextArea
+              className='survey-title'
+              value={surveyDescription}
+              onChange={(e) => setSurveyDescription(e.target.value)}
+              readOnly={survey?.clinicallyValidated}
+              autoSize={{ minRows:1.6, maxRows: 5 }}
+            />)}
+        </div>
+      </div>
+      <div className='custom-outer-div'>
+      <div className='inner-outer-div'>
+      <Paragraph className='header-title-css'>{t('Admin.data.survey.surveyInstructions')}</Paragraph>
+      {survey?.clinicallyValidated ? (
+        <TextArea
+          className='survey-title'
+          value={surveyInstructions}
+          autoSize={{ minRows:5, maxRows: 5 }}
+          readOnly
+        />
+      ) : (
+        <TextArea
+          className='survey-title'
+          value={surveyInstructions}
+          onChange={(e) => setSurveyInstructions(e.target.value)}
+          autoSize={{ minRows:5, maxRows: 5 }}
+        />
+      )}</div>
+      <div className='inner-outer-div'>
+      <Paragraph className='header-title-css'>{t('Admin.data.survey.surveyResultFeedback')}</Paragraph>
+      {survey?.clinicallyValidated ? (
+        <TextArea
+          className='survey-title'
+          value={surveyResultFeedback}
+          autoSize={{ minRows:5, maxRows: 5 }}
+          readOnly
+        />
+      ) : (
+        <TextArea
+          className='survey-title'
+          value={surveyResultFeedback}
+          autoSize={{ minRows:5, maxRows: 5 }}
+          onChange={(e) => setSurveyResultFeedback(e.target.value)}
+        />
+      )}</div></div>
+
+      {!survey?.clinicallyValidated && <>
+        <Paragraph className='header-title-css'>{t("Admin.data.survey.questionTitle")}</Paragraph>
+        <div className='question-section'>
+          <Input
+            className='question-input'
+            value={questionValue}
+            onChange={(e) => setQuestionValue(e.target.value)}
+            className="w-full"
+          />
+          <div className="select-container">
+            <div className='select-wrapper'>
+              <div className='select-row'>
+                {questionType != "openText" &&
+                  <span onClick={handleClickScore} className={`score-btn ${isScored ? 'active' : ''}`}>
+                      {isScored ? t("Admin.data.survey.scored") : t("Admin.data.survey.unscored")}
+                  </span>}
+                <Select
+                  className="question-type-select"
+                  bordered={false}
+                  onChange={(value) => setQuestionType(value)}
+                  value={questionType}
+                  placeholder={t('Admin.data.survey.type')}
+                >
+                  <Option value="rate"><span className='rate-option-span'><FaceHappy color={'stroke-gray-900'} width={17} height={17} /> </span>{t('Admin.data.survey.rate')}</Option>
+                  <Option value="singleSelect"><span className='rate-option-span'><LayerSingle color={'stroke-gray-900'} width={17} height={17} /> </span>{t('Admin.data.survey.singleSelect')}</Option>
+                  <Option value="multiSelect"><span className='rate-option-span'><LayersThree02 color={'stroke-gray-900'} width={17} height={17} /> </span>{t('Admin.data.survey.multiSelect')}</Option>
+                  <Option value="openText"><span className='rate-option-span'><MdOutlineAssignment className="icon" /> </span>{t('Admin.data.survey.openText')}</Option>
+                </Select>
+                <Button onClick={handleQuestion} size="small">
+                  <span className='score-span-css'>
+                    <MdAddCircleOutline className="button-icon" />
+                    {t('Admin.data.survey.add')}
+                  </span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div></>}
+    </div>
+  )
+}

@@ -1,0 +1,65 @@
+.addToReport-container {
+	width: 251px;
+	height: auto;
+	user-select: none;
+
+	.close-icon-css {
+		position: absolute;
+		top: var(--spacing-1-5);
+		right: var(--spacing-2-5);
+		cursor: pointer;
+	}
+
+	.search-icon-css {
+		background-color: var(--surface-primary);
+		border-radius: var(--radius-lg);
+		margin-bottom: var(--spacing-3);
+	}
+
+	.search-icon-css:hover {
+		border-color: var(--surface-primary);
+	}
+
+	.report-data-div {
+		max-height: 16rem;
+		overflow-y: auto;
+		margin-bottom: var(--spacing-3);
+	}
+
+	.report-checkbox-container {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-2);
+		padding-bottom: 8px;
+	}
+
+	.save-button-css {
+		width: fit-content;
+		cursor: pointer;
+		border-radius: var(--radius-md);
+		padding-top: var(--spacing-1);
+		padding-bottom: var(--spacing-1);
+		padding-left: var(--spacing-3);
+		padding-right: var(--spacing-3);
+	}
+
+	.save-button-css:hover {
+		background-color: var(--color-gray-800);
+	}
+
+	.new-report-container {
+		margin-top: 25px;
+		margin-bottom: var(--spacing-2);
+	}
+
+	.report-action-button-css-div {
+		display: flex;
+		justify-content: space-between;
+		margin-top: var(--spacing-2);
+	}
+}
+
+.report-count-badge.ant-badge {
+	padding: 0 0 0 5px;
+	min-width: auto;
+}

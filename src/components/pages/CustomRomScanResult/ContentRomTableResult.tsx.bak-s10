@@ -1,0 +1,403 @@
+import {
+	MinusOutlined,
+	PictureOutlined,
+	PlusOutlined,
+} from '@ant-design/icons';
+import { InfoCircle } from '@vitalflow-icons/general/infoCircle';
+import { CustomRomSession, OmniRomRomPatientResult } from '@types';
+import {
+	Collapse,
+	Flex,
+	Modal,
+	Popover,
+	Table,
+	Tag,
+	Typography,
+} from 'antd';
+import { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { evalScore } from './jointsTemplateData';
+import { ImageAnnotation } from '@pages/ImageAnnotation';
+import { useCanvasState } from '@pages/ImageAnnotation/hooks/useCanvasState';
+
+const { Text } = Typography;
+
+interface ContentRomResultProps {
+	getColorForCategory: (score: number) => string;
+	getCategoryName: (score: number) => string;
+	selectedRom: CustomRomSession;
+	isPdf?: boolean;
+	fetchData: (value: string) => void;
+}
+
+const calculateRanking = (score: number) => {
+	if (score >= 91) return 10;
+	if (score >= 81) return 9;
+	if (score >= 71) return 8;
+	if (score >= 61) return 7;
+	if (score >= 51) return 6;
+	if (score >= 41) return 5;
+	if (score >= 31) return 4;
+	if (score >= 21) return 3;
+	if (score >= 11) return 2;
+	if (score >= 1) return 1;
+	return 0;
+};
+
+const ContentRomResult = ({
+	getColorForCategory,
+	getCategoryName,
+	selectedRom,
+	isPdf = false,
+	fetchData
+}: ContentRomResultProps) => {
+	const { t } = useTranslation();
+	const dataSource = selectedRom?.romPatientResults;
+	const [modalVisible, setModalVisible] = useState(false)
+	const {canvasState, setCanvasState} = useCanvasState()
+	const [canvasLoading, setCanvasLoading] = useState(false);
+	const [selectedImage, setSelectedImage] = useState<string | null>(null);
+	const [selectedRecord, setSelectedRecord] =
+		useState<OmniRomRomPatientResult | null>(null);
+
+	const categories = [
+		{
+			name: t('Patient.data.omnirom.optimalMobility'),
+			range: '90 - 100',
+			color: 'var(--text-success)',
+			scoreRange: [90, 100],
+			description: t('Patient.data.omnirom.optimalMobilityDesc'),
+		},
+		{
+			name: t('Patient.data.omnirom.functionalMobility'),
+			range: '75 - 89',
+			color: 'var(--text-success)',
+			scoreRange: [75, 89],
+			description: t('Patient.data.omnirom.functionalMobilityDesc'),
+		},
+		{
+			name: t('Patient.data.omnirom.moderateRestriction'),
+			range: '60 - 74',
+			color: 'var(--color-warning-500)',
+			scoreRange: [60, 74],
+			description: t('Patient.data.omnirom.moderateRestrictionDesc'),
+		},
+		{
+			name: t('Patient.data.omnirom.restrictedMobility'),
+			range: '40 - 59',
+			color: 'var(--color-warning-500)',
+			scoreRange: [40, 59],
+			description: t('Patient.data.omnirom.limitedMobilityDesc'),
+		},
+		{
+			name: t('Patient.data.omnirom.severelyRestricted'),
+			range: '20 - 39',
+			color: 'var(--color-error-500)',
+			scoreRange: [20, 39],
+			description: t('Patient.data.omnirom.restrictedMobilityDesc'),
+		},
+		{
+			name: t('Patient.data.omnirom.criticallyImpaired'),
+			range: 'Below 20',
+			color: 'var(--color-error-500)',
+			scoreRange: [0, 19],
+			description: t('Patient.data.omnirom.criticallyImpairedDesc'),
+		},
+	];
+
+	const flattenDataSource = dataSource
+		?.map(item => item?.results?.map(result => ({ ...item, ...result })))
+		?.flat();
+
+	const categorizedData = flattenDataSource?.map(record => {
+		const rawScore = evalScore(record);
+		const score =
+			rawScore !== undefined
+				? rawScore >= 100
+					? 100
+					: rawScore
+				: evalScore(record);
+		const name = getCategoryName(score);
+		return {
+			...record,
+			category: name ? name : 'Uncategorized',
+			score,
+		};
+	});
+
+	const groupedData = categories?.map(category => {
+		const filteredData = categorizedData?.filter(
+			record => record?.category === category?.name,
+		);
+		return {
+			categoryName: category?.name,
+			categoryColor: category?.color,
+			data: filteredData,
+			range: category?.range,
+			categoryDescription: category?.description,
+		};
+	});
+
+	const columns = useMemo(() => [
+		{
+			title: '',
+			dataIndex: 'screenshot',
+			key: 'screenshot',
+			width: '40px',
+			render: (src: string, record: OmniRomRomPatientResult) => {
+				const iconId = `icon-${record?.id || Math.random().toString(36).substring(7)}`;
+
+				return (
+					<div
+						className="pdf-link"
+						data-href={new URL(src, window.location.origin).href}>
+							<PictureOutlined
+								style={{ fontSize: 22, cursor: 'pointer', color: 'var(--text-secondary)' }}
+								onClick={() => {
+									if (src) {
+										setSelectedRecord(record);
+										setSelectedImage(src);
+										setModalVisible(true);
+									}
+								}}
+							/>
+					</div>
+				);
+			},
+		},
+		{
+			title: (
+				<p className={isPdf ? 'pdf-margin' : ''}>
+					{t('Patient.data.omnirom.measure')}
+				</p>
+			),
+			dataIndex: 'title',
+			key: 'title',
+			width: '100%',
+			onCell: () => ({ style: { flex: 1 } }),
+			render: (_: string, record: OmniRomRomPatientResult) => (
+				<Text>
+					<p className={isPdf ? 'pdf-margin' : ''}>
+						{/* {record?.romProgramExercise?.strapiOmniRomExercise?.name ||
+							record?.title} */}
+						{record?.romProgramExercise?.title || record?.title}
+					</p>
+				</Text>
+			),
+		},
+		{
+			title: (
+				<Popover content={t('Patient.data.omnirom.normalInfo')} title="Normal">
+					<Flex align="space-between" gap="small">
+						<span className={isPdf ? 'pdf-margin' : ''}>
+							{t('Patient.data.omnirom.normal')}
+						</span>
+						<span className="cursor-pointer">
+							<InfoCircle width={16} height={16} color="stroke-gray-600" />
+						</span>
+					</Flex>
+				</Popover>
+			),
+			dataIndex: 'normal',
+			key: 'normal',
+			align: 'center',
+			render: (_: string, record: OmniRomRomPatientResult) => {
+				const normalValue = record?.normal || 0;
+				return (
+					<Text type="secondary" className={isPdf ? 'pdf-margin' : ''}>
+						{normalValue}°
+					</Text>
+				);
+			},
+		},
+		{
+			title: (
+				<Popover content={t('Patient.data.omnirom.wflInfo')} title="WFL">
+					<Flex align="space-between" gap="small">
+						<span className={isPdf ? 'pdf-margin' : ''}>
+							{t('Patient.data.omnirom.wfl')}
+						</span>
+						<span className="cursor-pointer">
+							<InfoCircle width={16} height={16} color="stroke-gray-600" />
+						</span>
+					</Flex>
+				</Popover>
+			),
+			dataIndex: 'wfl',
+			key: 'wfl',
+			align: 'center',
+			render: (_: string, record: OmniRomRomPatientResult) => {
+				const wflValue = record?.wfl || 0;
+				return (
+					<Text className={isPdf ? 'pdf-margin' : ''} type="secondary">
+						{wflValue}°
+					</Text>
+				);
+			},
+		},
+		{
+			title: (
+				<p className={isPdf ? 'pdf-margin' : ''}>
+					{t('Patient.data.omnirom.value')}
+				</p>
+			),
+			dataIndex: 'value',
+			key: 'value',
+			align: 'center',
+			render: (_: string, record: OmniRomRomPatientResult) => {
+				const score = evalScore(record);
+				const color = getColorForCategory(score);
+				return (
+					<span style={{ color: color }} className={isPdf ? 'pdf-margin' : ''}>
+						{record?.value}°
+					</span>
+				);
+			},
+		},
+		{
+			title: (
+				<p className={isPdf ? 'pdf-margin' : ''}>
+					{t('Patient.data.omnirom.ranking')}
+				</p>
+			),
+			dataIndex: 'ranking',
+			key: 'ranking',
+			align: 'center',
+			render: (_: string, record: OmniRomRomPatientResult) => {
+				const score = evalScore(record);
+				const color = getColorForCategory(score);
+				return (
+					<span
+						style={{ color: color, fontWeight: 'bold' }}
+						className={isPdf ? 'pdf-margin' : ''}>
+						{calculateRanking(score)}
+					</span>
+				);
+			},
+		},
+		{
+			title: (
+				<p className={isPdf ? 'pdf-margin' : ''}>
+					{t('Patient.data.omnirom.score')}
+				</p>
+			),
+			dataIndex: 'score',
+			key: 'score',
+			align: 'center',
+			render: (_: string, record: OmniRomRomPatientResult) => {
+				const score = evalScore(record);
+				const color = getColorForCategory(score || 0);
+				return (
+					<Tag
+						style={{ marginInlineEnd: 0, width: '100%', textAlign: 'center' }}
+						color={color || 'default'}>
+						<p className={isPdf ? 'pdf-margin' : ''}>
+							{Math.round(score || 0)}
+						</p>
+					</Tag>
+				);
+			},
+		},
+	], [t, isPdf, getColorForCategory, setSelectedRecord, setSelectedImage, setModalVisible]);
+
+	const defaultActiveKeys = groupedData
+		?.map((category, index) =>
+			category?.data && category?.data.length > 0 ? index.toString() : null,
+		)
+		?.filter(index => index !== null);
+
+	const [activeKeys, setActiveKeys] = useState<string[]>(
+		(defaultActiveKeys as string[]) || [],
+	);
+
+	useEffect(() => {
+		setActiveKeys((defaultActiveKeys as string[]) || []);
+	}, [isPdf, groupedData?.length, fetchData]);
+
+	const handleCancel = () => {
+		setModalVisible(false);
+		setCanvasState(prev => ({
+			...prev,
+			image: null,
+			landmarks: [],
+			annotations: [],
+		}));
+		setSelectedImage('');
+	};
+
+	return (
+		<div>
+			<Collapse
+				accordion={false}
+				bordered={false}
+				expandIcon={({ isActive }) =>
+					isActive ? <MinusOutlined /> : <PlusOutlined />
+				}
+				className={`collapse-categories-results`}
+				className="bg-transparent"
+				activeKey={activeKeys}
+				onChange={keys => setActiveKeys(Array.isArray(keys) ? keys : [keys])}>
+				{groupedData?.map((category, index) => (
+					<Collapse.Panel
+						key={index?.toString()}
+						data-color={category?.categoryName}
+						className={`rom-collapse header-panel !bg-gray-50 !border !border-gray-200 !rounded-lg my-1.5 ${isPdf ? 'pdf-section' : ''}`}
+						header={
+							<Flex justify="space-between" align="flex-start">
+								<span>
+									<p
+										className={
+											isPdf ? 'pdf-margin' : ''
+										}>{`${category?.categoryName}: `}</p>
+									<Text type="secondary" className={isPdf ? 'pdf-margin' : ''}>
+										{category?.categoryDescription}
+									</Text>
+								</span>
+								<Tag
+									style={{ marginInlineEnd: 0 }}
+									color={category?.categoryColor}>
+									<p className={isPdf ? 'pdf-margin' : ''}>{category?.range}</p>
+								</Tag>
+							</Flex>
+						}
+						style={{
+							borderLeft: `4px solid ${category.categoryColor}`,
+							margin: '16px 0',
+						}}>
+						<Table
+							bordered
+							className='rom-table'
+							dataSource={category?.data}
+							columns={columns}
+							pagination={false}
+							size="small"
+						/>
+					</Collapse.Panel>
+				))}
+			</Collapse>
+
+			<Modal
+				open={modalVisible}
+				onCancel={handleCancel}
+				onClose={handleCancel}
+				width={1600}
+				destroyOnHidden={false}
+				height={720}
+				style={{ height: '80vh', top: 0 }}
+				footer={null}>
+				<ImageAnnotation
+					canvasLoading={canvasLoading}
+					fetchSessionData={fetchData}
+					setCanvasLoading={setCanvasLoading}
+					selectedImage={selectedImage}
+					imageUrl={selectedImage}
+					// TODO: Consider using selectedRecord ?? defaultValue or selectedRecord?.property instead of selectedRecord!
+					record={selectedRecord!}
+					handleCancel={handleCancel}
+				/>
+			</Modal>
+		</div>
+	);
+};
+
+export default ContentRomResult;

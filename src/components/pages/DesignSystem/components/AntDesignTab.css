@@ -1,0 +1,312 @@
+/**
+ * AntDesignTab Styles
+ *
+ * Additional styling for Ant Design component showcase.
+ */
+
+/* ========== ANT DESIGN TAB SPECIFIC ========== */
+.antd-tab {
+	/* Inherits from components-tab */
+}
+
+/* ========== EXAMPLES GRID ========== */
+.antd-examples-grid {
+	margin-top: var(--spacing-2);
+}
+
+.antd-example-box {
+	padding: var(--spacing-3);
+	background: var(--surface-secondary, var(--color-gray-50));
+	border: 1px solid var(--border-primary, #e8e8e8);
+	border-radius: var(--radius-md);
+	min-height: var(--spacing-20);
+	transition: all var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.antd-example-box:hover {
+	border-color: var(--color-primary, var(--brand-primary));
+	box-shadow: var(--shadow-sm);
+}
+
+.antd-example-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: var(--spacing-10);
+	padding: var(--spacing-1);
+}
+
+/* Ensure full width for some components */
+.antd-example-preview .ant-input,
+.antd-example-preview .ant-select,
+.antd-example-preview .ant-picker {
+	width: 100%;
+}
+
+/* ========== COMPONENT SPECIFIC ADJUSTMENTS ========== */
+
+/* Table in examples */
+.antd-example-preview .ant-table-wrapper {
+	width: 100%;
+}
+
+.antd-example-preview .ant-table {
+	font-size: var(--font-size-xs);
+}
+
+/* Card in examples */
+.antd-example-preview .ant-card {
+	width: 100%;
+}
+
+/* List in examples */
+.antd-example-preview .ant-list {
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+/* Tree in examples */
+.antd-example-preview .ant-tree {
+	max-height: 150px;
+	overflow-y: auto;
+}
+
+/* Menu in examples */
+.antd-example-preview .ant-menu {
+	min-width: 200px;
+}
+
+/* Form in examples */
+.antd-example-preview .ant-form {
+	width: 100%;
+}
+
+/* Tabs in examples */
+.antd-example-preview .ant-tabs {
+	width: 100%;
+}
+
+/* Steps in examples */
+.antd-example-preview .ant-steps {
+	width: 100%;
+}
+
+/* Progress in examples */
+.antd-example-preview .ant-progress {
+	width: 100%;
+}
+
+/* Slider in examples */
+.antd-example-preview .ant-slider {
+	width: 100%;
+	margin: var(--spacing-2) 0;
+}
+
+/* Space in examples */
+.antd-example-preview .ant-space {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/* ========== INTERACTIVE CONTROLS ========== */
+.antd-interactive-controls {
+	margin-top: var(--spacing-4);
+	padding-top: var(--spacing-4);
+	border-top: 1px solid var(--border-primary, #e8e8e8);
+}
+
+.antd-prop-control {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	margin-bottom: var(--spacing-2);
+}
+
+.antd-prop-control-label {
+	min-width: var(--spacing-20);
+	font-size: 13px;
+	color: var(--text-secondary, rgba(0, 0, 0, 0.65));
+}
+
+/* ========== DARK MODE ========== */
+[data-theme='dark'] .antd-example-box,
+[data-theme='vibrant'] .antd-example-box {
+	background: var(--surface-secondary, #252525);
+	border-color: var(--border-primary, var(--color-gray-700));
+}
+
+[data-theme='dark'] .antd-example-box:hover,
+[data-theme='vibrant'] .antd-example-box:hover {
+	border-color: var(--color-primary, var(--brand-primary));
+	box-shadow: var(--shadow-md);
+}
+
+[data-theme='dark'] .antd-prop-control-label,
+[data-theme='vibrant'] .antd-prop-control-label {
+	color: var(--text-secondary, rgba(255, 255, 255, 0.65));
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 992px) {
+	.antd-example-box {
+		min-height: 60px;
+	}
+
+	.antd-example-preview .ant-table {
+		font-size: 11px;
+	}
+
+	.antd-example-preview .ant-menu {
+		min-width: 150px;
+	}
+}
+
+@media (max-width: 768px) {
+	.antd-examples-grid .ant-col {
+		margin-bottom: var(--spacing-2);
+	}
+
+	.antd-example-box {
+		padding: var(--spacing-2);
+	}
+
+	.antd-prop-control {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--spacing-1);
+	}
+
+	.antd-prop-control-label {
+		min-width: auto;
+	}
+}
+
+@media (max-width: 576px) {
+	/* Stack examples vertically on mobile */
+	.antd-examples-grid .ant-col {
+		width: 100% !important;
+	}
+
+	.antd-example-preview {
+		min-height: 60px;
+	}
+
+	/* Adjust component sizes for mobile */
+	.antd-example-preview .ant-progress-circle,
+	.antd-example-preview .ant-progress-dashboard {
+		width: 60px !important;
+		height: 60px !important;
+	}
+
+	.antd-example-preview .ant-steps {
+		font-size: 11px;
+	}
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+	.antd-interactive-controls {
+		display: none;
+	}
+
+	.antd-example-box {
+		break-inside: avoid;
+	}
+}
+
+/* ========== ACCESSIBILITY ========== */
+.antd-example-box:focus-within {
+	outline: 2px solid var(--color-primary, var(--brand-primary));
+	outline-offset: 2px;
+}
+
+/* Ensure good contrast for labels */
+.antd-prop-control-label {
+	font-weight: var(--font-weight-medium);
+}
+
+/* ========== ANIMATIONS ========== */
+.antd-example-box {
+	animation: fadeInUp 0.3s ease-in-out;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Smooth transitions for state changes */
+.antd-example-preview * {
+	transition: all var(--motion-duration-base) var(--motion-ease-out);
+}
+
+/* ========== OVERFLOW HANDLING ========== */
+.antd-example-preview {
+	overflow: hidden;
+}
+
+/* Handle long content in examples */
+.antd-example-preview .ant-typography {
+	max-width: 100%;
+	word-wrap: break-word;
+}
+
+/* ========== SPACING ADJUSTMENTS ========== */
+.antd-example-preview .ant-space {
+	width: 100%;
+}
+
+.antd-example-preview .ant-space-item {
+	margin-right: var(--spacing-2) !important;
+}
+
+/* ========== BADGE AND TAG ALIGNMENT ========== */
+.antd-example-preview .ant-badge {
+	display: inline-flex;
+	align-items: center;
+}
+
+.antd-example-preview .ant-tag {
+	margin: 0;
+}
+
+/* ========== AVATAR GROUP STYLING ========== */
+.antd-example-preview .ant-avatar-group {
+	display: flex;
+	align-items: center;
+}
+
+/* ========== FORM LAYOUT ========== */
+.antd-example-preview .ant-form-item {
+	margin-bottom: var(--spacing-2);
+}
+
+.antd-example-preview .ant-form-item-label {
+	padding-bottom: 0;
+}
+
+/* ========== BUTTON GROUP ========== */
+.antd-example-preview .ant-btn-group {
+	display: inline-flex;
+}
+
+/* ========== RATE COMPONENT ========== */
+.antd-example-preview .ant-rate {
+	font-size: var(--font-size-sm);
+}
+
+/* ========== UPLOAD COMPONENT ========== */
+.antd-example-preview .ant-upload {
+	width: 100%;
+}
+
+/* ========== COLOR PICKER ========== */
+.antd-example-preview .ant-color-picker-trigger {
+	width: auto;
+}

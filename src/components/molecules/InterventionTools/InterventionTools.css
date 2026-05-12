@@ -1,0 +1,19 @@
+/**
+ * InterventionTools Styles
+ *
+ * Uses design system tokens for consistent theming.
+ * Story 3.7: Patient Adherence Tracking
+ */
+
+.intervention-tools {
+	width: 100%;
+}
+
+.intervention-tools .ant-card {
+	border-color: var(--color-border);
+}
+
+/* History cards */
+.intervention-tools .ant-card-small {
+	margin-bottom: var(--spacing-sm);
+}

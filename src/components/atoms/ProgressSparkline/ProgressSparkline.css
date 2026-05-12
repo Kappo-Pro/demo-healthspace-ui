@@ -1,0 +1,38 @@
+/* src/components/atoms/ProgressSparkline/ProgressSparkline.css */
+
+.progress-sparkline {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xs, var(--spacing-1));
+}
+
+.progress-sparkline--compact {
+	gap: 0;
+}
+
+.progress-sparkline__label {
+	font-size: var(--font-size-sm, 14px);
+	color: var(--color-text-secondary);
+	font-weight: var(--font-weight-medium);
+}
+
+.progress-sparkline__improvement {
+	font-weight: var(--font-weight-semibold);
+	margin-left: var(--spacing-xs, var(--spacing-1));
+}
+
+.progress-sparkline__chart {
+	width: 100%;
+	min-width: 200px;
+}
+
+.progress-sparkline--compact .progress-sparkline__chart {
+	min-width: 100px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.progress-sparkline__chart {
+		min-width: 150px;
+	}
+}

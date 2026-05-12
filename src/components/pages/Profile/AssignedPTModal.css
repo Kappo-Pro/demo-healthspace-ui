@@ -1,0 +1,47 @@
+.button-container {
+	/* Use .flex-center + gap in TSX for flex layout */
+	gap: var(--spacing-2);
+}
+
+.pt-container {
+	/* Use .flex-center in TSX for flex layout */
+	padding: 0var (--spacing-16);
+	border-radius: var(--radius-md);
+	background-color: var(--color-gray-100);
+}
+
+.line-seperation {
+	background-color: rgb(152 162 179 / var(--tw-bg-opacity))
+		/* var(--color-gray-400) */;
+	color: rgb(152 162 179 / var(--tw-bg-opacity)) /* var(--color-gray-400) */;
+}
+
+.text-pt {
+	color: var(--color-gray-500);
+}
+
+.assigned-pt-title {
+	/* Use .flex-center in TSX */
+}
+
+.main-container {
+	/* Use .flex .flex-col in TSX */
+	row-gap: var(--spacing-3);
+}
+
+.flex-container-pt-list {
+	/* Use .flex .items-center in TSX */
+	margin-bottom: var(--spacing-0-5);
+	padding: var(--spacing-2);
+}
+
+.flex-container-pt-list:hover {
+	background-color: #e2e8f0;
+	border-radius: var(--radius-lg);
+}
+
+.custom-avatar-pt-profile {
+	/* Use inline-flex .items-center in TSX */
+	color: var(--surface-primary);
+	font-size: 22px;
+}

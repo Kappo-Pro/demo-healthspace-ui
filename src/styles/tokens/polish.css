@@ -1,0 +1,145 @@
+/**
+ * Visual Polish Tokens
+ *
+ * Enhanced design tokens for Phase 3 visual polish.
+ * Adds depth, sophistication, and micro-interaction support.
+ *
+ * Based on UX Spec: docs/ux-spec/05-visual-design.md
+ */
+
+:root {
+  /* ============================================
+     ENHANCED GRADIENTS
+     ============================================ */
+
+  /* Brand gradients */
+  --gradient-brand: linear-gradient(135deg, var(--color-purple-600) 0%, var(--color-purple-700) 100%);
+  --gradient-brand-vibrant: linear-gradient(135deg, var(--color-purple-500) 0%, var(--color-purple-700) 100%);
+  --gradient-subtle: linear-gradient(180deg, transparent 0%, hsla(262, 83%, 58%, 0.05) 100%);
+  --gradient-rom-icon: linear-gradient(41deg, rgba(159, 48, 237, 0.10) 16.8%, rgba(255, 255, 255, 0.07) 108.3%);
+  --gradient-avatar-border: linear-gradient(180deg, var(--color-white-alpha-20) 0%, var(--color-white) 100%);
+
+  /* Radial glows */
+  --gradient-glow-brand: radial-gradient(circle at center, hsla(262, 83%, 58%, 0.12) 0%, transparent 70%);
+  --gradient-glow-success: radial-gradient(circle at center, hsla(142, 71%, 45%, 0.12) 0%, transparent 70%);
+  --gradient-glow-error: radial-gradient(circle at center, hsla(348, 83%, 47%, 0.12) 0%, transparent 70%);
+  --gradient-glow-warning: radial-gradient(circle at center, hsla(38, 92%, 50%, 0.12) 0%, transparent 70%);
+
+  /* ============================================
+     ENHANCED ELEVATION SYSTEM
+     ============================================ */
+
+  /* Compound shadows for richer depth */
+  --elevation-none: none;
+  --elevation-raised: var(--shadow-sm);
+  --elevation-overlay: var(--shadow-md);
+  --elevation-modal: var(--shadow-xl);
+  --elevation-popover: var(--shadow-lg);
+
+  /* Hover elevation transitions */
+  --elevation-hover-card: var(--shadow-lg);
+  --elevation-hover-button: 0 4px 12px hsla(262, 83%, 58%, 0.15);
+
+  /* ============================================
+     ACCENT GLOWS
+     Used for hover states and active elements
+     ============================================ */
+
+  --accent-glow: hsla(262, 83%, 58%, 0.12);
+  --accent-glow-strong: hsla(262, 83%, 58%, 0.2);
+  --accent-glow-subtle: hsla(262, 83%, 58%, 0.06);
+
+  /* ============================================
+     INTERACTIVE STATE ENHANCEMENTS
+     ============================================ */
+
+  /* Hover state colors */
+  --interactive-hover-scale: 1.02;
+  --interactive-active-scale: 0.98;
+  --interactive-hover-lift: -2px;
+
+  /* Press/active state colors */
+  --interactive-pressed-opacity: 0.9;
+
+  /* ============================================
+     ANIMATION TIMING FUNCTIONS
+     ============================================ */
+
+  /* Easing curves */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Duration scale */
+  --duration-micro: 100ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow: 400ms;
+  --duration-slower: 500ms;
+
+  /* ============================================
+     SHIMMER & LOADING EFFECTS
+     ============================================ */
+
+  --shimmer-gradient: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsla(0, 0%, 100%, 0.08) 50%,
+    transparent 100%
+  );
+
+  /* ============================================
+     FOCUS RING ENHANCEMENTS
+     ============================================ */
+
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--brand-primary);
+  --focus-ring-glow: 0 0 0 4px var(--accent-glow);
+}
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+
+[data-theme='dark'] {
+  /* Adjusted glows for dark mode */
+  --gradient-glow-brand: radial-gradient(circle at center, hsla(84, 100%, 50%, 0.12) 0%, transparent 70%);
+  --accent-glow: hsla(84, 100%, 50%, 0.12);
+  --accent-glow-strong: hsla(84, 100%, 50%, 0.2);
+  --accent-glow-subtle: hsla(84, 100%, 50%, 0.06);
+
+  /* Enhanced shadows for dark mode (stronger) */
+  --elevation-raised: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --elevation-overlay: 0 4px 6px rgba(0, 0, 0, 0.5);
+  --elevation-modal: 0 20px 25px rgba(0, 0, 0, 0.7);
+  --elevation-hover-card: 0 10px 15px rgba(0, 0, 0, 0.6);
+
+  /* Shimmer for dark mode */
+  --shimmer-gradient: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsla(0, 0%, 100%, 0.04) 50%,
+    transparent 100%
+  );
+
+  /* Focus ring for dark mode */
+  --focus-ring-color: var(--color-lime-500);
+}
+
+/* ============================================
+   VIBRANT THEME OVERRIDES
+   ============================================ */
+
+[data-theme='vibrant'] {
+  /* Orange-based glows */
+  --gradient-glow-brand: radial-gradient(circle at center, hsla(24, 100%, 50%, 0.12) 0%, transparent 70%);
+  --accent-glow: hsla(24, 100%, 50%, 0.12);
+  --accent-glow-strong: hsla(24, 100%, 50%, 0.2);
+  --accent-glow-subtle: hsla(24, 100%, 50%, 0.06);
+
+  --elevation-hover-button: 0 4px 12px hsla(24, 100%, 50%, 0.15);
+  --focus-ring-color: var(--color-orange-500);
+}

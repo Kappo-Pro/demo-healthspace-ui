@@ -1,0 +1,18 @@
+/**
+ * TrendIndicator Styles
+ *
+ * Simple inline layout with icon and percentage value
+ */
+
+.trend-indicator {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-none);
+}
+
+.trend-value {
+	margin-left: var(--spacing-0-5);
+}

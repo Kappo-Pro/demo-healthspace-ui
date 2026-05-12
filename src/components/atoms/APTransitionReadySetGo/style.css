@@ -1,0 +1,82 @@
+/* ==========================================
+   ReadySetGo - Countdown transition overlay
+   ========================================== */
+
+.ready-set-go {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 80; /* Above flickering grid and overlay */
+	pointer-events: none;
+}
+
+/* Caption text - positioned at top, same height as posture-top-bar */
+.ready-set-go__caption {
+	position: absolute;
+	top: var(--spacing-7);
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 9999px;
+	padding: var(--spacing-3) var(--spacing-6);
+	background: var(--color-black-alpha-40);
+}
+
+.ready-set-go__text {
+	font-family: var(--font-family-sans), sans-serif;
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-tight);
+	text-align: center;
+	color: var(--color-white);
+	white-space: nowrap;
+}
+
+/* Countdown number - big h1 with blur animation */
+.ready-set-go__countdown {
+	font-family: 'Poppins', sans-serif;
+	font-size: 120px;
+	font-weight: var(--font-weight-bold);
+	line-height: 1;
+	color: var(--text-color-on-dark, #fff);
+	margin: 0;
+	text-shadow: 0 4px 24px var(--shadow-color-strong);
+	animation: countdown-blur-in 0.6s ease-out;
+}
+
+@keyframes countdown-blur-in {
+	0% {
+		opacity: 0;
+		filter: blur(12px);
+		transform: scale(1.2);
+	}
+	100% {
+		opacity: 1;
+		filter: blur(0);
+		transform: scale(1);
+	}
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+	.ready-set-go__caption {
+		padding: var(--spacing-2) var(--spacing-4);
+	}
+
+	.ready-set-go__text {
+		font-size: var(--font-size-base);
+	}
+
+	.ready-set-go__countdown {
+		font-size: 80px;
+	}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.ready-set-go__countdown {
+		animation: none;
+	}
+}

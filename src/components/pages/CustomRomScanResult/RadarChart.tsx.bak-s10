@@ -1,0 +1,235 @@
+import { Radar } from '@ant-design/plots';
+import { Card, Empty, Flex } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { CustomRomSession } from '@types';
+import { evalScore } from './jointsTemplateData';
+import { useMemo, useState } from 'react';
+import './style.css';
+
+interface RadarChartProps {
+	selectedRom: CustomRomSession | null;
+	persona: {
+		color: string;
+	};
+	avgScore: number;
+	isPdf?: boolean;
+}
+
+const FILTER_OPTIONS = [
+	'Full',
+	'Right',
+	'Left',
+	'Others',
+	// 'Shoulder', 'Wrist', 'Elbow', 'Rotation', 'Abduction', 'Flexion', 'Extension', 'Knee', 'Hip',
+];
+
+const RadarChart = ({
+	selectedRom,
+	persona,
+	avgScore,
+	isPdf,
+}: RadarChartProps) => {
+	const { t } = useTranslation();
+	const [selectedFilters, setSelectedFilters] = useState<string[]>(['Full']);
+
+	const handleFilterChange = (filter: string) => {
+		if (selectedFilters?.includes(filter)) {
+			selectedFilters?.length > 1 && setSelectedFilters(selectedFilters.filter(f => f !== filter));
+		} else {
+			if (filter === 'Full') {
+				setSelectedFilters(['Full']);
+			} else {
+				setSelectedFilters(
+					[...selectedFilters, filter].filter(filter => filter !== 'Full'),
+				);
+			}
+		}
+	};
+
+	const calculateAverageScoresByJointAndSide = () => {
+		const joints: Record<string, { total: number; count: number }> = {};
+
+		selectedRom?.romPatientResults?.forEach(item => {
+			item?.results?.forEach(data => {
+				const measure =
+					data?.romProgramExercise?.strapiOmniRomExercise?.name ||
+					data?.romProgramExercise?.exerciseLibrary?.title ||
+					t('Patient.data.omnirom.noTitle');
+
+				const joint = measure;
+				const score = evalScore(data) || 0;
+
+				const matchesFilter = selectedFilters.some(filter => {
+					if (filter === 'Full') return true;
+					if (filter === 'Others')
+						return (
+							joint.toLowerCase().includes('neck') ||
+							joint.toLowerCase().includes('spine') ||
+							joint.toLowerCase().includes('lumbar') ||
+							joint.toLowerCase().includes('squat')
+						);
+					return joint.toLowerCase().includes(filter.toLowerCase());
+				});
+
+				if (!matchesFilter) return;
+
+				if (!joints[joint]) {
+					joints[joint] = { total: 0, count: 0 };
+				}
+
+				joints[joint].total += score;
+				joints[joint].count += 1;
+			});
+		});
+
+		return Object.keys(joints).map(joint => ({
+			joint,
+			score: (joints[joint].total / joints[joint].count).toFixed(2),
+		}));
+	};
+
+	const averageScores = calculateAverageScoresByJointAndSide();
+
+	const maxScore = Math.max(
+		...(selectedRom?.romPatientResults?.flatMap(item =>
+			item?.results ? item.results.map(data => evalScore(data) || 100) : [],
+		) || [0]),
+	);
+
+	const filteredAvgScore = useMemo(() => {
+		const scores = averageScores
+			.map(item => parseFloat(item.score))
+			.filter(score => !isNaN(score));
+		if (scores.length === 0) return 0;
+		const sum = scores.reduce((a, b) => a + b, 0);
+		return Math.round(sum / scores.length);
+	}, [averageScores]);
+
+	const memoizedConfig = useMemo(
+		() => ({
+			data: averageScores
+				.filter(item => parseFloat(item.score) > 0.49)
+				.map(item => ({
+					...item,
+					score: Math.round(Math.min(100, parseFloat(item.score))),
+				})),
+			xField: 'joint',
+			yField: 'score',
+			meta: {
+				score: {
+					min: 0,
+					max: maxScore,
+				},
+			},
+			xAxis: {
+				line: null,
+				grid: null,
+				tickLine: null,
+				label: {
+					autoRotate: true,
+					autoHide: true,
+					autoEllipsis: false,
+					style: {
+						maxWidth: 80,
+						wordWrap: 'break-word',
+						textAlign: 'center',
+					},
+					formatter: (text: string) =>
+						averageScores?.length > 15
+							? text.slice(0, 3).toUpperCase() + '...'
+							: text.replace(/\s+/g, '\n'),
+				},
+			},
+			yAxis: {
+				label: null,
+				line: null,
+				tickLine: null,
+				grid: {
+					lineStyle: {
+						lineDash: null,
+					},
+					alternateColor: 'rgb(0, 0, 0, 0.05)',
+				},
+			},
+			area: {
+				style: {
+					fillOpacity: 0.7,
+				},
+			},
+			tooltip: {
+				showTitle: true,
+				showMarkers: false,
+				domStyles: {
+					'g2-tooltip': {
+						padding: '0px 12px 12px',
+						backgroundcolor: 'var(--text-on-dark)',
+						boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+						borderRadius: '6px',
+					},
+					'g2-tooltip-title': {
+						fontSize: '16px',
+						fontWeight: 'bold',
+						marginBottom: '8px',
+					},
+					'g2-tooltip-list-item': {
+						fontSize: '14px',
+						marginBottom: '4px',
+					},
+				},
+			},
+			annotations: [
+				{
+					type: 'text',
+					position: { x: '50%', y: '50%' },
+					content: `${filteredAvgScore}`,
+					style: {
+						fill: 'var(--color-black)',
+						fontSize: 30,
+						fontWeight: 'bold',
+						textAlign: 'center',
+						textBaseline: 'middle',
+						shadowColor: 'rgba(0, 0, 0, 0.4)',
+						shadowBlur: 4,
+					},
+				},
+			],
+			color: persona?.color,
+		}),
+		[avgScore, averageScores, maxScore, persona?.color],
+	);
+
+	return (
+		<Card
+			className="radar-chart"
+			style={{ height: 'auto', border: 'none', position: 'relative' }}>
+			{!isPdf && (
+				<div className="filter-container mb-4">
+					{FILTER_OPTIONS?.map((filter, index) => (
+						<span
+							key={index}
+							className={`filter-button ${selectedFilters?.includes(filter) ? 'selected' : ''}`}
+							onClick={() => handleFilterChange(filter)}>
+							{filter}
+						</span>
+					))}
+				</div>
+			)}
+			{filteredAvgScore > 0 ? (
+				<Radar {...memoizedConfig} style={{ height: '600px' }} />
+			) : (
+				<Flex vertical justify="center" className="h-screen">
+					<Empty
+						image={Empty.PRESENTED_IMAGE_SIMPLE}
+						description={
+							<span className="text-gray-300">
+								<span>{t('Admin.data.addToReports.noData')}</span>
+							</span>
+						}
+					/>
+				</Flex>
+			)}
+		</Card>
+	);
+};
+
+export default RadarChart;

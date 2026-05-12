@@ -1,0 +1,45 @@
+.onboard-main-container {
+	user-select: none;
+	background-color: var(--bg-page); /* Figma: colorBgLayout #1a1527 */
+	min-height: 100vh;
+}
+
+.onboard-sub-container {
+	padding-top: 260px;
+	padding-bottom: 70px;
+}
+
+/* Shared onboard button styles */
+.onboard-btn {
+	min-width: 258px;
+	border-radius: var(--radius-full);
+}
+
+.onboard-btn-wide {
+	min-width: 308px;
+	border-radius: var(--radius-full);
+}
+
+.onboard-btn-full {
+	width: 100%;
+	border-radius: var(--radius-full);
+}
+
+/* Shared onboard heading styles - Inter Semibold */
+/* Excludes .plan-card elements which have their own styles */
+.onboard-main-container h1:not(.plan-card *),
+.onboard-main-container h2:not(.plan-card *),
+.onboard-main-container h3:not(.plan-card *),
+.onboard-main-container h4:not(.plan-card *),
+.onboard-main-container h5:not(.plan-card *),
+.onboard-main-container h6:not(.plan-card *),
+.onboard-main-container .ant-typography:not(.plan-card *),
+.whole-day-header-title,
+.plan-header-title,
+.complete-profile-heading {
+	font-family: var(--font-family-primary);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	letter-spacing: -0.96px;
+	line-height: 28px;
+}

@@ -1,0 +1,155 @@
+/**
+ * OClinicalOutcomesPanel Styles
+ *
+ * Design system-based styling for clinical outcomes integration panel.
+ * Uses CSS custom properties for theming consistency.
+ */
+
+.clinical-outcomes-panel {
+	width: 100%;
+	min-height: 500px;
+}
+
+/* Loading & Error States */
+.clinical-outcomes-loading,
+.clinical-outcomes-error,
+.clinical-outcomes-empty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 400px;
+	padding: var(--spacing-xl);
+}
+
+/* Outcome Measures Section */
+.outcome-measures-section {
+	padding: var(--spacing-md) 0;
+}
+
+.measure-card {
+	height: 100%;
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+	transition: box-shadow var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.measure-card:hover {
+	box-shadow: var(--shadow-md);
+}
+
+.measure-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--spacing-sm);
+}
+
+.measure-mini-chart {
+	padding-top: var(--spacing-sm);
+	border-top: 1px solid var(--border-subtle);
+}
+
+/* Correlations Section */
+.correlations-section {
+	padding: var(--spacing-md) 0;
+}
+
+.correlation-chart-container {
+	padding: var(--spacing-md);
+	background: var(--surface-elevated);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border-subtle);
+}
+
+/* Insights Section */
+.insights-section {
+	padding: var(--spacing-md) 0;
+}
+
+.insight-item {
+	padding: 0 !important;
+}
+
+.insight-item .ant-card {
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+}
+
+.insight-header {
+	padding-bottom: var(--spacing-sm);
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+.related-dates {
+	padding: var(--spacing-sm);
+	background: var(--surface-overlay);
+	border-radius: var(--radius-sm);
+}
+
+.suggested-actions {
+	padding: var(--spacing-sm);
+	background: var(--surface-subtle);
+	border-left: 3px solid var(--brand-primary);
+	border-radius: var(--radius-sm);
+}
+
+.suggested-actions ul {
+	margin: var(--spacing-xs) 0 0 0;
+	padding-left: var(--spacing-lg);
+}
+
+.suggested-actions li {
+	margin-bottom: var(--spacing-xs);
+	color: var(--text-primary);
+}
+
+/* Goals Section */
+.goals-section {
+	padding: var(--spacing-md) 0;
+}
+
+.goal-card {
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+	margin-bottom: var(--spacing-md);
+}
+
+.goal-header {
+	padding-bottom: var(--spacing-sm);
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+.goal-dates {
+	padding-top: var(--spacing-sm);
+	border-top: 1px solid var(--border-subtle);
+}
+
+/* Tabs Customization */
+.clinical-outcomes-panel .ant-tabs {
+	margin-top: var(--spacing-md);
+}
+
+.clinical-outcomes-panel .ant-tabs-tab {
+	padding: var(--spacing-sm) var(--spacing-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.clinical-outcomes-panel {
+		min-height: 300px;
+	}
+
+	.measure-card,
+	.goal-card {
+		margin-bottom: var(--spacing-md);
+	}
+
+	.correlation-chart-container {
+		padding: var(--spacing-sm);
+	}
+
+	.clinical-outcomes-panel .ant-tabs-tab {
+		padding: var(--spacing-xs) var(--spacing-sm);
+		font-size: var(--font-size-sm);
+	}
+}

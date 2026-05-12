@@ -1,0 +1,326 @@
+/* ============================================
+   MOBILITY PERSONAS - BENTO GRID LAYOUT
+   ============================================ */
+
+.mobility-container {
+	width: 100%;
+}
+
+/* Bento Grid - 6 cards in a row */
+.mobility-persona-grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: var(--spacing-3);
+}
+
+/* Base Card Style */
+.mobility-persona-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: var(--spacing-4);
+	background: var(--surface-secondary);
+	border-radius: var(--radius-xl);
+	min-height: 200px;
+	transition: all var(--motion-duration-normal) var(--motion-ease-out);
+}
+
+/* Card Icon */
+.mobility-persona-card__icon {
+	margin-bottom: var(--spacing-3);
+}
+
+.mobility-persona-card__icon .ant-avatar {
+	background: transparent;
+}
+
+/* Card Title */
+.mobility-persona-card__title {
+	margin: 0 0 var(--spacing-2) 0 !important;
+	font-size: var(--font-size-base) !important;
+	font-weight: var(--font-weight-semibold) !important;
+	color: var(--text-primary);
+	line-height: 1.3 !important;
+}
+
+/* Card Description */
+.mobility-persona-card__description {
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+	line-height: 1.5;
+	flex: 1;
+}
+
+/* Score Badge (only on active card) */
+.mobility-persona-card__score {
+	position: absolute;
+	top: var(--spacing-3);
+	right: var(--spacing-3);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	padding: var(--spacing-1) var(--spacing-2);
+	background: var(--color-white-alpha-20);
+	border-radius: var(--radius-full);
+}
+
+.mobility-persona-card__score-label {
+	font-size: var(--font-size-xs);
+	color: var(--color-white);
+	opacity: 0.8;
+}
+
+.mobility-persona-card__score-value {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-white);
+}
+
+/* ============================================
+   ACTIVE CARD STYLES
+   ============================================ */
+
+.mobility-persona-card--active {
+	color: var(--color-white);
+}
+
+.mobility-persona-card--active .mobility-persona-card__title {
+	color: var(--color-white) !important;
+}
+
+.mobility-persona-card--active .mobility-persona-card__description {
+	color: var(--color-white);
+	opacity: 0.9;
+}
+
+/* ============================================
+   CATEGORY GRADIENTS (same as rom-persona-banner)
+   ============================================ */
+
+/* stylelint-disable color-no-hex */
+
+/* Limitless Performer (Optimal Mobility - score >= 90) */
+.mobility-persona-card--limitless {
+	background: linear-gradient(228deg, #2b672c 14.33%, #60e561 110.59%);
+}
+
+/* Agile Mover (Functional Mobility - score 75-89) */
+.mobility-persona-card--agile {
+	background: linear-gradient(228deg, #15325b 14.33%, #1668dc 110.59%);
+}
+
+/* Functional Explorer (Moderate Restriction - score 60-74) */
+.mobility-persona-card--functional {
+	background: linear-gradient(228deg, #8c540b 14.33%, #ffb624 110.59%);
+}
+
+/* Steady Progressor (Restricted Mobility - score 40-59) */
+.mobility-persona-card--steady {
+	background: linear-gradient(228deg, #8d1f0c 14.33%, #da4a23 110.59%);
+}
+
+/* Resilient Fighter (Severely Restricted - score 20-39) */
+.mobility-persona-card--resilient {
+	background: linear-gradient(228deg, #ac3b3b 14.33%, #d64545 110.59%);
+}
+
+/* Determined Warrior (Critically Impaired - score < 20) */
+.mobility-persona-card--determined {
+	background: linear-gradient(228deg, #520339 14.33%, #c41e7f 110.59%);
+}
+
+/* stylelint-enable color-no-hex */
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet: 3 columns */
+@media (max-width: 1200px) {
+	.mobility-persona-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* Mobile: 2 columns */
+@media (max-width: 768px) {
+	.mobility-persona-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.mobility-persona-card {
+		min-height: 180px;
+		padding: var(--spacing-3);
+	}
+
+	.mobility-persona-card__title {
+		font-size: var(--font-size-sm) !important;
+	}
+
+	.mobility-persona-card__description {
+		font-size: var(--font-size-xs);
+	}
+}
+
+/* Small Mobile: 1 column */
+@media (max-width: 480px) {
+	.mobility-persona-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.mobility-persona-card {
+		min-height: auto;
+	}
+}
+
+/* ============================================
+   LEGACY STYLES (kept for backwards compatibility)
+   ============================================ */
+
+.mobility-list {
+	display: grid;
+	grid-template-columns: 60% 40%;
+	gap: var(--spacing-4);
+	margin-top: var(--spacing-4);
+}
+
+/* Left side: mobility bodies */
+.mobility-bodies {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+/* Right side: timeline */
+.mobility-timeline {
+	display: flex;
+	align-items: stretch;
+}
+
+.mobility-timeline .ant-timeline {
+	padding-top: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.mobility-timeline .ant-timeline-item {
+	padding-bottom: 0 !important;
+	flex: 1;
+}
+
+.mobility-timeline .ant-timeline-item:last-child {
+	margin-bottom: 0;
+}
+
+.mobility-timeline .ant-timeline-item:last-child .ant-timeline-item-tail {
+	display: block;
+	height: 90%;
+}
+
+.mobility-timeline .ant-timeline-item-content {
+	min-height: auto;
+	display: flex;
+	align-items: flex-start;
+	height: 100%;
+}
+
+.mobility-timeline .ant-timeline-item-tail {
+	height: 100%;
+}
+
+.mobility-card {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-3);
+	padding: 0;
+	height: 100%;
+}
+
+.mobility-body {
+	background-color: var(--surface-tertiary);
+	border-radius: var(--radius-xl);
+	padding: var(--spacing-3) var(--spacing-4);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	flex: 1;
+	height: 100%;
+	border: 1px solid var(--border-secondary);
+	box-shadow: var(--shadow-xs);
+}
+
+.mobility-card.highlight .mobility-body {
+	background-color: var(--brand-primary);
+	border-color: var(--brand-primary);
+}
+
+.mobility-icon {
+	display: flex;
+	flex-shrink: 0;
+}
+
+.mobility-icon img {
+	width: var(--spacing-12);
+	height: var(--spacing-12);
+}
+
+.mobility-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.mobility-title {
+	font-weight: var(--font-weight-semibold);
+}
+
+.mobility-description {
+	font-size: var(--font-size-sm);
+	color: var(--ant-color-text-description);
+}
+
+.mobility-range {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--ant-color-text-description);
+	white-space: nowrap;
+}
+
+.mobility-range.active {
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+}
+
+/* Utility classes */
+.font-inter-bold-18 {
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-lg);
+	line-height: var(--spacing-7);
+	letter-spacing: var(--letter-spacing-normal);
+	vertical-align: middle;
+}
+
+.mobility-title-text {
+	font-weight: var(--font-weight-bold);
+	font-size: 22px;
+	line-height: var(--line-height-relaxed);
+	vertical-align: bottom;
+}
+
+.mobility-outer-container {
+	display: flex;
+	padding: var(--spacing-4);
+	gap: var(--spacing-2);
+	justify-content: center;
+	align-items: center;
+	border-radius: var(--radius-lg);
+}
+
+.mobility-outer-container .ant-card-body {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}

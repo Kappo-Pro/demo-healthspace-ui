@@ -1,0 +1,310 @@
+import { nextSequence, updateRecordConsult } from '@stores/clinical/rehab/main';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { Button, Col, Flex, Form, Input, Row, Typography, message } from 'antd';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+// REMOVED: import { Content } from 'antd/lib/layout/layout'
+import {
+	setProgramModal,
+	setProgramModalSubKey,
+} from '@stores/shared/patientDetail/patientDetail';
+import { useTranslation } from 'react-i18next';
+const { TextArea } = Input;
+
+interface IFormsProps {
+	title: string;
+	description?: string;
+	repetitions: number;
+	setsPerSession: number;
+	setsPerDay: number;
+	frequencyPerWeek: number;
+	visible: boolean;
+}
+
+function RecordConsultForm() {
+	const { state } = useLocation();
+	const dispatch = useTypedDispatch();
+	const { t } = useTranslation();
+	const [visibleOnLibrary, _setVisibleOnLibrary] = useState(
+		state?.saveOnLibrary || false,
+	);
+	const [_isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+	const [_saveData, setSavedData] = useState({});
+	const [_modalLabel, setModalLabel] = useState<string[]>();
+	const navigate = useNavigate();
+
+	const onClose = () => {
+		setIsConfirmModalOpen(false);
+	};
+
+	const { sequence } = useTypedSelector(state => state.rehab.main);
+
+	const onFinish = (values: IFormsProps) => {
+		const newExercise = {
+			...values,
+			visible: visibleOnLibrary,
+		};
+		setSavedData(newExercise);
+		const isWarning =
+			newExercise.repetitions > 15 ||
+			newExercise.setsPerSession > 15 ||
+			newExercise.setsPerDay > 15 ||
+			newExercise.frequencyPerWeek > 15;
+		if (isWarning) {
+			const modalLabelArray: string[] = [];
+			if (newExercise.repetitions > 15) {
+				modalLabelArray.push(
+					t('Admin.data.managePatient.rehab.exercises.repetitions'),
+				);
+			}
+			if (newExercise.setsPerSession > 15) {
+				modalLabelArray.push(
+					t('Admin.data.managePatient.rehab.exercises.setsPerSession'),
+				);
+			}
+			if (newExercise.setsPerDay > 15) {
+				modalLabelArray.push(
+					t('Admin.data.managePatient.rehab.exercises.setsPerDay'),
+				);
+			}
+			if (newExercise.frequencyPerWeek > 15) {
+				modalLabelArray.push(
+					t('Admin.data.managePatient.rehab.exercises.sessionsPerWeek'),
+				);
+			}
+			setModalLabel(modalLabelArray);
+			message.info({
+				content: (
+					<div className="m-5" style={{ color: 'var(--text-primary)' }}>
+						{modalLabelArray && modalLabelArray.length > 1
+							? modalLabelArray.slice(0, -1).join(', ') +
+								' ' +
+								t('Admin.data.rehab.addExerciseFromLibrary.and') +
+								' ' +
+								modalLabelArray[modalLabelArray.length - 1]
+							: modalLabelArray?.[0]}{' '}
+						{t('Admin.data.rehab.addExerciseFromLibrary.greaterThan')}
+						<Flex justify="center" className="mt-4">
+							<div className="mr-[10px]">
+								<Button
+									onClick={() => {
+										message.destroy();
+										onClose();
+									}}
+									size="small">
+									{t('Admin.data.rehab.addExerciseFromLibrary.cancel')}
+								</Button>
+							</div>
+							<Button
+								onClick={() => {
+									message.destroy();
+									handleSave(newExercise);
+								}}
+								size="small">
+								{t('Admin.data.rehab.addExerciseFromLibrary.ok')}
+							</Button>
+						</Flex>
+					</div>
+				),
+				duration: 0,
+				icon: <></>,
+			});
+			return;
+		} else {
+			dispatch(nextSequence(sequence?.next));
+			dispatch(updateRecordConsult(newExercise));
+		}
+	};
+
+	const handleSave = (newExercise: IFormsProps) => {
+		const updatedExercise = {
+			...newExercise,
+			visible: visibleOnLibrary,
+		};
+		dispatch(nextSequence(sequence?.next));
+		dispatch(updateRecordConsult(updatedExercise));
+	};
+
+	const handleCancel = () => {
+		navigate(-1);
+		dispatch(setProgramModal(true));
+		dispatch(setProgramModalSubKey('2'));
+	};
+
+	return (
+		<Flex
+			vertical
+			align="center"
+			justify="center"
+			style={{
+				margin: 'auto',
+				width: '640px',
+				height: '100%',
+			}}
+			className="select-none consult-form">
+			<Typography.Title style={{ color: 'var(--text-on-dark)' }} level={3}>
+				{t('Admin.data.rehab.addExercise.recordExercise')}
+			</Typography.Title>
+			<Form
+				labelWrap
+				layout="vertical"
+				onFinish={onFinish}
+				style={{
+					backgroundColor: 'var(--surface-elevated)',
+					borderRadius: 10,
+					padding: 25,
+				}}>
+				<Form.Item
+					label={t('Admin.data.rehab.addExercise.title')}
+					name="title"
+					rules={[
+						{
+							required: true,
+							message: t('Admin.data.rehab.addExercise.titleRequired'),
+							whitespace: true,
+						},
+					]}>
+					<Input
+						size="large"
+						placeholder={t('Admin.data.rehab.addExercise.titlePlaceholder')}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t('Admin.data.rehab.addExercise.description')}
+					name="description">
+					<TextArea
+						placeholder={t(
+							'Admin.data.rehab.addExercise.descriptionPlaceHolder',
+						)}
+						size="large"
+						rows={4}
+					/>
+				</Form.Item>
+
+				<Row gutter={24}>
+					<Col span={12}>
+						<Form.Item
+							label={t('Admin.data.rehab.addExercise.repetitions')}
+							name="repetitions"
+							rules={[
+								{
+									required: true,
+									message: t('Admin.data.rehab.addExercise.repetitionRequired'),
+								},
+								{
+									pattern: /^(?:[1-9]|[1-9][0-9]|100)$/,
+									message: t('Admin.data.rehab.addExercise.repetitionLength'),
+								},
+							]}>
+							<Input
+								className="h-10"
+								type="number"
+								placeholder={t('Admin.data.rehab.addExercise.repetitions')}
+							/>
+						</Form.Item>
+					</Col>
+					<Col span={12}>
+						<Form.Item
+							label={t('Admin.data.rehab.addExercise.setsPerSession')}
+							name="setsPerSession"
+							rules={[
+								{
+									required: true,
+									message: t(
+										'Admin.data.rehab.addExercise.setsPerSessionRequired',
+									),
+								},
+								{
+									pattern: /^(?:[1-9]|[1-9][0-9]|100)$/,
+									message: t(
+										'Admin.data.rehab.addExercise.setsPerSessionLength',
+									),
+								},
+							]}>
+							<Input
+								className="h-10"
+								type="number"
+								placeholder={t('Admin.data.rehab.addExercise.setsPerSession')}
+							/>
+						</Form.Item>
+					</Col>
+					<Col span={12}>
+						<Form.Item
+							label={t('Admin.data.rehab.addExercise.setsPerDay')}
+							name="setsPerDay"
+							rules={[
+								{
+									required: true,
+									message: t('Admin.data.rehab.addExercise.setsPerDayRequired'),
+								},
+								{
+									pattern: /^(?:[1-9]|[1-9][0-9]|100)$/,
+									message: t('Admin.data.rehab.addExercise.setsPerDayLength'),
+								},
+							]}>
+							<Input
+								className="h-10"
+								type="number"
+								placeholder={t('Admin.data.rehab.addExercise.setsPerDay')}
+							/>
+						</Form.Item>
+					</Col>
+					<Col span={12}>
+						<Form.Item
+							label={t('Admin.data.rehab.addExercise.sessionsPerWeek')}
+							name="frequencyPerWeek"
+							rules={[
+								{
+									required: true,
+									message: t(
+										'Admin.data.rehab.addExercise.sessionsPerWeekRequired',
+									),
+								},
+								{
+									pattern: /^(?:[1-9]|[1-9][0-9]|100)$/,
+									message: t(
+										'Admin.data.rehab.addExercise.sessionsPerWeekLength',
+									),
+								},
+							]}>
+							<Input
+								className="h-10"
+								type="number"
+								placeholder={t('Admin.data.rehab.addExercise.sessionsPerWeek')}
+							/>
+						</Form.Item>
+					</Col>
+					<Col span={24}>
+						<Flex align="center" justify="center"></Flex>
+					</Col>
+				</Row>
+				<Row gutter={24}>
+					<Col span={12}>
+						<Form.Item>
+							<Button
+								size="large"
+								htmlType="reset"
+								block
+								onClick={handleCancel}
+								className="bg-primary-700 text-white">
+								{t('Admin.data.menu.userRoles.pendingInvites.cancel')}
+							</Button>
+						</Form.Item>
+					</Col>
+					<Col span={12}>
+						<Form.Item>
+							<Button
+								size="large"
+								htmlType="submit"
+								block
+								className="bg-primary-700 text-white">
+								{t('Admin.data.rehab.addExercise.save')}
+							</Button>
+						</Form.Item>
+					</Col>
+				</Row>
+			</Form>
+		</Flex>
+	);
+}
+export default RecordConsultForm;

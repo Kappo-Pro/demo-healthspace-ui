@@ -1,0 +1,73 @@
+.body-shape-front-css {
+	position: relative;
+	margin-bottom: var(--spacing-3);
+}
+
+.hotspot-circle-selection {
+	position: absolute;
+	width: var(--spacing-5);
+	height: var(--spacing-5);
+	background: var(--color-gray-300);
+	border-radius: var(--radius-full);
+	position: absolute;
+	cursor: pointer;
+}
+.hotspot-circle-selection:hover {
+	background: var(--color-magenta-5);
+}
+.hotspot-circle-selection.active {
+	background: var(--color-magenta-5);
+}
+.hotspot-circle-selection.saved {
+	background: var(--color-success-400);
+}
+.hotspot-circle-selection.active:after {
+	content: '';
+	display: block;
+	width: var(--spacing-6);
+	height: var(--spacing-6);
+	border-radius: var(--radius-full);
+	border: var(--border-width-md) solid var(--color-magenta-5);
+	position: absolute;
+	top: calc(-1 * var(--spacing-1-25));
+	left: calc(-1 * var(--spacing-1-25));
+	animation: pulse 2s ease 0s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	80% {
+		opacity: 0;
+		transform: scale(2);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(3);
+	}
+}
+
+.hotspot-circle-selection:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+.body-step-label .ant-form-item .ant-form-item-label > label {
+	color: var(--text-primary) /* TODO: Verify context */ !important;
+}
+
+.extra-margin {
+	margin-left: var(--spacing-5);
+}
+
+.antd-custom-card-css {
+	min-width: 350px !important;
+	width: 350px;
+	flex-shrink: 0;
+}
+
+.antd-custom-card-css .ant-card-body {
+	padding: 0 !important;
+}

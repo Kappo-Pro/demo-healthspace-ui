@@ -1,0 +1,139 @@
+/**
+ * AdherenceHeatmap Styles
+ *
+ * GitHub-style calendar heatmap with weekly progress chart.
+ * Story 3.7: Patient Adherence Tracking
+ */
+
+.adherence-heatmap {
+	width: 100%;
+}
+
+/* Calendar Grid */
+.heatmap-calendar {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	margin: var(--spacing-4) 0;
+	overflow-x: auto;
+}
+
+/* Day labels row */
+.heatmap-day-labels {
+	display: flex;
+	gap: var(--spacing-1);
+	margin-bottom: var(--spacing-1);
+}
+
+.heatmap-spacer {
+	width: 60px; /* Match week label width */
+	flex-shrink: 0;
+}
+
+.heatmap-day-label {
+	width: var(--spacing-5);
+	height: var(--spacing-5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	color: var(--color-text-secondary);
+	flex-shrink: 0;
+}
+
+/* Week rows */
+.heatmap-week-row {
+	display: flex;
+	gap: var(--spacing-1);
+	align-items: center;
+}
+
+.heatmap-week-label {
+	width: 60px;
+	font-size: 11px;
+	color: var(--color-text-tertiary);
+	text-align: right;
+	padding-right: var(--spacing-2);
+	flex-shrink: 0;
+}
+
+/* Calendar cells */
+.heatmap-cell {
+	width: var(--spacing-5);
+	height: var(--spacing-5);
+	border-radius: 3px;
+	cursor: pointer;
+	transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+	flex-shrink: 0;
+	border: 1px solid var(--color-border-secondary);
+}
+
+.heatmap-cell:hover {
+	transform: scale(1.2);
+	border-color: var(--color-border);
+	z-index: 10;
+}
+
+/* Legend */
+.heatmap-legend {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1-5);
+	margin-top: var(--spacing-3);
+	justify-content: flex-end;
+}
+
+.heatmap-legend-item {
+	width: var(--spacing-3-5);
+	height: var(--spacing-3-5);
+	border-radius: var(--radius-xs);
+	border: 1px solid var(--color-border-secondary);
+}
+
+/* Summary section */
+.adherence-summary {
+	padding: var(--spacing-3);
+	background-color: var(--color-bg-container);
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--color-border);
+}
+
+/* Screen reader only content */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: var(--border-width-0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.heatmap-calendar {
+		overflow-x: scroll;
+	}
+
+	.heatmap-week-label {
+		width: 50px;
+		font-size: 10px;
+	}
+
+	.heatmap-cell {
+		width: var(--spacing-4);
+		height: var(--spacing-4);
+	}
+
+	.heatmap-day-label {
+		width: var(--spacing-4);
+		height: var(--spacing-4);
+		font-size: 9px;
+	}
+
+	.heatmap-spacer {
+		width: 50px;
+	}
+}

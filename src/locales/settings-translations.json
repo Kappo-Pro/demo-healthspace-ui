@@ -1,0 +1,341 @@
+{
+	"page": {
+		"title": "Settings",
+		"subtitle": "Manage your organization settings, integrations, and preferences"
+	},
+	"featureFlag": {
+		"title": "New Settings UI",
+		"subtitle": "Toggle to test the new Settings interface",
+		"enabled": "Enabled",
+		"disabled": "Disabled",
+		"manualOverrideActive": "Manual Override Active",
+		"overrideDescription": "This override affects only your current browser session. Other users will see the server-configured value from Unleash.",
+		"status": "Status",
+		"manualOverride": "Manual Override",
+		"serverValue": "Server Value",
+		"resetToServerValue": "Reset to Server Value",
+		"tip": "Tip",
+		"tipDescription": "Use this toggle to test the new Settings UI locally without affecting production rollout percentages. Changes take effect immediately after page reload."
+	},
+	"generalTab": {
+		"clientId": {
+			"label": "Client ID",
+			"description": "Unique identifier for your organization. Used for API integrations and analytics tracking.",
+			"placeholder": "Enter client ID"
+		},
+		"inviteCode": {
+			"label": "Invite Code",
+			"description": "Code that users need to provide when registering. Leave empty to disable invite code requirement.",
+			"placeholder": "Enter invite code"
+		},
+		"selfRegistration": {
+			"label": "Self-Registration",
+			"description": "Allow users to register without an invitation. Configure approval workflow and auto-assignment options.",
+			"enabled": "Self-registration enabled",
+			"disabled": "Self-registration disabled",
+			"requireApproval": "Require admin approval before account activation",
+			"autoAssignLabel": "Auto-assign new users to:",
+			"autoAssignPlaceholder": "Select admin (optional)"
+		},
+		"unsavedChanges": "You have unsaved changes in General settings. Are you sure you want to leave?",
+		"saveSuccess": "General settings saved successfully",
+		"saveError": "Failed to save general settings",
+		"saveChanges": "Save Changes"
+	},
+	"appearanceTab": {
+		"theme": {
+			"label": "Theme",
+			"description": "Choose the visual theme for your VitalFlow portal. Changes apply immediately.",
+			"default": "Default",
+			"vibrant": "Vibrant",
+			"dark": "Dark"
+		},
+		"updateSuccess": "Theme updated successfully",
+		"updateError": "Failed to update theme"
+	},
+	"integrationsTab": {
+		"apiKey": {
+			"label": "OpenAI API Key",
+			"description": "API key for OpenAI integration (kept secure). Your key is encrypted and never exposed in logs.",
+			"placeholder": "sk-...",
+			"helpLinkText": "Get your API key"
+		},
+		"apiKeyActive": {
+			"label": "API Key Active",
+			"description": "Enable or disable OpenAI integration. Useful for temporary disablement during debugging without deleting the key.",
+			"enabled": "OpenAI integration enabled",
+			"disabled": "OpenAI integration disabled"
+		},
+		"testConnection": {
+			"button": "Test Connection",
+			"tooltip": "Test your OpenAI API key connection",
+			"tooltipSaveFirst": "Save your changes first before testing",
+			"placeholder": "Test Connection feature will be implemented in Story 3.5"
+		},
+		"unsavedChanges": "You have unsaved changes in Integration settings. Are you sure you want to leave?",
+		"saveSuccess": "Integration settings saved successfully",
+		"saveError": "Failed to save integration settings",
+		"saveChanges": "Save Changes"
+	},
+	"templatesTab": {
+		"invite": {
+			"label": "Invite Template",
+			"description": "Email template sent when inviting a new user to the platform. Use {{name}}, {{inviteCode}}, {{link}} variables.",
+			"placeholder": "Hi {{name}}, you have been invited to join VitalFlow..."
+		},
+		"bulkInvite": {
+			"label": "Bulk Invite Template",
+			"description": "Email template used for bulk user invitations. Use {{name}}, {{inviteCode}}, {{link}} variables.",
+			"placeholder": "Dear {{name}}, Welcome to VitalFlow..."
+		},
+		"resultEmail": {
+			"label": "Result Email Template",
+			"description": "Email template sent when assessment results are ready. Use {{name}}, {{resultLink}}, {{assessmentType}} variables.",
+			"placeholder": "Hi {{name}}, your {{assessmentType}} results are ready..."
+		},
+		"consentForm": {
+			"label": "Consent Form Template",
+			"description": "Digital consent form content displayed to users before assessments. Use {{clinicName}}, {{date}} variables.",
+			"placeholder": "I, the undersigned, consent to participate in..."
+		},
+		"rom": {
+			"label": "ROM Assessment Template",
+			"description": "Instructions and description shown at the start of ROM assessments. Use {{patientName}}, {{date}} variables.",
+			"placeholder": "This assessment will measure your range of motion..."
+		},
+		"lastSaved": "Last saved",
+		"saving": "Saving...",
+		"preview": "Preview"
+	},
+	"plansTab": {
+		"title": "Plans",
+		"defaultPlan": {
+			"label": "Default Plan",
+			"description": "Default plan assigned to new users",
+			"placeholder": "Select default plan"
+		},
+		"upgradePlan": {
+			"label": "Upgrade Plan",
+			"description": "Plan users can upgrade to",
+			"placeholder": "Select upgrade plan"
+		},
+		"availablePlans": {
+			"label": "Available Plans",
+			"description": "Plans that can be selected by users"
+		},
+		"savedUserPlans": {
+			"label": "Saved User Plans",
+			"description": "Plans currently assigned to users (read-only)",
+			"noPlans": "No user plans assigned yet",
+			"user": "User",
+			"plan": "Plan",
+			"assigned": "Assigned"
+		},
+		"validation": {
+			"title": "Validation Errors",
+			"description": "Please fix the errors below before saving.",
+			"defaultNotInAvailable": "Default plan must be selected in Available Plans",
+			"upgradeNotInAvailable": "Upgrade plan must be selected in Available Plans",
+			"atLeastOne": "At least one plan must be available",
+			"defaultEqualsUpgrade": "Upgrade plan must be different from default plan"
+		},
+		"unsavedChanges": "You have unsaved changes in Plans settings. Are you sure you want to leave?",
+		"saveSuccess": "Plans saved successfully",
+		"saveError": "Failed to save plans",
+		"saveChanges": "Save Changes"
+	},
+	"contentLibraryTab": {
+		"tabs": {
+			"plans": "Plans",
+			"goals": "Functional Goals",
+			"conditions": "Pre-existing Conditions"
+		},
+		"plans": {
+			"label": "Service Plans",
+			"description": "Manage pricing plans and service packages. Create, edit, or delete plans. Click 'Save Changes' to persist your changes.",
+			"createButton": "Create Plan",
+			"columns": {
+				"name": "Plan Name",
+				"description": "Description",
+				"price": "Price",
+				"features": "Features",
+				"actions": "Actions"
+			},
+			"modal": {
+				"createTitle": "Create Plan",
+				"editTitle": "Edit Plan",
+				"nameLabel": "Plan Name",
+				"namePlaceholder": "e.g. Basic Plan, Premium Plan",
+				"nameRequired": "Please enter a plan name",
+				"nameMinLength": "Plan name must be at least 3 characters",
+				"descriptionLabel": "Description",
+				"descriptionPlaceholder": "Describe this plan and its benefits...",
+				"priceLabel": "Price",
+				"pricePlaceholder": "0.00",
+				"priceRequired": "Please enter a price",
+				"pricePositive": "Price must be a positive number",
+				"featuresLabel": "Features",
+				"featuresPlaceholder": "Add features (press Enter after each)",
+				"createButton": "Create",
+				"updateButton": "Update",
+				"cancelButton": "Cancel"
+			},
+			"delete": {
+				"title": "Delete Plan",
+				"description": "Are you sure you want to delete this plan?",
+				"yes": "Yes",
+				"no": "No"
+			},
+			"pagination": {
+				"total": "Total {{total}} plans"
+			},
+			"unsavedChanges": "You have unsaved changes to plans. Are you sure you want to leave?",
+			"createSuccess": "Plan created (unsaved)",
+			"updateSuccess": "Plan updated (unsaved)",
+			"deleteSuccess": "Plan deleted (unsaved)",
+			"saveSuccess": "Plans saved successfully",
+			"saveError": "Failed to save plans",
+			"saveChanges": "Save Changes"
+		},
+		"goals": {
+			"label": "Functional Goals",
+			"description": "Manage rehabilitation and functional goals library. Create, edit, or delete goals. Goals can be categorized for easier organization.",
+			"createButton": "Add Goal",
+			"empty": "No functional goals yet. Click 'Add Goal' to create one.",
+			"categories": {
+				"mobility": "Mobility",
+				"strength": "Strength",
+				"balance": "Balance",
+				"pain": "Pain Management",
+				"other": "Other"
+			},
+			"noDescription": "No description",
+			"modal": {
+				"createTitle": "Create Functional Goal",
+				"editTitle": "Edit Functional Goal",
+				"titleLabel": "Goal Title",
+				"titlePlaceholder": "e.g. Improve shoulder range of motion",
+				"titleRequired": "Please enter a goal title",
+				"titleMinLength": "Title must be at least 3 characters",
+				"categoryLabel": "Category",
+				"categoryPlaceholder": "Select a category",
+				"categoryRequired": "Please select a category",
+				"descriptionLabel": "Description",
+				"descriptionPlaceholder": "Describe this goal and its purpose...",
+				"createButton": "Create",
+				"updateButton": "Update",
+				"cancelButton": "Cancel"
+			},
+			"delete": {
+				"title": "Delete Goal",
+				"description": "Are you sure you want to delete this goal?",
+				"yes": "Yes",
+				"no": "No"
+			},
+			"unsavedChanges": "You have unsaved changes to functional goals. Are you sure you want to leave?",
+			"createSuccess": "Goal created (unsaved)",
+			"updateSuccess": "Goal updated (unsaved)",
+			"deleteSuccess": "Goal deleted (unsaved)",
+			"saveSuccess": "Functional goals saved successfully",
+			"saveError": "Failed to save functional goals",
+			"saveChanges": "Save Changes"
+		},
+		"conditions": {
+			"label": "Pre-existing Conditions",
+			"description": "Manage the library of pre-existing medical conditions. Track ICD-10 codes for standardized diagnosis classification.",
+			"createButton": "Add Condition",
+			"empty": "No conditions yet. Click 'Add Condition' to create one.",
+			"icd10": "ICD-10",
+			"noDescription": "No description",
+			"modal": {
+				"createTitle": "Create Pre-existing Condition",
+				"editTitle": "Edit Pre-existing Condition",
+				"nameLabel": "Condition Name",
+				"namePlaceholder": "e.g. Osteoarthritis, Hypertension",
+				"nameRequired": "Please enter a condition name",
+				"nameMinLength": "Name must be at least 3 characters",
+				"icd10Label": "ICD-10 Code",
+				"icd10Placeholder": "e.g. M15.0 (Polyosteoarthritis)",
+				"icd10Invalid": "Invalid ICD-10 format (e.g., M15.0 or A00)",
+				"descriptionLabel": "Description",
+				"descriptionPlaceholder": "Describe the condition, symptoms, or clinical notes...",
+				"createButton": "Create",
+				"updateButton": "Update",
+				"cancelButton": "Cancel"
+			},
+			"delete": {
+				"title": "Delete Condition",
+				"description": "Are you sure you want to delete this condition?",
+				"yes": "Yes",
+				"no": "No"
+			},
+			"pagination": {
+				"total": "Total {{total}} conditions"
+			},
+			"unsavedChanges": "You have unsaved changes to pre-existing conditions. Are you sure you want to leave?",
+			"createSuccess": "Condition created (unsaved)",
+			"updateSuccess": "Condition updated (unsaved)",
+			"deleteSuccess": "Condition deleted (unsaved)",
+			"saveSuccess": "Conditions saved successfully",
+			"saveError": "Failed to save conditions",
+			"saveChanges": "Save Changes"
+		}
+	},
+	"advancedTab": {
+		"unauthorized": {
+			"title": "Unauthorized",
+			"subtitle": "Super Admin access required for Advanced settings."
+		},
+		"bandwidth": {
+			"label": "Bandwidth Optimization",
+			"description": "Enable bandwidth limits for video uploads and processing to optimize network performance.",
+			"badge": "Super Admin",
+			"enabled": "Bandwidth limits enabled",
+			"disabled": "Bandwidth limits disabled",
+			"maxUploadLabel": "Max upload size (MB):",
+			"maxProcessingLabel": "Max processing size (MB):",
+			"validationError": "Max upload size must be less than max processing size"
+		},
+		"tags": {
+			"label": "User Tags",
+			"description": "Manage tags for organizing users into groups and categories.",
+			"badge": "Super Admin",
+			"addButton": "Add Tag",
+			"editTooltip": "Edit tag",
+			"deleteTooltip": "Delete tag",
+			"modal": {
+				"createTitle": "Add Tag",
+				"editTitle": "Edit Tag",
+				"nameLabel": "Tag Name",
+				"namePlaceholder": "Enter tag name",
+				"nameRequired": "Please enter tag name",
+				"colorLabel": "Tag Color",
+				"colorRequired": "Please select tag color",
+				"descriptionLabel": "Description (Optional)",
+				"descriptionPlaceholder": "Enter tag description",
+				"createButton": "Add",
+				"updateButton": "Save",
+				"cancelButton": "Cancel"
+			},
+			"delete": {
+				"title": "Delete Tag",
+				"description": "Are you sure you want to delete this tag?",
+				"yes": "Delete",
+				"no": "Cancel"
+			}
+		},
+		"confirmChanges": {
+			"title": "Confirm Changes",
+			"description": "These tag changes affect user organization. Continue?",
+			"ok": "Save Changes",
+			"cancel": "Cancel"
+		},
+		"unsavedChanges": "You have unsaved changes in Advanced settings. These affect all users. Are you sure you want to leave?",
+		"bandwidthUpdateSuccess": "Bandwidth settings updated",
+		"bandwidthUpdateError": "Failed to update bandwidth",
+		"retryButton": "Retry",
+		"tagsSuccess": "Tags saved successfully",
+		"tagsError": "Failed to save tags",
+		"saveChanges": "Save Changes"
+	}
+}

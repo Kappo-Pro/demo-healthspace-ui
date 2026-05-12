@@ -1,0 +1,68 @@
+.text-animate {
+	transition: all 0.8s ease-out;
+}
+
+/* Blur In/Out Animation */
+.text-animate--blurInOut.text-animate--hidden {
+	opacity: 0;
+	filter: blur(12px);
+	transform: scale(1.1);
+}
+
+.text-animate--blurInOut.text-animate--visible {
+	opacity: 1;
+	filter: blur(0);
+	transform: scale(1);
+}
+
+.text-animate--blurInOut.text-animate--exit {
+	opacity: 0;
+	filter: blur(12px);
+	transform: scale(0.95);
+}
+
+/* Blur In Only Animation */
+.text-animate--blurIn.text-animate--hidden {
+	opacity: 0;
+	filter: blur(12px);
+	transform: scale(1.1);
+}
+
+.text-animate--blurIn.text-animate--visible,
+.text-animate--blurIn.text-animate--exit {
+	opacity: 1;
+	filter: blur(0);
+	transform: scale(1);
+}
+
+/* Fade In Animation */
+.text-animate--fadeIn.text-animate--hidden {
+	opacity: 0;
+	transform: translateY(10px);
+}
+
+.text-animate--fadeIn.text-animate--visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.text-animate--fadeIn.text-animate--exit {
+	opacity: 0;
+	transform: translateY(-10px);
+}
+
+/* Slide Up Animation */
+.text-animate--slideUp.text-animate--hidden {
+	opacity: 0;
+	transform: translateY(30px);
+}
+
+.text-animate--slideUp.text-animate--visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.text-animate--slideUp.text-animate--exit {
+	opacity: 0;
+	transform: translateY(-30px);
+}

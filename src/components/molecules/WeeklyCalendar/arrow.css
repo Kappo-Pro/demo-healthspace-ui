@@ -1,0 +1,4 @@
+.custom-weekly-arrow {
+	margin-left: var(--spacing-3);
+	cursor: pointer;
+}

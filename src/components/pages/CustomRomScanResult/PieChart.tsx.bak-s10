@@ -1,0 +1,280 @@
+import { Pie } from '@ant-design/plots';
+import { Card, Empty, Flex } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { CustomRomSession } from '@types';
+import { evalScore } from './jointsTemplateData';
+import { useMemo } from 'react';
+
+interface PieChartProps {
+	selectedRom: CustomRomSession | null;
+	persona: {
+		color: string;
+	};
+	isPdf?: boolean;
+}
+
+const PieChart = (props: PieChartProps) => {
+	const { selectedRom, isPdf } = props;
+	const { t } = useTranslation();
+
+	const flattenDataSource = selectedRom?.romPatientResults
+		?.map(item => item?.results?.map(result => ({ ...item, ...result })))
+		?.flat();
+
+	const getCategoryName = (score: number) => {
+  if (score >= 90) return t('Patient.data.omnirom.optimalMobility');
+  if (score >= 75) return t('Patient.data.omnirom.functionalMobility');
+  if (score >= 60) return t('Patient.data.omnirom.moderateRestriction');
+  if (score >= 40) return t('Patient.data.omnirom.restrictedMobility');
+  if (score >= 20) return t('Patient.data.omnirom.severelyRestricted');
+  return t('Patient.data.omnirom.criticallyImpaired');
+};
+
+	const categorizedData = flattenDataSource?.map(record => {
+		const rawScore = evalScore(record);
+		const score =
+			rawScore !== undefined
+				? Number(rawScore) >= 100
+					? 100
+					: Number(rawScore)
+				: evalScore(record);
+		const name = getCategoryName(Number(score));
+		return {
+			...record,
+			category: name ? name : 'Uncategorized',
+			score,
+		};
+	});
+
+	const categories = [
+    { name:t('Patient.data.omnirom.optimalMobility'), color: 'var(--text-success)', scoreRange: [90, 100] },
+    { name: t('Patient.data.omnirom.functionalMobility'), color: 'var(--text-success)', scoreRange: [75, 89] },
+    { name: t('Patient.data.omnirom.moderateRestriction'), color: 'var(--color-warning-500)', scoreRange: [60, 74] },
+    { name: t('Patient.data.omnirom.restrictedMobility'), color: 'var(--color-warning-500)', scoreRange: [40, 59] },
+    {name: t('Patient.data.omnirom.severelyRestricted'), color: 'var(--color-error-500)', scoreRange: [20, 39] },
+    { name: t('Patient.data.omnirom.criticallyImpaired'), color: 'var(--color-error-500)', scoreRange: [0, 19] },
+  ];
+
+	const groupedData = categories?.map(category => {
+		const filteredData = categorizedData?.filter(
+			record => record?.category === category?.name,
+		);
+		return {
+			categoryName: category?.name,
+			categoryColor: category?.color,
+			data: filteredData,
+		};
+	});
+
+	const calculateAverageScoresByJointAndSide = () => {
+		const joints: Record<string, { total: number; count: number }> = {};
+		selectedRom?.romPatientResults?.forEach(item => {
+			item?.results?.forEach(data => {
+				const measure =
+					data?.romProgramExercise?.strapiOmniRomExercise?.name ||
+					data?.romProgramExercise?.exerciseLibrary?.title ||
+					t('Patient.data.omnirom.noTitle');
+				const joint = measure;
+				const score = evalScore(data) || 0;
+
+				if (!joints[joint]) {
+					joints[joint] = { total: 0, count: 0 };
+				}
+				joints[joint].total += Number(score);
+				joints[joint].count += 1;
+			});
+		});
+
+		return Object.keys(joints).map(joint => ({
+			joint,
+			score: (joints[joint].total / joints[joint].count).toFixed(2),
+		}));
+	};
+
+	const averageScores = calculateAverageScoresByJointAndSide();
+
+	const filteredData = useMemo(() => {
+		const filtered = averageScores.filter(
+			item => parseFloat(item.score) > 0.49,
+		);
+		return filtered;
+	}, [averageScores]);
+
+	const filteredAvgScore = useMemo(() => {
+		const scores = averageScores
+			.map(item => parseFloat(item.score))
+			.filter(score => !isNaN(score));
+		if (scores.length === 0) return 0;
+		const sum = scores.reduce((a, b) => a + b, 0);
+		return Math.round(sum / scores.length);
+	}, [averageScores]);
+
+	const rawPieData = groupedData
+  .filter(group => group.data && group.data.length > 0)
+  .map(group => {
+    const avgValue =
+      group && group.data && group.data.length > 0
+        ? group.data.reduce(
+            (sum, item) => sum + (Math.round(Number(item.score)) || 0),
+            0,
+          ) / group.data.length
+        : 0;
+
+    return {
+      type: group.categoryName,
+      rawValue: Math.round(avgValue),
+      color: group.categoryColor,
+    };
+  });
+
+
+	const total = rawPieData.reduce((sum, item) => sum + item.rawValue, 0);
+
+	const withPercentages = rawPieData.map(item => ({
+		...item,
+		exactPercent: (item.rawValue / total) * 100,
+	}));
+
+	let totalRounded = 0;
+	const roundedData = withPercentages.map(item => {
+		const rounded = Math.floor(item.exactPercent);
+		totalRounded += rounded;
+		return { ...item, roundedPercent: rounded };
+	});
+
+	const remaining = 100 - totalRounded;
+
+	const sortedByRemainder = [...withPercentages]
+		.map((item, i) => ({
+			index: i,
+			remainder: item.exactPercent - Math.floor(item.exactPercent),
+		}))
+		.sort((a, b) => b.remainder - a.remainder);
+
+	for (let i = 0; i < remaining; i++) {
+		const index = sortedByRemainder[i].index;
+		roundedData[index].roundedPercent += 1;
+	}
+
+	const pieDataFromGrouped = roundedData
+  .map(item => ({
+    type: item.type,
+    value: item.roundedPercent,
+    color: item.color,
+  }))
+  .filter(item => item.value > 0);
+
+	const memoizedConfig = useMemo(
+		() => ({
+			data: pieDataFromGrouped,
+			angleField: 'value',
+			colorField: 'type',
+			color: pieDataFromGrouped.map(group => group.color),
+			radius: 1,
+			innerRadius: 0.3,
+			label: {
+				type: 'inner',
+				content: '{value}%',
+				offset: -50,
+				style: {
+					fontSize: 14,
+					textAlign: 'center',
+				},
+				autoRotate: false,
+			},
+			tooltip: {
+				showTitle: false,
+				customContent: (_title: string, data: string | []) => {
+					if (!data || data.length === 0) return '';
+
+					const currentCategory = data[0].data?.type;
+					const currentPercentage = data[0].data?.value; 
+					const group = groupedData.find(
+						g => g.categoryName === currentCategory,
+					);
+
+					if (!group || !group.data || group.data.length === 0) return '';
+
+					const tableRows = group.data
+						.map(item => {
+							const measure =
+								item?.romProgramExercise?.strapiOmniRomExercise?.name ||
+								item?.romProgramExercise?.exerciseLibrary?.title ||
+								'No Title';
+							const score = Math.round(Number(item?.score) || 0);
+							return `
+      <tr>
+        <td style="padding: 4px 8px; border: 1px solid var(--color-gray-100);">${measure}</td>
+        <td style="padding: 4px 8px; border: 1px solid var(--color-gray-100); text-align: right;">${score}</td>
+      </tr>`;
+						})
+						.join('');
+
+					return `
+  <div style="padding: 8px; font-size: 14px;">
+    <div style="margin-bottom: 10px; font-weight: 600;">${currentCategory} : ${currentPercentage}%</div>
+    <table style="border-collapse: collapse; width: 100%; font-size: 12px; border: 1px solid var(--color-gray-100);">
+      <thead>
+        <tr>
+          <th style="text-align: left; padding: 4px 8px; border: 1px solid var(--color-gray-100); background: #fafafa;">Joint</th>
+          <th style="text-align: right; padding: 4px 8px; border: 1px solid var(--color-gray-100); background: #fafafa;">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRows}
+      </tbody>
+    </table>
+  </div>
+`;
+				},
+			},
+
+			statistic: !isPdf && {
+				content: {
+					content: Math.round(Number(filteredAvgScore)).toString(),
+					style: { fontSize: 24, fontWeight: 'bold' },
+					className: isPdf ? 'pdf-margin' : '',
+				},
+			},
+			appendPadding: [60, 20, 40, 20],
+			legend: {
+				position: 'bottom',
+				layout: 'horizontal',
+				itemName: {
+					style: {
+						fontSize: 12,
+					},
+				},
+				flipPage: false,
+			},
+			responsive: true,
+			interactions: [{ type: 'element-active' }],
+		}),
+		[pieDataFromGrouped, filteredAvgScore],
+	);
+
+
+	return (
+		<Card className='pie-card' style={{ height: 'auto', border: 'none' }}>
+			{pieDataFromGrouped.length === 0 ? (
+				<Empty
+					image={Empty.PRESENTED_IMAGE_SIMPLE}
+					description={<span>{t('Admin.data.addToReports.noData')}</span>}
+				/>
+			) : (
+				<>
+					{isPdf && (
+						<Flex className={isPdf ? 'pdf-margin' : ''}>
+							Total : {Math.round(Number(filteredAvgScore)).toString()}
+						</Flex>
+					)}
+					<Pie
+						{...memoizedConfig}
+					/>
+				</>
+			)}
+		</Card>
+	);
+};
+
+export default PieChart;

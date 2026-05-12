@@ -1,0 +1,171 @@
+/**
+ * ImprovementSummary Styles (Story 2.2)
+ *
+ * Mobile-first responsive design using design system tokens
+ */
+
+.improvement-summary {
+	margin-bottom: var(--spacing-6);
+	border-radius: var(--border-radius-md);
+	box-shadow: var(--shadow-sm);
+}
+
+/* Header section */
+.improvement-summary__header {
+	margin-bottom: var(--spacing-4);
+}
+
+/* Progress section */
+.improvement-summary__progress {
+	padding: var(--spacing-4);
+	background-color: var(--color-neutral-50);
+	border-radius: var(--border-radius-sm);
+}
+
+.improvement-summary__progress-label {
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+	margin-bottom: var(--spacing-2);
+	font-weight: var(--font-weight-medium);
+}
+
+.improvement-summary__progress-status {
+	font-size: var(--font-size-md);
+	margin-top: var(--spacing-2);
+	text-align: center;
+	text-transform: capitalize;
+}
+
+/* Stats section */
+.improvement-summary__stats {
+	width: 100%;
+}
+
+.improvement-summary__stat {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	font-size: var(--font-size-md);
+	color: var(--text-primary);
+}
+
+.improvement-summary__stat span {
+	color: var(--text-secondary);
+}
+
+.improvement-summary__stat strong {
+	color: var(--text-primary);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* Improvements list */
+.improvement-summary__improvements {
+	margin-top: var(--spacing-6);
+	padding-top: var(--spacing-4);
+	border-top: 1px solid var(--color-neutral-200);
+}
+
+.improvement-summary__improvements-title {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	margin-bottom: var(--spacing-4);
+	color: var(--text-primary);
+}
+
+.improvement-summary__improvements-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-4);
+}
+
+@media (min-width: 768px) {
+	.improvement-summary__improvements-list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Individual improvement item */
+.improvement-summary__improvement-item {
+	padding: var(--spacing-4);
+	background-color: var(--color-neutral-50);
+	border-radius: var(--border-radius-sm);
+	border: 1px solid var(--color-neutral-200);
+	transition: box-shadow 0.2s ease;
+}
+
+.improvement-summary__improvement-item:hover {
+	box-shadow: var(--shadow-sm);
+}
+
+.improvement-summary__improvement-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--spacing-2);
+}
+
+.improvement-summary__body-part {
+	font-weight: var(--font-weight-semibold);
+	font-size: var(--font-size-md);
+	color: var(--text-primary);
+	text-transform: capitalize;
+}
+
+.improvement-summary__improvement-value {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	margin-bottom: var(--spacing-2);
+}
+
+.improvement-summary__delta {
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+}
+
+.improvement-summary__description {
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+	margin: 0;
+}
+
+/* Compact mode */
+.improvement-summary--compact {
+	padding: var(--spacing-4);
+}
+
+.improvement-summary--compact .improvement-summary__header {
+	margin-bottom: 0;
+}
+
+.improvement-summary--compact .improvement-summary__improvements {
+	display: none;
+}
+
+/* Screen reader only */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Accessibility: High contrast mode */
+@media (prefers-contrast: high) {
+	.improvement-summary__improvement-item {
+		border: 2px solid currentColor;
+	}
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.improvement-summary__improvement-item {
+		transition: none;
+	}
+}

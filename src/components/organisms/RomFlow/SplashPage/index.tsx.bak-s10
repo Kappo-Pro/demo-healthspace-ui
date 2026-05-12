@@ -1,0 +1,406 @@
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import {
+  createSession,
+  setStrapiOmniRomExerciseGroupId,
+} from '@stores/clinical/rom/main';
+import { Button, Flex, Typography } from 'antd';
+import { ModalContentSkeleton } from '@atoms/Skeletons';
+import { ResponsiveImage } from '@atoms/ResponsiveImage';
+
+const { Paragraph } = Typography;
+
+const { Title } = Typography;
+import { useEffect, useState } from 'react';
+import './style.css';
+import { useTranslation } from 'react-i18next';
+import {
+  bodyPoints,
+  buttonStyle,
+  mainTemplateGroup,
+  sittingBodyPoints,
+} from './ProgramGroup';
+import { setVideoRecordState } from '@stores/shared/onBoard/onBoard';
+import { PlayCircle } from '@vitalflow-icons/media/playCircle';
+import { showCustomModal } from '@atoms/CustomModalInfo';
+import {
+  fetchOmniromProgram,
+  fetchStrapiExercises,
+} from '@stores/clinical/rom/romTemplates';
+import {
+  CustomRomExercise,
+  TOmniromSelectedExercise,
+} from '@types';
+import { FilterLines } from '@vitalflow-icons/general/filterLines';
+import { useNavigate } from 'react-router-dom';
+
+interface ISplashPageProps {
+  onTogglesSplashPage: () => void;
+}
+
+const AreaHighlight = (highlightedPoints: []) => {
+  const resolvedPoints = highlightedPoints.map(({ styles }) => {
+    const resolved = { top: 0, left: 0 };
+
+    if ('top' in styles) {
+      resolved.top = parseFloat(styles.top);
+    } else if ('bottom' in styles) {
+      resolved.top = 430 - parseFloat(styles.bottom);
+    }
+
+    if ('left' in styles) {
+      resolved.left = parseFloat(styles.left);
+    } else if ('right' in styles) {
+      resolved.left = 300 - parseFloat(styles.right);
+    }
+
+    return resolved;
+  });
+
+  const topValues = resolvedPoints.map(p => p.top);
+  const leftValues = resolvedPoints.map(p => p.left);
+
+  const minTop = Math.min(...topValues);
+  const maxTop = Math.max(...topValues);
+  const minLeft = Math.min(...leftValues);
+  const maxLeft = Math.max(...leftValues);
+
+  const width = maxLeft - minLeft;
+  const height = maxTop - minTop;
+  const diameter = Math.max(width, height) + 80;
+  const centerTop = minTop + height / 2;
+  const centerLeft = minLeft + width / 2;
+
+  return (
+    <div
+      className="area-highlight"
+      style={{
+        position: 'absolute',
+        top: centerTop - diameter / 2,
+        left: centerLeft - diameter / 2,
+        width: diameter,
+        height: diameter,
+        borderRadius: '1000px',
+        backgroundColor: 'var(--splash-area-highlight)',
+        zIndex: 9999,
+        opacity: 0.119,
+        pointerEvents: 'none',
+      }}
+    />
+  );
+};
+
+const SplashPage = (props: ISplashPageProps) => {
+  const { onTogglesSplashPage } = props;
+  const { t } = useTranslation();
+  const dispatch = useTypedDispatch();
+  const navigate = useNavigate();
+  const [selectedButton, setSelectedButton] = useState('region');
+  const options = [
+    {
+      label: '',
+      value: 'filter',
+      icon: <FilterLines color="stroke-black" width={20} height={18} />,
+    },
+    {
+      label: t('Patient.data.omnirom.scanRegion'),
+      value: 'region',
+    },
+    { label: t('Patient.data.omnirom.scanSpeciality'), value: 'speciality' },
+  ];
+  const { user, selectedUser } = useTypedSelector(state => ({
+    user: state.user,
+    selectedUser: state.contacts.main.selectedUser,
+  }));
+  const [selectedDropdown, setSelectedDropdown] = useState('');
+  const [selectedBodyPointOptions, setSelectedBodyPointOptions] = useState([]);
+  const [highlightPoints, setHighlightPoints] = useState([]);
+  const [dropdownOptions, setDropdownOptions] = useState([]);
+  const [areaHightlight, setAreaHighlight] = useState();
+  const [highlightedButton, setHighlightedButton] = useState('');
+  const [exerciseLoading, setExerciseLoading] = useState(false);
+  const [savedExercise, setSavedExercise] =
+    useState<TOmniromSelectedExercise>();
+
+  useEffect(() => {
+    fetchData(selectedButton);
+  }, []);
+
+  useEffect(() => {
+    const highlightedAreaPoints = bodyPoints?.filter(hotspot =>
+      highlightPoints?.find(
+        point => point?.name?.toLowerCase() == hotspot?.name?.toLowerCase(),
+      ),
+    );
+    const hightLightedArea = AreaHighlight(highlightedAreaPoints);
+
+    setAreaHighlight(
+      highlightedAreaPoints?.length > 1 ? hightLightedArea : <div></div>,
+    );
+  }, [highlightPoints]);
+
+  const fetchData = async (value: string) => {
+    const data = await dispatch(fetchStrapiExercises({ value }));
+    setDropdownOptions(data?.payload?.data);
+  };
+
+  const createSessionAndSetId = async (programId: number | string) => {
+    dispatch(setStrapiOmniRomExerciseGroupId(programId));
+    const session = {
+      strapiOmniRomProgramId: programId,
+      userId: user.isPhysioterapist ? selectedUser?.id : user.id,
+    };
+    return dispatch(createSession(session));
+  };
+
+  const handleDropdownChange = async (programId: number | string) => {
+    try {
+      setExerciseLoading(true);
+      const response = await dispatch(
+        fetchOmniromProgram({ omniRomProgramId: Number(programId) }),
+      );
+      setSelectedBodyPointOptions(response?.payload[0]?.exercises);
+      setHighlightPoints(response?.payload[0]?.omniRomJoints);
+      highlightedButton && setSavedExercise(response?.payload[0]);
+      setExerciseLoading(false);
+    } catch (error) {
+       
+      console.error('Error fetching exercises:', error);
+    }
+  };
+
+  const onToggleSplash = async (programId: number | string) => {
+    dispatch(setVideoRecordState(true));
+    await createSessionAndSetId(programId);
+    onTogglesSplashPage();
+  };
+
+  const handleSelectExercise = (exercise: CustomRomExercise) => {
+    setHighlightedButton('');
+    setSelectedDropdown(exercise.vitalflowId);
+    handleDropdownChange(exercise.id);
+    setSavedExercise(exercise);
+    exercise.vitalflowId === 55 && setHighlightedButton('sittingBaseline');
+  };
+
+  return (
+    <Flex
+      vertical
+      className="flex-center"
+      style={{
+        height: '100%',
+        backgroundColor: 'var(--color-gray-100)',
+      }}>
+      <div className="middle-button-css">
+        {mainTemplateGroup?.map(group => {
+          const styleObj = eval('(' + group?.frontend?.styles + ')');
+          const go = () => {
+            if (group.navigateTo) {
+              navigate(group.navigateTo);
+            } else {
+              onToggleSplash(group?.id);
+            }
+          };
+          return (
+            <Button
+              key={group.id}
+              style={{
+                ...styleObj,
+                position: 'static',
+                height: 'auto',
+                color: 'var(--text-color)',
+                borderRadius: '100px',
+                padding: '8px 28px',
+                borderColor:
+                  highlightedButton === group.key && 'var(--text-color)',
+              }}
+              onClick={go}
+              onMouseEnter={() => {
+                setSelectedDropdown('');
+                setSelectedBodyPointOptions([]);
+                setHighlightPoints(group.hotspotPoints);
+                setHighlightedButton(group.key);
+              }}
+              // onMouseEnter={() => {
+              //   setSelectedDropdown('');
+              //   setSelectedBodyPointOptions([]);
+              //   setHighlightPoints(group.hotspotPoints);
+              // }}
+            >
+              {group?.name}
+            </Button>
+          );
+        })}
+      </div>
+      <div className={'splash orom-splash-wrapper'}>
+        <div className="splash-header">
+          <div className="exercise-list-header">
+            <Title level={3} className="text-center mb-[7px]">
+              {t('Patient.data.omnirom.chooseScan').toUpperCase()}
+            </Title>
+            <Button.Group>
+              {options.map(item => {
+                const isSelected = selectedButton === item.value;
+                return (
+                  <Button
+                    key={item.label}
+                    icon={item.icon}
+                    style={{
+                      borderColor: 'inherit',
+                      borderRadius: '0px',
+                      backgroundColor: isSelected ? 'var(--border-default)' : 'white',
+                      color: 'var(--color-gray-900)',
+                    }}
+                    onClick={() => {
+                      if (item.value !== 'filter') {
+                        setSelectedButton(item.value);
+                        fetchData(item.value);
+                      }
+                    }}>
+                    {item.label}
+                  </Button>
+                );
+              })}
+            </Button.Group>
+          </div>
+          <div className="exercise-list-container">
+            <ul className="exercises-list">
+              {dropdownOptions.map(exercise => (
+                <li
+                  key={exercise.id}
+                  className={`exercise-item ${selectedDropdown === exercise.id ? 'selected' : ''}`}
+                  onClick={() => handleSelectExercise(exercise)}>
+                  {exercise.title}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="body-points select-none">
+          <Flex justify="center" className="body-front-container">
+            <div className="body-front-container-col">
+              <div className="body-shape-front">
+                {areaHightlight}
+                {highlightedButton === 'sittingBaseline' ? (
+                  <ResponsiveImage src="/assets/Sitting.png" style={{ width: 307 }} loading="eager" alt="Sitting position" />
+                ) : (
+                  <ResponsiveImage src="/assets/Frame.png" style={{ width: 307 }} loading="eager" alt="Body frame" />
+                )}
+                {(highlightedButton === 'sittingBaseline'
+                  ? sittingBodyPoints
+                  : bodyPoints
+                ).map((hotspot, index) => (
+                  <div
+                    key={index}
+                    style={hotspot.styles}
+                    className={`hotspot-circle ${highlightPoints?.find(point => point?.name?.toLowerCase() == hotspot?.name?.toLowerCase()) ? 'active' : ''}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </Flex>
+        </div>
+        <Flex
+          vertical
+          justify={exerciseLoading ? 'center' : undefined}
+          style={{
+            opacity: selectedBodyPointOptions?.length > 0 ? 1 : 0,
+            width: '370px',
+            borderRadius: '12px',
+            padding: '16px 8px 16px 16px',
+            minHeight: '200px',
+            maxHeight: '600px',
+            backgroundColor: 'var(--card-bg-color)',
+            boxShadow:
+              selectedBodyPointOptions?.length > 0
+                ? '0px 2px 12px var(--box-shadow)'
+                : '',
+          }}>
+          {exerciseLoading ? (
+          <ModalContentSkeleton />
+          ) : (
+            selectedBodyPointOptions?.length > 0 && (
+              <>
+                <Flex
+                  vertical
+                  gap={14}
+                  style={{
+                    color: 'black',
+                    maxHeight: '500px',
+                    overflowY: 'auto',
+                    fontSize: '16px',
+                  }}>
+                  {selectedBodyPointOptions?.map(group => {
+                    return (
+                      <Flex>
+                        <div
+                          onClick={e => {
+                            e.stopPropagation();
+                            showCustomModal({
+                              video: group?.OmniRomExerciseId?.video?.url,
+                              name: group?.OmniRomExerciseId?.name,
+                              description:
+                                group?.OmniRomExerciseId?.description,
+                            });
+                          }}>
+                          <div className="orom-exercise-data-item image-wrapper">
+                            <ResponsiveImage
+                              src={group?.OmniRomExerciseId?.image?.url}
+                              className="orom-exercise-data-item-image"
+                              alt={group?.OmniRomExerciseId?.name || 'Exercise'}
+                            />
+                            <div className="play-button">
+                              <PlayCircle width={40} height={40} />
+                            </div>
+                          </div>
+                        </div>
+                        <div style={{ width: '100%', marginLeft: 10 }}>
+                          <Paragraph className="orom-exercise-data-item-title">
+                            {group?.OmniRomExerciseId?.name}
+                          </Paragraph>
+                          <p
+                            className="exercise-item-description"
+                            title={
+                              group?.OmniRomExerciseId?.description ||
+                              t('Patient.data.omnirom.noDescription')
+                            }>
+                            {group?.OmniRomExerciseId?.description
+                              ? group?.OmniRomExerciseId?.description
+                              : t('Patient.data.omnirom.noDescription')}
+                          </p>
+                        </div>
+                      </Flex>
+                    );
+                  })}
+                </Flex>
+                <Button
+                  className="start-session-css"
+                  style={buttonStyle}
+                  icon={
+                    <PlayCircle
+                      height={18}
+                      width={18}
+                      color="stroke-purple-700"
+                    />
+                  }
+                  onClick={() => onToggleSplash(selectedDropdown)}>
+                  {t('Admin.data.managePatient.omniRom.startScan')}
+                </Button>
+                <div className="orom-estimated-time">
+                  <span style={{ marginRight: '4px', fontWeight: '600' }}>
+                    {t('Admin.data.managePatient.omniRom.estimatedTime')}
+                  </span>{' '}
+                  {savedExercise?.estimatedMinutes}{' '}
+                  {t('Admin.data.managePatient.omniRom.min')}{' '}
+                  {savedExercise?.estimatedSeconds}{' '}
+                  {t('Admin.data.managePatient.omniRom.sec')}
+                </div>
+              </>
+            )
+          )}
+        </Flex>
+      </div>
+    </Flex>
+  );
+};
+
+export default SplashPage;

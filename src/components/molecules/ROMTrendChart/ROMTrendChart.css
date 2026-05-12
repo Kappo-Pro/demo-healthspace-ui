@@ -1,0 +1,95 @@
+/**
+ * ROMTrendChart Styles
+ *
+ * Styles for the ROM trend chart molecule component
+ * Uses design system tokens for consistent theming
+ */
+
+/* ============================================
+   CHART CONTAINER
+   ============================================ */
+
+.rom-trend-chart {
+	padding: var(--spacing-md);
+	background: var(--surface-elevated);
+	border-radius: var(--border-radius-md);
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+
+.rom-trend-chart-loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
+	background: var(--surface-elevated);
+	border-radius: var(--border-radius-md);
+	color: var(--text-secondary);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.rom-trend-chart-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
+	background: var(--surface-elevated);
+	border-radius: var(--border-radius-md);
+	padding: var(--spacing-lg);
+}
+
+/* ============================================
+   CUSTOM TOOLTIP
+   ============================================ */
+
+.rom-trend-tooltip {
+	background: var(--surface-elevated);
+	border: 1px solid var(--border-default);
+	border-radius: var(--border-radius-sm);
+	padding: var(--spacing-sm) var(--spacing-md);
+	box-shadow: var(--shadow-md);
+}
+
+.tooltip-date {
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+	margin: 0 0 var(--spacing-xs) 0;
+}
+
+.tooltip-score {
+	font-size: var(--font-size-base);
+	color: var(--text-primary);
+	margin: 0;
+}
+
+.tooltip-score strong {
+	color: var(--brand-primary);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+	.rom-trend-chart {
+		padding: var(--spacing-sm);
+	}
+
+	.rom-trend-tooltip {
+		padding: var(--spacing-xs) var(--spacing-sm);
+	}
+
+	.tooltip-date {
+		font-size: var(--font-size-xs);
+	}
+
+	.tooltip-score {
+		font-size: var(--font-size-sm);
+	}
+}

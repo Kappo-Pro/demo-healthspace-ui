@@ -1,0 +1,23 @@
+.image-upload-container:hover .image-upload-overlay {
+	opacity: 1;
+}
+
+/* ContentImageCard hover effect */
+.content-image-card-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--overlay-default);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.content-image-card-image:hover .content-image-card-overlay {
+	opacity: 1;
+}

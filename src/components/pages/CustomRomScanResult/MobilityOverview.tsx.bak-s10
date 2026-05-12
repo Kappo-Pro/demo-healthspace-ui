@@ -1,0 +1,66 @@
+import { useTranslation } from 'react-i18next';
+import './MobilityOverview.css';
+import { Typography } from 'antd';
+
+const { Paragraph } = Typography;
+
+const { Title } = Typography;
+
+interface IMobilityOverView {
+	isPdf: boolean;
+	persona: {
+		color: string;
+	};
+}
+
+const MobilityOverview = (props: IMobilityOverView) => {
+	const { persona, isPdf } = props;
+	const {t} = useTranslation();
+	return (
+		<div className={`overview-grid ${isPdf ? 'pdf-section' : ''}`}>
+			<div className="overview-card">
+				<Title level={3} className="inter-bold-text">{t('Patient.data.mobilityReport.mobilityOverview')}</Title>
+				<Paragraph className="inter-text-regular text-gray-500">
+					{t('Patient.data.mobilityReport.mobilityOverviewDescription')}
+				</Paragraph>
+			</div>
+
+			<div className="overview-card">
+				<Title level={3} className="inter-bold-text">{t('Patient.data.mobilityReport.didYouKnow')}</Title>
+				<Paragraph className="inter-text-regular text-gray-500">
+					{t('Patient.data.mobilityReport.didYouKnowDescription')}
+				</Paragraph>
+			</div>
+
+			<div className="overview-card">
+				<h3 className={`inter-bold-text ${isPdf ? 'pdf-margin' : ''}`}>
+					{t('Patient.data.mobilityReport.whatThisMeans')}
+				</h3>
+				<div className="overview-cards">
+					<div className="overview-item font-text-semibold">
+						<p className={`${isPdf ? 'pdf-margin' : ''}`}>
+							{t('Patient.data.mobilityReport.list1')}
+						</p>
+					</div>
+					<div className="overview-item font-text-semibold">
+						<p className={`${isPdf ? 'pdf-margin' : ''}`}>
+							{t('Patient.data.mobilityReport.list2')}
+						</p>
+					</div>
+					<div className="overview-item font-text-semibold">
+						<p className={`${isPdf ? 'pdf-margin' : ''}`}>
+							{t('Patient.data.mobilityReport.list3')}
+						</p>
+					</div>
+					<div className="overview-item font-text-semibold">
+						<p className={`${isPdf ? 'pdf-margin' : ''}`}>
+							{t('Patient.data.mobilityReport.list4')}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default MobilityOverview;

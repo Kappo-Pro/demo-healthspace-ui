@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link id="favicon" rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitalFlow | AI-Powered Rehabilitation</title>
+
+  <!-- CRITICAL: Initialize theme BEFORE React loads to prevent flash and race conditions -->
+  <script>
+    (function initializeTheme() {
+      try {
+        // Read stored theme from localStorage (same key as ThemeProvider)
+        const stored = localStorage.getItem('vitalflow-theme');
+        let theme = 'system';
+
+        if (stored) {
+          try {
+            const parsedTheme = JSON.parse(stored);
+            // Validate theme is one of the supported options
+            if (['light', 'dark', 'default', 'vibrant', 'system'].includes(parsedTheme)) {
+              theme = parsedTheme;
+            }
+          } catch (e) {
+            // Invalid JSON, use system default
+            theme = 'system';
+          }
+        }
+
+        // Resolve 'system' to actual theme based on OS preference
+        if (theme === 'system') {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          theme = prefersDark ? 'dark' : 'default';
+        }
+
+        // Map 'light' to 'default' for consistency (they're the same theme)
+        if (theme === 'light') {
+          theme = 'default';
+        }
+
+        // Set data-theme attribute IMMEDIATELY (before React renders)
+        // This prevents race condition where getCSSVar() reads wrong theme
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (error) {
+        // Fallback to default on error
+        console.error('[Theme Init] Error initializing theme:', error);
+        document.documentElement.setAttribute('data-theme', 'default');
+      }
+    })();
+  </script>
+
+  <script>
+    function updateFavicon() {
+      const favicon = document.getElementById("favicon");
+      const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      favicon.href = isDarkMode ? "/icon-light.png" : "/icon-dark.png";
+    }
+
+    updateFavicon();
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateFavicon);
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>

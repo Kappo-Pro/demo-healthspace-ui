@@ -1,0 +1,45 @@
+.timer {
+	z-index: 1;
+}
+
+.timer.center {
+	bottom: calc(50% - 50px);
+	right: calc(50% - 50px);
+}
+
+.timer.centerDown {
+	bottom: 5px;
+	right: calc(50% - 600px);
+}
+
+.timer.bottomRight {
+	bottom: 0;
+	right: 0;
+}
+
+.timer.topRight {
+	top: 60px;
+	right: var(--spacing-5);
+}
+.timer.bottomLeft {
+	bottom: 60px;
+	left: var(--spacing-5);
+}
+
+.timer.topleft {
+	top: 60px;
+	left: var(--spacing-5);
+}
+
+.timer.inbar {
+	max-width: 62%;
+	z-index: 130;
+}
+
+.timer svg path {
+	stroke: var(--surface-primary);
+}
+
+.timer svg g g g g g {
+	fill: var(--surface-primary);
+}

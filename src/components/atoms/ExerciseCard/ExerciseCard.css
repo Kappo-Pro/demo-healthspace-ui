@@ -1,0 +1,51 @@
+/**
+ * ExerciseCard Component Styles (Story 2.3)
+ *
+ * Design System Tokens:
+ * - Uses semantic color tokens
+ * - WCAG 2.1 AA compliant
+ */
+
+.exercise-card {
+	transition:
+		transform 0.2s ease-in-out,
+		box-shadow 0.2s ease-in-out;
+	border: 1px solid var(--border-subtle);
+}
+
+.exercise-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-md);
+}
+
+.exercise-card.completed {
+	border-color: var(--brand-success);
+	background-color: var(--surface-success-subtle);
+}
+
+.exercise-card:focus-within {
+	outline: 2px solid var(--brand-primary);
+	outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+	.exercise-card {
+		border-width: var(--spacing-0-5);
+	}
+
+	.exercise-card.completed {
+		border-width: var(--border-width-2);
+	}
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+	.exercise-card {
+		transition: none;
+	}
+
+	.exercise-card:hover {
+		transform: none;
+	}
+}

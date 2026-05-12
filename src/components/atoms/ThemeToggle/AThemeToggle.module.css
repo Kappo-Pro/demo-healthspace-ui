@@ -1,0 +1,14 @@
+.themeToggle {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.icon {
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary, var(--color-gray-600));
+}
+
+[data-theme='dark'] .icon {
+	color: var(--text-secondary, var(--color-gray-300));
+}

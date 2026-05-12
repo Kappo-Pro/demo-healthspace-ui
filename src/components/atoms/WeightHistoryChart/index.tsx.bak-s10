@@ -1,0 +1,311 @@
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { measurementTypes } from '@pages/PatientOnboard/Constants';
+import { getUser, updateUserWeight } from '@stores/shared/user';
+import { Input, message, Popover, Flex, Typography, Spin } from 'antd';
+
+const { Paragraph } = Typography;
+import { Speedometer01 } from '@vitalflow-icons/general/speedometer01';
+import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+import { getUserById } from '@stores/activity/contacts/contacts';
+import { useTheme } from "@providers/ThemeProvider";
+import { THEME } from '@stores/constants';
+
+// Lazy load the heavy chart library
+const Line = lazy(() => import('@ant-design/charts').then(m => ({ default: m.Line })));
+
+const createChartConfig = (data: unknown, max: number, min: number) => {
+  return {
+    data,
+    xField: 'createdAt',
+    yField: 'metricWeight',
+    smooth: true,
+    color: document.documentElement.getAttribute("data-theme") === THEME.VIBRANT ? 'var(--color-warning-600)' :'#ccff00',
+    area: {
+      style: {
+        fill: 'l(90) 0:rgba(204, 255, 0, 0.5) 1:rgba(204, 255, 0, 0)',
+      },
+    },
+    lineStyle: {
+      stroke: document.documentElement.getAttribute("data-theme") === THEME.VIBRANT ? 'var(--color-warning-600)' :'#ccff00',
+      lineWidth: 3,
+    },
+    meta: {
+      value: {
+        min: min,
+        max: max,
+        // tickInterval: Math.ceil((max - min) / 5),
+      },
+    },
+    tooltip: false,
+    xAxis: {
+      line: null,
+      tickLine: null,
+      label: null,
+    },
+    yAxis: {
+      line: null,
+      tickLine: null,
+      grid: null,
+      label: null,
+      min: min,
+      max: max,
+    },
+    legend: false,
+  };
+};
+
+export const WeightHistoryChart = ({ userDetails }) => {
+  const { toggleTheme } = useTheme(); 
+  const { t } = useTranslation();
+  const user = useTypedSelector(state => state.user);
+  const { selectedUser } = useTypedSelector(state => state.contacts.main);
+  const [open, setOpen] = useState(false);
+  const dispatch = useTypedDispatch();
+  const [weightFormData, setWeightFormData] = useState({
+    imperialWeight: 0,
+    metricWeight: 0,
+    measurementSystem: 'imperial',
+  });
+  const [unit, setUnit] = useState('');
+
+  useEffect(() => {
+    setWeightFormData({
+      imperialWeight:
+        userDetails.profile?.weight &&
+        userDetails.profile?.weight[0]?.imperialWeight,
+      metricWeight:
+        userDetails.profile?.weight &&
+        userDetails.profile?.weight[0]?.metricWeight,
+      measurementSystem: userDetails.profile?.measurementSystem,
+    });
+
+    setUnit(
+      userDetails.profile?.measurementSystem === measurementTypes.METRIC
+        ? measurementTypes.METRIC
+        : measurementTypes.IMPERIAL,
+    );
+  }, [userDetails, selectedUser]);
+
+  const chartConfig = userDetails?.profile?.weight
+    ? createChartConfig(
+        (userDetails?.profile?.weight ?? []).slice().reverse(),
+        Math.max(
+          ...(userDetails?.profile?.weight ?? [])
+            .slice()
+            .map((o: { metricWeight: unknown }) => o.metricWeight),
+        ),
+        Math.min(
+          ...(userDetails?.profile?.weight ?? [])
+            .slice()
+            .map((o: { metricWeight: unknown }) => o.metricWeight),
+        ),
+      )
+    : null;
+
+  const handleWeightChange = (unit: string) => {
+    setUnit(
+      unit === measurementTypes.KILOGRAM
+        ? measurementTypes.METRIC
+        : measurementTypes.IMPERIAL,
+    );
+
+    setWeightFormData(prev => ({
+      ...prev,
+      measurementSystem:
+        unit === measurementTypes.KILOGRAM
+          ? measurementTypes.METRIC
+          : measurementTypes.IMPERIAL,
+    }));
+  };
+
+  const handleUpdateWeight = async () => {
+    try {
+      const payload = {
+        measurementSystem: weightFormData?.measurementSystem,
+        ...(weightFormData?.measurementSystem == 'imperial'
+          ? { imperialWeight: weightFormData.imperialWeight }
+          : { metricWeight: weightFormData.metricWeight }),
+      };
+      await dispatch(
+        updateUserWeight({
+          userId: user.isPhysioterapist ? selectedUser?.id : user?.id,
+          data: payload,
+        }),
+      );
+      !user.isPhysioterapist
+        ? await dispatch(getUser(user?.id))
+        : await dispatch(getUserById(selectedUser?.id));
+      setOpen(false);
+    } catch (error) {
+       
+      console.error(`${t('Patient.data.completeProfile.saveError')}`, error);
+      message.error(`${t('Patient.data.completeProfile.saveError')}`);
+    }
+  };
+
+  const formatWeight = (
+    weight: { imperialWeight?: string; metricWeight?: string }[],
+    measurementSystem: string,
+    pos = 0,
+  ) => {
+    if (!weight || weight.length === 0) {
+      return `${t('Admin.data.managePatient.na')}`;
+    }
+
+    return measurementSystem === measurementTypes.IMPERIAL
+      ? `${weight[pos]?.imperialWeight} ${measurementTypes.LB}`
+      : `${weight[pos]?.metricWeight}  ${measurementTypes.KILOGRAM}`;
+  };
+
+  const recentWeightchange = (
+    weight: { imperialWeight?: number; metricWeight?: number }[],
+    measurementSystem: string,
+  ) => {
+    const metricDiff = (weight[0]?.metricWeight ?? 0) - (weight[1]?.metricWeight ?? 0);
+    const imperialDiff = (weight[0]?.imperialWeight ?? 0) - (weight[1]?.imperialWeight ?? 0);
+
+    return measurementSystem === measurementTypes.IMPERIAL
+      ? `${imperialDiff > 0 ? '+' : ''} ${imperialDiff} ${measurementTypes.LB}`
+      : `${metricDiff > 0 ? '+' : ''} ${metricDiff}  ${measurementTypes.KILOGRAM}`;
+  };
+
+  const handleOnChangeForm = (key: string, value: number | null) => {
+    setWeightFormData(prevData => ({ ...prevData, [key]: value }));
+  };
+
+  return (
+    <Flex
+      vertical
+      justify="space-between"
+      className="mt-2.5 h-auto"
+      style={{
+        background: 'var(--user-menu-bg-color)',
+        borderRadius: '0.5rem',
+      }}>
+      <Flex className="weight-chart-title mx-3 mt-4" justify="space-between" align="center">
+        <Paragraph className="leading-3 ">{t('Admin.data.managePatient.weight')}</Paragraph>
+        <Popover
+          placement="top"
+          open={open}
+          onOpenChange={() => {
+            setOpen(!open);
+          }}
+          content={
+            <Flex vertical gap={12} justify="center" align="center" className="p-3 w-72" style={{color : 'var(--tabs-text-color'}}>
+              <Paragraph className="font-bold">{t('Admin.data.managePatient.addYourWeight')}</Paragraph>
+              <Paragraph>{t('Admin.data.managePatient.keepTrack')}</Paragraph>
+              <div className="mb-4 text-left">
+                <Flex
+                  className="weight-input-container"
+                  align="center">
+                  <Input
+                    type="number"
+                    prefix={
+                      <Speedometer01
+                        width={13}
+                        height={15}
+                        color="stroke-gray-600"
+                      />
+                    }
+                    placeholder="Weight"
+                    value={
+                      unit === measurementTypes.METRIC
+                        ? weightFormData.metricWeight
+                        : weightFormData.imperialWeight || ''
+                    }
+                    onChange={e => {
+                      const value = parseFloat(e.target.value);
+                      if (value >= 0 || e.target.value === '') {
+                        handleOnChangeForm(
+                          unit === measurementTypes.METRIC
+                            ? 'metricWeight'
+                            : 'imperialWeight',
+                          value || null,
+                        );
+                      }
+                    }}
+                    style={{ flex: 1, marginRight: '8px', padding: '8px' }}
+                  />
+                  <select
+                    value={unit === measurementTypes.METRIC ? 'Kg' : 'Lb'}
+                    onChange={e => handleWeightChange(e.target.value)}
+                    style={{
+                      width: 80,
+                      height: 40,
+                      borderRadius: '6px',
+                      border: '1px solid gainsboro',
+                      color: 'black',
+                    }}>
+                    <option value="Lb">{measurementTypes.LB}</option>
+                    <option value="Kg">{measurementTypes.KILOGRAM}</option>
+                  </select>
+                </Flex>
+              </div>
+              <div
+                onClick={() => {
+                  weightFormData?.measurementSystem == measurementTypes.IMPERIAL
+                    ? weightFormData?.imperialWeight !=
+                      userDetails?.profile?.weight[0]?.imperialWeight
+                      ? !weightFormData?.imperialWeight
+                        ? message.warning(t('Admin.data.managePatient.weightEmpty'))
+                        : handleUpdateWeight()
+                      : message.warning(t('Admin.data.managePatient.weightSame'))
+                    : weightFormData?.metricWeight !=
+                        userDetails?.profile?.weight[0]?.metricWeight
+                      ? !weightFormData?.metricWeight
+                        ? message.warning(t('Admin.data.managePatient.weightEmpty'))
+                        : handleUpdateWeight()
+                      : message.warning(t('Admin.data.managePatient.weightSame'));
+                }}
+                className={`p-2 bg-[var(--button-color)] cursor-pointer w-full text-[var(--button-text-color)] font-semibold text-center rounded-lg`}>
+                {t('Admin.data.managePatient.save')}
+              </div>
+            </Flex>
+          }
+          trigger="click"
+          overlayInnerStyle={{ backgroundColor: 'var(--content-manager-card-header-bg-color)', paddingLeft: '20px', paddingRight: '20px' }}>
+          <span
+            className="start-session-css text-xs px-2 py-1 rounded-full font-semibold cursor-pointer"
+            style={{
+              color: 'var(--button-text-color)',
+              border: 'inherit',
+            }}
+            onClick={e => {
+              e.stopPropagation();
+            }}>
+            New Input
+          </span>
+        </Popover>
+      </Flex>
+      <li className="text-md font-bold ml-3 leading-4" style={{color:'var(--button-color)'}}>
+        {formatWeight(
+          userDetails?.profile?.weight,
+          userDetails?.profile?.measurementSystem,
+        )}
+        {userDetails?.profile?.weight?.length > 1 && (
+          <p className="text-xs font-bold leading-4" style={{color:'var(--button-color)'}}>
+            {recentWeightchange(
+              userDetails?.profile?.weight,
+              userDetails?.profile?.measurementSystem,
+            )}
+          </p>
+        )}
+      </li>
+      {userDetails?.profile?.weight?.length > 1 && (
+        <li style={{ height: 50, marginBottom: 10 }}>
+          <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 50 }}><Spin size="small" /></div>}>
+            <Line {...chartConfig} />
+          </Suspense>
+        </li>
+      )}
+      <li className="text-xs w-full text-right pr-1 pb-1 text-gray-300/50">
+        Last Update{' '}
+        {moment(userDetails?.profile?.weight[0].createdAt)
+          .local()
+          .format('DD/MM/YYYY')}
+      </li>
+    </Flex>
+  );
+};

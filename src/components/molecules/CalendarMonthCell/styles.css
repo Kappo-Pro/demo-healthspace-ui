@@ -1,0 +1,290 @@
+/* CalendarMonthCell Component Styles */
+
+.month-cell {
+	min-height: 120px;
+	border: 1px solid var(--color-border-secondary);
+	padding: var(--spacing-2);
+	cursor: pointer;
+	transition:
+		background-color 0.2s,
+		border-color 0.2s,
+		box-shadow 0.2s;
+	background-color: var(--surface-primary);
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.month-cell:hover {
+	background-color: var(--color-background-hover);
+	box-shadow: var(--shadow-sm);
+}
+
+.month-cell:focus {
+	outline: 2px solid var(--color-primary-500);
+	outline-offset: -2px;
+}
+
+/* Today highlighting */
+.month-cell--today {
+	border: 2px solid var(--color-primary-600);
+	background-color: var(--color-primary-50);
+	box-shadow: 0 0 0 1px var(--color-primary-200);
+}
+
+.month-cell--today:hover {
+	background-color: var(--color-primary-100);
+}
+
+/* Selected day */
+.month-cell--selected {
+	background-color: var(--color-primary-100);
+	border-color: var(--color-primary-500);
+}
+
+/* Outside current month (previous/next month dates) */
+.month-cell--outside-month {
+	opacity: 0.4;
+	background-color: var(--color-background-tertiary);
+}
+
+.month-cell--outside-month:hover {
+	opacity: 0.6;
+}
+
+/* Weekend styling */
+.month-cell--weekend {
+	background-color: var(--color-gray-50);
+}
+
+[data-theme='dark'] .month-cell--weekend {
+	background-color: var(--color-gray-900);
+}
+
+/* Density levels (heat map) */
+.month-cell--density-none {
+	/* Default background */
+}
+
+.month-cell--density-low {
+	background-color: var(--color-info-50);
+}
+
+.month-cell--density-medium {
+	background-color: var(--color-info-100);
+}
+
+.month-cell--density-high {
+	background-color: var(--color-warning-100);
+}
+
+.month-cell--density-very-high {
+	background-color: var(--color-error-100);
+}
+
+/* Dark mode density levels */
+[data-theme='dark'] .month-cell--density-low {
+	background-color: var(--color-info-900);
+}
+
+[data-theme='dark'] .month-cell--density-medium {
+	background-color: var(--color-info-800);
+}
+
+[data-theme='dark'] .month-cell--density-high {
+	background-color: var(--color-warning-900);
+}
+
+[data-theme='dark'] .month-cell--density-very-high {
+	background-color: var(--color-error-900);
+}
+
+/* Header section */
+.month-cell__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--spacing-2);
+	flex-shrink: 0;
+}
+
+.month-cell__day-number {
+	font-weight: var(--font-weight-semibold);
+	font-size: var(--font-size-base);
+	color: var(--color-text-primary);
+	line-height: var(--line-height-none);
+}
+
+.month-cell--today .month-cell__day-number {
+	font-weight: var(--font-weight-bold);
+	color: var(--color-primary-700);
+}
+
+.month-cell__event-count {
+	flex-shrink: 0;
+}
+
+/* Events section */
+.month-cell__events {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	flex: 1;
+	overflow: hidden;
+}
+
+.month-cell__event {
+	font-size: var(--font-size-xs);
+	padding: var(--spacing-1) var(--spacing-2);
+	border-radius: var(--border-radius-sm);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+	transition:
+		opacity 0.2s,
+		transform 0.2s;
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	min-height: var(--spacing-6);
+}
+
+.month-cell__event:hover {
+	opacity: 0.8;
+	transform: translateX(2px);
+}
+
+.month-cell__event:focus {
+	outline: 2px solid var(--color-primary-500);
+	outline-offset: 1px;
+}
+
+.month-cell__event-title {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+}
+
+.month-cell__event-time {
+	font-size: 10px;
+	color: var(--color-text-secondary);
+	flex-shrink: 0;
+	font-weight: var(--font-weight-normal);
+}
+
+/* Show more button */
+.month-cell__show-more {
+	font-size: var(--font-size-xs);
+	color: var(--color-primary-600);
+	background: none;
+	border: none;
+	cursor: pointer;
+	text-align: left;
+	padding: var(--spacing-1) var(--spacing-2);
+	font-weight: var(--font-weight-semibold);
+	transition:
+		color 0.2s,
+		background-color 0.2s;
+	border-radius: var(--border-radius-sm);
+	margin-top: auto;
+}
+
+.month-cell__show-more:hover {
+	color: var(--color-primary-700);
+	background-color: var(--color-primary-50);
+}
+
+.month-cell__show-more:focus {
+	outline: 2px solid var(--color-primary-500);
+	outline-offset: 1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+	.month-cell {
+		min-height: 100px;
+		padding: var(--spacing-1);
+	}
+
+	.month-cell__day-number {
+		font-size: var(--font-size-sm);
+	}
+
+	.month-cell__event {
+		font-size: 11px;
+		padding: var(--spacing-0-5) var(--spacing-1);
+	}
+
+	.month-cell__event-time {
+		display: none;
+	}
+}
+
+@media (max-width: 768px) {
+	.month-cell {
+		min-height: var(--spacing-20);
+		padding: var(--spacing-1);
+	}
+
+	.month-cell__header {
+		margin-bottom: var(--spacing-1);
+	}
+
+	.month-cell__day-number {
+		font-size: var(--font-size-sm);
+	}
+
+	.month-cell__event {
+		font-size: 10px;
+		padding: var(--spacing-0-5) var(--spacing-1);
+		min-height: var(--spacing-5);
+	}
+
+	.month-cell__event-title {
+		font-size: 10px;
+	}
+
+	.month-cell__show-more {
+		font-size: 10px;
+		padding: var(--spacing-0-5) var(--spacing-1);
+	}
+}
+
+@media (max-width: 480px) {
+	.month-cell {
+		min-height: 60px;
+	}
+
+	.month-cell__events {
+		gap: 1px;
+	}
+
+	.month-cell__event {
+		border-left-width: var(--spacing-0-5);
+	}
+
+	/* Hide event text on very small screens, show only colored bars */
+	.month-cell__event-title {
+		display: none;
+	}
+}
+
+/* Print styles */
+@media print {
+	.month-cell {
+		min-height: var(--spacing-20);
+		border: 1px solid var(--color-black);
+	}
+
+	.month-cell--today {
+		border: 2px solid var(--color-black);
+	}
+
+	.month-cell__event {
+		background-color: #f0f0f0 !important;
+	}
+}

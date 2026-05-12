@@ -1,0 +1,268 @@
+/**
+ * Light Theme (Clean Light Mode)
+ *
+ * A brighter, more minimal light theme variation.
+ * Uses purple branding with warm cream-tinted backgrounds.
+ * Updated: 2025-11-30 from Figma Design System (node 234:1910)
+ */
+
+[data-theme='light'] {
+	/* ============================================
+     BRAND (from Figma Light Mode)
+     ============================================ */
+--input-border: #8674a7; /* Figma: colorBorder */
+	--input-border-hover: var(--border-default);
+	--input-border-focus: var(--border-focus); /* #ba57ff - colorPrimary */
+	--input-border-error: var(--border-error);
+	--brand-primary: #9f30ed; /* Figma: colorPrimary */
+	--brand-primary-hover: #542972; /* Figma: colorPrimaryActive */
+	--brand-primary-light: var(--color-purple-50);
+	--brand-secondary: var(--color-purple-500);
+	--brand-accent: var(--color-purple-400);
+
+	/* ============================================
+     SURFACES & BACKGROUNDS (from Figma Light Mode)
+     ============================================ */
+
+	--surface-primary: #fffef7; /* Figma: colorBgContainer */
+	--rom-card-primary: #fffef7;
+	--pie-chart-text-color: var(--color-black);
+	--video-bg-text: var(--color-black);
+	--surface-secondary: #f6f2e9; /* Figma: gray-2 */
+	--surface-tertiary: #fffef7; /* Figma: gray-1 */
+	--surface-elevated: #fffef7;
+	--surface-overlay: #fffef7;
+
+	--surface-interactive: #f6f2e9; /* Figma: gray-2 */
+	--surface-interactive-hover: #f1ece1; /* Figma: gray-3 */
+	--surface-interactive-active: #e8e2d7; /* Figma: gray-4 */
+
+	--surface-brand: var(--color-purple-25);
+	--surface-brand-subtle: var(--color-purple-25);
+
+	/* Interactive surface states */
+	--surface-hover: #f1ece1; /* Figma: gray-3 */
+	--surface-active: #e8e2d7; /* Figma: gray-4 */
+	--surface-error: var(--color-red-25);
+
+	--bg-page: #f1ece1; /* Figma: colorBgLayout */
+	--bg-canvas: #fffef7;
+	--bg-input: #fffef7;
+	--bg-disabled: #f6f2e9;
+
+	/* Fill colors (Ant Design colorFill tokens) */
+	--fill-secondary: rgba(
+		0,
+		0,
+		0,
+		0.06
+	); /* Figma: colorFillSecondary - subtle fill for inactive elements */
+
+	/* Split/Separator color (Ant Design colorSplit token) */
+	--color-split: rgba(
+		0,
+		0,
+		0,
+		0.06
+	); /* Figma: colorSplit - subtle dividers, step connectors */
+
+	/* ============================================
+     TEXT COLORS (from Figma Light Mode)
+     ============================================ */
+
+	--text-primary: rgba(0, 0, 0, 0.75); /* Figma: colorText */
+	--text-secondary: rgba(0, 0, 0, 0.55); /* Figma: colorTextLabel */
+	--text-tertiary: rgba(0, 0, 0, 0.45); /* Figma: colorTextDescription */
+	--text-quaternary: #9d989f; /* Figma: gray-5 */
+	--text-placeholder: #9d989f;
+	--text-disabled: #cbc9c2;
+
+	--text-on-brand: var(--color-white);
+	--text-on-dark: var(--color-white);
+	--text-on-light: rgba(0, 0, 0, 0.75);
+
+	--text-brand: #9f30ed; /* Figma: colorPrimaryText */
+	--text-link: #9f30ed;
+	--text-link-hover: #542972;
+
+	/* ============================================
+     ICON COLORS (from Figma Light Mode)
+     ============================================ */
+	--icon-color: #635d65; /* Figma: colorStrokeIcon3 / gray-6 */
+
+	/* ============================================
+     BORDERS (from Figma Light Mode)
+     ============================================ */
+
+	--border-subtle: #e8e2d7; /* Figma: colorBorderSecondary / gray-4 */
+	--border-default: #9d989f; /* Figma: colorBorder / gray-5 */
+	--border-strong: #635d65; /* Figma: gray-6 */
+	--border-brand: #9f30ed;
+	--border-focus: #9f30ed;
+	--border-focus-ring: #f4ebff; /* Figma: purple-100 - outer focus ring */
+
+	/* ============================================
+     INTERACTIVE STATES (from Figma Light Mode)
+     ============================================ */
+
+	--button-primary-bg: #9f30ed; /* Figma: colorPrimary */
+	--button-primary-bg-hover: #542972; /* Figma: colorPrimaryActive */
+	--button-primary-bg-active: #421264;
+	--button-primary-bg-disabled: var(--color-purple-200);
+	--button-primary-text: var(--color-white);
+
+	/* ============================================
+     FORM ELEMENTS (from Figma Light Mode)
+     ============================================ */
+
+	/* Input backgrounds */
+	--input-bg: var(--surface-primary); /* #fffef7 - colorBgContainer */
+	--input-bg-hover: var(--surface-primary);
+	--input-bg-focus: var(--surface-primary);
+	--input-bg-disabled: var(--bg-disabled);
+	--input-disabled-overlay: var(
+		--color-black-alpha-10
+	); /* lighter overlay for light mode */
+
+	/* Input borders */
+	--input-border: var(--border-default); /* #9d989f - colorBorder */
+	--input-border-hover: var(--border-default);
+	--input-border-focus: var(--border-focus); /* #9f30ed - colorPrimary */
+	--input-border-error: var(--color-error-500);
+
+	/* Input focus ring */
+	--input-focus-ring: 0 0 0 2px var(--border-focus-ring); /* outer glow */
+
+	/* Input text */
+	--input-text: var(--text-primary);
+	--input-text-placeholder: var(--text-placeholder);
+	--input-text-disabled: var(--text-disabled);
+
+	/* Input icons */
+	--input-icon: var(--icon-color); /* #635d65 - colorStrokeIcon3 */
+
+	/* ============================================
+     COMPONENT-SPECIFIC
+     ============================================ */
+
+	/* TABLE */
+	/* --table-border: Uses Ant Design default for proper light/dark mode support */
+	--table-header-bg: var(--color-gray-50);
+	--table-header-text: var(--color-gray-700);
+	--table-row-bg: var(--surface-elevated);
+	--table-row-hover-bg: var(--color-gray-50);
+	--table-row-selected-bg: var(--color-purple-50);
+
+	--nav-bg: var(--color-purple-600);
+	--nav-text: var(--color-white);
+	--nav-item-active-bg: var(--color-purple-500);
+	--nav-item-hover-bg: var(--color-purple-700);
+
+	--card-bg: var(--color-white);
+	--card-hover-bg: #faf9f2;
+	--stroke-default-white: var(--color-white);
+	--card-border: var(--color-gray-100);
+
+	--modal-bg: var(--color-white);
+	--modal-overlay: rgba(0, 0, 0, 0.3);
+
+	--tab-text-active: var(--color-purple-600);
+	--tab-indicator: var(--color-purple-600);
+
+	/* Stepper - Figma node 1460:55373 */
+	--stepper-active-bg: #9f30ed; /* Figma: colorPrimary */
+	--stepper-active-text: var(--color-white);
+	--stepper-inactive-bg: rgba(0, 0, 0, 0.06); /* Figma: colorFillSecondary */
+	--stepper-inactive-text: rgba(
+		0,
+		0,
+		0,
+		0.45
+	); /* Figma: colorTextDescription */
+	--stepper-completed-bg: #f5eafd; /* Figma: colorPrimaryBg - light purple */
+	--stepper-completed-icon: #635d65; /* Figma: gray checkmark color */
+	--stepper-line-active: #9f30ed; /* Figma: colorPrimary */
+	--stepper-line-inactive: rgba(0, 0, 0, 0.06); /* Figma: colorSplit */
+
+	/* Plan Card Overlays - Figma node 1460:55373 */
+	--plan-card-gradient-start: rgba(
+		28,
+		2,
+		45,
+		0.3
+	); /* Default gradient bottom */
+	--plan-card-gradient-start-hover: rgba(
+		28,
+		2,
+		45,
+		0.7
+	); /* Hover/selected gradient */
+	--plan-card-gradient-end: rgba(159, 48, 237, 0); /* Transparent purple top */
+	--plan-card-inner-bg: rgba(33, 7, 52, 0.5); /* Card content overlay */
+
+	--loader-primary: var(--color-purple-600);
+
+	--sidebar-item-active-bg: #f5eafd;
+	--sidebar-item-active-text: var(--color-gray-900);
+	--sidebar-subnav-bg: #faf9f2;
+
+	/* ============================================
+     LEGACY COMPATIBILITY (updated for Figma Light Mode)
+     ============================================ */
+
+	--layout-bg-color: #fffef7;
+	--mainmenu-bg-color: #9f30ed;
+	--adminmenu-bg-color: #542972;
+	--stepper-color: #542972;
+	--stepper-secondary-color: #9f30ed;
+	--text-color: #9f30ed;
+	--text-color-root: rgba(0, 0, 0, 0.75);
+	--evaluation-bg-colors: #fffef7;
+	--evaluation-title-color: #635d65;
+	--bodyPoint-label-color: #9f30ed;
+	--settings-button-bg-color: #9f30ed;
+	--settings-button-text-color: var(--color-white);
+	--content-manager-card-bg-color: #fffef7;
+	--content-manager-card-header-bg-color: #f6f2e9;
+	--content-manager-card-header-text-color: rgba(0, 0, 0, 0.75);
+	--tabs-text-color: rgba(0, 0, 0, 0.75);
+	--button-color-primary: #9f30ed;
+	--loader-bg-color: #9f30ed;
+	--functional-goal-color: #9f30ed;
+	--functional-goal-color-unslected: #f6f2e9;
+}
+
+/* ============================================
+   LIGHT THEME CSS OVERRIDES (2025-11-29)
+   Applied after CSS variable definitions
+   ============================================ */
+
+[data-theme='light'] .ant-input-outlined,
+[data-theme='light'] .ant-input-outlined:hover,
+[data-theme='light'] .ant-input-affix-wrapper,
+[data-theme='light'] .ant-input-affix-wrapper:hover,
+[data-theme='light'] .ant-select-selector,
+[data-theme='light'] .ant-select-selector:hover,
+[data-theme='light'] .ant-picker,
+[data-theme='light'] .ant-picker:hover {
+	background-color: var(--surface-tertiary) !important;
+	border: 1px solid var(--border-default) !important;
+	box-shadow: none !important;
+}
+
+/* Remove active indicator bar from nav items */
+[data-theme='light'] [class*='Navigation_navItem']::before {
+	display: none !important;
+}
+
+[data-theme='light'] .ant-input-outlined:focus,
+[data-theme='light'] .ant-input-outlined:focus-within,
+[data-theme='light'] .ant-input-affix-wrapper:focus,
+[data-theme='light'] .ant-input-affix-wrapper:focus-within,
+[data-theme='light'] .ant-input-affix-wrapper-focused,
+[data-theme='light'] .ant-select-focused .ant-select-selector,
+[data-theme='light'] .ant-picker-focused {
+	background-color: var(--surface-tertiary) !important;
+	border: 1px solid var(--brand-primary) !important;
+	box-shadow: none !important;
+}

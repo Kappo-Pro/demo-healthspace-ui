@@ -1,0 +1,24 @@
+/**
+ * VitalFlow UI - Font Declarations
+ *
+ * This file contains all font-face declarations and font imports
+ * used throughout the application.
+ *
+ * Fonts:
+ * - Poppins: Headings font (Google Fonts)
+ * - Inter: Body text font (Google Fonts)
+ * - Montserrat: Legacy font (Google Fonts, kept for backward compatibility)
+ */
+
+/* ============================================
+   GOOGLE FONTS
+   ============================================ */
+
+/* Poppins - Headings (h1-h6) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Inter - Body text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Legacy fonts (kept for backward compatibility) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap');

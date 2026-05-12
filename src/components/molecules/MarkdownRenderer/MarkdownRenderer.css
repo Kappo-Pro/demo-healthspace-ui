@@ -1,0 +1,365 @@
+/**
+ * MarkdownRenderer Styles
+ * EPIC-019-S2: Markdown Renderer with Design System Tokens
+ *
+ * Supports:
+ * - GitHub Flavored Markdown (tables, strikethrough, task lists)
+ * - Dark mode via design system tokens
+ * - Responsive typography
+ * - Accessible contrast ratios
+ *
+ * Color Migration: October 2025
+ * - Migrated all hardcoded colors to design system tokens
+ * - Improved dark mode support
+ * - Maintained WCAG AA contrast ratios
+ */
+
+.markdown-renderer {
+	font-family: var(
+		--font-body,
+		-apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
+		Roboto,
+		'Helvetica Neue',
+		Arial,
+		sans-serif
+	);
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-relaxed);
+	color: var(--text-primary);
+	word-wrap: break-word;
+}
+
+/* ============================================================================
+   HEADINGS
+   ============================================================================ */
+
+.markdown-renderer h1 {
+	font-size: 2em;
+	font-weight: var(--font-weight-bold);
+	margin-top: var(--spacing-xl, var(--spacing-6));
+	margin-bottom: var(--spacing-lg, var(--spacing-4));
+	color: var(--text-primary);
+	line-height: var(--line-height-tight);
+	border-bottom: 1px solid var(--border-default);
+	padding-bottom: var(--spacing-sm, var(--spacing-2));
+}
+
+.markdown-renderer h1:first-child {
+	margin-top: 0;
+}
+
+.markdown-renderer h2 {
+	font-size: 1.5em;
+	font-weight: var(--font-weight-semibold);
+	margin-top: var(--spacing-lg, var(--spacing-5));
+	margin-bottom: var(--spacing-md, var(--spacing-3));
+	color: var(--text-primary);
+	line-height: var(--line-height-snug);
+	border-bottom: 1px solid var(--border-subtle);
+	padding-bottom: var(--spacing-xs, var(--spacing-1-5));
+}
+
+.markdown-renderer h3 {
+	font-size: 1.25em;
+	font-weight: var(--font-weight-semibold);
+	margin-top: var(--spacing-md, var(--spacing-4));
+	margin-bottom: var(--spacing-sm, var(--spacing-2));
+	color: var(--text-primary);
+	line-height: 1.35;
+}
+
+.markdown-renderer h4 {
+	font-size: 1.1em;
+	font-weight: var(--font-weight-semibold);
+	margin-top: var(--spacing-md, var(--spacing-3-5));
+	margin-bottom: var(--spacing-sm, var(--spacing-1-5));
+	color: var(--text-primary);
+}
+
+.markdown-renderer h5,
+.markdown-renderer h6 {
+	font-size: 1em;
+	font-weight: var(--font-weight-semibold);
+	margin-top: var(--spacing-sm, var(--spacing-3));
+	margin-bottom: var(--spacing-xs, var(--spacing-1));
+	color: var(--text-secondary);
+}
+
+/* ============================================================================
+   PARAGRAPHS & TEXT
+   ============================================================================ */
+
+.markdown-renderer p {
+	margin-bottom: var(--spacing-lg, var(--spacing-4));
+	line-height: var(--line-height-relaxed);
+}
+
+.markdown-renderer p:last-child {
+	margin-bottom: 0;
+}
+
+.markdown-renderer strong {
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+}
+
+.markdown-renderer em {
+	font-style: italic;
+}
+
+.markdown-renderer del {
+	text-decoration: line-through;
+	opacity: 0.7;
+}
+
+/* ============================================================================
+   LISTS
+   ============================================================================ */
+
+.markdown-renderer ul,
+.markdown-renderer ol {
+	margin-bottom: var(--spacing-lg, var(--spacing-4));
+	padding-left: var(--spacing-xl, var(--spacing-6));
+}
+
+.markdown-renderer li {
+	margin-bottom: var(--spacing-sm, var(--spacing-2));
+	line-height: var(--line-height-relaxed);
+}
+
+.markdown-renderer li:last-child {
+	margin-bottom: 0;
+}
+
+/* Nested lists */
+.markdown-renderer ul ul,
+.markdown-renderer ol ol,
+.markdown-renderer ul ol,
+.markdown-renderer ol ul {
+	margin-top: var(--spacing-sm, var(--spacing-2));
+	margin-bottom: 0;
+}
+
+/* Task lists (GFM) */
+.markdown-renderer input[type='checkbox'] {
+	margin-right: var(--spacing-sm, var(--spacing-2));
+	cursor: pointer;
+}
+
+/* ============================================================================
+   CODE
+   ============================================================================ */
+
+.markdown-renderer code {
+	font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+	font-size: 0.9em;
+}
+
+/* Inline code */
+.markdown-renderer .markdown-inline-code {
+	background-color: var(--surface-secondary);
+	color: var(--text-primary);
+	padding: var(--spacing-0-5) var(--spacing-1-5);
+	border-radius: var(--border-radius-sm, 4px);
+	border: 1px solid var(--border-subtle);
+}
+
+/* Code blocks */
+.markdown-renderer pre {
+	background-color: var(--surface-secondary);
+	padding: var(--spacing-lg, var(--spacing-4));
+	border-radius: var(--border-radius-md, 8px);
+	overflow-x: auto;
+	margin-bottom: var(--spacing-lg, var(--spacing-4));
+	border: 1px solid var(--border-default);
+}
+
+.markdown-renderer pre .markdown-code-block {
+	background: none;
+	padding: 0;
+	border: none;
+	color: var(--text-primary);
+}
+
+/* ============================================================================
+   LINKS
+   ============================================================================ */
+
+.markdown-renderer .markdown-link {
+	color: var(--text-link);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.markdown-renderer .markdown-link:hover {
+	text-decoration: underline;
+	color: var(--text-link-hover);
+}
+
+.markdown-renderer .markdown-link:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+	border-radius: var(--radius-xs);
+}
+
+/* ============================================================================
+   TABLES (GFM)
+   ============================================================================ */
+
+.markdown-table-wrapper {
+	overflow-x: auto;
+	margin-bottom: var(--spacing-lg, var(--spacing-4));
+}
+
+.markdown-renderer .markdown-table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.markdown-renderer .markdown-table th,
+.markdown-renderer .markdown-table td {
+	border: 1px solid var(--border-default);
+	padding: var(--spacing-sm, var(--spacing-2))
+		var(--spacing-md, var(--spacing-3));
+	text-align: left;
+}
+
+.markdown-renderer .markdown-table th {
+	background-color: var(--table-header-bg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+}
+
+.markdown-renderer .markdown-table tr:nth-child(even) {
+	background-color: var(--surface-secondary);
+}
+
+.markdown-renderer .markdown-table tr:hover {
+	background-color: var(--table-row-hover-bg);
+}
+
+/* ============================================================================
+   BLOCKQUOTES
+   ============================================================================ */
+
+.markdown-renderer .markdown-blockquote {
+	border-left: var(--spacing-1) solid var(--border-brand);
+	padding-left: var(--spacing-lg, var(--spacing-4));
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: var(--spacing-lg, var(--spacing-4));
+	color: var(--text-secondary);
+	font-style: italic;
+}
+
+.markdown-renderer .markdown-blockquote p {
+	margin-bottom: var(--spacing-sm, var(--spacing-2));
+}
+
+.markdown-renderer .markdown-blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* ============================================================================
+   IMAGES
+   ============================================================================ */
+
+.markdown-renderer .markdown-image {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--border-radius-md, 8px);
+	margin: var(--spacing-lg, var(--spacing-4)) 0;
+	box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================================
+   HORIZONTAL RULE
+   ============================================================================ */
+
+.markdown-renderer hr {
+	border: none;
+	border-top: 1px solid var(--border-default);
+	margin: var(--spacing-xl, var(--spacing-6)) 0;
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+	.markdown-renderer {
+		font-size: 15px;
+	}
+
+	.markdown-renderer h1 {
+		font-size: 1.75em;
+	}
+
+	.markdown-renderer h2 {
+		font-size: 1.4em;
+	}
+
+	.markdown-renderer h3 {
+		font-size: 1.2em;
+	}
+
+	.markdown-renderer ul,
+	.markdown-renderer ol {
+		padding-left: var(--spacing-lg, var(--spacing-5));
+	}
+
+	.markdown-renderer pre {
+		padding: var(--spacing-md, var(--spacing-3));
+	}
+
+	.markdown-table-wrapper {
+		margin-left: calc(-1 * var(--spacing-md, var(--spacing-3)));
+		margin-right: calc(-1 * var(--spacing-md, var(--spacing-3)));
+		padding: 0 var(--spacing-md, var(--spacing-3));
+	}
+}
+
+@media (max-width: 480px) {
+	.markdown-renderer {
+		font-size: var(--font-size-sm);
+	}
+
+	.markdown-renderer h1 {
+		font-size: 1.5em;
+		margin-top: var(--spacing-lg, 18px);
+	}
+
+	.markdown-renderer h2 {
+		font-size: 1.3em;
+	}
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+	.markdown-renderer {
+		font-size: 12pt;
+		line-height: var(--line-height-normal);
+		color: var(--color-black);
+	}
+
+	.markdown-renderer .markdown-link {
+		color: var(--color-black);
+		text-decoration: underline;
+	}
+
+	.markdown-renderer pre {
+		border: 1px solid var(--color-gray-400);
+		page-break-inside: avoid;
+	}
+
+	.markdown-renderer .markdown-image {
+		max-width: 100%;
+		page-break-inside: avoid;
+	}
+}

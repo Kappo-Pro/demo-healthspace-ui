@@ -1,0 +1,77 @@
+import { MagicWand01 } from '@vitalflow-icons/editor/magicWand01';
+import { Modal, Flex, Typography } from 'antd';
+
+const { Paragraph } = Typography;
+import { IProgramExercise } from '@types';
+import { useTranslation } from 'react-i18next';
+import { MyExrciseModalData } from './MyExerciseModalData';
+import { Plus } from '@vitalflow-icons/general/plus';
+import { useState } from 'react';
+
+interface AddLibraryExerciseModalProps {
+	isVisible: boolean;
+	onOk: () => void;
+	onCancel: () => void;
+	selectedExercises: IProgramExercise[];
+	setSelectedExercises: (selectedExercises: IProgramExercise[]) => void;
+}
+
+export const AddLibraryExerciseModal = ({
+	isVisible,
+	onOk,
+	onCancel,
+	selectedExercises,
+	setSelectedExercises,
+}: AddLibraryExerciseModalProps) => {
+	const { t } = useTranslation();
+	const [open, setOpen] = useState(false);
+	return (
+		<Modal
+			title={
+				<Flex gap={4}>
+					<span className="rounded-full bg-primary-100 py-1 px-1.5">
+						<MagicWand01 width={20} height={20} color="stroke-primary-600" />
+					</span>
+					<span className="titleStyle">
+						{t('Admin.data.menu.aiAssistant.aiAssistantPrograms.create')}
+					</span>
+				</Flex>
+			}
+			style={{ top: 20 }}
+			open={isVisible}
+			onCancel={onCancel}
+			footer={false}
+			width={974}
+			className="select-none">
+			<div className="rounded-none p-4">
+				<MyExrciseModalData
+					open={open}
+					setOpen={setOpen}
+					selectedExercises={selectedExercises}
+					setSelectedExercises={setSelectedExercises}
+				/>
+				{selectedExercises.length !== 0 && (
+					<Flex
+						justify="center"
+						align="center"
+						gap={2}
+						className="w-full cursor-pointer bg-success-500 rounded-lg text-white font-semibold p-2"
+						onClick={() => onOk()}>
+						<Plus />
+						<Paragraph>
+							{t(
+								'Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.add',
+							)}{' '}
+							{selectedExercises.length}{' '}
+							{selectedExercises.length === 1
+								? t('Admin.data.menu.aiAssistant.aiAssistantPrograms.exercise')
+								: t(
+									'Admin.data.menu.aiAssistant.aiAssistantPrograms.exercises',
+								)}
+						</Paragraph>
+					</Flex>
+				)}
+			</div>
+		</Modal>
+	);
+};

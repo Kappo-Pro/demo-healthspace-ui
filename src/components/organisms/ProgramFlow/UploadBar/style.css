@@ -1,0 +1,43 @@
+.upload-progress-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--surface-primary);
+	padding: var(--spacing-5);
+	gap: var(--spacing-2-5);
+}
+
+.upload-message {
+	font-size: 26px;
+	margin-bottom: var(--spacing-5);
+	color: var(--surface-primary);
+	text-align: center;
+}
+
+.upload-progress-bar .ant-progress-bg {
+	border-radius: var(--radius-md);
+	text-align: center;
+	transition: width 0.5s ease;
+}
+
+.upload-progress-bar .ant-progress-outer {
+	width: 100%;
+	max-width: 500px;
+}
+
+.progress-percentage {
+	font-size: 21px;
+	color: var(--surface-primary);
+	margin-top: var(--spacing-2-5);
+	font-weight: bold;
+	transition: color 0.9s ease;
+}
+
+.progress-percentage::after {
+	font-size: 15px;
+	color: var(--surface-primary);
+}
+
+.progress-bar-width {
+	width: 90px;
+}

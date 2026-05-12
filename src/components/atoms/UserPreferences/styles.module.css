@@ -1,0 +1,249 @@
+/**
+ * UserPreferences Styles
+ *
+ * Clean, organized preferences panel with tabs
+ */
+
+.preferencesDrawer :global(.ant-drawer-header) {
+	border-bottom: 1px solid var(--border-default, var(--color-gray-200));
+	padding: var(--spacing-5) var(--spacing-6);
+}
+
+.preferencesDrawer :global(.ant-drawer-body) {
+	padding: 0;
+}
+
+.preferencesDrawer :global(.ant-drawer-footer) {
+	padding: var(--spacing-4) var(--spacing-6);
+	border-top: 1px solid var(--border-default, var(--color-gray-200));
+	background: var(--surface-secondary, var(--color-gray-50));
+}
+
+.drawerTitle {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary, var(--color-gray-900));
+}
+
+.drawerTitle :global(.anticon) {
+	font-size: var(--font-size-lg);
+	color: var(--color-brand-primary, var(--brand-primary));
+}
+
+/* Tabs */
+.tabs :global(.ant-tabs-nav) {
+	padding: 0 var(--spacing-6);
+	margin: 0;
+	background: var(--surface-secondary, var(--color-gray-50));
+}
+
+.tabs :global(.ant-tabs-tab) {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+}
+
+.tabs :global(.ant-tabs-tab-icon) {
+	margin-right: var(--spacing-1-5);
+}
+
+.tabs :global(.ant-tabs-content) {
+	padding: var(--spacing-6);
+}
+
+/* Tab Content */
+.tabContent {
+	max-width: 600px;
+}
+
+.section {
+	margin-bottom: var(--spacing-6);
+}
+
+.section:last-child {
+	margin-bottom: 0;
+}
+
+.section h4 {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary, var(--color-gray-900));
+	margin: 0 0 var(--spacing-2) 0;
+}
+
+.description {
+	font-size: 13px;
+	color: var(--text-tertiary, var(--color-gray-500));
+	margin: 0 0 var(--spacing-4) 0;
+	line-height: var(--line-height-normal);
+}
+
+/* Setting Row */
+.settingRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--spacing-3) 0;
+	gap: var(--spacing-4);
+}
+
+.settingRow:not(:last-child) {
+	border-bottom: 1px solid var(--border-subtle, var(--color-gray-100));
+}
+
+.settingLabel {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--text-primary, var(--color-gray-900));
+	margin-bottom: var(--spacing-1);
+}
+
+.settingDescription {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary, var(--color-gray-500));
+	line-height: var(--line-height-snug);
+}
+
+/* Theme Radio */
+.themeRadio {
+	width: 100%;
+}
+
+.themeRadio :global(.ant-radio-button-wrapper) {
+	height: var(--spacing-10);
+	line-height: 38px;
+	border-radius: var(--radius-md);
+	margin-right: var(--spacing-2);
+	margin-bottom: var(--spacing-2);
+	transition: all 150ms ease-out;
+}
+
+.themeRadio :global(.ant-radio-button-wrapper:hover) {
+	color: var(--color-brand-primary, var(--brand-primary));
+}
+
+.themeRadio :global(.ant-radio-button-wrapper-checked) {
+	background: var(--color-brand-primary, var(--brand-primary));
+	border-color: var(--color-brand-primary, var(--brand-primary));
+}
+
+/* Footer */
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* Ant Design Overrides */
+:global(.ant-divider) {
+	margin: var(--spacing-6) 0;
+	border-color: var(--border-subtle, var(--color-gray-200));
+}
+
+:global(.ant-select),
+:global(.ant-radio-group),
+:global(.ant-switch) {
+	transition: all 150ms ease-out;
+}
+
+:global(.ant-switch-checked) {
+	background-color: var(--color-brand-primary, var(--brand-primary));
+}
+
+:global(
+		.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)
+	) {
+	background: var(--color-brand-primary, var(--brand-primary));
+	border-color: var(--color-brand-primary, var(--brand-primary));
+}
+
+:global(
+		.ant-radio-button-wrapper-checked:not(
+				.ant-radio-button-wrapper-disabled
+			):hover
+	) {
+	background: var(--color-brand-primary-hover, #7c3aed);
+	border-color: var(--color-brand-primary-hover, #7c3aed);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.preferencesDrawer {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	.tabs :global(.ant-tabs-nav) {
+		padding: 0 var(--spacing-4);
+	}
+
+	.tabs :global(.ant-tabs-content) {
+		padding: var(--spacing-4);
+	}
+
+	.footer {
+		flex-direction: column;
+		gap: var(--spacing-3);
+		align-items: stretch;
+	}
+
+	.footer :global(.ant-space) {
+		width: 100%;
+		justify-content: stretch;
+	}
+
+	.footer :global(.ant-btn) {
+		flex: 1;
+	}
+}
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+	.drawerTitle {
+		color: var(--text-primary, var(--color-gray-50));
+	}
+
+	.section h4 {
+		color: var(--text-primary, var(--color-gray-50));
+	}
+
+	.settingLabel {
+		color: var(--text-primary, var(--color-gray-50));
+	}
+
+	.tabs :global(.ant-tabs-nav) {
+		background: var(--surface-secondary, var(--color-gray-900));
+	}
+
+	.preferencesDrawer :global(.ant-drawer-footer) {
+		background: var(--surface-secondary, var(--color-gray-900));
+	}
+}
+
+/* Animations */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.tabContent {
+	animation: fadeIn 200ms ease-out;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+	.themeRadio :global(.ant-radio-button-wrapper),
+	:global(.ant-select),
+	:global(.ant-radio-group),
+	:global(.ant-switch),
+	.tabContent {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+}

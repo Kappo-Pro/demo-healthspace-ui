@@ -1,0 +1,251 @@
+/**
+ * KeyboardShortcutsOverlay Component
+ *
+ * Shows all available keyboard shortcuts in a modal overlay.
+ * Triggered by Cmd+/ or ? key. Groups shortcuts by category.
+ */
+
+import React, { useState } from 'react';
+import { Modal } from 'antd';
+import {
+  HomeOutlined,
+  UserOutlined,
+  BarChartOutlined,
+  ToolOutlined,
+  SettingOutlined,
+  SearchOutlined,
+  PlusOutlined,
+  QuestionCircleOutlined,
+  CloseOutlined,
+  ExpandOutlined,
+  CompressOutlined,
+} from '@ant-design/icons';
+import { useKeyboardShortcut } from '../../../hooks/useKeyboardNavigation';
+import styles from './styles.module.css';
+
+export interface ShortcutDefinition {
+  keys: string | string[];
+  description: string;
+  category: 'global' | 'navigation' | 'actions' | 'list';
+  icon?: React.ReactNode;
+}
+
+interface KeyboardShortcutsOverlayProps {
+  /** Additional custom shortcuts */
+  customShortcuts?: ShortcutDefinition[];
+}
+
+/**
+ * Default keyboard shortcuts
+ */
+const DEFAULT_SHORTCUTS: ShortcutDefinition[] = [
+  // Global
+  {
+    keys: ['Cmd', 'K'],
+    description: 'Open command palette',
+    category: 'global',
+    icon: <SearchOutlined />,
+  },
+  {
+    keys: ['Cmd', '/'],
+    description: 'Show keyboard shortcuts',
+    category: 'global',
+    icon: <QuestionCircleOutlined />,
+  },
+  {
+    keys: '[',
+    description: 'Collapse sidebar',
+    category: 'global',
+    icon: <CompressOutlined />,
+  },
+  {
+    keys: ']',
+    description: 'Expand sidebar',
+    category: 'global',
+    icon: <ExpandOutlined />,
+  },
+  {
+    keys: 'Esc',
+    description: 'Close modal/drawer',
+    category: 'global',
+    icon: <CloseOutlined />,
+  },
+
+  // Navigation
+  {
+    keys: ['g', 'h'],
+    description: 'Go to home',
+    category: 'navigation',
+    icon: <HomeOutlined />,
+  },
+  {
+    keys: ['g', 'p'],
+    description: 'Go to patients',
+    category: 'navigation',
+    icon: <UserOutlined />,
+  },
+  {
+    keys: ['g', 'a'],
+    description: 'Go to analytics',
+    category: 'navigation',
+    icon: <BarChartOutlined />,
+  },
+  {
+    keys: ['g', 't'],
+    description: 'Go to tools',
+    category: 'navigation',
+    icon: <ToolOutlined />,
+  },
+  {
+    keys: ['g', 's'],
+    description: 'Go to settings',
+    category: 'navigation',
+    icon: <SettingOutlined />,
+  },
+
+  // Actions
+  {
+    keys: 'c',
+    description: 'Create (context-dependent)',
+    category: 'actions',
+    icon: <PlusOutlined />,
+  },
+  {
+    keys: '/',
+    description: 'Focus search',
+    category: 'actions',
+    icon: <SearchOutlined />,
+  },
+  {
+    keys: '?',
+    description: 'Show help',
+    category: 'actions',
+    icon: <QuestionCircleOutlined />,
+  },
+
+  // List Navigation
+  {
+    keys: ['j', '↓'],
+    description: 'Next item',
+    category: 'list',
+  },
+  {
+    keys: ['k', '↑'],
+    description: 'Previous item',
+    category: 'list',
+  },
+  {
+    keys: 'Enter',
+    description: 'Select item',
+    category: 'list',
+  },
+  {
+    keys: 'Space',
+    description: 'Toggle selection',
+    category: 'list',
+  },
+];
+
+/**
+ * KeyboardShortcutsOverlay Component
+ */
+export const KeyboardShortcutsOverlay: React.FC<KeyboardShortcutsOverlayProps> = ({
+  customShortcuts = [],
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const allShortcuts = [...DEFAULT_SHORTCUTS, ...customShortcuts];
+
+  // Group shortcuts by category
+  const groupedShortcuts = allShortcuts.reduce((acc, shortcut) => {
+    if (!acc[shortcut.category]) {
+      acc[shortcut.category] = [];
+    }
+    acc[shortcut.category].push(shortcut);
+    return acc;
+  }, {} as Record<string, ShortcutDefinition[]>);
+
+  // Register shortcut to open overlay
+  useKeyboardShortcut('cmd+/', () => setIsOpen(true));
+  useKeyboardShortcut('?', () => setIsOpen(true));
+
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case 'global': return 'Global';
+      case 'navigation': return 'Navigation';
+      case 'actions': return 'Actions';
+      case 'list': return 'List Navigation';
+      default: return category;
+    }
+  };
+
+  const renderKeys = (keys: string | string[]) => {
+    const keyArray = Array.isArray(keys) ? keys : [keys];
+
+    return (
+      <div className={styles.keysContainer}>
+        {keyArray.map((key, index) => (
+          <React.Fragment key={index}>
+            <kbd className={styles.key}>{key}</kbd>
+            {index < keyArray.length - 1 && (
+              <span className={styles.keySeparator}>then</span>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <Modal
+      title={
+        <div className={styles.modalTitle}>
+          <QuestionCircleOutlined />
+          <span>Keyboard Shortcuts</span>
+        </div>
+      }
+      open={isOpen}
+      onCancel={() => setIsOpen(false)}
+      footer={null}
+      width={800}
+      className={styles.shortcutsModal}
+    >
+      <div className={styles.shortcutsContainer}>
+        {Object.entries(groupedShortcuts).map(([category, shortcuts]) => (
+          <div key={category} className={styles.shortcutSection}>
+            <h3 className={styles.sectionTitle}>
+              {getCategoryLabel(category)}
+            </h3>
+
+            <div className={styles.shortcutList}>
+              {shortcuts.map((shortcut, index) => (
+                <div key={index} className={styles.shortcutItem}>
+                  <div className={styles.shortcutDescription}>
+                    {shortcut.icon && (
+                      <span className={styles.shortcutIcon}>
+                        {shortcut.icon}
+                      </span>
+                    )}
+                    <span>{shortcut.description}</span>
+                  </div>
+                  {renderKeys(shortcut.keys)}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.footer}>
+        <div className={styles.footerNote}>
+          Press <kbd className={styles.key}>Esc</kbd> to close
+        </div>
+        <div className={styles.footerHint}>
+          Shortcuts work when you're not typing in an input field
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+export default KeyboardShortcutsOverlay;

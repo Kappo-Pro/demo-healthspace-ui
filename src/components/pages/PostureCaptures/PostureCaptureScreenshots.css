@@ -1,0 +1,102 @@
+/* CompareSlider container */
+.compare-slider-container {
+	position: relative;
+	width: 100%;
+	height: auto;
+	max-height: 90vh;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	user-select: none;
+	cursor: ew-resize;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--input-border);
+	border-radius: var(--radius-lg);
+}
+
+/* Right image */
+.compare-slider-right-image {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: contain;
+	background: var(--ant-modal-content-bg);
+}
+
+/* Left image (clipped) */
+.compare-slider-left-image {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	object-fit: contain;
+	background: var(--ant-modal-content-bg);
+}
+
+/* White center line */
+.compare-slider-center-line {
+	position: absolute;
+	top: 0;
+	transform: translateX(-50%);
+	width: var(--spacing-0-5);
+	height: 100%;
+	background: var(--color-white);
+	z-index: 20;
+}
+
+/* Drag handle circle */
+.compare-slider-handle {
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: var(--spacing-11);
+	height: var(--spacing-11);
+	border-radius: 50%;
+	background: var(--color-black-alpha-70);
+	box-shadow: 0 var(--spacing-0-5) var(--spacing-2) var(--color-black-alpha-30);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 30;
+	cursor: ew-resize;
+}
+
+/* Arrow base */
+.compare-slider-arrow {
+	font-size: 22px;
+	color: var(--text-secondary);
+}
+
+/* Left arrow */
+.compare-slider-arrow-left {
+	margin-right: 4px;
+}
+
+/* Right arrow */
+.compare-slider-arrow-right {
+	margin-left: 4px;
+}
+
+/* Label base */
+.compare-slider-label {
+	position: absolute;
+	top: 50%;
+	padding: var(--spacing-1) var(--spacing-2);
+	background: var(--color-black-alpha-60);
+	color: var(--color-white);
+	border-radius: 4px;
+	font-size: 12px;
+	z-index: 40;
+}
+
+/* Label left */
+.compare-slider-label-left {
+	left: var(--spacing-2-5);
+}
+
+/* Label right */
+.compare-slider-label-right {
+	right: var(--spacing-2-5);
+}

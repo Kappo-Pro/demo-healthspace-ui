@@ -1,0 +1,38 @@
+.main-heading-label {
+	font-weight: var(--font-weight-semibold);
+	font-size: var(--font-size-base);
+}
+
+.text-align-center {
+	text-align: center;
+}
+
+.back-arrow-css {
+	border-radius: 25px;
+}
+
+.select-none {
+	user-select: none;
+}
+
+.unreported-container {
+	background-color: color-mix(in srgb, var(--color-gray-50) 10%, transparent);
+	width: 80%;
+	padding: var(--spacing-3);
+	border-radius: 12px;
+	margin-top: var(--spacing-2);
+}
+
+.theme-text-color {
+	color: var(--ant-color-text);
+}
+
+.margin-top {
+	margin-top: var(--spacing-3);
+}
+
+.speak-load-label {
+	font-weight: var(--font-weight-semibold);
+	align-items: center;
+	justify-items: center;
+}

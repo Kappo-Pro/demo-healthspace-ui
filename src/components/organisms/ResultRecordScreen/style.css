@@ -1,0 +1,46 @@
+.rehab .result-record {
+	background: var(--surface-primary);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 1;
+	top: 0;
+	z-index: 1000;
+	overflow-y: auto;
+}
+
+.rehab .ant-switch {
+	background-color: var(--color-black-alpha-25);
+}
+
+.rehab .ant-switch.ant-switch-checked {
+	background-color: var(--brand-primary-dark);
+}
+
+.result-record .container {
+	width: 100%;
+	height: 40%;
+	text-align: center;
+}
+
+.result-record .result-record-content {
+	max-width: 50%;
+	background: var(--surface-primary);
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	padding: 25px;
+	margin: 0 auto;
+	padding: 15px 25px 25px;
+}
+
+h1.result-record-title {
+	font-weight: var(--font-weight-bold);
+	font-size: 25px;
+	color: var(--surface-primary);
+	margin-top: 25px;
+	text-transform: uppercase;
+}

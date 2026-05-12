@@ -1,0 +1,222 @@
+import { useEffect, useState } from 'react';
+import { Table, Tooltip, Flex } from 'antd';
+import BodySilhouetteWithHotspots from './HotspotBodyJointfs';
+import { CustomRomSession, RomPatientResult } from '@types';
+import { useTranslation } from 'react-i18next';
+import { evalScore } from './jointsTemplateData';
+import './ContentROMTableResultSides.css';
+import { setCollapsible } from '@stores/shared/patientDetail/patientDetail';
+import { useTypedDispatch } from '@stores/index';
+interface CombinedMobilityReportProps {
+	getColorForCategory: (score: number) => string;
+	getCategoryName: (score: number) => string;
+	getCategoryDesc: (score: number) => string;
+	selectedRom: CustomRomSession;
+	isPdf?: boolean;
+}
+
+const CombinedMobilityReport = ({
+	getColorForCategory,
+	getCategoryName,
+	getCategoryDesc,
+	selectedRom,
+	isPdf = false,
+}: CombinedMobilityReportProps) => {
+	const { t } = useTranslation();
+
+	const [rightData, setRightData] = useState<RomPatientResult[]>();
+	const [leftData, setLeftData] = useState<RomPatientResult[]>();
+	const dispatch = useTypedDispatch();
+
+	useEffect(() => {
+		const checkDevice = () => {
+			const isMobileOrIpad = window.innerWidth <= 1100;
+			if (isMobileOrIpad) {
+				dispatch(setCollapsible(true));
+			} else {
+				dispatch(setCollapsible(false));
+			}
+		};
+
+		checkDevice();
+
+		window.addEventListener('resize', checkDevice);
+
+		return () => {
+			window.removeEventListener('resize', checkDevice);
+		};
+	}, [dispatch]);
+
+	useEffect(() => {
+		const left: RomPatientResult[] = [];
+		const right: RomPatientResult[] = [];
+
+		selectedRom?.romPatientResults?.forEach(item =>
+			item?.results?.forEach(result => {
+				const name: string =
+					item?.title ||
+					result?.romProgramExercise?.exerciseLibrary?.title ||
+					t('Patient.data.omnirom.noTitle');
+				name?.toLowerCase()?.includes('left')
+					? left.push({
+							...result,
+							title: name,
+						})
+					: right.push({
+							...result,
+							title: name,
+						});
+			}),
+		);
+
+		setLeftData(left);
+		setRightData(right);
+	}, [selectedRom]);
+
+	const tableColumns = [
+		{
+			title: (
+				<p className={isPdf ? 'pdf-margin' : ''}>
+					{t('Patient.data.omnirom.joint')}
+				</p>
+			),
+			dataIndex: 'title',
+			key: 'title',
+			render: (text: string) => (
+				<div
+					style={{
+						width: '100%',
+						overflow: 'hidden',
+						textOverflow: 'ellipsis',
+						whiteSpace: 'nowrap',
+					}}>
+					<p className={isPdf ? 'pdf-margin' : ''}>
+						{text?.replace(/(Right|Left)/g, '')}
+					</p>
+				</div>
+			),
+		},
+		{
+			title: <p className={isPdf ? 'pdf-margin' : ''}>R</p>,
+			dataIndex: 'right',
+			key: 'right',
+			className: 'custom-header-align',
+			render: (_: string, record: RomPatientResult) => {
+				const score = evalScore(record);
+				return (
+					<Tooltip
+						title={getCategoryName(score)}
+						color={getColorForCategory(score)}>
+						<Flex align="space-between" justify="center" gap="small">
+							<p
+								className={isPdf ? 'pdf-margin' : ''}
+								style={{
+									width: 'max-content',
+									textAlign: 'center',
+									color: getColorForCategory(score),
+								}}>
+								{record.value ? `${record.value} °` : '-'}
+							</p>
+						</Flex>
+					</Tooltip>
+				);
+			},
+		},
+	];
+
+	const tableColumns2 = [
+		{
+			title: (
+				<p className={isPdf ? 'pdf-margin' : ''}>
+					{t('Patient.data.omnirom.joint')}
+				</p>
+			),
+			dataIndex: 'title',
+			key: 'title',
+			render: (text: string) => (
+				<div
+					style={{
+						width: '100%',
+						overflow: 'hidden',
+						textOverflow: 'ellipsis',
+						whiteSpace: 'nowrap',
+					}}>
+					<p className={isPdf ? 'pdf-margin' : ''}>
+						{text?.replace(/(Right|Left)/g, '')}
+					</p>
+				</div>
+			),
+		},
+		{
+			title: <span className="pad-margin">L</span>,
+			dataIndex: 'left',
+			key: 'left',
+			className: 'custom-header-align',
+			with: '100%',
+			render: (_: string, record: RomPatientResult) => {
+				const score = evalScore(record);
+				return (
+					<Tooltip
+						title={getCategoryName(score)}
+						color={getColorForCategory(score)}>
+						<Flex align="space-between" justify="center" gap="small">
+							<p
+								className={isPdf ? 'pdf-margin' : ''}
+								style={{
+									width: 'max-content',
+									textAlign: 'center',
+									color: getColorForCategory(score),
+								}}>
+								{record.value ? `${record.value} °` : '-'}
+							</p>
+						</Flex>
+					</Tooltip>
+				);
+			},
+		},
+	];
+	
+	return (
+		<div style={{ height: '100%', background: 'var(--surface-primary)', borderRadius: '12px' }}>
+  <Flex className="flex-wrapper">
+    {(rightData?.length ?? 0) > 0 ? (
+      <Table
+        className="rounded-table-left"
+        size="small"
+        tableLayout="auto"
+        dataSource={rightData}
+        columns={tableColumns}
+        pagination={false}
+        rowKey="joint"
+      />
+    ) : (
+      <div />
+    )}
+
+    <BodySilhouetteWithHotspots
+      isPdf={isPdf}
+      selectedRom={selectedRom}
+      getColorForCategory={getColorForCategory}
+      getCategoryName={getCategoryName}
+      getCategoryDesc={getCategoryDesc}
+    />
+
+    {(leftData?.length ?? 0) > 0 ? (
+      <Table
+        className="rounded-table-right"
+        size="small"
+        tableLayout="auto"
+        dataSource={leftData}
+        columns={tableColumns2}
+        pagination={false}
+        rowKey="joint"
+      />
+    ) : (
+      <div />
+    )}
+  </Flex>
+</div>
+	);
+};
+
+export default CombinedMobilityReport;

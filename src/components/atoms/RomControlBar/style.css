@@ -1,0 +1,197 @@
+/**
+ * RomControlBar Styles
+ *
+ * Figma design: node 1402-14731
+ * Floating control bar with circular buttons and pill-shaped volume control
+ *
+ * Uses semantic design tokens from:
+ * - src/styles/tokens/semantic.css (surfaces, text)
+ * - src/styles/tokens/layout.css (shadows, spacing)
+ * - src/styles/tokens/primitives.css (radius, motion)
+ */
+
+/* ============================================
+   CONTROL BAR CONTAINER
+   ============================================ */
+
+.rom-control-bar {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	position: absolute;
+	z-index: 1001;
+	padding: var(--spacing-2);
+}
+
+/* Position variants */
+.rom-control-bar--top-right {
+	top: var(--spacing-4);
+	right: var(--spacing-4);
+}
+
+.rom-control-bar--top-left {
+	top: var(--spacing-4);
+	left: var(--spacing-4);
+}
+
+.rom-control-bar--bottom-right {
+	bottom: var(--spacing-4);
+	right: var(--spacing-4);
+}
+
+.rom-control-bar--bottom-left {
+	bottom: var(--spacing-4);
+	left: var(--spacing-4);
+}
+
+/* ============================================
+   CIRCULAR BUTTON
+   ============================================ */
+
+.rom-control-btn {
+	/* Size: 40px */
+	width: var(--spacing-10);
+	height: var(--spacing-10);
+
+	/* Circular shape */
+	border-radius: var(--radius-full);
+
+	/* Semantic colors: elevated surface + tertiary text */
+	background-color: var(--surface-elevated);
+	color: var(--text-tertiary);
+	border: none;
+
+	/* Flexbox centering */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	/* Elevation */
+	box-shadow: var(--shadow-md);
+
+	/* Smooth transitions */
+	transition:
+		background-color var(--motion-duration-fast) var(--motion-ease-out),
+		color var(--motion-duration-fast) var(--motion-ease-out),
+		transform var(--motion-duration-fast) var(--motion-ease-out),
+		box-shadow var(--motion-duration-fast) var(--motion-ease-out);
+
+	/* Cursor */
+	cursor: pointer;
+}
+
+.rom-control-btn:hover {
+	background-color: var(--surface-interactive-hover);
+	color: var(--text-secondary);
+	transform: scale(1.05);
+	box-shadow: var(--shadow-lg);
+}
+
+.rom-control-btn:active {
+	background-color: var(--surface-interactive-active);
+	transform: scale(0.95);
+}
+
+.rom-control-btn:focus-visible {
+	outline: 2px solid var(--brand-primary);
+	outline-offset: 2px;
+}
+
+.rom-control-btn svg {
+	flex-shrink: 0;
+}
+
+/* ============================================
+   VOLUME CONTROL (PILL SHAPED)
+   ============================================ */
+
+.rom-control-volume {
+	/* Pill shape */
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	padding: var(--spacing-2) var(--spacing-3);
+	height: var(--spacing-10);
+
+	/* Fully rounded pill */
+	border-radius: var(--radius-full);
+
+	/* Semantic colors */
+	background-color: var(--surface-elevated);
+	color: var(--text-tertiary);
+
+	/* Elevation */
+	box-shadow: var(--shadow-md);
+}
+
+.rom-control-volume svg {
+	flex-shrink: 0;
+}
+
+/* Slider customization - minimal overrides to preserve Ant Design functionality */
+.rom-control-volume-slider {
+	width: 120px;
+	margin: 0;
+}
+
+.rom-control-volume-slider .ant-slider-rail {
+	background-color: var(--border-default);
+}
+
+.rom-control-volume-slider .ant-slider-track {
+	background-color: var(--brand-primary);
+}
+
+.rom-control-volume-slider .ant-slider-handle::after {
+	box-shadow: 0 0 0 2px var(--brand-primary);
+}
+
+.rom-control-volume-slider .ant-slider-handle:hover::after,
+.rom-control-volume-slider .ant-slider-handle:focus::after {
+	box-shadow: 0 0 0 2px var(--brand-primary-hover);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+	.rom-control-bar {
+		gap: var(--spacing-2);
+	}
+
+	.rom-control-btn {
+		width: var(--spacing-9);
+		height: var(--spacing-9);
+	}
+
+	.rom-control-volume {
+		height: var(--spacing-9);
+		padding: var(--spacing-1-5) var(--spacing-2-5);
+	}
+
+	.rom-control-volume-slider {
+		width: 80px;
+	}
+}
+
+@media (max-width: 480px) {
+	.rom-control-bar {
+		gap: var(--spacing-1);
+		padding: var(--spacing-1);
+	}
+
+	.rom-control-btn {
+		width: var(--spacing-8);
+		height: var(--spacing-8);
+	}
+
+	.rom-control-btn svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.rom-control-volume {
+		display: none; /* Hide volume on very small screens */
+	}
+}

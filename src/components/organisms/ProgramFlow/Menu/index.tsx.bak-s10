@@ -1,0 +1,74 @@
+
+import { useTypedDispatch, useTypedSelector } from '@stores/index'
+import { UserListSkeleton } from '@atoms/Skeletons'
+import { List, Typography } from 'antd'
+import { MdCheck } from 'react-icons/md'
+import { IProgramExercise } from '@types'
+import { useTranslation } from 'react-i18next'
+import { goToExercise } from '@stores/shared/patientDetail/program'
+
+function Menu({ onToggleMenu }: { onToggleMenu: () => void }) {
+	const dispatch = useTypedDispatch()
+	const { t } = useTranslation()
+	const { exercises, currentExercise, completedExercises } = useTypedSelector((state) => state.patientDetail.program.main)
+
+	const onClickMenu = (exercise: IProgramExercise) => {
+		if (currentExercise?.id !== exercise.id) {
+			onToggleMenu()
+			dispatch(goToExercise(exercise))
+		}
+	}
+
+	if (!exercises) {
+		return <UserListSkeleton count={6} />;
+	}
+
+	return (
+		<List
+			className="h-full"
+			style={{
+				maxHeight: '100%',
+			}}
+			header={
+				<Typography.Title
+					level={5}
+					style={{
+						padding: '0 10px 0 40px',
+						margin: 0,
+						color: 'var(--surface-primary)80',
+					}}
+				>
+					{t('Patient.data.omnirom.exercises')}
+				</Typography.Title>
+			}
+			dataSource={exercises || []}
+			renderItem={(exercise) => {
+				const isDone = completedExercises.find(exer => exer.id == exercise.id)
+				return (
+					<List.Item
+						style={{
+							padding: '10px 20px 10px 40px',
+							borderColor: 'var(--surface-primary)33',
+							cursor: currentExercise?.id !== exercise.id ? 'pointer' : 'default',
+						}}
+						onClick={() => onClickMenu(exercise)}
+					>
+						<Typography.Text
+							style={{ color: isDone ? 'var(--surface-primary)' : 'var(--surface-primary)80' }}
+						>
+							{exercise?.name ? <>
+							{exercise?.name?.toUpperCase()}
+							</>:<>{exercise?.exerciseLibrary?.title?.toUpperCase()}</>}
+						</Typography.Text>
+						{isDone && <MdCheck
+							className="exercise-check md-icon"
+							size="24px"
+						/>}
+					</List.Item>
+				)
+			}}
+		/>
+	)
+}
+
+export default Menu

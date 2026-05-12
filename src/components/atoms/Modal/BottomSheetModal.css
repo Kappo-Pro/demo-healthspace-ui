@@ -1,0 +1,244 @@
+/**
+ * BottomSheetModal Styles
+ *
+ * Apple-inspired modal with sticky scroll behavior.
+ * The modal starts at the bottom and scrolls up, revealing
+ * the bottom border-radius when reaching the end of content.
+ *
+ * Structure:
+ * - Wrapper: fixed, full viewport, overflow-y: auto (scroll container)
+ * - Spacer: pushes modal to bottom initially
+ * - Modal: sticky top:0, border-radius on ALL corners
+ *
+ * Uses design system tokens for consistency.
+ */
+
+/* ============================================
+   SLIDE UP ANIMATION
+   ============================================ */
+
+@keyframes bottomSheetSlideUp {
+	from {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes bottomSheetSlideDown {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+}
+
+/* ============================================
+   MODAL WRAPPER - SCROLL CONTAINER
+   ============================================ */
+
+.bottom-sheet-modal-wrap {
+	/* Full viewport scroll container */
+	position: fixed;
+	inset: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	/* Simple block layout - content flows naturally */
+	display: block;
+
+	/* Smooth scrolling */
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+
+	/* Custom scrollbar - subtle */
+	scrollbar-width: thin;
+	scrollbar-color: var(--surface-tertiary) transparent;
+}
+
+.bottom-sheet-modal-wrap::-webkit-scrollbar {
+	width: 6px;
+}
+
+.bottom-sheet-modal-wrap::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.bottom-sheet-modal-wrap::-webkit-scrollbar-thumb {
+	background: var(--surface-tertiary);
+	border-radius: var(--radius-xs);
+}
+
+.bottom-sheet-modal-wrap::-webkit-scrollbar-thumb:hover {
+	background: var(--color-gray-500);
+}
+
+/* ============================================
+   TOP SPACER - Creates space above modal
+   Clicking here closes the modal
+   ============================================ */
+
+.bottom-sheet-modal-wrap::before {
+	content: '';
+	display: block;
+	/* Height = viewport height - this pushes modal to start at bottom */
+	height: 15vh;
+	min-height: 80px;
+	width: 100%;
+}
+
+/* ============================================
+   MODAL CONTAINER - STICKY BEHAVIOR
+   ============================================ */
+
+.bottom-sheet-modal {
+	/* Size */
+	max-width: 1100px;
+	width: calc(100% - var(--spacing-12));
+
+	/* Bottom margin creates space that reveals bottom border-radius when scrolled to end */
+	margin: 0 auto var(--spacing-8);
+
+	/* Animation */
+	animation: bottomSheetSlideUp var(--motion-duration-slow)
+		var(--motion-ease-out-circ) forwards;
+
+	/* Flex behavior */
+	flex: 0 0 auto;
+}
+
+.bottom-sheet-modal.ant-modal-hidden {
+	animation: bottomSheetSlideDown var(--motion-duration-base)
+		var(--motion-ease-in-out) forwards;
+}
+
+/* ============================================
+   MODAL CONTENT BOX - ROUNDED ALL CORNERS
+   ============================================ */
+
+.bottom-sheet-modal .ant-modal-content {
+	/* Subtle shadow - no glow */
+	box-shadow: 0 -4px 32px var(--color-black-alpha-12);
+	border: none;
+
+	/* Shape - ALL corners rounded */
+	border-radius: var(--radius-3xl);
+
+	/* NO overflow hidden - content determines height */
+	overflow: visible;
+
+	/* NO max-height - modal grows with content */
+	max-height: none;
+
+	/* Background uses theme token */
+	background: var(--modal-bg);
+}
+
+/* Ensure wrapper doesn't clip corners */
+.bottom-sheet-modal.ant-modal {
+	border-radius: var(--radius-3xl);
+	overflow: visible;
+
+	/* NO max-height on the modal itself */
+	max-height: none;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.bottom-sheet-modal .ant-modal-header {
+	background: transparent;
+	border-bottom: none;
+	padding: var(--spacing-6) var(--spacing-6) var(--spacing-4);
+	margin: 0;
+}
+
+.bottom-sheet-modal .ant-modal-title {
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-color-root);
+}
+
+/* ============================================
+   CLOSE BUTTON
+   ============================================ */
+
+.bottom-sheet-modal .ant-modal-close {
+	top: var(--spacing-4);
+	right: var(--spacing-4);
+	width: var(--spacing-9);
+	height: var(--spacing-9);
+	border-radius: var(--radius-full);
+	background: var(--surface-secondary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.bottom-sheet-modal .ant-modal-close:hover {
+	background: var(--surface-tertiary);
+}
+
+.bottom-sheet-modal .ant-modal-close-x {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--control-font-lg);
+	line-height: var(--line-height-none);
+}
+
+/* ============================================
+   BODY - NO INTERNAL SCROLL
+   ============================================ */
+
+.bottom-sheet-modal .ant-modal-body {
+	/* padding: 0 var(--spacing-6) var(--spacing-6); */
+
+	/* NO max-height - content determines height */
+	max-height: none !important;
+
+	/* NO overflow - content flows naturally, scroll is on wrapper */
+	overflow: visible !important;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.bottom-sheet-modal .ant-modal-footer {
+	border-top: var(--border-width-1) solid var(--border-default);
+	padding: var(--spacing-4) var(--spacing-6);
+	margin: 0;
+	background: transparent;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+	.bottom-sheet-modal {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.bottom-sheet-modal .ant-modal-content {
+		border-radius: var(--radius-2xl);
+	}
+
+	.bottom-sheet-modal-wrap::before {
+		min-height: 5vh;
+	}
+
+	.bottom-sheet-modal-wrap::after {
+		height: var(--spacing-6);
+	}
+}

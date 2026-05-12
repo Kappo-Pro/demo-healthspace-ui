@@ -1,0 +1,218 @@
+/**
+ * KeyboardShortcutsOverlay Styles
+ *
+ * Clean, organized layout for keyboard shortcuts reference
+ */
+
+.shortcutsModal :global(.ant-modal-header) {
+	border-bottom: 1px solid var(--border-default, var(--color-gray-200));
+	padding: var(--spacing-5) var(--spacing-6);
+}
+
+.shortcutsModal :global(.ant-modal-body) {
+	padding: 0;
+	max-height: 600px;
+	overflow-y: auto;
+}
+
+.modalTitle {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary, var(--color-gray-900));
+}
+
+.modalTitle :global(.anticon) {
+	font-size: var(--font-size-lg);
+	color: var(--color-brand-primary, var(--brand-primary));
+}
+
+.shortcutsContainer {
+	padding: var(--spacing-6);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	gap: var(--spacing-8);
+}
+
+/* Section */
+.shortcutSection {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+}
+
+.sectionTitle {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wider);
+	color: var(--text-tertiary, var(--color-gray-500));
+	margin: 0;
+	padding-bottom: var(--spacing-2);
+	border-bottom: var(--spacing-0-5) solid
+		var(--border-default, var(--color-gray-200));
+}
+
+/* Shortcut List */
+.shortcutList {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+.shortcutItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-4);
+	padding: var(--spacing-2-5) var(--spacing-3);
+	border-radius: var(--radius-md);
+	transition: background-color 150ms ease-out;
+}
+
+.shortcutItem:hover {
+	background-color: var(--surface-secondary, var(--color-gray-50));
+}
+
+.shortcutDescription {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2-5);
+	flex: 1;
+	font-size: var(--font-size-sm);
+	color: var(--text-primary, var(--color-gray-900));
+}
+
+.shortcutIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--spacing-6);
+	height: var(--spacing-6);
+	color: var(--text-secondary, var(--color-gray-500));
+	font-size: var(--font-size-sm);
+}
+
+/* Keys Display */
+.keysContainer {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1-5);
+	flex-shrink: 0;
+}
+
+.key {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: var(--spacing-7);
+	height: var(--spacing-6);
+	padding: 0 var(--spacing-2);
+	border-radius: var(--radius-sm);
+	background: linear-gradient(
+		180deg,
+		var(--surface-tertiary, var(--color-gray-100)) 0%,
+		var(--surface-secondary, var(--color-gray-200)) 100%
+	);
+	border: 1px solid var(--border-subtle, var(--color-gray-300));
+	box-shadow: var(--shadow-xs);
+	font-size: var(--font-size-xs);
+	font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+	font-weight: var(--font-weight-medium);
+	color: var(--text-primary, var(--color-gray-900));
+	text-transform: capitalize;
+	user-select: none;
+}
+
+.keySeparator {
+	font-size: 11px;
+	font-weight: var(--font-weight-medium);
+	color: var(--text-tertiary, var(--color-gray-400));
+	padding: 0 var(--spacing-0-5);
+}
+
+/* Footer */
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--spacing-4) var(--spacing-6);
+	border-top: 1px solid var(--border-default, var(--color-gray-200));
+	background: var(--surface-secondary, var(--color-gray-50));
+}
+
+.footerNote {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1-5);
+	font-size: 13px;
+	font-weight: var(--font-weight-medium);
+	color: var(--text-secondary, var(--color-gray-500));
+}
+
+.footerHint {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary, var(--color-gray-400));
+	font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.shortcutsContainer {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-6);
+		padding: var(--spacing-4);
+	}
+
+	.shortcutsModal :global(.ant-modal-body) {
+		max-height: 500px;
+	}
+
+	.footer {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--spacing-2);
+	}
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+	.modalTitle {
+		color: var(--text-primary, var(--color-gray-50));
+	}
+
+	.shortcutItem:hover {
+		background-color: var(--surface-secondary, var(--color-gray-800));
+	}
+
+	.shortcutDescription {
+		color: var(--text-primary, var(--color-gray-50));
+	}
+
+	.key {
+		background: linear-gradient(
+			180deg,
+			var(--surface-tertiary, var(--color-gray-700)) 0%,
+			var(--surface-secondary, var(--color-gray-800)) 100%
+		);
+		border-color: var(--border-subtle, var(--color-gray-600));
+		color: var(--text-primary, var(--color-gray-50));
+		box-shadow:
+			0 1px 2px var(--color-black-alpha-30),
+			inset 0 -1px 0 var(--color-black-alpha-40);
+	}
+
+	.footer {
+		background: var(--surface-secondary, var(--color-gray-900));
+		border-top-color: var(--border-default, var(--color-gray-700));
+	}
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+	.shortcutItem {
+		transition-duration: 0.01ms !important;
+	}
+}

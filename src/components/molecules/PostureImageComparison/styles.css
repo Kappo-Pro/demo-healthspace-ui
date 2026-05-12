@@ -1,0 +1,155 @@
+/**
+ * PostureImageComparison Styles (Story 2.2 - FR7a)
+ *
+ * Mobile-first responsive design using design system tokens
+ */
+
+.posture-image-comparison {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* Loading state */
+.posture-image-comparison--loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 400px;
+	padding: var(--spacing-6);
+}
+
+/* Error state */
+.posture-image-comparison--error,
+.posture-image-comparison--empty {
+	padding: var(--spacing-6);
+}
+
+/* Summary section */
+.posture-image-comparison__summary {
+	margin-bottom: var(--spacing-6);
+}
+
+/* Main container */
+.posture-image-comparison__container {
+	width: 100%;
+}
+
+/* Grid layout - Mobile first */
+.posture-image-comparison__grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-4);
+	width: 100%;
+}
+
+/* Tablet and desktop - side by side */
+@media (min-width: 768px) {
+	.posture-image-comparison__grid {
+		grid-template-columns: 1fr 1fr;
+		gap: var(--spacing-6);
+	}
+}
+
+/* Card styling */
+.posture-image-comparison__card {
+	border-radius: var(--border-radius-md);
+	box-shadow: var(--shadow-md);
+	transition: box-shadow var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.posture-image-comparison__card:hover {
+	box-shadow: var(--shadow-lg);
+}
+
+.posture-image-comparison__card--baseline .ant-card-head {
+	background-color: var(--color-neutral-50);
+	border-bottom: var(--spacing-0-5) solid var(--color-neutral-200);
+}
+
+.posture-image-comparison__card--current .ant-card-head {
+	background-color: var(--color-primary-50);
+	border-bottom: var(--spacing-0-5) solid var(--color-primary-200);
+}
+
+/* Image container */
+.posture-image-comparison__image-container {
+	position: relative;
+	width: 100%;
+	padding-top: 133.33%; /* 3:4 aspect ratio for posture scans */
+	background-color: var(--color-neutral-100);
+	border-radius: var(--border-radius-sm);
+	overflow: hidden;
+}
+
+.posture-image-comparison__image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	cursor: pointer;
+	transition: opacity var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.posture-image-comparison__image:hover {
+	opacity: 0.9 !important;
+}
+
+.posture-image-comparison__image:focus {
+	outline: 3px solid var(--focus-ring-color);
+	outline-offset: 2px;
+}
+
+/* Loading spinner inside image */
+.posture-image-comparison__image-loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+}
+
+/* Screen reader only */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Accessibility: High contrast mode */
+@media (prefers-contrast: high) {
+	.posture-image-comparison__card {
+		border: 2px solid currentColor;
+	}
+
+	.posture-image-comparison__image {
+		border: 1px solid currentColor;
+	}
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.posture-image-comparison__image,
+	.posture-image-comparison__card {
+		transition: none;
+	}
+}
+
+/* Mobile optimization */
+@media (max-width: 767px) {
+	.posture-image-comparison__summary {
+		margin-bottom: var(--spacing-4);
+	}
+
+	.posture-image-comparison__card {
+		margin-bottom: var(--spacing-4);
+	}
+}

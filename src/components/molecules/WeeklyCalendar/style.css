@@ -1,0 +1,113 @@
+.weekly-container {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: var(--spacing-2);
+}
+
+.weekly-div {
+	display: flex;
+	margin-left: 0;
+	cursor: pointer;
+	color: var(--text-brand);
+	font-weight: var(--font-weight-bold);
+}
+
+.weekly-icon {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin-right: var(--spacing-7);
+}
+
+.custom-w-15 {
+	width: 15rem; /* 240px - larger than available spacing tokens */
+}
+
+.custom-w-3 {
+	width: var(--spacing-14);
+}
+
+.weekly-today {
+	cursor: pointer;
+	color: var(--text-brand);
+	font-weight: var(--font-weight-bold);
+}
+
+.weekly-main-container {
+	display: flex;
+	text-align: center;
+	margin-left: calc(var(--spacing-4) * -1);
+}
+
+.custom-weekly-css {
+	display: block;
+	text-align: center;
+	font-size: var(--font-size-base);
+	width: var(--spacing-10);
+	height: var(--spacing-10);
+	line-height: var(--spacing-10);
+	border-radius: var(--radius-full);
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.custom-week-date-css {
+	color: var(--text-brand);
+	cursor: pointer;
+}
+
+.custom-week-date-gray-css {
+	color: var(--text-tertiary);
+	cursor: pointer;
+}
+
+.custom-w-full {
+	width: 100%;
+}
+
+.custom-block-text-base {
+	display: block;
+	font-size: var(--font-size-xs);
+	line-height: var(--line-height-normal);
+	font-weight: var(--font-weight-semibold);
+}
+
+.custom-class-css-week {
+	display: block;
+	text-align: center;
+	font-size: var(--font-size-base);
+	width: var(--spacing-10);
+	height: var(--spacing-10);
+	line-height: var(--spacing-10);
+	border-radius: var(--radius-full);
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.custom-css-current-date {
+	background-color: var(--brand-primary);
+	color: var(--text-on-brand);
+	cursor: pointer;
+}
+
+.custom-css-event-current-date {
+	background-color: var(--brand-primary-light);
+	cursor: pointer;
+	color: var(--text-primary);
+}
+
+.custom-bg-primary-week {
+	background-color: var(--brand-accent) !important;
+	color: var(--text-on-brand) !important;
+	cursor: pointer;
+}
+
+.custom-bg-gray-week {
+	background-color: var(--surface-secondary);
+	cursor: pointer;
+}

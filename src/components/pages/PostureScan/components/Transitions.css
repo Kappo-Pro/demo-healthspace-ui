@@ -1,0 +1,68 @@
+/* Animated border for ready-set-go countdown */
+@property --border-progress {
+	syntax: '<percentage>';
+	initial-value: 0%;
+	inherits: false;
+}
+
+.posture-border-animate {
+	position: relative;
+}
+
+.posture-border-animate::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	padding: 4px;
+	background: conic-gradient(
+		from 270deg at 50% 0%,
+		var(--success-500) var(--border-progress),
+		transparent var(--border-progress)
+	);
+	-webkit-mask:
+		linear-gradient(white 0 0) content-box,
+		linear-gradient(white 0 0);
+	mask:
+		linear-gradient(white 0 0) content-box,
+		linear-gradient(white 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	pointer-events: none;
+	z-index: 100;
+	animation: border-progress 3s linear forwards;
+}
+
+/* Glow effect layer */
+.posture-border-animate::after {
+	content: '';
+	position: absolute;
+	inset: -4px;
+	padding: 8px;
+	background: conic-gradient(
+		from 270deg at 50% 0%,
+		var(--success-500) var(--border-progress),
+		transparent var(--border-progress)
+	);
+	-webkit-mask:
+		linear-gradient(white 0 0) content-box,
+		linear-gradient(white 0 0);
+	mask:
+		linear-gradient(white 0 0) content-box,
+		linear-gradient(white 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	pointer-events: none;
+	z-index: 99;
+	filter: blur(12px);
+	opacity: 0.7;
+	animation: border-progress 3s linear forwards;
+}
+
+@keyframes border-progress {
+	from {
+		--border-progress: 0%;
+	}
+	to {
+		--border-progress: 100%;
+	}
+}

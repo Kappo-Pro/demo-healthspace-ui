@@ -1,0 +1,4959 @@
+{
+	"Admin": {
+		"data": {
+			"addNotes": {
+				"add": "Add",
+				"addNotesHere": "Add notes here",
+				"browserErr": "Browser error",
+				"enterDescription": "Description",
+				"enterNotesHere": "Enter notes here",
+				"image": "Image",
+				"notes": "Notes",
+				"record": "Record",
+				"requiredErr": "Notes are required",
+				"stop": "Stop",
+				"video": "Video",
+				"tooEasy": "Too Easy",
+				"tooHard": "Too Hard",
+				"easy": "Easy",
+				"hard": "Hard",
+				"plan": "Plan",
+				"normal": "Normal",
+				"captures": "VitalScan ROM Capture",
+				"planData": "Plan Data",
+				"objective": "Objective",
+				"assessment": "Assessment",
+				"romSummary": "VitalScan ROM Sessions",
+				"soapReport": "SOAP - Report",
+				"subjective": "Subjective",
+				"listSessions": "Program Result",
+				"surveySummary": "Survey Result",
+				"assessmentData": "Assessment Data",
+				"listEvaluation": "Evaluation Result",
+				"subjectiveNotes": "Subjective Notes"
+			},
+			"addToReports": {
+				"addNotes": "Add Notes",
+				"all": "All",
+				"ankle": "Ankle",
+				"cancel": "Cancel",
+				"captures": "ROM Insights",
+				"clickToViewDetails": "Click to view details",
+				"copy": "Copy",
+				"create": "Create",
+				"createError": "Failed to create report",
+				"createNewReport": "Create New Report",
+				"createReport": "Create Report",
+				"createSuccess": "Report created successfully",
+				"createdAt": "Created At",
+				"dateErr": "Date range is required",
+				"dateLabel": "Date:",
+				"dateLimitWarning": "Date range cannot exceed 90 days",
+				"delete": "Delete",
+				"deleteAlertText": "Are you sure you want to delete this report?",
+				"deleteText": "Report deleted successfully",
+				"download": "Download",
+				"downloading": "Downloading...",
+				"ear": "Ear",
+				"edit": "Edit",
+				"elbow": "Elbow",
+				"errorText": "Please select a report",
+				"evaluation": "Evaluation",
+				"exerciseName": "Exercise Name:",
+				"export": "Export",
+				"exportSuccess": "Report exported successfully",
+				"head": "Head",
+				"hideAll": "Hide All",
+				"hip": "Hip",
+				"knee": "Knee",
+				"legends": "Legends",
+				"max": "Max:",
+				"min": "Min:",
+				"no": "No",
+				"noData": "No data available",
+				"none": "None",
+				"noReport": "No reports available",
+				"normal": "Normal:",
+				"omniRom": "VitalScan ROM",
+				"programName": "Program Name:",
+				"ranking": "Ranking:",
+				"reportCreated": "Report created successfully",
+				"reportName": "Report Name",
+				"reportNameErr": "Report name is required",
+				"romCapturesData": "ROM Insights Data",
+				"romSummary": "ROM Sessions",
+				"romSummaryData": "ROM Sessions Data",
+				"save": "Save",
+				"saveReport": "Save to Report",
+				"saveText": "Saved successfully",
+				"score": "Score:",
+				"screenshot": "Screenshot:",
+				"search": "Search reports",
+				"searchPlaceholder": "Search",
+				"selectSections": "Select report sections",
+				"sessionDate": "Session Date:",
+				"sessions": "Sessions",
+				"shoulder": "Shoulder",
+				"showAll": "Show All",
+				"summaryButton": "View Summary",
+				"title": "Add to Report",
+				"value": "Value:",
+				"wfl": "WFL:",
+				"yes": "Yes",
+				"view": "View",
+				"rehab": "Rehab +",
+				"video": "Video:",
+				"reports": "Reports",
+				"copyText": "Copied to Clipboard",
+				"painLevel": "Discomfort Level:",
+				"createTest": "Report Created Successfully!",
+				"reportExist": "Report name already exist",
+				"downloadText": "Downloaded",
+				"downloadSuccess": "Report downloaded successfully",
+				"downloadError": "Failed to download report",
+				"generatingReport": "Generating report...",
+				"reportPreview": "Report Preview",
+				"evaluationData": "Evaluation Data",
+				"romResultsNotes": "VitalScan ROM Results Notes:",
+				"romSessionNotes": "VitalScan ROM Session Notes:",
+				"overallCondition": "Overall Condition:",
+				"rehabCapturesData": "Rehab Captures Data",
+				"rehabSessionNotes": "Rehab Session Notes:",
+				"confirmPopupStatus": "Do you want to save your changes?",
+				"letsMoveCapturesData": "Let's Move Capture Data",
+				"evaluationSessionNotes": "Evaluation Session Notes:",
+				"letsMoveHistoricalData": "Let's Move Historical Data",
+				"evaluationNotesPlaceholder": "Enter Evaluation Notes",
+				"romResultsNotesPlaceholder": "Enter VitalScan ROM Results Notes",
+				"romSessionNotesPlaceholder": "Enter VitalScan ROM Session Notes",
+				"rehabSessionNotesPlaceholder": "Enter Rehab Session Notes",
+				"reportsCleared": "Report Cleared Successfully"
+			},
+			"adminMenus": {
+				"activity": "Activity",
+				"apply-theme": "Apply Theme",
+				"careSpaceplan": "VitalFlow Plan",
+				"content-manager": "Content Manager",
+				"create": "Create",
+				"create-reports": "Create Report",
+				"download-app": "Download App",
+				"evaluation": "Evaluation",
+				"evaluation-results": "Evaluation Results",
+				"generate-program": "Generate Program",
+				"lets-move": "Programs",
+				"logout": "Logout",
+				"omni-rom": "Scan",
+				"vitalscan-rom-captures": "ROM Insights",
+				"vitalscan-rom-summary": "ROM Sessions",
+				"posture-captures": "Posture Insights",
+				"posture-summary": "Posture Sessions",
+				"program-list": "Program List",
+				"program-summary": "Program Summary",
+				"report-summary": "Report Summary",
+				"reports": "Reports",
+				"settings": "Settings",
+				"start-evaluation": "Start Evaluation",
+				"start-scan": "Select Scan",
+				"start-survey": "Start Survey",
+				"survey": "Survey",
+				"survey-summary": "Survey Summary",
+				"templates": "Templates",
+				"tools": "Tools"
+			},
+			"bulkActions": {
+				"bulkRescheduleTitle": "Bulk Reschedule",
+				"cancel": "Cancel",
+				"clear": "Clear",
+				"confirmDeleteTitle": "Confirm Bulk Delete",
+				"delete": "Delete",
+				"markComplete": "Mark Complete",
+				"newDate": "New Date:",
+				"preview": "Preview:",
+				"processingTitle": "Processing Bulk Action",
+				"reschedule": "Reschedule",
+				"rescheduleShiftDays": "Shift by number of days",
+				"rescheduleSpecificDate": "Reschedule to specific date",
+				"selectActivities": "Select activities to perform bulk actions",
+				"selected": "selected",
+				"shiftByDays": "Shift by days:",
+				"shiftPlaceholder": "Enter number of days (positive = forward, negative = backward)",
+				"undo": "Undo"
+			},
+			"clinical": {
+				"reasoningLabel": "Clinical reasoning"
+			},
+			"common": {
+				"preview": "Preview"
+			},
+			"consentFormModal": {
+				"buttons": {
+					"cancel": "Cancel",
+					"save": "Save"
+				},
+				"checkbox": "I accept the consent form on behalf of this user",
+				"labels": {
+					"currentStatus": "Current Status:",
+					"name": "Name:",
+					"profileData": "Profile Data:",
+					"user": "User:",
+					"userId": "User ID:"
+				},
+				"status": {
+					"accepted": "Accepted",
+					"notAccepted": "Not Accepted"
+				},
+				"title": "Consent Form - {{firstName}} {{lastName}}"
+			},
+			"consultation": {
+				"alerts": {
+					"connectionDescription": "Lost connection to consultation server. Attempting to reconnect...",
+					"connectionIssue": "Connection Issue",
+					"patientNotJoined": "Patient has not joined the consultation yet.",
+					"waitingForPatient": "Waiting for Patient"
+				},
+				"chat": {
+					"placeholder": "Type a message...",
+					"send": "Send",
+					"title": "Chat"
+				},
+				"goals": {
+					"addGoal": "Add Goal",
+					"agree": "Agree",
+					"agreed": "Agreed",
+					"currentLabel": "Current:",
+					"currentValue": "Current Value",
+					"description": "Goal Description",
+					"descriptionPlaceholder": "e.g., Improve shoulder alignment",
+					"metrics": {
+						"balance": "Balance",
+						"headAlignment": "Head Alignment",
+						"hipAlignment": "Hip Alignment",
+						"shoulderSymmetry": "Shoulder Symmetry",
+						"spineCurvature": "Spine Curvature"
+					},
+					"modalTitle": "Add Collaborative Goal",
+					"progress": {
+						"ariaLabel": "{{title}} goal progress: {{progress}}%",
+						"loading": "Loading {{title}} progress"
+					},
+					"targetLabel": "Target:",
+					"targetMetric": "Target Metric",
+					"targetValue": "Target Value",
+					"title": "Goals"
+				},
+				"header": {
+					"audio": "Audio",
+					"connected": "Connected",
+					"disconnected": "Disconnected",
+					"endSession": "End Session",
+					"screenShare": "Screen Share",
+					"startRecording": "Start Recording",
+					"stopRecording": "Stop Recording",
+					"title": "Consultation Mode",
+					"video": "Video"
+				},
+				"messages": {
+					"connectionError": "Connection error: {{error}}",
+					"goalAdded": "Goal added for discussion",
+					"missingId": "Missing session or user ID",
+					"recordingStarted": "Recording started",
+					"recordingStopped": "Recording stopped and saved",
+					"sessionEndFailed": "Failed to end session properly",
+					"sessionEnded": "Consultation session ended successfully",
+					"startFailed": "Failed to start consultation: {{error}}",
+					"startingSession": "Starting consultation session...",
+					"summaryEmail": "Session summary will be emailed to patient"
+				},
+				"modes": {
+					"dualView": "Dual View:",
+					"externalDisplay": "External Display Connected",
+					"mirrorMode": "Mirror Mode:",
+					"switchOff": "OFF",
+					"switchOn": "ON"
+				},
+				"session": {
+					"emailSummary": "Email summary to patient",
+					"endButton": "End Session",
+					"endConfirmation": "Are you sure you want to end this consultation session? This will:",
+					"endModalTitle": "End Consultation Session",
+					"generateSummary": "Generate session summary",
+					"saveAnnotations": "Save all annotations",
+					"stopRecording": "Stop recording (if active)"
+				},
+				"views": {
+					"baselineComparison": "Baseline Comparison",
+					"patientScan": "Patient Posture Scan",
+					"session": "Session:"
+				}
+			},
+			"escalationRequired": {
+				"submitStatusChanged": "Submit Status Changed"
+			},
+			"evaluation": {
+				"errors": {
+					"lazyLoad": {
+						"retryButton": "Retry",
+						"subtitle": "Unable to load evaluation details. Please try again.",
+						"title": "Unable to Load"
+					},
+					"modalError": {
+						"description1": "We encountered an error while loading the evaluation details. This issue has been logged and will be investigated.",
+						"description2": "You can try refreshing, or return to the legacy view to access your data.",
+						"legacyViewButton": "Return to Legacy View",
+						"retryButton": "Retry",
+						"title": "Unable to Load Evaluation Details"
+					}
+				},
+				"export": {
+					"buttonLabel": "Export PDF",
+					"exporting": "Exporting...",
+					"noEvaluationSelected": "No evaluation selected"
+				},
+				"modal": {
+					"closeAriaLabel": "Close evaluation details",
+					"description": "Detailed evaluation results for patient assessment",
+					"liveRegion": {
+						"painAssessmentLoaded": "Pain Assessment tab panel",
+						"summaryLoaded": "Summary tab panel",
+						"symptomsHistoryLoaded": "Symptoms & History tab panel"
+					},
+					"tabs": {
+						"painAssessment": "Pain Assessment",
+						"painAssessmentAriaLabel": "Pain Assessment tab, 2 of 3",
+						"summary": "Summary",
+						"summaryAriaLabel": "Summary tab, 1 of 3",
+						"symptomsHistory": "Symptoms & History",
+						"symptomsHistoryAriaLabel": "Symptoms & History tab, 3 of 3"
+					},
+					"tabsAriaLabel": "Evaluation sections",
+					"title": "Virtual Evaluation Results"
+				},
+				"painAssessment": {
+					"noDataAvailable": "No pain assessment data available",
+					"sections": {
+						"characteristics": {
+							"noCharacteristics": "No characteristics reported",
+							"title": "Pain Characteristics"
+						},
+						"functionalImpact": {
+							"mobility": "Mobility:",
+							"noImpact": "No functional impact reported",
+							"selfCare": "Self-care:",
+							"sleep": "Sleep:",
+							"title": "Impact on Function",
+							"workActivities": "Work/Activities:"
+						},
+						"intensity": {
+							"mildPain": "Mild Pain",
+							"moderatePain": "Moderate Pain",
+							"notAssessed": "Pain intensity not assessed",
+							"scale": "0 = No pain, 10 = Worst imaginable pain",
+							"severePain": "Severe Pain",
+							"title": "Pain Intensity"
+						},
+						"locations": {
+							"noLocations": "No pain locations reported",
+							"primary": "(Primary)",
+							"title": "Pain Locations"
+						},
+						"temporalPatterns": {
+							"aggravatingFactors": "Aggravating factors:",
+							"duration": "Duration:",
+							"frequency": "Frequency:",
+							"noPatterns": "No temporal patterns documented",
+							"relievingFactors": "Relieving factors:",
+							"timeOfDay": "Time of day:",
+							"title": "Temporal Patterns"
+						}
+					}
+				},
+				"severity": {
+					"ariaLabel": "Severity:",
+					"high": "High",
+					"low": "Low",
+					"medium": "Medium"
+				},
+				"statusDropdown": {
+					"confirmation": {
+						"cancelButton": "Cancel",
+						"confirmButton": "Confirm",
+						"justificationNote": "This action may require justification.",
+						"message": "Are you sure you want to change status from <strong>{{currentStatus}}</strong> to <strong>{{newStatus}}</strong>?",
+						"title": "Confirm Status Change"
+					},
+					"labels": {
+						"archived": "Archived",
+						"completed": "Completed",
+						"inReview": "In Review",
+						"pending": "Pending"
+					}
+				},
+				"summary": {
+					"actions": {
+						"changeStatus": "Change Status:",
+						"export": "Export:"
+					},
+					"findings": {
+						"healthSigns": "Health signs: {{signs}}",
+						"medicalHistory": "Medical history: {{history}}",
+						"noFindings": "No key findings available",
+						"painReport": "Patient reports pain in {{location}} (level: {{level}})"
+					},
+					"metadata": {
+						"completion": "Completion:",
+						"date": "Date:",
+						"duration": "Duration:",
+						"notAvailable": "N/A",
+						"provider": "Provider:",
+						"status": "Status:"
+					},
+					"sections": {
+						"evaluationDetails": "Evaluation Details",
+						"keyFindings": "Key Findings",
+						"quickActions": "Quick Actions"
+					},
+					"status": {
+						"archived": "Archived",
+						"completed": "Completed",
+						"inReview": "In Review",
+						"pending": "Pending"
+					}
+				},
+				"symptomsHistory": {
+					"history": {
+						"comorbidities": {
+							"title": "Comorbidities"
+						},
+						"contraindications": {
+							"title": "Contraindications & Precautions"
+						},
+						"diagnoses": {
+							"diagnosed": "Diagnosed: {{date}}",
+							"statusActive": "Active",
+							"statusManaged": "Managed",
+							"statusResolved": "Resolved",
+							"title": "Diagnoses"
+						},
+						"medications": {
+							"started": "Started: {{date}}",
+							"title": "Current Medications"
+						},
+						"previousTreatments": {
+							"completed": "Completed: {{date}}",
+							"duration": "Duration: {{duration}}",
+							"outcome": "Outcome: {{outcome}}",
+							"title": "Previous Treatments"
+						}
+					},
+					"noDataAvailable": "No symptoms or medical history available",
+					"sections": {
+						"currentSymptoms": "Current Symptoms",
+						"medicalHistory": "Medical History"
+					},
+					"symptoms": {
+						"categories": {
+							"functional": "Functional",
+							"musculoskeletal": "Musculoskeletal",
+							"neurological": "Neurological",
+							"other": "Other"
+						},
+						"duration": "Duration: {{duration}}",
+						"frequency": "Frequency: {{frequency}}",
+						"impactLabel": "Impact:"
+					}
+				}
+			},
+			"imageAnnotation": {
+				"reset": "Reset",
+				"selectClassifications": "Select Classifications",
+				"dragPan": "Drag",
+				"successClassifications": "Classifications saved successfully",
+				"enterText": "Enter Your Text to Add",
+				"textPlaceholder": "Type Here...",
+				"cancel": "Cancel",
+				"ok": "Ok",
+				"aiFailure": "AI analysis failed",
+				"preliminary": "Preliminary",
+				"verified": "Verified",
+				"ptVerified": "PT Verified",
+				"aiSuccess": "AI analysis completed successfully",
+				"angle": "Angle",
+				"annotationClear": "Annotations cleared",
+				"arrow": "Arrow",
+				"auth": {
+					"accessDenied": "Access Denied",
+					"contactAdmin": "Please contact your administrator if you believe this is an error.",
+					"roleRequired": "You need {{roles}} role to access this page. Your current role: {{currentRole}}"
+				},
+				"circle": "Circle",
+				"color": "Color",
+				"coordinates": {
+					"x": "X:",
+					"y": "Y:"
+				},
+				"editText": "Edit Text",
+				"errorBoundary": {
+					"errorDetails": "Error Details",
+					"errorLabel": "Error:",
+					"errorLogged": "The annotation tool encountered an unexpected error. This has been logged and will be investigated.",
+					"refreshPage": "Refresh Page",
+					"stackLabel": "Stack:",
+					"title": "Something went wrong",
+					"tryAgain": "Try Again"
+				},
+				"failCanvas": "Failed to get canvas context",
+				"failImage": "Failed to load image",
+				"failedToLoad": "Failed to load landmarks and annotations",
+				"fontDecrease": "Decrease Font Size",
+				"fontIncrease": "Increase Font Size",
+				"freehand": "Freehand",
+				"imageExport": "Image exported successfully",
+				"landmarkClear": "Landmarks cleared",
+				"landmarks": "Landmarks",
+				"line": "Line",
+				"noCanvas": "Canvas element not found",
+				"runningAi": "Running AI analysis...",
+				"select": "Select",
+				"switchOrientation": "Switch Orientation",
+				"text": "Text",
+				"thickness": "Thickness",
+				"toggleGrid": "Toggle Grid",
+				"validation": {
+					"angleRequires3Points": "Angle calculation requires exactly 3 points",
+					"colorInvalidFormat": "Color must be in hex format (#RRGGBB)",
+					"colorMustBeString": "Color must be a string",
+					"coordinatesNotFinite": "{{field}} coordinates must be finite numbers",
+					"coordinatesNotNumbers": "{{field}} coordinates must be numbers",
+					"coordinatesOutOfBounds": "{{field}} coordinates must be within bounds ({{minX}}-{{maxX}}, {{minY}}-{{maxY}})",
+					"dimensionsMustBePositive": "Canvas dimensions must be positive",
+					"dimensionsNotFinite": "Canvas dimensions must be finite numbers",
+					"dimensionsNotNumbers": "Canvas dimensions must be numbers",
+					"dimensionsTooLarge": "Canvas dimensions too large (max 8192x8192)",
+					"fileNameInvalidChars": "File name contains invalid characters",
+					"fileNameLength": "File name must be 1-255 characters",
+					"fileTooLarge": "File size must be less than 10MB",
+					"invalidFileType": "File type must be JPEG, PNG, or JSON",
+					"landmarkColorInvalid": "Landmark {{index}} color invalid: {{error}}",
+					"landmarkCoordNotFinite": "Landmark {{index}} {{coord}} coordinate must be a finite number",
+					"landmarkCoordOutOfBounds": "Landmark {{index}} {{coord}} coordinate out of bounds (-10000 to 10000)",
+					"landmarkCoordsNotFinite": "Landmark {{index}} coordinates must be finite",
+					"landmarkCoordsNotNumbers": "Landmark {{index}} coordinates must be numbers",
+					"landmarkGroupInvalid": "Landmark {{index}} group must be a string (1-50 characters)",
+					"landmarkIndexInvalid": "Landmark {{index}} index must be a non-negative number",
+					"landmarkMissingCoords": "Landmark {{index}} missing coordinates",
+					"landmarkMissingProperty": "Landmark {{index}} missing essential property: {{property}}",
+					"landmarkNameInvalid": "Landmark {{index}} name must be a string (1-100 characters)",
+					"landmarkNotArray": "Landmark data must be an array",
+					"landmarkNotObject": "Landmark {{index}} must be an object",
+					"landmarkVisibleInvalid": "Landmark {{index}} visible must be a boolean",
+					"noFileProvided": "No file provided",
+					"pointInvalid": "{{field}} must be a valid object",
+					"pointsCollinear": "Points cannot be collinear for angle calculation",
+					"textTooLong": "Text must be 0-1000 characters",
+					"textUnsafe": "Text contains potentially unsafe content",
+					"thicknessInvalid": "Thickness must be a valid number",
+					"thicknessOutOfRange": "Thickness must be between 1 and 20",
+					"tooManyLandmarks": "Too many landmarks (max 1000)"
+				},
+				"undo": "Undo",
+				"redo": "Redo",
+				"clearAnnotations": "Clear Annotations",
+				"clearLandmarks": "Clear Landmarks",
+				"save": "Save",
+				"export": "Export",
+				"aiAnalysis": "AI Analysis"
+			},
+			"inbox": {
+				"description": "Description",
+				"feedback": "Feedback",
+				"hello": "Hello",
+				"inbox": "Inbox",
+				"instruction": "Instruction",
+				"title": "Title"
+			},
+			"intakeProcess": {
+				"answerQuestions": "Answer a few questions so we can recommend the best exercise program for you.",
+				"deselectAll": "Deselect All",
+				"enroll": "Enroll",
+				"goals": "Goals",
+				"joinAll": "Join All Selected",
+				"letsExperience": "Let's personalize your experience!",
+				"letsMovePrograms": "Let's Move Programs",
+				"previous": "Previous",
+				"primaryGoal": "We see your primary goal is",
+				"programMatch": "These programs match your movement criteria:",
+				"programs": "Programs",
+				"reachedEnd": "You've reached the end",
+				"region": "Region",
+				"reviewPreferences": "Review Preferences",
+				"selectAll": "Select All",
+				"selectBodyRegion": "Select Body Region:",
+				"selectExercise": "Select an Exercise",
+				"skip": "Skip",
+				"step1": "Step 1: Goal Selection",
+				"step1Placeholder": "What is your primary fitness goal?",
+				"step2": "Step 2: Experience Level",
+				"step2Placeholder": "What is your experience level?",
+				"step3": "Step 3: Workout Preference",
+				"step3Placeholder": "What type of workouts do you prefer?",
+				"step4": "Step 4: Time Availability",
+				"step4placeholder": "How much time can you dedicate per session?",
+				"welcome": "Welcome",
+				"yourExperience": "Your experience is based on your latest answers. Update them to keep evolving!"
+			},
+			"intervention": {
+				"buttons": {
+					"adjustPlan": "Adjust Plan",
+					"scheduleCall": "Schedule Call",
+					"sendEncouragement": "Send Encouragement"
+				},
+				"callModal": {
+					"dateTime": "Date & Time:",
+					"dateTimePlaceholder": "Select date and time",
+					"error": "Failed to schedule call",
+					"notes": "Notes:",
+					"notesPlaceholder": "Notes about the purpose of the call...",
+					"okText": "Schedule Call",
+					"success": "Follow-up call scheduled successfully",
+					"title": "Schedule Follow-Up Call",
+					"warnings": {
+						"selectDateTime": "Please select a date and time for the call"
+					}
+				},
+				"history": {
+					"by": "By:",
+					"title": "Recent Interventions",
+					"types": {
+						"call": "Follow-Up Call",
+						"message": "Encouragement Message",
+						"planAdjustment": "Plan Adjustment"
+					}
+				},
+				"messageModal": {
+					"customizeMessage": "Customize Message (Optional):",
+					"customizePlaceholder": "Add a personal note or modify the template...",
+					"error": "Failed to send message",
+					"okText": "Send Message",
+					"preview": "Preview:",
+					"selectTemplate": "Select Template:",
+					"success": "Encouragement message sent successfully",
+					"templatePlaceholder": "Choose a message template",
+					"title": "Send Encouragement Message",
+					"warnings": {
+						"selectTemplate": "Please select a message template"
+					}
+				},
+				"planModal": {
+					"difficulty": {
+						"easier": "Make exercises easier",
+						"harder": "Make exercises harder",
+						"label": "Difficulty Adjustment:",
+						"noChange": "No change"
+					},
+					"error": "Failed to adjust plan",
+					"frequency": {
+						"decrease": "Decrease frequency",
+						"increase": "Increase frequency",
+						"label": "Frequency Adjustment:",
+						"noChange": "No change"
+					},
+					"okText": "Adjust Plan",
+					"reason": {
+						"label": "Reason for Adjustment:",
+						"placeholder": "Explain why this adjustment is needed..."
+					},
+					"success": "Exercise plan adjusted successfully",
+					"title": "Adjust Exercise Plan",
+					"warnings": {
+						"provideReason": "Please provide a reason for the adjustment",
+						"selectAdjustment": "Please select at least one adjustment"
+					}
+				},
+				"title": "Intervention Tools"
+			},
+			"invalid": {
+				"key": "Invalid translation key"
+			},
+			"managePatient": {
+				"addYourWeight": "Add Your Weight",
+				"birthdate": "Birthdate",
+				"edit": "Edit",
+				"editFunctionalGoal": "Edit Functional Goal",
+				"functionalGoals": "Functional Goals",
+				"gender": "Gender",
+				"height": "Height",
+				"keepTrack": "Keep track of your weight over time",
+				"letsMove": {
+					"letsMove": "Let's Move"
+				},
+				"na": "N/A",
+				"noFunctionalGoals": "No functional goals set",
+				"noIcon": "No Icon",
+				"omniRom": {
+					"estimatedTime": "Estimated Time",
+					"min": "min",
+					"sec": "sec",
+					"startScan": "Start Scan"
+				},
+				"patientId": "Patient ID",
+				"rehab": {
+					"captures": {
+						"noCapturesFound": "No Captures Found"
+					},
+					"exercises": {
+						"repetitions": "Repetitions",
+						"sessionsPerWeek": "Sessions per Week",
+						"setsPerDay": "Sets per Day",
+						"setsPerSession": "Sets per Session"
+					}
+				},
+				"save": "Save",
+				"weight": "Weight",
+				"weightEmpty": "Please enter a weight value",
+				"weightSame": "Weight value is the same as current weight",
+				"wellnesscheck": {
+					"description": "Please let us know if you are experiencing any discomfort",
+					"label": "Wellness Check",
+					"noBetter": "No better",
+					"stillDiscomfort": "Still experiencing discomfort?",
+					"title": "How are you feeling?"
+				},
+				"yearsOld": "years old"
+			},
+			"menu": {
+				"home": {
+					"dashboard": {
+						"dashboard": "Dashboard",
+						"escalationRequired": "Escalation Required",
+						"followUpRequired": "Follow-up Required",
+						"newPatients": "New Patients",
+						"outOfParameters": "Out of Parameters",
+						"pendingReview": "Pending Review",
+						"reviewed": "Reviewed"
+					},
+					"home": "Home"
+				},
+				"logout": "Logout",
+				"noUser": "No user found",
+				"patientDetail": {
+					"aiAssistantCreateProgramModal": {
+						"add": "Add",
+						"apply": "Apply",
+						"both": "Both",
+						"category": "Category",
+						"collectingResults": "Collecting results...",
+						"daily": "Daily",
+						"determineExercises": "Determining exercises...",
+						"duration": "Duration",
+						"evaluatePain": "Evaluating pain levels...",
+						"fetchData": "Fetching data...",
+						"filters": "Filters",
+						"functionalGoals": "Functional Goals",
+						"gatherData": "Gathering data...",
+						"joint": "Joint",
+						"left": "Left",
+						"recordExercise": "Record Exercise",
+						"region": "Region",
+						"reps": "Reps",
+						"reset": "Reset",
+						"reviewGoals": "Reviewing goals...",
+						"right": "Right",
+						"sets": "Sets",
+						"side": "Side",
+						"startDate": "Start Date",
+						"weekly": "Weekly"
+					},
+					"aiAssistantListSessions": {
+						"improving": "Improving",
+						"noChange": "No change",
+						"unsavedChanges": "You have unsaved changes",
+						"worsening": "Worsening"
+					},
+					"aiAssistantListEvaluation": {
+						"noEvaluationFound": "No Evaluations Found"
+					},
+					"aiAssistantPrograms": {
+						"disabled":"Disabled",
+						"updateSuccess": "Updated Successfully",
+						"titleLabel": "Title",
+						"descriptionLabel": "Description",
+						"durationType": "Duration Type",
+						"weeks": "Weeks",
+						"days": "Days",
+						"months": "Months",
+						"years": "Years",
+						"uploadLabel": "Upload",
+						"coverImage": "Cover Image",
+						"addExercises": "Add Exercises",
+						"and": "and",
+						"approved": "Approved",
+						"byAI": "By AI",
+						"byPT": "By PT",
+						"vitalflowLibrary": "VitalFlow Library",
+						"chooseLibrary": "Choose Library",
+						"create": "Create",
+						"createFailed": "Failed to create program",
+						"createProgram": "Create Program",
+						"disapproved": "Disapproved",
+						"dropImage": "Drop image here or click to upload",
+						"durationErr": "Please enter a duration",
+						"durationTypeErr": "Please select a duration type",
+						"durationValid": "Duration must be a positive number",
+						"edit": "Edit",
+						"exercise": "Exercise",
+						"exercises": "Exercises",
+						"generateAi": "Generate AI Program",
+						"generateCarespace": "Generate VitalFlow Program",
+						"generateNew": "Generate New",
+						"imageRequirement": "Image must be less than 2MB",
+						"myLibrary": "My Library",
+						"myTemplates": "My Templates",
+						"noExercisesFound": "No Exercises Found",
+						"noProgram": "No programs available",
+						"preview": "Preview",
+						"programDescriptionErr": "Please enter a program description",
+						"programName": "Program Name",
+						"programNameErr": "Please enter a program name",
+						"repititions": "Repetitions",
+						"save": "Save Changes",
+						"saveTemplate": "Save as Template",
+						"search": "Search",
+						"select": "Select",
+						"selectAtLeast": "Please select at least one exercise",
+						"selectTemplate": "Select Template",
+						"selected": "Selected",
+						"setsPerDay": "Sets per Day",
+						"setsPerSession": "Sets per Session",
+						"setsPerWeek": "Sets per Week",
+						"startDateErr": "Please select a start date",
+						"systemTemplates": "System Templates",
+						"templateCreateFailed": "Failed to create program template",
+						"updateFailed": "Failed to update program",
+						"validationBetween": "should be between 1 and 100",
+						"validationRange": "should between 1 to 100"
+					},
+					"aiAssistantRomSummary": {
+						"statusSuccess": "Status changed successfully",
+						"edit": "Edit",
+						"qrCode": "QR Code",
+						"saving": "Saving...",
+						"download": "Download",
+						"sendEmail": "Send Email"
+					},
+					"aiVirtualAssessment": {
+						"aiAssistant": "AI Assistant"
+					}
+				},
+				"setting": {
+					"generalLabel": "General Settings",
+					"openAi": {
+						"apikeyPlaceholder": "Enter your OpenAI API key",
+						"copied": "Copied!",
+						"description": "Configure OpenAI API settings for AI-powered features",
+						"description2": "Learn more about API keys",
+						"label": "OpenAI Configuration",
+						"save": "Save Settings",
+						"shareCode": "Share Invite Code"
+					},
+					"plan1": "Getting Started",
+					"plan1description": "Introduction to the platform",
+					"plan2": "Health Assessment",
+					"plan2description": "Complete your health assessment",
+					"plan3": "Wellness Goals",
+					"plan3description": "Set your wellness goals",
+					"reset": "Reset",
+					"scanQR": "Scan QR Code",
+					"update": "Update"
+				},
+				"userRoles": {
+					"tags": "Tags",
+					"PatientsLabel": "Patients",
+					"acceptedDate": "Accepted Date",
+					"addPatient": "Add Patient",
+					"addPhysiotherapist": "Add Physiotherapist",
+					"admin": "Admin",
+					"all": "All",
+					"inviteUser": "Invite User",
+					"allPatients": {
+						"label": "All Patients"
+					},
+					"consentForm": "Legal Consent",
+					"delete": "Delete",
+					"edit": "Edit",
+					"escalationRequired": {
+						"label": "Escalation Required"
+					},
+					"filter": "Filter",
+					"followUpRequired": {
+						"label": "Follow-up Required"
+					},
+					"inCompleted": "Incomplete",
+					"invitePatientModal": {
+						"discard": "Discard",
+						"alreadyAccount": "The following user(s) already have an account!",
+						"selectFeatureRequired": "Please select Features",
+						"discardChangesContent": "You will lose all the unsaved changes on this Invite User Table",
+						"invalidEmail": "Invalid Email",
+						"addAdmin": "Add Admin",
+						"allowFormat": "Allowed Format",
+						"androidStoreAlt": "Android Store",
+						"appleStoreAlt": "Apple Store",
+						"cancel": "Cancel",
+						"clickUpload": "or click to upload",
+						"credentialInformations": "Credential Informations",
+						"csv": "CSV, XLSX",
+						"dataSuccess": "Data saved successfully",
+						"default": "Invite User",
+						"bulkInvite": "Bulk Invite",
+						"defaultPassword": "Default Password",
+						"defaultPasswordErr": "Cannot use default password",
+						"downloadApp": "Download App",
+						"downloadSample": "Download Sample",
+						"drag": "Drag & Drop",
+						"email": "Email",
+						"emailContentRequired": "Email content is required",
+						"emailPlaceholder": "Enter email address",
+						"emailRequired": "Email is required",
+						"emailText": "Email",
+						"fileUploaded": "File Uploaded Successfully",
+						"firstName": "First Name",
+						"firstNamePlaceholder": "Enter first name",
+						"firstNameRequired": "First name is required",
+						"instanceLink": "Instance Link",
+						"inviteCode": "Invite Code",
+						"lastName": "Last Name",
+						"lastNamePlaceholder": "Enter last name",
+						"lastNameRequired": "Last name is required",
+						"maxFileSize": "3 MB",
+						"maximumFile": "Maximum File Size",
+						"mobile": "Mobile",
+						"mobileNumber": "Mobile Number",
+						"mobileNumberPlaceholder": "Enter mobile number",
+						"mobilePhone": "Mobile Phone",
+						"password": "Password",
+						"passwordLengthErr": "Password must be at least 8 characters",
+						"passwordPlaceholder": "Enter password",
+						"passwordRequired": "Password is required",
+						"phone": "Phone",
+						"phonePlaceholder": "Enter phone number",
+						"phoneRequired": "Phone number is required",
+						"planRequired": "Plan is required",
+						"role": "Role",
+						"roleRequired": "Role is required",
+						"save": "Save",
+						"selectAdmin": "Select Admin",
+						"selectPlan": "Select Plan",
+						"sentMail": "Send Email Invitation",
+						"update": "Update",
+						"uploading": "Uploading",
+						"username": "Username",
+						"editUser": "Edit User",
+						"emptyContent": "No content available",
+						"successEmail": "Email sent successfully"
+					},
+					"invitePatients": "Invite Patients",
+					"name": "Name",
+					"newPatients": {
+						"label": "New Patients"
+					},
+					"outOfParams": {
+						"label": "Out of Parameters"
+					},
+					"patient": "Patient",
+					"pendingInvites": {
+						"cancel": "Cancel",
+						"description": "Invitations sent but not yet accepted",
+						"label": "Pending Invites"
+					},
+					"pendingReview": {
+						"label": "Pending Review"
+					},
+					"physiotherapist": "Physiotherapist",
+					"registeredPatients": {
+						"cancel": "Cancel",
+						"deleteConfirm": "Are you sure you want to delete this user?",
+						"deleteMessage": "User deleted successfully",
+						"deletedfailed": "Failed to delete user",
+						"description": "Total number of registered users in the system",
+						"label": "Assigned Users",
+						"newPassword": "New Password",
+						"ok": "OK",
+						"passwordMismatch": "Passwords do not match",
+						"userLabel": "Assigned Users",
+						"adminLabel": "Registered Users",
+						"notEmptyPasswordRule": "Please enter your new password!",
+						"forcePasswordChangeText": "Ask user to change their password when they sign in",
+						"minimumPasswordLengthRule": "Password must be at least 8 characters!",
+						"confirmNewPassword": "Confirm new password",
+						"confirmPasswordRule": "Please confirm your password!",
+						"confirmPassword": "Confirm Password",
+						"enterNewPassword": "Enter new password"
+					},
+					"resetPassword": "Reset Password",
+					"reviewed": {
+						"label": "Reviewed"
+					},
+					"role": "Role",
+					"searchUser": "Search User",
+					"selectTags": "Select tags",
+					"successPatientAssigned": "Success Patient Assigned",
+					"superAdmin": "Super Admin",
+					"unAssignedPatients": {
+						"label": "Unassigned Users",
+						"userLabel": "Unassigned Users"
+					},
+					"updatedSuccess": "Updated Success",
+					"userPopup": {
+						"chooseAnother": "Choose Another",
+						"continue": "Continue",
+						"description": "Description",
+						"physioAssignDesc": "Physiotherapist Assign Description",
+						"physioAssignLabel": "Physiotherapist Assign Label",
+						"search": "Search",
+						"title": "Title"
+					},
+					"usersLabel": "Users",
+					"consentFormPatients": {
+						"label": "Consent Form Patients"
+					}
+				}
+			},
+			"newPatients": {
+				"date": "Date",
+				"imported": "Imported",
+				"name": "Name",
+				"newPatients": "New Patients",
+				"noPatientsFound": "No patients found",
+				"status": "Status",
+				"subtitle": "New users who just registered",
+				"users": "Users"
+			},
+			"organizationalReporting": {
+				"aggregateMetrics": {
+					"adherenceRate": "Adherence Rate",
+					"avgImprovement": "Avg Improvement",
+					"engagementRate": "Engagement Rate",
+					"title": "Aggregate Metrics",
+					"totalPatients": "Total Patients"
+				},
+				"buttons": {
+					"exportPdf": "Export PDF",
+					"exportPowerPoint": "Export PowerPoint",
+					"refresh": "Refresh"
+				},
+				"cohortAnalysis": {
+					"chartLabels": {
+						"engagementRate": "Engagement Rate",
+						"improvementRate": "Improvement Rate"
+					},
+					"cohortInsights": "Cohort Insights",
+					"improvementRatesBy": "Improvement Rates by",
+					"statisticalSignificance": "Statistical Significance:",
+					"yAxisLabel": "Improvement (%)"
+				},
+				"engagementTrends": {
+					"activePatientsLabel": "Active Patients",
+					"activePatientsTitle": "Active Patients Over Time",
+					"activePatientsYAxisLabel": "Active Patients",
+					"chartLabels": {
+						"adherenceRate": "Adherence Rate",
+						"engagementRate": "Engagement Rate"
+					},
+					"title": "Engagement Trends Over Time",
+					"yAxisLabel": "Rate (%)"
+				},
+				"executiveSummary": {
+					"keyHighlights": "Key Highlights",
+					"recommendations": "Recommendations",
+					"title": "Executive Summary"
+				},
+				"filters": {
+					"dateRange": "Date Range:",
+					"groupBy": "Group By:",
+					"options": {
+						"ageGroup": "Age Group",
+						"clinician": "Clinician",
+						"condition": "Condition",
+						"riskLevel": "Risk Level"
+					}
+				},
+				"loading": "Loading organizational metrics...",
+				"messages": {
+					"exportError": "Failed to export report",
+					"exportSuccess": "Report exported as {{format}}"
+				},
+				"retry": "Retry",
+				"roiMetrics": {
+					"avgSessionsPerPatient": "Avg Sessions per Patient",
+					"avgTimeToImprovement": "Avg Time to Improvement",
+					"clinicalEfficiency": "Clinical Efficiency",
+					"costMetrics": "Cost Metrics",
+					"costPerOutcome": "Cost per Outcome",
+					"costPerPatient": "Cost per Patient",
+					"improvementRate": "Improvement Rate",
+					"outcomeAchievementRate": "Outcome Achievement Rate",
+					"patientOutcomes": "Patient Outcomes",
+					"retentionRate": "Retention Rate",
+					"riskDistribution": "Risk Distribution",
+					"totalProgramCost": "Total Program Cost",
+					"triageTimeReduction": "Triage Time Reduction"
+				},
+				"subtitle": "Multi-clinic analytics and performance benchmarking",
+				"tabs": {
+					"cohortAnalysis": "Cohort Analysis",
+					"engagementTrends": "Engagement Trends",
+					"roiMetrics": "ROI Metrics"
+				},
+				"title": "Organizational Reporting"
+			},
+			"patients": {
+				"searchPlaceholder": "Type to search..."
+			},
+			"pendingReview": {
+				"noPermission": "No permission",
+				"rehab": {
+					"changeStatus": "Change Status"
+				},
+				"submitStatusChanged": "Submit Status Changed"
+			},
+			"rehab": {
+				"addExercise": {
+					"titlePlaceholder": "Enter title",
+					"description": "Description",
+					"descriptionPlaceHolder": "Enter description",
+					"recordAnotherExercise": "Record Another Exercise",
+					"recordExercise": "Record Exercise",
+					"repetitionLength": "Repetitions must be between 1 and 100",
+					"repetitionRequired": "Please enter repetitions",
+					"repetitions": "Repetitions",
+					"returnToAdminConsole": "Return to Admin Console",
+					"save": "Save",
+					"sessionsPerWeek": "Sessions Per Week",
+					"sessionsPerWeekLength": "Sessions per week must be between 1 and 100",
+					"sessionsPerWeekRequired": "Please enter sessions per week",
+					"setsPerDay": "Sets Per Day",
+					"setsPerDayLength": "Sets per day must be between 1 and 100",
+					"setsPerDayRequired": "Please enter sets per day",
+					"setsPerSession": "Sets Per Session",
+					"setsPerSessionLength": "Sets per session must be between 1 and 100",
+					"setsPerSessionRequired": "Please enter sets per session",
+					"title": "Title",
+					"titleRequired": "Please enter a title",
+					"uploadNewExercise": "Upload new Exercise",
+					"whatWouldYouLikeToDo": "What would you like to do?"
+				},
+				"addExerciseFromLibrary": {
+					"and": "and",
+					"cancel": "Cancel",
+					"greaterThan": "greater than",
+					"ok": "OK"
+				},
+				"flow": {
+					"fullscreen": "Fullscreen",
+					"info": "Info",
+					"menu": "Menu"
+				},
+				"rehabPostAssessment": {
+					"congratulations": "Congratulations!",
+					"dashboard": "Dashboard",
+					"description": "You have completed your rehabilitation session",
+					"difficultyExercise": "How difficult was the exercise?",
+					"tooEasy": "TOO EASY",
+					"tooHard": "TOO HARD",
+					"voiceCommand": "Say \"Done\" or \"Dashboard\" to return to the Dashboard"
+				},
+				"rehabPreAssessment": {
+					"no": "No",
+					"yes": "Yes",
+					"slow": "Slow: A slower transition time for those who need more time.",
+					"title": "Have you experienced any new un-reported injuries?",
+					"autoT1": "All actions are automated: the player will start, stop, and save each exercise recording automatically.",
+					"autoT2": "Ideal for a seamless experience without worrying about player controls.",
+					"autoT3": "Recommended for those already familiar with the process.",
+					"manual": "Manual: Manually start the exercise when you are ready.",
+					"okText": "Ok",
+					"default": "Default: Use the transition time set by your Virtual Care.",
+					"autoMode": "Auto Mode",
+					"noChange": "No Change",
+					"preferTT": "Please select your preferred transition time for the exercises.",
+					"saveText": "Save",
+					"slowText": "Slow",
+					"uploaded": "UPLOADED",
+					"closeText": "Close",
+					"dashboard": "Dashboard",
+					"improving": "Improving",
+					"sayNumber": "Say a number between 0 at 10",
+					"true2Form": "TRUE 2 FORM AVAILABLE",
+					"worsening": "Worsening",
+					"cancelText": "Cancel",
+					"chooseMode": "Which mode would you like to use to complete this session?",
+					"decideThat": "Decide the",
+					"manualText": "Manual",
+					"standardT1": "Manual control with buttons to start, stop, and save the recording.",
+					"standardT2": "Includes voice commands to trigger player functions.",
+					"standardT3": "Recommended for those who prefer more control over each stage of the exercise.",
+					"dearPatient": "Dear User",
+					"defaultText": "Default",
+					"letsStarted": "Let's Get Started!",
+					"saveAsImage": "Save as Image",
+					"gestureNotes": "Note: You can change the execution mode at any time in the player settings.",
+					"howDifficult": "How difficult was it for you to complete each exercise?",
+					"rateYourPain": "How would you rate your discomfort today?",
+					"speakDesired": "Speak the desired option out loud",
+					"standardMode": "Manual Mode",
+					"startSession": "Start Session",
+					"gestureControl": "Gesture Control",
+					"transitionTime": "Transition Time",
+					"importantNotice": "Important Notice",
+					"overallCondition": "How is your overall condition?",
+					"virtualEvaluation": "Virtual Evaluation",
+					"noticeDescription1": "If you are experiencing any new or unexpected discomfort during your exercise program, we encourage you to communicate with our physiotherapists before continuing. Your well-being is our priority, and open dialogue helps us provide you with the best care.",
+					"noticeDescription2": "Please don't hesitate to reach out to discuss any concerns or changes in your condition. Your feedback is crucial for us to tailor your program effectively.",
+					"noticeDescription3": "Thank you for your cooperation.",
+					"unreportedInjuries1": "Have you experienced any new",
+					"unreportedInjuries2": "un-reported injuries?",
+					"contactPhysiotherapist": "Contact Physiotherapist",
+					"gestureControlDescription": "From this screen, you can also control actions using Gesture Control. Would you like to activate this function?",
+					"unreportedInjuriesDescription1": "If you are experiencing any new or unexpected discomfort, we encourage you to do the virtual evaluation before continuing. Your well-being is our priority, and open dialogue helps us provide you with the best care."
+				}
+			},
+			"retryScreen": {
+				"addName": "Add Name",
+				"cancel": "Cancel",
+				"descr1": "Select a custom ROM from the list below to edit.",
+				"descr2": "You can modify measures and values as needed.",
+				"editedSuccess": "Changes saved successfully",
+				"measure": "Measure",
+				"pendingScans": "Available Custom ROMs",
+				"scanSelected": "Custom ROM selected",
+				"selectTitle": "Select Custom ROM",
+				"value": "Value"
+			},
+			"scheduleActivity": {
+				"activityName": "Activity Name",
+				"activityType": "Activity Type",
+				"category": "Category",
+				"description": "Description",
+				"estimatedDuration": "~{{minutes}} min",
+				"noProgramsFound": "No programs found",
+				"noRomTemplatesFound": "No ROM templates found",
+				"noSurveysFound": "No surveys found",
+				"notesPlaceholder": "Add instructions or notes for the patient...",
+				"reviewTitle": "Please review the details before confirming",
+				"searchPlaceholder": "Search activities...",
+				"surveyTag": "Survey",
+				"title": "Schedule Activity"
+			},
+			"selectUser": {
+				"description": "Description",
+				"title": "Title"
+			},
+			"survey": {
+				"answerEmptyError": "Answer is Required",
+				"titleTemplate": "Templates",
+				"surveyResultFeedback": "Result Feedback",
+				"surveyInstructions": "Instructions",
+				"titleCreateSurvey": "Create Survey",
+				"systemTemplatesSurvey": "System Templates",
+				"myTemplatesSurvey": "My Templates",
+				"clinicallyValidatedSurvey": "Clinically Validated",
+				"errSurveyInstructions": "Survey Instructions is Required",
+				"errSurveyResultFeedback": "Survey ResultFeedback is Required",
+				"errQuestionTitle": "Question Title is Required",
+				"errQuestionType": "Question Type is Required",
+				"questionTitle": "Question Title",
+				"scored": "Scored",
+				"unscored": "Unscored",
+				"answerTitle": "Answer Title",
+				"scoreTitle": "Score",
+				"active": "Active",
+				"nonActive": "Non Active",
+				"enableSurvey": "Enable",
+				"disableSurvey": "Disable",
+				"editSurvey": "Edit",
+				"deleteSurvey": "Delete",
+				"surveySuccess": "Survey added successfully",
+				"createSurvey": "CREATE SURVEY",
+				"aiDescriptionCreateSurvey": "Based on the latest Evaluation and Range of Motion results , I suggested these surveys for this patient:",
+				"create": "Create Survey",
+				"mySurvey": "My Survey",
+				"questions": "Questions",
+				"noSurvey": "No Surveys Found",
+				"editSurvey": "Edit Survey",
+				"changeImage": "Change Image",
+				"upload": "Upload Image",
+				"uploadImage": "UPLOAD IMAGE",
+				"surveyTitle": "Survey Title",
+				"surveyDescription": "Survey Description",
+				"addQuestion": "ADD QUESTION",
+				"add": "ADD",
+				"addQuestion": "ADD QUESTION",
+				"type": "Type",
+				"rate": "Rate",
+				"singleSelect": "Single Select",
+				"multiSelect": "Multi Select",
+				"openText": "Open Text",
+				"edit": "Edit",
+				"save": "Save",
+				"addNewAnswer": "ADD NEW ANSWER",
+				"score": "Score",
+				"addItem": "Add",
+				"noImage": "No Image Found",
+				"noTemplate": "No Template Found",
+				"aiDescriptionStartSurvey": "Sure, here is the surveys assigned to you",
+				"completed": "Completed",
+				"startSurvey": "Start Survey",
+				"startSurveyAgain": "Start Survey Again",
+				"discardChangesTitle": "Discard Changes ?",
+				"discardChangesContent": "You will loose all the unsaved changes on this selected survey",
+				"thankYouText": "Thank you for completing the survey.Your reponsesprovide valuable insights into how neck pain impacts your daily life. Please feel free to reach out if you have any furthur questions or concerns.",
+				"exit": "Exit",
+				"submit": "Submit",
+				"back": "Back",
+				"next": "Next",
+				"selectRate": "Select your rating",
+				"detailedAnswer": "Provide a detailed answer",
+				"allOptions": "Select all options that apply",
+				"oneOption": "Select one option",
+				"aiDescriptionSurveySummary": "Sure, Here are the Survey's Summary for this patient:",
+				"noResult": "No Results Found",
+				"noSurvey": "This survey is no longer available",
+				"surveyName": "Survey Name",
+				"surveySummary": "Survey Summary",
+				"completedSurvey": "successfully completed the Survey",
+				"assignedSurvey": "You have been assigned a new survey",
+				"surveyNotes": "Survey Notes",
+				"enterSurveyNotes": "Enter Survey Notes",
+				"survey": "Survey",
+				"errSurveyTitle": "Survey Title is Required",
+				"errSurveyDescription": "Survey Description is Required",
+				"errQuestion": "Please add at least one question",
+				"errOption": "Every question must have options",
+				"errRate": "Please fill the rating question options",
+				"surveyUpdated": "Survey is updated successfully",
+				"errQuestionTitle": "Question Title is Required",
+				"errQuestionType": "Question Type is Required",
+				"questionUpdated": "Question updated successfully",
+				"questionDeleted": "Question deleted successfully",
+				"optionUpdated": "Option updated successfully",
+				"optionDeleted": "Option deleted successfully",
+				"noQuestionAdded": "No Question Added",
+				"errRateEmpty": "Rating should not be Empty",
+				"errQuestionEmpty": "Question should not be empty",
+				"errOptionEmpty": "Option should not be Empty",
+				"surveyApprove": "Survey Approved Successfully",
+				"surveyDisapprove": "Survey Disapproved Successfully",
+				"allOptions": "Select all options that apply",
+				"assignedSurvey": "Assigned Survey",
+				"back": "Back",
+				"changeImage": "Change Image",
+				"changesDiscardedConfirmation": "Your changes will be discarded. Do you want to proceed?",
+				"completed": "Completed",
+				"completedSurvey": "Completed Survey",
+				"detailedAnswer": "Please provide a detailed answer",
+				"done": "Done",
+				"exit": "Exit",
+				"next": "Next",
+				"noImage": "No image",
+				"noResult": "No result",
+				"noSurveysFound": "No Surveys Found",
+				"oneOption": "Select one option",
+				"questions": "Questions",
+				"save": "Save",
+				"score": "Score",
+				"selectRate": "Select a rating",
+				"startSurvey": "Start Survey",
+				"startSurveyAgain": "Start Survey Again",
+				"submit": "Submit",
+				"survey": "Survey",
+				"surveyName": "Survey Name",
+				"surveySummary": "Survey Summary",
+				"thankYouText": "Thank you for completing the survey!",
+				"upload": "Upload",
+				"uploadImage": "Upload Image",
+				"yourTotal": "Your total score:"
+			},
+			"table": {
+				"consentAcceptedDate": "Consent Accepted Date",
+				"date": "Date",
+				"managedBy": "Managed By",
+				"name": "Name",
+				"role": "Role",
+				"status": "Status"
+			},
+			"theme": {
+				"addTag": "Add Tags",
+				"applyTheme": "Apply Theme",
+				"bandwithText": "Bandwidth Mode",
+				"blockUser": "Block User Access",
+				"changeTheme": "Change Theme",
+				"disable": "Disable",
+				"enable": "Enable",
+				"high": "High Bandwidth",
+				"inviteCodeText": "Invite Code",
+				"low": "Low Bandwidth",
+				"noTagFound": "No tags found",
+				"selectTag": "Select Tag",
+				"selfRegistration": "Self-Registration",
+				"themeChanged": "Theme Changed",
+				"themeSelectorText": "Theme Settings"
+			},
+			"triage": {
+				"bulkOperations": {
+					"assignClinician": {
+						"ariaLabel": "Select clinician",
+						"button": "Assign Clinician",
+						"buttonAria": "Assign clinician to selected patients",
+						"buttonWithShortcut": "Assign Clinician (C)",
+						"confirmMessage": "You are about to assign a clinician to {{count}} patient",
+						"confirmMessage_other": "You are about to assign a clinician to {{count}} patients",
+						"errorMessage": "Failed to assign clinician",
+						"label": "Select Clinician:",
+						"minSelectionWarning": "Please select at least 2 patients to assign clinician",
+						"placeholder": "Select clinician",
+						"sendNotification": "Send notification email to assigned clinician",
+						"successMessage": "Assigned {{clinicianName}} to {{count}} patient(s)",
+						"title": "Assign Clinician",
+						"undoWarning": "This action can be undone within 10 seconds"
+					},
+					"common": {
+						"cancel": "Cancel"
+					},
+					"export": {
+						"button": "Export",
+						"buttonAria": "Export selected patients",
+						"buttonExporting": "Exporting...",
+						"buttonWithShortcut": "Export (E)",
+						"confirmMessage": "Exporting data for {{count}} patient",
+						"confirmMessage_other": "Exporting data for {{count}} patients",
+						"csvOption": "CSV (Excel compatible)",
+						"errorMessage": "Failed to export data",
+						"formatLabel": "Export Format:",
+						"includesInfo": "Export includes: Patient name, ID, posture score, status, last scan date",
+						"jsonOption": "JSON (API data format)",
+						"minSelectionWarning": "Please select at least 2 patients to export",
+						"preparingExport": "Preparing export...",
+						"successMessage": "Exported {{count}} patient(s) as {{format}}",
+						"title": "Export Patient Data"
+					},
+					"undo": {
+						"dismissNotification": "Dismiss notification",
+						"undoAvailable": "Undo available for {{seconds}}s",
+						"undoBulkOperation": "Undo bulk operation",
+						"undoButton": "Undo",
+						"undoError": "Failed to undo operation",
+						"undoSuccess": "Operation undone successfully"
+					},
+					"updateStatus": {
+						"ariaLabel": "Select new status",
+						"button": "Update Status",
+						"buttonAria": "Update status for selected patients",
+						"buttonWithShortcut": "Update Status (U)",
+						"confirmMessage": "You are about to update status for {{count}} patient",
+						"confirmMessage_other": "You are about to update status for {{count}} patients",
+						"errorMessage": "Failed to update status",
+						"label": "New Status:",
+						"minSelectionWarning": "Please select at least 2 patients to update status",
+						"placeholder": "Select new status",
+						"successMessage": "Updated status for {{count}} patient(s)",
+						"title": "Update Patient Status",
+						"undoWarning": "This action can be undone within 10 seconds"
+					}
+				},
+				"dashboard": {
+					"keyboardShortcuts": "Keyboard Shortcuts (?)",
+					"keyboardShortcutsTitle": "Admin Triage Dashboard Shortcuts",
+					"patientTriageDashboard": "Patient triage dashboard",
+					"refresh": "Refresh",
+					"refreshPatientData": "Refresh patient data",
+					"refreshWithShortcut": "Refresh (R)",
+					"shortcuts": "Shortcuts",
+					"showKeyboardShortcuts": "Show keyboard shortcuts",
+					"standardTableView": "Standard table view",
+					"title": "Triage Dashboard",
+					"toggleVirtualScrolling": "Toggle virtual scrolling",
+					"virtualScrolling": "Virtual Scrolling",
+					"virtualScrollingTooltip": "Using virtual scrolling for better performance"
+				},
+				"filters": {
+					"advancedFilters": "Advanced Filters",
+					"allPatients": "All Patients",
+					"clearAllFilters": "Clear all filters",
+					"clearFilters": "Clear Filters",
+					"filteredResults": "Filtered to show {{count}} patients with {{filter}} criteria",
+					"focusSearchTooltip": "Focus Search (/)",
+					"highRisk": "High Risk",
+					"needsReview": "Needs Review",
+					"overdueScan": "Overdue Scan",
+					"quickFiltersAriaLabel": "Quick filters",
+					"searchPatients": "Search patients",
+					"searchPlaceholder": "Search by patient name or email (debounced 300ms)",
+					"toggleAdvancedFilters": "Toggle advanced filters",
+					"toggleFilters": "Toggle Filters (F)"
+				},
+				"messages": {
+					"loadError": "Failed to load patient data"
+				},
+				"selection": {
+					"clearSelection": "Clear Selection",
+					"clearSelectionAria": "Clear selection",
+					"clearSelectionTooltip": "Deselect All (Cmd+Shift+A)",
+					"keyboardHint": "(J/K to navigate, Space to select, Cmd+A to select all)",
+					"patientsSelected": "{{count}} patient selected",
+					"patientsSelected_other": "{{count}} patients selected",
+					"selectAll": "Selected all {{count}} patients",
+					"selectPatient": "Select patient {{name}}",
+					"selectionCleared": "Selection cleared"
+				},
+				"status": {
+					"critical": "Critical",
+					"excellent": "Excellent",
+					"fair": "Fair",
+					"good": "Good",
+					"poor": "Poor"
+				},
+				"table": {
+					"columns": {
+						"assignedClinician": "Assigned Clinician",
+						"lastScan": "Last Scan",
+						"patientName": "Patient Name",
+						"postureScore": "Posture Score",
+						"riskLevel": "Risk Level",
+						"select": "Select",
+						"status": "Status"
+					},
+					"loadingPatients": "Loading patients...",
+					"noPatients": "No patients found",
+					"paginationText": "{{from}}-{{to}} of {{total}} patients",
+					"patientListTable": "Patient list table",
+					"unassigned": "Unassigned",
+					"virtualScrollStatus": "Showing {{showing}} of {{total}} patients (Virtual scrolling enabled for performance)"
+				}
+			},
+			"welcome": "Welcome"
+		},
+		"settings": {
+			"exportReportsTab": {
+				"exportSuccess": "Report exported successfully",
+				"tags": {
+					"description": "Select one or more tags to filter the exported report.",
+					"placeholder": "Add Tags Here"
+				},
+				"dateRange": {
+					"description": "Choose a start and end date to generate the report.",
+					"label": "Select Date Range"
+				}
+			},
+			"loading": "Loading settings...",
+			"error": {
+				"title": "Failed to Load Settings",
+				"retry": "Retry"
+			},
+			"advancedTab": {
+				"bandwidth": {
+					"networkIssue": "Low Bandwidth Mode enabled",
+					"networkOk": "High Bandwidth Mode enabled",
+					"badge": "Super Admin",
+					"description": "Enable bandwidth limits for video uploads and processing to optimize network performance.",
+					"disabled": "Bandwidth limits disabled",
+					"enabled": "Bandwidth limits enabled",
+					"label": "Bandwidth Optimization",
+					"maxProcessingLabel": "Max processing size (MB):",
+					"maxUploadLabel": "Max upload size (MB):",
+					"validationError": "Max upload size must be less than max processing size"
+				},
+				"bandwidthUpdateError": "Failed to update bandwidth",
+				"bandwidthUpdateSuccess": "Bandwidth settings updated",
+				"confirmChanges": {
+					"cancel": "Cancel",
+					"description": "These tag changes affect user organization. Continue?",
+					"ok": "Save Changes",
+					"title": "Confirm Changes"
+				},
+				"retryButton": "Retry",
+				"saveChanges": "Save Changes",
+				"tags": {
+					"addButton": "Add Tag",
+					"badge": "Super Admin",
+					"delete": {
+						"description": "Are you sure you want to delete this tag?",
+						"no": "Cancel",
+						"title": "Delete Tag",
+						"yes": "Delete"
+					},
+					"deleteTooltip": "Delete tag",
+					"description": "Manage tags for organizing users into groups and categories.",
+					"editTooltip": "Edit tag",
+					"label": "User Tags",
+					"modal": {
+						"cancelButton": "Cancel",
+						"colorLabel": "Tag Color",
+						"colorRequired": "Please select tag color",
+						"createButton": "Add",
+						"createTitle": "Add Tag",
+						"descriptionLabel": "Description (Optional)",
+						"descriptionPlaceholder": "Enter tag description",
+						"editTitle": "Edit Tag",
+						"nameLabel": "Tag Name",
+						"namePlaceholder": "Enter tag name",
+						"nameRequired": "Please enter tag name",
+						"updateButton": "Save"
+					}
+				},
+				"tagsError": "Failed to save tags",
+				"tagsSuccess": "Tags saved successfully",
+				"unauthorized": {
+					"subtitle": "Super Admin access required for Advanced settings.",
+					"title": "Unauthorized"
+				},
+				"unsavedChanges": "You have unsaved changes in Advanced settings. These affect all users. Are you sure you want to leave?"
+			},
+			"appearanceTab": {
+				"theme": {
+					"dark": "Dark",
+					"default": "Default",
+					"description": "Choose the visual theme for your VitalFlow portal. Changes apply immediately.",
+					"label": "Theme",
+					"system": "System",
+					"vibrant": "Vibrant"
+				},
+				"updateError": "Failed to update theme",
+				"updateSuccess": "Theme updated successfully"
+			},
+			"contentLibraryTab": {
+				"conditions": {
+					"createButton": "Add Content",
+					"createSuccess": "Condition created (unsaved)",
+					"delete": {
+						"description": "Are you sure you want to delete this condition?",
+						"no": "No",
+						"title": "Delete Condition",
+						"yes": "Yes"
+					},
+					"deleteSuccess": "Condition deleted (unsaved)",
+					"description": "Manage the pre-existing conditions content card shown during patient onboarding.",
+					"empty": "No content configured. Click the card to add content.",
+					"icd10": "ICD-10",
+					"label": "Pre-existing Conditions",
+					"modal": {
+						"cancelButton": "Cancel",
+						"createButton": "Create",
+						"createTitle": "Create Pre-existing Condition",
+						"descriptionLabel": "Description",
+						"descriptionPlaceholder": "Enter description with rich text formatting...",
+						"editTitle": "Edit Pre-existing Conditions",
+						"icd10Invalid": "Invalid ICD-10 format (e.g., M15.0 or A00)",
+						"icd10Label": "ICD-10 Code",
+						"icd10Placeholder": "e.g. M15.0 (Polyosteoarthritis)",
+						"imageLabel": "Image",
+						"imageSizeError": "Image must be smaller than 5MB!",
+						"imageTypeError": "You can only upload image files!",
+						"nameLabel": "Condition Name",
+						"nameMinLength": "Title must be at least 3 characters",
+						"namePlaceholder": "e.g. Osteoarthritis, Hypertension",
+						"nameRequired": "Please enter a condition name",
+						"saveButton": "Save",
+						"titleLabel": "Title",
+						"titleMinLength": "Title must be at least 3 characters",
+						"titlePlaceholder": "Enter title",
+						"titleRequired": "Please enter a title",
+						"updateButton": "Update",
+						"uploadHint": "Supported formats: JPG, PNG, GIF. Max size: 5MB. Recommended size: 800x600px.",
+						"uploadText": "Click to upload"
+					},
+					"noDescription": "No description",
+					"pagination": {
+						"total": "Total {{total}} conditions"
+					},
+					"saveChanges": "Save Changes",
+					"saveError": "Failed to save conditions",
+					"saveSuccess": "Changes saved successfully",
+					"unsavedChanges": "You have unsaved changes to pre-existing conditions. Are you sure you want to leave?",
+					"updateSuccess": "Content updated successfully"
+				},
+				"goals": {
+					"categories": {
+						"balance": "Balance",
+						"mobility": "Mobility",
+						"other": "Other",
+						"pain": "Pain Management",
+						"strength": "Strength"
+					},
+					"createButton": "Add Goal",
+					"createSuccess": "Goal created (unsaved)",
+					"delete": {
+						"description": "Are you sure you want to delete this goal?",
+						"no": "No",
+						"title": "Delete Goal",
+						"yes": "Yes"
+					},
+					"deleteSuccess": "Goal deleted (unsaved)",
+					"description": "Manage rehabilitation and functional goals library. Create, edit, or delete goals. Goals can be categorized for easier organization.",
+					"empty": "No functional goals yet. Click 'Add Goal' to create one.",
+					"label": "Functional Goals",
+					"modal": {
+						"cancelButton": "Cancel",
+						"categoryLabel": "Category",
+						"categoryPlaceholder": "Select a category",
+						"categoryRequired": "Please select a category",
+						"createButton": "Create",
+						"createTitle": "Create Functional Goal",
+						"descriptionLabel": "Description",
+						"descriptionPlaceholder": "Describe this goal and its purpose...",
+						"editTitle": "Edit Functional Goal",
+						"titleLabel": "Goal Title",
+						"titleMinLength": "Title must be at least 3 characters",
+						"titlePlaceholder": "e.g. Improve shoulder range of motion",
+						"titleRequired": "Please enter a goal title",
+						"updateButton": "Update"
+					},
+					"noDescription": "No description",
+					"saveChanges": "Save Changes",
+					"saveError": "Failed to save functional goals",
+					"saveSuccess": "Functional goals saved successfully",
+					"unsavedChanges": "You have unsaved changes to functional goals. Are you sure you want to leave?",
+					"updateSuccess": "Goal updated (unsaved)"
+				},
+				"plans": {
+					"columns": {
+						"actions": "Actions",
+						"description": "Description",
+						"features": "Features",
+						"name": "Plan Name",
+						"price": "Price"
+					},
+					"createButton": "Create Plan",
+					"createSuccess": "Plan created (unsaved)",
+					"delete": {
+						"description": "Are you sure you want to delete this plan?",
+						"no": "No",
+						"title": "Delete Plan",
+						"yes": "Yes"
+					},
+					"deleteSuccess": "Plan deleted (unsaved)",
+					"description": "Manage pricing plans and service packages. Create, edit, or delete plans. Click 'Save Changes' to persist your changes.",
+					"label": "Service Plans",
+					"modal": {
+						"cancelButton": "Cancel",
+						"createButton": "Create",
+						"createTitle": "Create Plan",
+						"descriptionLabel": "Description",
+						"descriptionPlaceholder": "Describe this plan and its benefits...",
+						"editTitle": "Edit Plan",
+						"featuresLabel": "Features",
+						"featuresPlaceholder": "Add features (press Enter after each)",
+						"nameLabel": "Plan Name",
+						"nameMinLength": "Plan name must be at least 3 characters",
+						"namePlaceholder": "e.g. Basic Plan, Premium Plan",
+						"nameRequired": "Please enter a plan name",
+						"priceLabel": "Price",
+						"pricePlaceholder": "0.00",
+						"pricePositive": "Price must be a positive number",
+						"priceRequired": "Please enter a price",
+						"updateButton": "Update"
+					},
+					"pagination": {
+						"total": "Total {{total}} plans"
+					},
+					"saveChanges": "Save Changes",
+					"saveError": "Failed to save plans",
+					"saveSuccess": "Plans saved successfully",
+					"unsavedChanges": "You have unsaved changes to plans. Are you sure you want to leave?",
+					"updateSuccess": "Plan updated (unsaved)"
+				},
+				"tabs": {
+					"conditions": "Pre-existing Conditions",
+					"goals": "Functional Goals",
+					"plans": "Plans"
+				}
+			},
+			"featureFlag": {
+				"disabled": "Disabled",
+				"enabled": "Enabled",
+				"manualOverride": "Manual Override",
+				"manualOverrideActive": "Manual Override Active",
+				"overrideDescription": "This override affects only your current browser session. Other users will see the server-configured value from Unleash.",
+				"resetToServerValue": "Reset to Server Value",
+				"serverValue": "Server Value",
+				"status": "Status",
+				"subtitle": "Toggle to test the new Settings interface",
+				"tip": "Tip",
+				"tipDescription": "Use this toggle to test the new Settings UI locally without affecting production rollout percentages. Changes take effect immediately after page reload.",
+				"title": "New Settings UI"
+			},
+			"generalTab": {
+				"clientId": {
+					"description": "Unique identifier for your organization. Used for API integrations and analytics tracking.",
+					"label": "Client ID",
+					"placeholder": "Enter client ID"
+				},
+				"inviteCode": {
+					"description": "Code that users need to provide when registering. Leave empty to disable invite code requirement.",
+					"label": "Invite Code",
+					"placeholder": "Enter invite code"
+				},
+				"saveChanges": "Save Changes",
+				"saveError": "Failed to save general settings",
+				"saveSuccess": "General settings saved successfully",
+				"selfRegistration": {
+					"autoAssignLabel": "Auto-assign new users to:",
+					"autoAssignPlaceholder": "Select admin (optional)",
+					"description": "Allow users to register without an invitation. Configure approval workflow and auto-assignment options.",
+					"disabled": "Self-registration disabled",
+					"enabled": "Self-registration enabled",
+					"label": "Self-Registration",
+					"requireApproval": "Require admin approval before account activation"
+				},
+				"unsavedChanges": "You have unsaved changes in General settings. Are you sure you want to leave?"
+			},
+			"integrationsTab": {
+				"apiKey": {
+					"description": "API key for OpenAI integration (kept secure). Your key is encrypted and never exposed in logs.",
+					"helpLinkText": "Get your API key",
+					"label": "OpenAI API Key",
+					"placeholder": "sk-..."
+				},
+				"apiKeyActive": {
+					"description": "Enable or disable OpenAI integration. Useful for temporary disablement during debugging without deleting the key.",
+					"disabled": "OpenAI integration disabled",
+					"enabled": "OpenAI integration enabled",
+					"label": "API Key Active"
+				},
+				"saveChanges": "Save Changes",
+				"saveError": "Failed to save integration settings",
+				"saveSuccess": "Integration settings saved successfully",
+				"testConnection": {
+					"button": "Test Connection",
+					"placeholder": "Test Connection feature will be implemented in Story 3.5",
+					"tooltip": "Test your OpenAI API key connection",
+					"tooltipSaveFirst": "Save your changes first before testing"
+				},
+				"unsavedChanges": "You have unsaved changes in Integration settings. Are you sure you want to leave?"
+			},
+			"page": {
+				"subtitle": "Manage your organization settings, integrations, and preferences",
+				"title": "Settings"
+			},
+			"plansTab": {
+				"availablePlans": {
+					"description": "Plans that can be selected by users",
+					"label": "Available Plans"
+				},
+				"defaultPlan": {
+					"description": "Default plan assigned to new users",
+					"label": "Default Plan",
+					"placeholder": "Select default plan"
+				},
+				"saveChanges": "Save Changes",
+				"saveError": "Failed to save plans",
+				"saveSuccess": "Plans saved successfully",
+				"savedUserPlans": {
+					"assigned": "Assigned",
+					"description": "Plans currently assigned to users (read-only)",
+					"label": "Saved User Plans",
+					"noPlans": "No user plans assigned yet",
+					"plan": "Plan",
+					"user": "User"
+				},
+				"title": "Plans",
+				"unsavedChanges": "You have unsaved changes in Plans settings. Are you sure you want to leave?",
+				"upgradePlan": {
+					"description": "Plan users can upgrade to",
+					"label": "Upgrade Plan",
+					"placeholder": "Select upgrade plan"
+				},
+				"validation": {
+					"atLeastOne": "At least one plan must be available",
+					"defaultEqualsUpgrade": "Upgrade plan must be different from default plan",
+					"defaultNotInAvailable": "Default plan must be selected in Available Plans",
+					"description": "Please fix the errors below before saving.",
+					"title": "Validation Errors",
+					"upgradeNotInAvailable": "Upgrade plan must be selected in Available Plans"
+				}
+			},
+			"templatesTab": {
+				"bulkInvite": {
+					"description": "Email template used for bulk user invitations. Use {{name}}, {{inviteCode}}, {{link}} variables.",
+					"label": "Bulk Invite Template",
+					"placeholder": "Dear {{name}}, Welcome to VitalFlow..."
+				},
+				"consentForm": {
+					"description": "Digital consent form content displayed to users before assessments. Use {{clinicName}}, {{date}} variables.",
+					"label": "Consent Form Template",
+					"placeholder": "I, the undersigned, consent to participate in..."
+				},
+				"invite": {
+					"description": "Email template sent when inviting a new user to the platform. Use {{name}}, {{inviteCode}}, {{link}} variables.",
+					"label": "Invite Template",
+					"placeholder": "Hi {{name}}, you have been invited to join VitalFlow..."
+				},
+				"lastSaved": "Last saved",
+				"preview": "Preview",
+				"resultEmail": {
+					"description": "Email template sent when assessment results are ready. Use {{name}}, {{resultLink}}, {{assessmentType}} variables.",
+					"label": "Result Email Template",
+					"placeholder": "Hi {{name}}, your {{assessmentType}} results are ready..."
+				},
+				"rom": {
+					"description": "Instructions and description shown at the start of ROM assessments. Use {{patientName}}, {{date}} variables.",
+					"label": "ROM Assessment Template",
+					"placeholder": "This assessment will measure your range of motion..."
+				},
+				"saving": "Saving..."
+			}
+		}
+	},
+	"No Data": "No Data",
+	"No values exceeded the limit": "No values exceeded the limit",
+	"Patient": {
+		"data": {
+			"achievements": {
+				"pageDescription": "Track your progress and celebrate your milestones on your journey to better health.",
+				"pageTitle": "Your Achievements"
+			},
+			"actions": "Actions",
+			"activityStream": {
+				"addMessage": "ADD A MESSAGE",
+				"areReady": "WHEN YOU'RE READY",
+				"attachImage": "Attach Image",
+				"calendarNavigation": "Calendar Navigation",
+				"clear": "Clear",
+				"clearMsg": "Reports cleared successfully",
+				"closeAttachMenu": "Close Attach Menu",
+				"closeReply": "Close Reply",
+				"dateList": "Date List",
+				"discard": "DISCARD",
+				"discardRecording": "Discard Recording",
+				"discardTooltip": "Discard",
+				"editImage": "Edit Image",
+				"evaluation": "Evaluation Assessment",
+				"evaluationDescription": "successfully completed the evaluation.",
+				"hasEvents": "Has Events",
+				"image": "Image",
+				"imageErr": "Image is Required",
+				"imageFileInput": "Image File Input",
+				"imageSelected": "Image is Selected",
+				"loading": "Loading",
+				"mainContent": "Main Content",
+				"message": "Message",
+				"messageErr": "Message or Video/Image is Required",
+				"messageHere": "Enter message here",
+				"messageInput": "Message Input",
+				"newMsg": "New Message",
+				"newProgramAssigned": "You have been assigned a new program",
+				"newVideoMsg": "New Video Message",
+				"nextWeek": "Next Week",
+				"omniRom": "VitalScan ROM",
+				"omniRomDescription": "successfully completed the VitalScan ROM.",
+				"openAttachMenu": "Open Attach Menu",
+				"posture": "Posture",
+				"postureDescription": "successfully completed the Posture",
+				"pressRecord": "PRESS RECORD",
+				"previousWeek": "Previous Week",
+				"program": "Program Session",
+				"programDescription": "successfully completed the Program Session",
+				"recDiscard": "Message Discarded",
+				"recStarted": "Recording Started",
+				"record": "RECORD",
+				"recordVideo": "Record Video",
+				"recorded": "Recorded",
+				"returnToToday": "Return To Today",
+				"selectDate": "Select Date",
+				"selectMonth": "Select month: {{month}}",
+				"selectedPreview": "Selected Preview",
+				"send": "Send",
+				"sendMessage": "Message Send",
+				"sendMessageErr": "Failed to send message",
+				"sendingMessage": "Sending message...",
+				"speechRecognitionNotSupported": "Browser doesn't support speech recognition.",
+				"startIn": "start in",
+				"startVoiceRecording": "Start Voice Recording",
+				"stop": "STOP",
+				"stopRecording": "Stop Recording",
+				"stopTooltip": "Stop",
+				"submit": "SUBMIT",
+				"today": "Today",
+				"uploadImage": "UPLOAD IMAGE",
+				"video": "Video",
+				"videoErr": "Video is Required",
+				"title": "Activity Stream",
+				"activity": "Activity",
+				"getReady": "GET READY",
+				"letsMove": "Let's Move New videos record",
+				"newImage": "New Image",
+				"newRecord": "New Record",
+				"uploadImages": "Upload Images",
+				"voiceRecording": "Voice Recording",
+				"letsMoveDescription": "successfully completed the Let's Move."
+			},
+			"assessment": {
+				"noDataAvailable": "No assessment data available yet"
+			},
+			"charts": {
+				"outcomeCorrelation": {
+					"noCorrelationDataAvailable": "No correlation data available yet"
+				}
+			},
+			"completeProfile": {
+				"consentPolicy": "Informed consent policy",
+				"date": "Date",
+				"dob": "Date of birth",
+				"dobError": "Birth date is required.",
+				"editProfile": "Edit Profile",
+				"feet": "ft",
+				"feetInchErr": "Both Feet and Inch Required.",
+				"female": "Female",
+				"firstName": "First Name",
+				"firstNameErr": "First name is required.",
+				"gender": "Gender",
+				"genderErr": "Gender is required.",
+				"height": "Height",
+				"heightErr": "Height is required.",
+				"heightPositive": "Height must be a positive number.",
+				"inches": "in",
+				"lastName": "Last Name",
+				"lastNameErr": "Last name is required.",
+				"male": "Male",
+				"mobileErr": "Invalid mobile number (must be 10 digits)",
+				"month": "Month",
+				"other": "Other",
+				"pleaseCorrect": "Please correct the errors in the form.",
+				"readAgree": "I have read and agree to the",
+				"saveError": "Error saving user data",
+				"saveError 2nd block": "Error saving profile. Please try again.",
+				"saveSuccess": "Data saved Successfully",
+				"weight": "Weight",
+				"weightErr": "Weight is required.",
+				"weightPositive": "Weight must be a positive number.",
+				"year": "Year",
+				"youAgree": "You must agree to the consent policy.",
+				"title": "Complete Your Profile",
+				"button": "NEXT",
+				"update": "Update",
+				"dataSave": "Data Saved Successfully",
+				"pregnant": "I'm pregnant",
+				"birthDate": "Birth Date",
+				"errGender": "Please select your Gender !",
+				"errHeight": "Please enter your Height !",
+				"errWeight": "Please enter your Weight !",
+				"preganant": "I'm Pregnant",
+				"backProfile": "Return to profile form",
+				"consent_p_1": "Thank you for choosing VitalFlow for your mobility assessment and treatment. The VitalFlow program involves a comprehensive evaluation and treatment process. As with any form of medical intervention, individual responses to treatment may vary, and it is not always possible to predict the outcome due to the unique nature of each person's condition. If you have any questions or concerns about your evaluation or recommended treatment plan, please inform your assigned Physical Therapist (PT) immediately. They will explain the treatment rationale and make any necessary modifications to your program.",
+				"consent_p_2": "All VitalFlow Specialists are qualified Physiotherapists who specialize in diagnosing and treating musculoskeletal (MSK) injuries and disorders and all VitalFlow treatment plans may include personalized exercise plans which includes muscle activation exercises, strengthening exercises, stretches and Mobility Exercises.",
+				"consent_p_3": "",
+				"consent_p_4": "",
+				"consent_p_5": "",
+				"consent_p_6": "",
+				"errLastName": "Please enter your Last Name !",
+				"consentError": "Please agree the consent policy.",
+				"errBirthDate": "Please select your Birth Date !",
+				"errFirstName": "Please enter your First Name !",
+				"functionGoals": "Functional Goals",
+				"readCarefully": "Please Read Carefully",
+				"errFunctionalGoals": "Please select Functional Goals !",
+				"informConsentPolicy": "Informed Consent Policy"
+			},
+			"functionalGoals": {
+				"description-1": "Ease discomfort with rest, breathing, or movement to reduce stress and feel better",
+				"description-2": "Restore ROM, Strength, and Endurance Post-Injury, Pre/Post-Surgical Rehabilitation",
+				"description-6": "Injury Prevention, Sports-Specific Training & Performance Optimization",
+				"description-7": "Improve strength, flexibility, balance, and movement control",
+				"description-10": "Improve Overall Wellness & Stress Management, Enhance Quality of Life, Improve Cardiovascular and Respiratory Function, Weight Management",
+				"description-3": "Improve ADLs, Balance & Gait Training, Fall Prevention"
+			},
+			"dashboardInvite": {
+				"careSpace": "VitalFlow",
+				"downloadApp": "Download App From",
+				"improveMobility": "turns your phone into an effective tool to improve your mobility.",
+				"inviteCode": "INVITE CODE",
+				"text": "Text",
+				"email": "Email",
+				"yourMail": "Your Mail",
+				"yourPhone": "Your Phone Number",
+				"shareInvite": "Share Invite"
+			},
+			"dashboardScreen": {
+				"createCustomScan": "Create Custom Scan",
+				"currentStreak": "Current Streak",
+				"mobilityScore": "Discover Your Mobility Score",
+				"postureAnalysis": "Posture Analysis helps assess your body alignment to detect imbalances. Regular checks can improve comfort, reduce strain, and enhance daily function.",
+				"romMeasures": "Range of Motion (ROM) measures how freely your joints move. Regular checks can reveal your mobility progress and guide your wellness journey.",
+				"romScore": "ROM Score",
+				"sessionsCompleted": "Sessions Completed",
+				"startPostureScan": "Start Posture Scan"
+			},
+			"errors": {
+				"errorLoadingDashboard": "Error Loading Dashboard",
+				"failedToLoadDashboard": "Failed to load dashboard data"
+			},
+			"exercises": {
+				"markComplete": "Mark complete",
+				"recommendation": {
+					"filters": {
+						"difficulty": {
+							"advanced": "Advanced",
+							"all": "All Levels",
+							"beginner": "Beginner",
+							"intermediate": "Intermediate",
+							"label": "Filter by difficulty",
+							"placeholder": "Difficulty"
+						},
+						"muscleGroup": {
+							"all": "All Muscle Groups",
+							"core": "Core",
+							"hipsPelvis": "Hips/Pelvis",
+							"label": "Filter by muscle group",
+							"lowerBack": "Lower Back",
+							"neckShoulders": "Neck/Shoulders",
+							"placeholder": "Muscle Group",
+							"upperBack": "Upper Back"
+						}
+					},
+					"loadingTip": "Loading exercise recommendations...",
+					"modal": {
+						"tabs": {
+							"instructions": "Instructions",
+							"reasoning": "Why This Exercise?",
+							"transcript": "Transcript",
+							"video": "Video Demo"
+						},
+						"transcript": {
+							"comingSoon": "Transcript functionality coming soon. For now, please enable closed captions in the video player.",
+							"title": "Video Transcript"
+						}
+					},
+					"noMatchingFilters": "No exercises match your filters",
+					"noRecommendations": "No exercise recommendations available",
+					"sort": {
+						"alphabetical": "A-Z",
+						"difficulty": "Difficulty",
+						"duration": "Duration",
+						"label": "Sort exercises",
+						"priority": "Priority"
+					},
+					"subtitle": "{{count}} exercise to improve your posture",
+					"subtitle_plural": "{{count}} exercises to improve your posture",
+					"title": "Recommended Exercises"
+				}
+			},
+			"milestones": {
+				"allMilestonesEarned": "All available milestones earned!",
+				"earnedMilestones": "Earned Milestones",
+				"inProgress": "In Progress:",
+				"noMilestonesEarned": "No milestones earned yet",
+				"progressTowardMilestones": "Progress Toward Milestones",
+				"recentAchievements": "Recent Achievements",
+				"recentBadge": "Recent!",
+				"title": "Patient Milestones",
+				"totalEarned": "Total Earned:"
+			},
+			"mobilityReport": {
+				"birthDate": "Birth Date",
+				"description": "You're doing well, but some stiffness or limitations might affect certain activities. A bit of focused mobility work can help you move even better.",
+				"description1": "You're in top form! You move with ease, flexibility, and full range—perfect for peak performance. There's no limitation to your movement.",
+				"description2": "You're strong and agile with a bit of room for improvement. Your daily movements are efficient, though you may have some minor restrictions that don't slow you down.",
+				"description4": "Your movements are a bit restricted, causing occasional discomfort or inefficiencies. With the right corrective exercises, you'll regain more fluid movement.",
+				"description5": "You face significant mobility challenges, affecting daily activities. There is an increased risk of stiffness, pain, or injury, requiring focused rehabilitation to restore function.",
+				"description6": "You're dealing with severe mobility restrictions, which may be affecting your independence. Immediate intervention and focused support are needed to improve your mobility.",
+				"didYouKnow": "Did You Know?",
+				"didYouKnowDescription": "Improving your joint mobility not only relieves pain but also boosts posture, balance and energy levels.",
+				"height": "Height",
+				"list1": "Your right shoulder is almost at optimal mobility",
+				"list2": "Your left shoulder extension is close to optimal",
+				"list3": "Lumbar spine needs mobility rehab",
+				"list4": "You’re on track - Keep going!",
+				"mobilityOverview": "Your Mobility Overview",
+				"mobilityOverviewDescription": "This chart provides a snapshot of your current mobility compared to your full potential. Each section represents a joint and its related movement. The more filled the circle, the closer you are to optimal mobility.",
+				"mobilityPersonas": "Mobility Personas",
+				"mobilityProgressReport": "Mobility Progress Report",
+				"range1": "Optimal Mobility: 90-100",
+				"range2": "Functional Mobility: 75-89",
+				"range3": "Moderate Restriction: 60-74",
+				"range4": "Restricted Mobility: 40-59",
+				"range5": "Severely Restricted: 20-39",
+				"range6": "Critically Impaired: Below 20",
+				"reportCreated": "Report Created By",
+				"reportCreatedDate": "Report Created Date",
+				"title1": "Limitless Performer",
+				"title2": "Agile Achiever",
+				"title3": "Functional Mover",
+				"title4": "Steady Navigator",
+				"title5": "Resilient Mover",
+				"title6": "Determined Pathfinder",
+				"weight": "Weight",
+				"whatThisMeans": "What This Means For You",
+				"youAre": "You're an",
+				"mobilityProgram": "mobility program",
+				"startRecommended": "Start your recommended"
+			},
+			"myProgress": {
+				"evaluation": {
+					"associatedSymptoms": "Associated Symptoms",
+					"copy": "Copy",
+					"copyClipboard": "Copied to Clipboard",
+					"dateOfAssessment": "Date of Assessment:",
+					"doYouHaveAnyOfTheseSymptoms": "Do you have any of these symptoms?",
+					"download": "Download",
+					"haveYouBeenDiagnosedWithAnyOfTheFollowing": "Have you been diagnosed with any of the following?",
+					"medicalHistory": "Medical History",
+					"painSummary": "Summary",
+					"patientID": "User ID:",
+					"patientName": "User Name:",
+					"export": "Export",
+					"downloaded": "Downloaded",
+					"summaryReview": "Summary Review",
+					"virtualEvaluation": "Virtual Evaluation"
+				},
+				"omniRom": {
+					"chart": "Chart",
+					"compare": "Compare",
+					"compareImages": "Compare Images",
+					"empty": "No Scan Found",
+					"exercises": "Exercises",
+					"normalToolTip": "Normal VitalScan ROM Measurement",
+					"result": " - Result: ",
+					"wflToolTip": "Within Functional Limits",
+					"wfl": "WFL",
+					"date": "Date",
+					"squat": "Squat",
+					"value": "Value",
+					"export": "Export",
+					"normal": "Normal",
+					"leftHip": "Left Hip",
+					"captures": "Captures",
+					"fullScan": "FULL SCAN",
+					"leftKnee": "Left Knee",
+					"overview": "Overview",
+					"rightHip": "Right Hip",
+					"romScore": "ROM Score",
+					"leftElbow": "Left Elbow",
+					"rightKnee": "Right Knee",
+					"startScan": "Start Scan",
+					"assessment": "Assessment",
+					"rightElbow": "Right Elbow",
+					"betaRelease": "BETA RELEASE (V1.0)",
+					"lastCapture": "Last Capture",
+					"lastSession": "Last Session",
+					"resultValue": "Result",
+					"screenshots": "Screenshots",
+					"leftShoulder": "Left Shoulder",
+					"copyClipboard": "Copied to Clipboard",
+					"rightShoulder": "Right Shoulder",
+					"reportGenerate": "Report Generated by VitalFlow VitalScan ROM: ",
+					"emptyDescription": "You don't have scanned exercises for this body part",
+					"compareMessageError": "You can only select up to two images for comparison"
+				},
+				"rehab": {
+					"titlePlaceholder": "Enter title",
+					"daily": "Daily",
+					"mute": "Mute",
+					"notAvailable": "N/A",
+					"reps": "Reps",
+					"sets": "Sets",
+					"startSession": "Start Session",
+					"unmute": "Unmute",
+					"weekly": "Weekly",
+					"empty": "No Exercises Found",
+					"export": "Export",
+					"noData": "No Data",
+					"exercises": {
+						"spd": "SPD",
+						"sps": "SPS",
+						"spw": "SPW",
+						"reps": "REPS",
+						"title": "TITLE",
+						"setsPerDay": "Sets Per Day",
+						"description": "DESCRIPTION",
+						"repetitions": "Repetitions",
+						"setsPerSession": "Sets Per Session",
+						"sessionsPerWeek": "Sessions Per Week",
+						"noExercisesFound": "No exercises found"
+					},
+					"assessment": {
+						"date": "DATE",
+						"painLevel": "DISCOMFORT LEVEL",
+						"yourProgress": "YOUR PROGRESS",
+						"exerciseEffort": "EXERCISE EFFORT"
+					},
+					"noCaptures": "No captures found",
+					"viewSummary": "View Summary"
+				},
+				"next": "Next",
+				"tabs": {
+					"rehab": "Rehab+",
+					"omniRom": "VitalScan ROM",
+					"captures": "Captures",
+					"letsMove": "Let's Move",
+					"exercises": "Exercises",
+					"assessment": "Assessment",
+					"evaluation": "Evaluation",
+					"romSummary": "VitalScan ROM Sessions",
+					"performance": "Performance+"
+				},
+				"letsMove": {
+					"noData": "No Data",
+					"program": "Program",
+					"captures": "Captures",
+					"exercises": "Exercises",
+					"startSession": "Start Session"
+				},
+				"previous": "Previous",
+				"performance": {
+					"empty": "No Exercises Found",
+					"captures": "Captures",
+					"startSession": "Start Session",
+					"emptyDescription": "You don't have recorded exercises yet."
+				}
+			},
+			"name": "Name",
+			"newDashboard": {
+				"enroll": "Enroll",
+				"enrolled": "Enrolled Successfully",
+				"exercise": "Exercise",
+				"exercises": "Exercises",
+				"functionalGoals": "Functional Goals",
+				"myProgram": "My Programs",
+				"myProgramTips": "Recommended exercises and holistic wellness practices",
+				"myPrograms": "My Programs",
+				"programEmptyDescription": "Your program will appear here once it's been assigned.",
+				"programEmptyTitle": "Don't worry - Help is on the way!",
+				"showAll": "Show All",
+				"suggestedPrograms": "Suggested Programs",
+				"suggestedProgramsTips": "Recommended exercises and holistic wellness practices",
+				"viewHistory": "View History",
+				"rom": "Range of Motion",
+				"poses": "Poses",
+				"score": "Score",
+				"movements": "Movements",
+				"showOthers": "Show Others",
+				"lastSession": "Last Session",
+				"moreDetails": "More Details",
+				"mobilityScore": "Mobility Score",
+				"postureAnalysis": "Posture Analysis"
+			},
+			"omniRom": {
+				"cancel": "Cancel",
+				"edit": "Edit",
+				"save": "Save"
+			},
+			"startScan": {
+				"rom": {
+					"title": "Range of Motion",
+					"description": "Measure joint flexibility and movement range with AI-guided assessments"
+				},
+				"posture": {
+					"title": "Posture Analysis",
+					"description": "Analyze body alignment and identify postural imbalances"
+				},
+				"bodyComposition": {
+					"title": "Body Composition",
+					"description": "Get 3D visualization of your body with precise measurements and composition analysis"
+				},
+				"comingSoon": "Coming Soon"
+			},
+			"vitalscan-rom": {
+				"romProgramTitle": "ROM Program",
+				"bulkUpload": "Bulk Upload",
+				"addExercise": "Add Exercise",
+				"addExercises": "Add Exercises",
+				"addTitle": "Add Title",
+				"addDescription": "Add Description",
+				"alreadyFirst": "Already at the first exercise",
+				"alreadyLast": "Already at the last exercise",
+				"audioContext": {
+					"enableAudio": "Enable Audio",
+					"enableAudioButton": "Enable Audio",
+					"enableAudioDescription": "Please enable audio by clicking below to proceed with instructions"
+				},
+				"betaRelease": "Beta Release",
+				"bodyFrontAlt": "Body front",
+				"bodyPointDeleted": "Body Point Deleted Successfully",
+				"bodyPointErr": "Please select at least one body point",
+				"chooseScan": "Choose Scan",
+				"continueSession": "Continue Session",
+				"continueSessionQuestion": "Would you like to continue your previous session?",
+				"createRom": "Create Custom Rom",
+				"createRomProgram": "Create ROM Program",
+				"criticallyImpaired": "Critically Impaired",
+				"criticallyImpairedDesc": "Severe impairment requiring intervention",
+				"customOptions": "Custom Options",
+				"description": "Description",
+				"discardText": "Discard changes",
+				"editRom": "Edit ROM",
+				"enterFullscreen": "Enter Fullscreen",
+				"enterMax": "Enter Max",
+				"enterMin": "Enter Min",
+				"enterNormal": "Enter Normal",
+				"enterWFL": "Enter WFL",
+				"exercises": "Exercises",
+				"exitFullscreen": "Exit Fullscreen",
+				"fetchingData": "Fetching data...",
+				"flipCamera": "Flip Camera",
+				"fullScreen": "Full Screen",
+				"functionalMobility": "Functional Mobility",
+				"functionalMobilityDesc": "Adequate range for daily activities",
+				"generatingPdf": "Generating PDF...",
+				"getPosition": "Get in Position",
+				"highBandwidth": "High Bandwidth",
+				"keepTime": "You can keep this time or choose from the options",
+				"labelMax": "Max",
+				"labelMin": "Min",
+				"labelNormal": "Normal",
+				"labelWFL": "WFL",
+				"limitedMobility": "Limited Mobility",
+				"limitedMobilityDesc": "Significant limitation in movement",
+				"logoAlt": "Logo",
+				"lowBandwidth": "Low Bandwidth",
+				"joint": "Joint",
+				"manual": "Manual",
+				"manualOpt": "Manual",
+				"maximizeVideo": "Maximize Video",
+				"measure": "Measure",
+				"menu": "Menu",
+				"minimizeVideo": "Minimize Video",
+				"moderateRestriction": "Moderate Restriction",
+				"moderateRestrictionDesc": "Some limitation in range of motion",
+				"next": "Next",
+				"no": "No",
+				"noCapturesFound": "No Captures Found",
+				"noDescription": "No description available",
+				"noExercisesFound": "No Exercises Found",
+				"noExercisesSelected": "No exercises selected",
+				"noData": "No Data",
+				"noProgramsFound": "No programs found",
+				"noRomDataAvailable": "No ROM data available yet",
+				"noTitle": "No Title",
+				"normal": "Normal",
+				"normalInfo": "Normal range",
+				"optimalMobility": "Optimal Mobility",
+				"optimalMobilityDesc": "Full range of motion with no restrictions",
+				"pause": "Pause",
+				"pauseVideo": "Pause Video",
+				"play": "Play",
+				"playVideo": "Play Video",
+				"processing": "Processing ...",
+				"ranking": "Ranking",
+				"record": "Record",
+				"recordExercise": "Record Exercise",
+				"recordStarted": "Recording started",
+				"recordStopped": "Recording stopped",
+				"restrictedMobility": "Restricted Mobility",
+				"restrictedMobilityDesc": "Major restriction in range of motion",
+				"romCreation": "ROM program created successfully",
+				"romDescription": "ROM Description",
+				"romDescriptionErr": "Please enter a ROM description",
+				"romMobilityReport": "ROM Mobility Report",
+				"romNameErr": "Please enter a ROM name",
+				"romTemplateCreation": "ROM template created successfully",
+				"romTemplateUpdation": "ROM template updated successfully",
+				"romTitle": "ROM Title",
+				"save": "Save",
+				"saveError": "Saveor error",
+				"saveSuccess": "Saved successfully",
+				"savedBodyPoints": "Saved Body Points",
+				"savedMsg": "Saved successfully",
+				"sayLoud": "Choose one of the options and say it out loud.",
+				"scanRegion": "Scan Region",
+				"scanResult": {
+					"bodyFrameAlt": "Body frame scan",
+					"pieChart": "Pie Chart",
+					"radarChart": "Radar Chart",
+					"sittingPositionAlt": "Sitting position scan",
+					"tooltipJointHeader": "Joint",
+					"tooltipScoreHeader": "Score"
+				},
+				"scanFinished": "Scan Finished",
+				"scanSpeciality": "Scan Specialty",
+				"score": "Score",
+				"secs": "secs",
+				"selectBodyParts": "Select the body parts you would like to measure the angle of",
+				"severelyRestricted": "Severely Restricted",
+				"showTutorial": "Show Tutorial",
+				"splashPage": {
+					"bodyFrameAlt": "Body frame",
+					"sittingPositionAlt": "Sitting position"
+				},
+				"submit": "Submit",
+				"submitAndContinue": "Submit and Continue",
+				"submitToConitinue": "Submit and Continue",
+				"switchCamera": "Switch Camera",
+				"switchPrevious": "Switch to previous exercise",
+				"switchVideo": "Switch Video",
+				"title": "Title",
+				"titleErr": "Title error",
+				"tooltip": {
+					"info": "Info"
+				},
+				"transistionTime": "Transition Time",
+				"transitionExercise": "The transition time for this exercise is",
+				"transitionTime": "Transition Time",
+				"tryAgain": "Try Again",
+				"tryExerciseAgain": "Try Exercise Again",
+				"tutorial": "Tutorial",
+				"updateFailed": "Failed to update ROM template",
+				"upload": "Upload",
+				"uploadAnotherVideo": "Upload Another Video",
+				"uploadVideo": "Upload Video",
+				"value": "Value",
+				"videoErr": "Video error",
+				"wfl": "WFL",
+				"wflInfo": "Within functional limits",
+				"yes": "Yes",
+				"scanStartError": "Failed to start scan. Please try again.",
+				"sendAssessmentResults": "Send Assessment Results",
+				"skipTutorial": "Skip Tutorial"
+			},
+			"onboard": {
+				"back": "Back",
+				"bending": "Bending",
+				"browsePrograms": "Browse Programs",
+				"completeProfile": "Complete Your Profile",
+				"completeProfileDescription": "We collect your personal information to personalize your care experience and improve our services.\nYour data is stored securely and never shared without your consent.",
+				"continue": "Continue",
+				"hoursWarn": "Hours Warn",
+				"howSpend": "How do you spend your day?",
+				"lifting": "Lifting",
+				"next": "Next",
+				"nextSlide": "Next slide",
+				"omniRom": "VitalScan ROM",
+				"omniRomDescription1": "Range of Motion (ROM) measures how freely your joints move.",
+				"omniRomDescription2": "Regular checks can reveal your mobility progress and guide your wellness journey.",
+				"omniRomIntroDescription": "Range of motion (ROM) measures how freely your joints move. Regular checks can reveal your mobility progress and guide your wellness journey.",
+				"omniRomImageAlt": "Range of Motion",
+				"discoverMobilityScore": "Discover your mobility score",
+				"rangeOfMotion": "VitalScan ROM",
+				"rangeOfMotionDescription": "Range of motion (ROM) measures how freely your joints move. Regular checks can reveal your mobility progress and guide your wellness journey.",
+				"overAllTime": "Over All Time",
+				"postureAnalysis": "Posture Analysis",
+				"postureAnalysisDescription": "Posture Analysis helps assess your body alignment to detect imbalances. Regular checks can improve comfort, reduce strain, and enhance daily function.",
+				"previewImage": "Preview",
+				"previousSlide": "Previous slide",
+				"rangeMotion": "Range of Motion",
+				"recommendationDescription": "suggestion and tips",
+				"recommendationTitle": "Recommendations",
+				"save": "Save",
+				"scanRange": "Scan your range of motion",
+				"scrollToPrograms": "Scroll to programs section",
+				"selectApply": "Select all that apply",
+				"sitting": "Sitting",
+				"skip": "Skip",
+				"sleeping": "Sleeping",
+				"standing": "Standing",
+				"trueToFormDescription": "Learn the best way to perform your exercises",
+				"trueToFormTitle": "True 2 Form",
+				"walking": "Walking",
+				"painLevel": "Pain Level",
+				"preExistingTitle": "Pre-existing conditions",
+				"preExistingDescription1": "If you answer",
+				"preExistingDescription2": "to any of the following questions, you should seek medical clearance before proceeding with enrollment.",
+				"preExistingAcknowledge": "I acknowledge I do not have any of the criteria listed above and am eligible to participate in this program.",
+				"yes": "Yes",
+				"selectCategory": "Select a category that fits your needs and start your journey toward improved flexibility, strength, and recovery.",
+				"chooseCategory": "This is your recommended path based on your plan",
+				"choosePath": "Choose your path to better movement goals",
+				"select": "Select",
+				"selected": "Selected",
+				"functionalGoals": "Functional Goals",
+				"functionalGoalsDescription": "Define your personal wellness objectives",
+				"defineObj": "Define your personal wellness objectives",
+				"painAssessment": "Pain Assessment",
+				"painAssessmentDescription": "Where is your discomfort located?",
+				"associatedSymptoms": "Associated Symptoms",
+				"associatedSymptomsDescription": "Describe your symptoms",
+				"medicalHistory": "Medical History",
+				"medicalHistoryDescription": "Select all that apply",
+				"stepper": {
+					"completeProfile": "Personal",
+					"choosePath": "Plans",
+					"preExistingConditions": "Background",
+					"howSpendDay": "Routine",
+					"functionalGoals": "Goals",
+					"onboarding": "Scan"
+				}
+			},
+			"patientMenus": {
+				"activity": "Activity",
+				"apply-theme": "Apply  Theme",
+				"create-reports": "Create Reports",
+				"download-app": "Download App",
+				"evaluation": "Evaluation",
+				"evaluation-results": "Evaluation Results",
+				"lets-move": "Programs",
+				"logout": "Logout",
+				"omni-rom": "Scan",
+				"vitalscan-rom-captures": "VitalScan ROM Insights",
+				"vitalscan-rom-summary": "VitalScan ROM Sessions",
+				"posture-captures": "Posture Insights",
+				"posture-summary": "Posture Sessions",
+				"program-list": "Program List",
+				"program-summary": "Program Summary",
+				"report-summary": "Report Summary",
+				"reports": "Reports",
+				"start-evaluation": "Start Virtual Evaluation",
+				"start-scan": "Select Scan",
+				"start-survey": "Start Survey",
+				"survey": "Survey",
+				"survey-summary": "Survey Summary",
+				"tools": "Tools",
+				"settings": "Settings",
+				"select-theme": "Select Theme"
+			},
+			"postures": {
+				"Back": "Back",
+				"DOB": "DOB",
+				"Front": "Front",
+				"Height": "Height",
+				"Left": "Left",
+				"Report": "Report",
+				"ReportCreatedBy": "Report Created By",
+				"Right": "Right",
+				"Weight": "Weight",
+				"capturedImage": "Captured Image",
+				"comparison": {
+					"imageLoadFailedDescription": "One or more images could not be loaded. Please try refreshing the page.",
+					"imageLoadFailedMessage": "Image loading failed",
+					"loadFailedMessage": "Failed to load comparison",
+					"loading": "Loading posture comparison",
+					"noDataDescription": "No comparison data available for this session",
+					"viewerLabel": "Posture comparison viewer"
+				},
+				"customMeasures": "",
+				"detail": {
+					"metrics": {
+						"content": "Metrics content",
+						"performance": {
+							"critical": "Critical - Immediate action needed",
+							"excellent": "Excellent performance",
+							"fair": "Fair - Room for improvement",
+							"good": "Good progress",
+							"needsAttention": "Needs attention"
+						},
+						"title": "Metrics"
+					},
+					"overview": {
+						"content": "Overview content",
+						"title": "Overview"
+					},
+					"recommendations": {
+						"content": "Recommendations",
+						"title": "Recommendations"
+					},
+					"title": "Posture Assessment Details"
+				},
+				"exercises": {
+					"filters": {
+						"difficulty": {
+							"advanced": "Advanced",
+							"beginner": "Beginner",
+							"intermediate": "Intermediate"
+						}
+					}
+				},
+				"journeyView": {
+					"ariaLabel": "Patient Posture Journey Timeline",
+					"milestonesHeading": "Milestones",
+					"startTour": "Start tour",
+					"takeTour": "Take Tour",
+					"title": "Your Posture Journey"
+				},
+				"lastScan": "Last Scan: ",
+				"loadingScans": "Loading posture scans...",
+				"loadingScansLabel": "Loading posture scans",
+				"nextScan": "Next scan",
+				"noCaptureFound": "No Capture Found",
+				"patientJourney": "Patient Journey",
+				"postureAnalysis": "Posture Analysis",
+				"postureData": "Posture Data",
+				"postureMeasure": "POSTURES - Measured in centimeters (cm)",
+				"postureMeasures": "",
+				"postureScore": "Posture Score",
+				"postureSummary": "Posture Sessions",
+				"postureViewContainer": {
+					"ariaLabel2D": "2D posture view",
+					"ariaLabel3D": "3D posture view",
+					"deviationLabel": "Deviation: {{degrees}}°",
+					"landmarksLabel": "Landmarks: {{count}} points",
+					"title2D": "2D Posture View"
+				},
+				"progressSummary": "Progress Summary",
+				"romMeasures": "",
+				"scanExpectations": "What to Expect During Your Scan",
+				"scanResult": {
+					"interactiveControlsInstructions": "Use mouse to rotate/zoom, or press",
+					"interactiveControlsLabel": "Interactive Controls:",
+					"left": "LEFT",
+					"newBadge": "NEW",
+					"noDataAvailable": "No Data available",
+					"noImageAvailable": "No Image available",
+					"noPostureDataAvailable": "No Posture Data Available",
+					"right": "RIGHT",
+					"visualization3DTitle": "3D Posture Visualization"
+				},
+				"suggestions": {
+					"highlightsDescription": "Some areas of strength and balance (e.g. even hips, steady weight distribution)",
+					"highlightsTitle": "Posture Highlights",
+					"improvementDescription": "Areas needing attention (e.g. forward head, pelvic tilt, shoulder asymmetry)",
+					"improvementTitle": "Areas for Improvement"
+				},
+				"viewFullSizeScreenshot": "View full size screenshot",
+				"viewer3D": {
+					"cameraPresets": {
+						"ariaLabel": "Camera preset views",
+						"buttonAriaLabel": "{{label}} (Press {{shortcut}})",
+						"diagonalView": "Diagonal View",
+						"frontView": "Front View",
+						"sideView": "Side View",
+						"topView": "Top View"
+					},
+					"default2DView": {
+						"ariaLabel": "Posture summary",
+						"deviation": "Deviation:",
+						"landmarksCount": "{{count}} / 33",
+						"landmarksDetected": "Landmarks Detected:",
+						"quality": "Quality:",
+						"qualityExcellent": "Excellent",
+						"qualityFair": "Fair",
+						"qualityGood": "Good",
+						"qualityPoor": "Poor",
+						"title": "Posture Analysis",
+						"upgradeMessage": "Switch to 3D view for interactive visualization"
+					},
+					"errorBoundary": {
+						"errorDetails": "Error details: {{message}}",
+						"failedToLoad": "Failed to load 3D viewer.",
+						"retryButton": "Retry",
+						"retryButtonAriaLabel": "Retry loading 3D viewer"
+					},
+					"loadingFallback": {
+						"ariaLabel": "Loading 3D viewer",
+						"loadingText": "Loading 3D Viewer..."
+					},
+					"performanceMonitor": {
+						"ariaLabel": "Performance metrics",
+						"fps": "FPS: {{value}}",
+						"fpsAriaLabel": "Frames per second: {{value}}{{warning}}",
+						"highMemoryWarning": ". Warning: High memory usage",
+						"lowFpsWarning": ". Warning: Low frame rate",
+						"memory": "Memory: {{value}} MB",
+						"memoryAriaLabel": "Memory usage: {{value}} megabytes{{warning}}",
+						"warningIconAriaLabel": "Warning: {{type}}"
+					},
+					"posture3DViewer": {
+						"announcement": "Posture quality: {{quality}}. Deviation: {{degrees}} degrees from ideal alignment.",
+						"ariaLabel": "3D Posture Viewer",
+						"deviationAriaLabel": "Deviation from ideal posture: {{degrees}} degrees",
+						"deviationLabel": "Deviation: {{degrees}}°",
+						"keyboardInstructions": "Use arrow keys to rotate the 3D view. Use scroll to zoom in and out. Press keys 1, 2, 3, or 4 to switch camera preset views. Press Tab to navigate to additional controls.",
+						"landmarksAriaLabel": "{{count}} pose landmarks detected",
+						"landmarksLabel": "Landmarks: {{count}}",
+						"metricsAriaLabel": "Posture metrics",
+						"qualityExcellent": "excellent",
+						"qualityFair": "fair",
+						"qualityGood": "good",
+						"qualityNeedsAttention": "needs attention",
+						"skipLink": "Skip to camera controls"
+					},
+					"postureViewContainer": {
+						"ariaLabel2D": "2D posture view",
+						"ariaLabel3D": "3D posture view",
+						"deviationLabel": "Deviation: {{degrees}}°",
+						"landmarksLabel": "Landmarks: {{count}} points",
+						"title2D": "2D Posture View"
+					},
+					"postureViewSelector": {
+						"2dView": "2D View",
+						"3dView": "3D View",
+						"3dViewDisabledTitle": "3D view requires WebGL support",
+						"ariaLabel": "Select posture view mode"
+					},
+					"webGLCapability": {
+						"checking": "Checking WebGL support...",
+						"notSupported": "WebGL is not supported in this browser",
+						"unknownError": "Unknown error detecting WebGL"
+					}
+				},
+				"webGLCapability": {
+					"checking": "Checking WebGL support...",
+					"notSupported": "WebGL is not supported in this browser",
+					"unknownError": "Unknown error detecting WebGL"
+				},
+				"yourPosture": "Your posture at every angle",
+				"and": "and",
+				"benefits": {
+					"energy": {
+						"label": "Energy Levels:",
+						"description": "Less fatigue from overworked or imbalanced muscles"
+					},
+					"breathing": {
+						"label": "Breathing & Circulation:",
+						"description": "Allows lungs and diaphragm to expand fully"
+					},
+					"spinalHealth": {
+						"label": "Spinal Health:",
+						"description": "Reduces strain on joints, discs, and muscles"
+					},
+					"painPrevention": {
+						"label": "Pain Prevention:",
+						"description": "Helps avoid neck, back, and joint pain from poor mechanics"
+					},
+					"efficientMovement": {
+						"label": "Efficient Movement:",
+						"description": "Makes walking, lifting, and exercising easier"
+					}
+				},
+				"loadMore": "Load more",
+				"personas": {
+					"agileAchiever": {
+						"title": "The Agile Achiever",
+						"subtitle": "Postural Harmony & Movement Excellence",
+						"tagline": "Postural harmony & Movement excellence",
+						"description": "You're dealing with severe mobility restrictions, which may be affecting your independence. Immediate intervention and focused support are needed to improve your mobility."
+					},
+					"balancedMover": {
+						"title": "The Balanced Mover",
+						"subtitle": "Strong Foundation with Minor Imbalances",
+						"tagline": "Strong foundation with minor imbalances",
+						"description": "Your posture is generally good, with just a few subtle deviations - often due to modern habits like long sitting or repetitive tasks. You're stable and functional, but there's room to improve your efficiency and comfort."
+					},
+					"collapsedCoper": {
+						"title": "The Collapsed Coper",
+						"subtitle": "When Support Systems Are Failing",
+						"tagline": "When Support Systems Are Failing",
+						"description": "Your body shows signs of postural collapse. Daily tasks may feel fatiguing or uncomfortable, and movement lacks control."
+					},
+					"stiffStruggler": {
+						"title": "The Stiff Struggler",
+						"subtitle": "Managing Imbalances with Smart Adaptation",
+						"tagline": "Managing Imbalances with Smart Adaptation",
+						"description": "Your posture shows more pronounced restrictions, often leading to stiff, awkward movement and chronic discomfort."
+					},
+					"compensatingContender": {
+						"title": "The Compensating Contender",
+						"subtitle": "Managing Imbalances with Smart Adaptation",
+						"tagline": "Managing Imbalances with Smart Adaptation",
+						"description": "Your body is working hard to stay functional, but it's relying on compensation patterns. These can lead to discomfort or fatigue over time."
+					}
+				},
+				"readLess": "Read less",
+				"readMore": "Read more",
+				"scanTitle": "Based on the latest Evaluation and Range of Motion results, I suggested these new VitalScan ROM Playlist  for this user.",
+				"scanOption": "Scan Options",
+				"expectRange": "Expected range of motion for this exercise is between",
+				"rangeMotion": "Range of Motion",
+				"posturePersona": "Posture Personas:",
+				"goodPostureTitle": "Good Posture Supports:",
+				"mobilityLimitation": "Something may have gone wrong, or you may have a mobility limitation.",
+				"postureDescription": "Here is the list containing all the Posture Insights",
+				"whyThisMattersGoal": "Your goal is to fill out the Circle.",
+				"RecommendedPrograms": "Recommended Programs",
+				"whyThisMattersTitle": "Why this matters",
+				"MobilleReportSummary": "Mobille Report Summary",
+				"startPosturePlanLine1": "Start your recommended",
+				"startPosturePlanLine2": "posture exercises plan",
+				"postureSummaryDescription": "Here is the list containing all the results for Posture Analysis.",
+				"whyThisMattersDescription": "When your posture is balanced, your muscles work in harmony, your joints move freely, and your energy flows efficiently. But when it’s off—even slightly—your body starts to compensate, leading to fatigue, tightness, or pain. This report gives you a clear view of your current posture and the steps to improve it."
+			},
+			"profile": {
+				"form": {
+					"resetPassword": "Reset password",
+					"weightUnit": {
+						"kg": "Kg",
+						"lb": "Lb"
+					}
+				}
+			},
+			"programs": {
+				"flow": {
+					"disabledDuringRecording": " (Disabled during recording)",
+					"fullscreen": "Fullscreen",
+					"hideVideo": "Hide Video",
+					"info": "Info",
+					"menu": "Menu",
+					"showVideo": "Show Video",
+					"skipInstructionalVideo": "Skip Instructional Video"
+				}
+			},
+			"progress": {
+				"dashboard": {
+					"startYourJourney": "Start Your Journey!",
+					"startYourJourneyDescription": "Complete your first posture scan or exercise to start earning milestones and tracking your progress."
+				},
+				"milestone": {
+					"achieved": "Achieved"
+				}
+			},
+			"rehab": {
+				"assignLetsMove": "Assign Let's Move",
+				"confirm": "Confirm",
+				"continueExercise": "Do you want to continue with the next exercise?",
+				"daily": "Daily",
+				"discard": "Discard",
+				"fullScreen": "Full Screen",
+				"getReady": "Get Ready",
+				"mute": "Mute",
+				"new": "New",
+				"no": "No",
+				"notAvailable": "N/A",
+				"record": "Record",
+				"rehabEmpty": "No rehabilitation exercises available",
+				"reps": "Reps",
+				"sets": "Sets",
+				"stop": "Stop",
+				"submit": "Submit",
+				"unmute": "Unmute",
+				"weekly": "Weekly",
+				"yes": "Yes"
+			},
+			"virtualEvaluation": {
+				"painAssesment": {
+					"selectAnOption": "Select an option",
+					"save": "SAVE",
+					"title": "Assessment",
+					"delete": "DELETE",
+					"update": "UPDATE",
+					"description": "Where is your discomfort located?",
+					"pleaseSelect": "Please Select",
+					"pleaseFillAllTheRequiredFields": "Please fill all the required fields"
+				},
+				"summary": {
+					"patientID": "User ID:",
+					"dateOfAssessment": "Date of Assessment:",
+					"title": "Summary",
+					"description": "Review and confirm",
+					"description2": "Review, Confirm and Export your assessment results below.",
+					"copyToClipboard": "Copied to Clipboard",
+					"download": "Download",
+					"copy": "Copy",
+					"patientName": "User Name:",
+					"downloaded": "Downloaded"
+				},
+				"associatedSymptoms": {
+					"title": "Associated Symptoms",
+					"description": "Describe your symptoms",
+					"doYouHaveAnyOfTheseSymptoms": "Do you have any of these symptoms?",
+					"pleaseSelectAtLeastOneOption": "Please select at least one option"
+				},
+				"medicalHistory": {
+					"title": "Medical History",
+					"description": "Complete your medical history",
+					"pleaseSelectAtLeastOneOption": "Please select at least one option",
+					"haveYouBeenDiagnosedWithAnyOfTheFollowing": "Have you been diagnosed with any of the following?"
+				},
+				"back": "BACK",
+				"submit": "SUBMIT",
+				"next": "NEXT"
+			},
+			"summaryOptionList": {
+				"cop": "Cause",
+				"dop": "Duration",
+				"fop": "Frequency",
+				"sop": "Status",
+				"location": "Location",
+				"agrFactor": "Aggravating Factors",
+				"relFactor": "Relieving Factors"
+			},
+			"dataNotifications": {
+				"dataSave": "Data Saved Successfully",
+				"dataUpdate": "Data Updated Successfully",
+				"dataDelete": "Data Deleted Successfully"
+			},
+			"romoptions": {
+				"lBody": "Lower Body",
+				"lLeft": "Lower Left",
+				"uBody": "Upper Body",
+				"uLeft": "Upper Left",
+				"lRight": "Lower Right",
+				"uRight": "Upper Right",
+				"fullScan": "Full Scan"
+			},
+			"performance": {
+				"title": "THE VIRTUAL WORKOUT",
+				"description": "Performance+ is in development, but you can experience a sneak preview of the future potential. Please be patient, as it's far from perfect.",
+				"description2": "Meanwhile, view the promo video to see what Performance+ will become when it's launched in full glory.",
+				"viewPromoVideo": "View Promo Video",
+				"goToSneakPreview": "Go to Sneak Preview"
+			},
+			"diagnosisCode": {
+				"label": "PT Diagnosis Codes - ICD 10",
+				"icdCode": "ICD-10 Code",
+				"addCodes": "Add Codes",
+				"placeHolder": "Search Diagnosis Codes",
+				"icdDescription": "ICD-10 Description"
+			},
+			"recommendations": {
+				"toHelp": "to help manage pain.",
+				"toManage": "to manage chronic pain and reduce stress.",
+				"doNotPush": "Do not push through severe pain -",
+				"useProper": "Use proper posture and ergonomics",
+				"suggestions": "suggestions and tips",
+				"engageGentle": "Engage in gentle, low-impact exercises",
+				"practiceDeep": "Practice deep breathing or mindfulness exercises",
+				"avoidMovement": "Do not avoid movement -",
+				"stressAnxiety": "stress and anxiety can amplify pain, so address both physical and mental well-being.",
+				"stopActivities": "stop activities that cause sharp or unmanageable pain.",
+				"recommendations": "Recommendations",
+				"duringActivities": "during activities to minimize strain on the body and reduce pain.",
+				"inactivityWorsen": "inactivity can worsen pain and stiffness over time; follow your therapist’s guidance for appropriate movement.",
+				"neglectEmotional": "Don’t neglect your emotional health -"
+			}
+		},
+		"id": 13
+	},
+	"SDK": {
+		"postureScan": {
+			"assessment": {
+				"capturePosture": "Capture Posture",
+				"captureView": "Capture {{view}} View",
+				"holdSteady": "Hold your position steady. The camera will capture automatically after the countdown.",
+				"processingCapture": "Processing capture..."
+			},
+			"calibration": {
+				"continueToAssessment": "Continue to Assessment",
+				"detectionStatus": "Detection Status",
+				"positionYourself": "Position yourself:",
+				"readyToCapture": "Ready to capture!",
+				"views": {
+					"back": {
+						"instructions": {
+							"armsNatural": "Let arms hang naturally at your sides",
+							"feetApart": "Stand with feet shoulder-width apart",
+							"headStraight": "Keep your head straight",
+							"turnBack": "Turn your back to the camera"
+						},
+						"title": "Back View"
+					},
+					"front": {
+						"instructions": {
+							"armsNatural": "Let arms hang naturally at your sides",
+							"faceCamera": "Face the camera directly",
+							"feetApart": "Stand with feet shoulder-width apart",
+							"lookAhead": "Look straight ahead"
+						},
+						"title": "Front View"
+					},
+					"left": {
+						"instructions": {
+							"armsNatural": "Let arms hang naturally at your sides",
+							"feetApart": "Stand with feet shoulder-width apart",
+							"leftSide": "Turn so your left side faces the camera",
+							"lookAhead": "Look straight ahead"
+						},
+						"title": "Left Side View"
+					},
+					"right": {
+						"instructions": {
+							"armsNatural": "Let arms hang naturally at your sides",
+							"feetApart": "Stand with feet shoulder-width apart",
+							"lookAhead": "Look straight ahead",
+							"rightSide": "Turn so your right side faces the camera"
+						},
+						"title": "Right Side View"
+					}
+				},
+				"captions": {
+					"front": {
+						"visibility": "Face the camera with your whole body visible.",
+						"wrongSide": "You're facing away from the camera. Please turn around.",
+						"frame": "Step back until you fit in the frame.",
+						"instruction": "Stand tall facing the camera. Arms relaxed at your sides. Hold still for the capture.",
+						"congratulations": "Great job! Capture complete."
+					},
+					"left": {
+						"visibility": "Turn your left side toward the camera.",
+						"wrongSide": "That's your right side. Please turn the other way.",
+						"frame": "Step back until you fit in the frame.",
+						"instruction": "Stand tall with your left shoulder facing the camera. Arms relaxed. Hold still.",
+						"congratulations": "Great job! Capture complete."
+					},
+					"right": {
+						"visibility": "Turn your right side toward the camera.",
+						"wrongSide": "That's your left side. Please turn the other way.",
+						"frame": "Step back until you fit in the frame.",
+						"instruction": "Stand tall with your right shoulder facing the camera. Arms relaxed. Hold still.",
+						"congratulations": "Great job! Capture complete."
+					},
+					"back": {
+						"visibility": "Turn your back toward the camera.",
+						"wrongSide": "You're facing the camera. Please turn around.",
+						"frame": "Step back until you fit in the frame.",
+						"instruction": "Stand tall with your back to the camera. Arms relaxed. Hold still.",
+						"congratulations": "Great job! Capture complete."
+					},
+					"shared": {
+						"success": "Perfect. Captured!",
+						"poseLost": "Hold still, we lost your position.",
+						"leftTip": "Your left side. Raise your left hand to check."
+					},
+					"viewTransitions": {
+						"title1": "Let's start your posture analysis. Pose 1 of 4.",
+						"title2": "Great! Now for pose 2 of 4.",
+						"title3": "Perfect! Pose 3 of 4.",
+						"title4": "Almost done! Last pose."
+					}
+				}
+			},
+			"camera": {
+				"error": "Camera error: {{message}}",
+				"failedAccess": "Failed to access camera. Please check your permissions.",
+				"inUse": "Camera is already in use by another application.",
+				"notFound": "No camera found on this device.",
+				"permissionDenied": "Camera access required for assessment. Please grant camera permissions."
+			},
+			"completion": {
+				"message": "Results have been submitted successfully.",
+				"title": "Assessment Complete!"
+			},
+			"error": {
+				"retry": "Retry",
+				"title": "Error"
+			},
+			"fullscreen": {
+				"cancelText": "Not now",
+				"description": "Posture Scan works better in full screen. Would you like to switch now?",
+				"okText": "Go Full Screen",
+				"title": "Go Full Screen?",
+				"unsupported": "Your browser doesn't support Full Screen on this device."
+			},
+			"intro": {
+				"beforeYouBegin": "Before you begin:",
+				"description": "This assessment will capture your posture from four angles: front, left, right, and back.",
+				"instructions": {
+					"cameraPermission": "Grant camera permission when prompted",
+					"distanceFromCamera": "Stand at least 6 feet away from your camera",
+					"fittingClothing": "Wear form-fitting clothing for accurate detection",
+					"goodLighting": "Ensure you have good lighting"
+				},
+				"privacyNote": "Your privacy is important. Video is processed locally and not stored.",
+				"startAssessment": "Start Assessment",
+				"title": "Posture Assessment"
+			},
+			"poseDetection": {
+				"initFailed": "Failed to initialize pose detection. Please refresh and try again.",
+				"loadFailed": "Failed to load pose detection model"
+			},
+			"results": {
+				"altText": "{{view}} view",
+				"bodyParts": {
+					"ankle": "Ankle",
+					"ear": "Ear",
+					"elbow": "Elbow",
+					"head": "Head",
+					"hip": "Hip",
+					"knee": "Knee",
+					"shoulder": "Shoulder"
+				},
+				"description": "Review your posture measurements from all four angles.",
+				"footer": "Results have been saved and will be delivered to your provider.",
+				"notCaptured": "Not captured",
+				"title": "Assessment Results",
+				"views": {
+					"back": "Back View",
+					"front": "Front View",
+					"left": "Left View",
+					"right": "Right View"
+				}
+			}
+		},
+		"romScan": {
+			"exerciseInfo": {
+				"ariaLabel": "Exercise information"
+			},
+			"exerciseList": {
+				"ariaLabel": "Exercise list",
+				"completedAriaLabel": "Exercise completed",
+				"itemAriaLabel": "{{name}}{{completed}}",
+				"loading": "Loading exercises"
+			}
+		},
+		"bodyMeasurement": {
+			"intro": {
+				"title": "Body Measurement Assessment",
+				"description": "This assessment will capture your body image for precise measurements and composition analysis.",
+				"requirements": {
+					"title": "Requirements:",
+					"camera": "Camera access",
+					"lighting": "Good lighting conditions",
+					"space": "Clear space around you",
+					"clothing": "Form-fitting clothing recommended"
+				},
+				"startButton": "Start Assessment"
+			},
+			"cameraSetup": {
+				"title": "Camera Setup",
+				"noCameraMessage": "Camera not started",
+				"requestingCamera": "Requesting camera access...",
+				"startCamera": "Start Camera",
+				"continue": "Continue",
+				"switchCamera": "Switch to {{mode}}",
+				"frontCamera": "Front Camera",
+				"backCamera": "Back Camera"
+			},
+			"capture": {
+				"instruction": "Stand within the frame and keep your whole body visible",
+				"poseInstruction": "Position your whole body within the frame",
+				"readyInstruction": "Hold steady - ready to capture!",
+				"captureButton": "Capture Photo",
+				"waitingForPose": "Waiting for pose detection...",
+				"cancelButton": "Cancel"
+			},
+			"pose": {
+				"loading": "Loading pose detection...",
+				"detected": "Pose detected",
+				"notDetected": "Stand in frame - pose not detected",
+				"quality": "Pose quality",
+				"initFailed": "Failed to initialize pose detection: {{message}}"
+			},
+			"preview": {
+				"title": "Preview Capture",
+				"imageAlt": "Captured body image",
+				"continueButton": "Use This Photo",
+				"retakeButton": "Retake Photo"
+			},
+			"completion": {
+				"title": "Assessment Complete!",
+				"message": "Your body measurement assessment has been captured successfully. Results will be processed and delivered to your provider.",
+				"sessionId": "Session ID",
+				"resetButton": "Start New Assessment"
+			},
+			"camera": {
+				"permissionDenied": "Camera access required for body measurement assessment. Please grant camera permissions.",
+				"notFound": "No camera found on this device.",
+				"inUse": "Camera is already in use by another application.",
+				"error": "Camera error: {{message}}",
+				"failedAccess": "Failed to access camera. Please check your permissions."
+			},
+			"error": {
+				"title": "Error",
+				"retryButton": "Try Again"
+			}
+		},
+		"shared": {
+			"error": {
+				"title": "Assessment Error"
+			}
+		}
+	},
+	"activityTypes": {
+		"evaluation": "Evaluation",
+		"image": "Image",
+		"message": "Message",
+		"painAssessment": "Pain Assessment",
+		"posture": "Posture",
+		"program": "Program",
+		"rehab": "Rehab",
+		"rom": "ROM",
+		"survey": "Survey",
+		"video": "Video"
+	},
+	"admin": {
+		"adminMenus": {
+			"activity": "Activity",
+			"apply-theme": "Apply Theme",
+			"careSpaceplan": "VitalFlow Plan",
+			"content-manager": "Content Manager",
+			"create": "Create",
+			"create-reports": "Create Report",
+			"download-app": "Download App",
+			"evaluation": "Evaluation",
+			"evaluation-results": "Evaluation Results",
+			"generate-program": "Generate Program",
+			"lets-move": "Programs",
+			"logout": "Logout",
+			"omni-rom": "Scan",
+			"vitalscan-rom-captures": "ROM Insights",
+			"vitalscan-rom-summary": "ROM Sessions",
+			"posture-captures": "Posture Insights",
+			"posture-summary": "Posture Sessions",
+			"program-list": "Program List",
+			"program-summary": "Program Summary",
+			"report-summary": "Report Summary",
+			"reports": "Reports",
+			"settings": "Settings",
+			"start-evaluation": "Start Evaluation",
+			"start-scan": "Select Scan",
+			"start-survey": "Start Survey",
+			"survey": "Survey",
+			"survey-summary": "Survey Summary",
+			"templates": "Templates",
+			"tools": "Tools"
+		},
+		"clinicalOutcomes": {
+			"correlations": {
+				"analysisDescription": "These charts show how posture improvements correlate with clinical outcome changes over time.",
+				"analysisTitle": "Correlation Analysis",
+				"noDataDescription": "No correlation data available"
+			},
+			"empty": {
+				"noDataDescription": "No clinical outcome data available for this patient"
+			},
+			"errors": {
+				"loadingTitle": "Error Loading Clinical Outcomes"
+			},
+			"goals": {
+				"current": "Current",
+				"noGoalsDescription": "No outcome goals set for this patient",
+				"predicted": "Predicted: ",
+				"progress": "Progress",
+				"target": "Target",
+				"targetDate": "Target Date: "
+			},
+			"insights": {
+				"criticalAttentionMessage": "Critical Insights Require Attention",
+				"insightsNeedReview": "insight(s) need review",
+				"noInsightsDescription": "No clinical insights available yet",
+				"relatedDates": "Related dates:",
+				"suggestedActions": "Suggested Actions:"
+			},
+			"loading": {
+				"message": "Loading clinical outcomes..."
+			},
+			"measures": {
+				"baseline": "Baseline",
+				"change": "Change",
+				"current": "Current"
+			},
+			"tabs": {
+				"correlations": "Correlations",
+				"goals": "Outcome Goals",
+				"insights": "Clinical Insights",
+				"measures": "Outcome Measures"
+			},
+			"title": "Clinical Outcomes Integration"
+		},
+		"dashboard": {
+			"escalationRequired": "Escalation Required",
+			"followUpRequired": "Follow-up Required",
+			"newPatients": "New Patients",
+			"outOfParameters": "Out of Parameters",
+			"pendingReview": "Pending Review",
+			"reviewed": "Reviewed",
+			"title": "Dashboard"
+		},
+		"home": "Home",
+		"inbox": {
+			"allCaughtUp": "You're all caught up.",
+			"newMessage": "New Message",
+			"niceWork": "Nice work!",
+			"title": "Inbox"
+		},
+		"managePatient": {
+			"edit": "Edit",
+			"editFunctionalGoal": "Edit Functional Goal",
+			"functionalGoals": "Functional Goals",
+			"height": "Height",
+			"na": "N/A",
+			"noFunctionalGoals": "No functional goals set",
+			"noIcon": "No Icon",
+			"wellnesscheck": "Wellness Check",
+			"yearsOld": "years old"
+		},
+		"menu": {
+			"activity": "Activity",
+			"applyTheme": "Apply Theme",
+			"back": "Back",
+			"vitalflowPlan": "VitalFlow Plan",
+			"contentManager": "Content Manager",
+			"copied": "Copied!",
+			"copyEmail": "Copy email",
+			"downloadApp": "Download App",
+			"emailCopied": "Email copied to clipboard!",
+			"evaluation": {
+				"results": "Evaluation Results",
+				"start": "Start Evaluation",
+				"title": "Evaluation"
+			},
+			"letsMove": {
+				"generateProgram": "Generate Program",
+				"programList": "Program List",
+				"programSummary": "Program Summary",
+				"title": "Programs"
+			},
+			"logout": "Logout",
+			"noUser": "No user found",
+			"vitalscan-rom": {
+				"captures": "ROM Insights",
+				"startScan": "Select Scan",
+				"summary": "ROM Sessions",
+				"title": "Scan"
+			},
+			"patientDetail": {
+				"aiAssistantCreateProgramModal": {
+					"add": "Add",
+					"apply": "Apply",
+					"both": "Both",
+					"category": "Category",
+					"collectingResults": "Collecting results...",
+					"daily": "Daily",
+					"determineExercises": "Determining exercises...",
+					"duration": "Duration",
+					"evaluatePain": "Evaluating pain levels...",
+					"fetchData": "Fetching data...",
+					"filters": "Filters",
+					"functionalGoals": "Functional Goals",
+					"gatherData": "Gathering data...",
+					"joint": "Joint",
+					"left": "Left",
+					"recordExercise": "Record Exercise",
+					"region": "Region",
+					"reps": "Reps",
+					"reset": "Reset",
+					"reviewGoals": "Reviewing goals...",
+					"right": "Right",
+					"sets": "Sets",
+					"side": "Side",
+					"startDate": "Start Date",
+					"weekly": "Weekly"
+				},
+				"aiAssistantListSessions": {
+					"unsavedChanges": "You have unsaved changes"
+				},
+				"aiAssistantListEvaluation": {
+					"noEvaluationFound": "No Evaluations Found"
+				},
+				"aiAssistantPrograms": {
+					"durationType": "Duration Type",
+					"uploadLabel": "Upload",
+					"coverImage": "Cover Image",
+					"vitalflowLibrary": "VitalFlow Library",
+					"chooseLibrary": "Choose Library",
+					"exercise": "Exercise",
+					"exercises": "Exercises",
+					"generateAi": "Generate AI Program",
+					"generateCarespace": "Generate VitalFlow Program",
+					"myLibrary": "My Library",
+					"myTemplates": "My Templates",
+					"noProgram": "No programs available",
+					"save": "Save",
+					"saveTemplate": "Save as Template",
+					"search": "Search",
+					"select": "Select",
+					"selectTemplate": "Select Template",
+					"selected": "Selected",
+					"systemTemplates": "System Templates"
+				}
+			},
+			"posture": {
+				"captures": "Posture Insights",
+				"summary": "Posture Sessions"
+			},
+			"reports": {
+				"create": "Create Report",
+				"summary": "Report Summary",
+				"title": "Reports"
+			},
+			"selectPatient": "Select a Patient",
+			"setting": {
+				"generalLabel": "General Settings",
+				"openAi": "OpenAI Configuration",
+				"plan1": "Getting Started",
+				"plan1description": "Introduction to the platform",
+				"plan2": "Health Assessment",
+				"plan2description": "Complete your health assessment",
+				"plan3": "Wellness Goals",
+				"plan3description": "Set your wellness goals",
+				"resetToDefault": "Reset to Default",
+				"save": "Save",
+				"savedSuccessfully": "Saved Successfully",
+				"update": "Update"
+			},
+			"settings": "Settings",
+			"survey": {
+				"create": "Create",
+				"start": "Start Survey",
+				"summary": "Survey Summary",
+				"title": "Survey"
+			},
+			"templates": "Templates",
+			"tools": "Tools"
+		},
+		"newPatients": "New Patients",
+		"noUser": "No user found",
+		"patient": {
+			"edit": "Edit",
+			"editFunctionalGoal": "Edit Functional Goal",
+			"functionalGoals": "Functional Goals",
+			"height": "Height",
+			"na": "N/A",
+			"noFunctionalGoals": "No functional goals set",
+			"noIcon": "No Icon",
+			"wellnessCheck": {
+				"description": "Let us know if you're still experiencing discomfort so we can adjust our recommendations.",
+				"label": "Wellness Check",
+				"noBetter": "No, I am better",
+				"yesPain" : "Yes, I have pain or discomfort",
+				"stillDiscomfort": "Do you still feel discomfort?",
+				"title": "Tracking your progress is important!"
+			},
+			"yearsOld": "years old"
+		},
+		"patientDetail": {
+			"panel": {
+				"addNote": "Add Note",
+				"adherenceDataDescription": "Patient has not started exercise tracking yet.",
+				"adherenceDataNotAvailable": "Adherence data not available",
+				"betterThan": "Better than",
+				"cancel": "Cancel",
+				"clinicalNotes": "Clinical Notes",
+				"cohortAverage": "Cohort Average",
+				"cohortComparison": "Cohort Comparison",
+				"cohortDataNotAvailable": "Cohort data not available",
+				"comparativeAnalytics": "Comparative Analytics",
+				"delete": "Delete",
+				"edit": "Edit",
+				"error": "Error",
+				"exerciseAdherence": "Exercise Adherence",
+				"exportError": "Failed to export report",
+				"exportPdf": "Export PDF",
+				"exportSuccess": "Patient report exported successfully",
+				"improvementRate": "Improvement Rate",
+				"noteAdded": "Note added",
+				"noteDeleteError": "Failed to delete note",
+				"noteDeleted": "Note deleted",
+				"notePlaceholder": "Add clinical note... Use @mention to tag team members",
+				"noteSaveError": "Failed to save note",
+				"noteUpdated": "Note updated",
+				"ofPatients": "% of patients",
+				"overallPostureScore": "Overall Posture Score",
+				"patientScore": "Patient Score",
+				"percentile": "percentile",
+				"percentileRank": "Percentile Rank",
+				"postureTrends": "Posture Trends",
+				"summaryMetrics": "Summary Metrics",
+				"updateNote": "Update Note"
+			},
+			"programs": {
+				"save": "Save Changes"
+			},
+			"sessions": {
+				"unsavedChanges": "You have unsaved changes"
+			}
+		},
+		"patients": {
+			"PatientsLabel": "Patients",
+			"all": "All Patients",
+			"allPatients": "All Patients",
+			"escalationRequired": "Escalation Required",
+			"followUpRequired": "Follow-up Required",
+			"invite": "Invite Patients",
+			"invitePatients": "Invite Patients",
+			"label": "Patients",
+			"new": "New Patients",
+			"newPatients": "New Patients",
+			"outOfParameters": "Out of Parameters",
+			"outOfParams": "Out of Parameters",
+			"pendingReview": "Pending Review",
+			"physiotherapist": "Physiotherapist",
+			"registered": "Registered Patients",
+			"registeredPatients": "Registered Users",
+			"reviewed": "Reviewed",
+			"unAssignedPatients": "Unassigned Users",
+			"unassigned": "Unassigned Patients",
+			"usersLabel": "Users"
+		},
+		"roles": {
+			"physiotherapist": "Physiotherapist"
+		},
+		"settings": {
+			"contentLibraryTab": {
+				"conditions": {
+					"modal": {
+						"titleLabel": "Title",
+						"thumbnailLabel": "Thumbnail",
+						"thumbnailRequired": "Thumbnail is required",
+						"descriptionLabel": "Description",
+						"descriptionRequired": "Description is required",
+						"uploadText": "Click to upload",
+						"changeImage": "Change Image",
+						"uploadHint": "Supported formats: JPG, PNG, GIF. Max size: 5MB. Recommended size: 800x600px.",
+						"titleMinLength": "Title must be at least 3 characters",
+						"saveSuccess": "Changes saved successfully",
+						"saveError": "Failed to save changes"
+					}
+				}
+			},
+			"general": "General Settings",
+			"openai": {
+				"apikeyPlaceholder": "Enter your OpenAI API key",
+				"description": "Configure OpenAI API settings for AI-powered features",
+				"description2": "Learn more about API keys",
+				"label": "OpenAI Configuration",
+				"save": "Save Settings",
+				"shareCode": "Share Invite Code"
+			},
+			"plan1": "Getting Started",
+			"plan1Description": "Introduction to the platform",
+			"plan2": "Health Assessment",
+			"plan2Description": "Complete your health assessment",
+			"plan3": "Wellness Goals",
+			"plan3Description": "Set your wellness goals",
+			"update": "Update"
+		},
+		"theme": {
+			"addTag": "Add Tags",
+			"bandwithText": "Bandwidth Mode",
+			"blockUser": "Block User Access",
+			"disable": "Disable",
+			"enable": "Enable",
+			"high": "High Bandwidth",
+			"inviteCodeText": "Invite Code",
+			"low": "Low Bandwidth",
+			"noTagFound": "No tags found",
+			"selfRegistration": "Self-Registration",
+			"themeSelectorText": "Theme Settings"
+		},
+		"users": {
+			"label": "Users",
+			"modal": {
+				"actions": {
+					"deleteUser": "Delete User",
+					"resetPassword": "Reset Password",
+					"editUser": "Edit User",
+					"legalConsent": "Legal Consent"
+				},
+				"consentForm": {
+					"accept": "Accept",
+					"decline": "Decline",
+					"title": "Informed Consent to Telehealth Physical Therapy"
+				}
+			},
+			"registered": "Registered Users",
+			"unassigned": "Unassigned Users"
+		}
+	},
+	"annotation": {
+		"actions": {
+			"clearAll": "Clear All",
+			"clearAllAnnotations": "Clear all annotations",
+			"undo": "Undo",
+			"undoLastStroke": "Undo last stroke"
+		},
+		"toolbar": {
+			"colorLabel": "Color:",
+			"colorPicker": {
+				"label": "Annotation color picker"
+			},
+			"label": "Annotation tools",
+			"strokeWidth": {
+				"label": "Stroke width"
+			}
+		},
+		"tools": {
+			"arrow": "Arrow",
+			"circle": "Circle",
+			"eraser": "Eraser",
+			"highlighter": "Highlighter",
+			"pen": "Pen",
+			"text": "Text"
+		}
+	},
+	"calendar": {
+		"activities": "Activities",
+		"agenda": "Agenda",
+		"allDay": "All day",
+		"date": "Date",
+		"day": "Day",
+		"event": "Event",
+		"eventSelected": "Event selected",
+		"fullCalendar": "Full Calendar",
+		"loading": "Loading calendar...",
+		"mainLabel": "Activity calendar",
+		"month": "Month",
+		"more": "More",
+		"next": "Next",
+		"noActivities": "No activities scheduled for this day",
+		"noEvents": "No events for this date",
+		"previous": "Previous",
+		"sessionCalendar": {
+			"ariaLabel": "Session activity calendar heatmap",
+			"legend": {
+				"less": "Less",
+				"more": "More"
+			},
+			"loading": "Loading calendar...",
+			"noData": "No session data available yet",
+			"tooltip": {
+				"session": "session",
+				"sessions": "sessions"
+			}
+		},
+		"switchToFullView": "Switch to full calendar view",
+		"switchToWeeklyView": "Switch to weekly calendar view",
+		"time": "Time",
+		"today": "Today",
+		"week": "Week",
+		"weeklyView": "Weekly View"
+	},
+	"common": {
+		"activityCalendar": {
+			"event": {
+				"hasImage": "Has image",
+				"hasVideo": "Has video"
+			},
+			"shortcuts": {
+				"keyboard": "Keyboard"
+			}
+		},
+		"appLayout": {
+			"content": {
+				"error": "Something went wrong",
+				"loading": "Loading..."
+			},
+			"header": {
+				"menuButton": {
+					"ariaLabel": "Open navigation menu",
+					"title": "Open menu"
+				}
+			},
+			"sidebar": {
+				"homeLink": {
+					"ariaLabel": "VitalFlow Home"
+				},
+				"navigation": {
+					"ariaLabel": "Main navigation"
+				}
+			},
+			"userMenu": {
+				"ariaLabel": "User menu",
+				"profile": "Profile",
+				"settings": "Settings",
+				"signOut": "Sign out",
+				"theme": "Theme",
+				"themes": {
+					"system": "System",
+					"default": "Default",
+					"dark": "Dark",
+					"vibrant": "Vibrant"
+				}
+			}
+		},
+		"calendar": {
+			"agenda": {
+				"foundEvents": "Found {{count}} events",
+				"loading": "Loading events...",
+				"noEventsFound": "No events found",
+				"noEventsToDisplay": "No events to display",
+				"searchPlaceholder": "Search events..."
+			},
+			"validation": {
+				"cannotScheduleInPast": "Cannot schedule in the past",
+				"failedToScheduleActivity": "Failed to schedule activity"
+			}
+		},
+		"careSpaceLogoAlt": "VitalFlow Logo",
+		"carousel": {
+			"loadingRecommendations": "Loading recommendations...",
+			"nextSlide": "Next slide",
+			"previousSlide": "Previous slide"
+		},
+		"commandPalette": {
+			"actions": {
+				"cancel": "Cancel",
+				"confirm": "Confirm",
+				"confirmAction": "Are you sure you want to {{action}} for {{userName}}?",
+				"execute": "Execute",
+				"noActionsAvailable": "No actions available",
+				"noActionsMatch": "No actions match \"{{query}}\"",
+				"open": "Open"
+			},
+			"admin": {
+				"manageUsers": {
+					"description": "View and manage all users in the system",
+					"label": "Manage All Users"
+				},
+				"reports": {
+					"description": "View system-wide reports and analytics",
+					"label": "System Reports"
+				},
+				"settings": {
+					"description": "Configure system settings",
+					"label": "System Settings"
+				}
+			},
+			"ariaLabels": {
+				"clearUserSelection": "Clear user selection",
+				"closeDrawer": "Close drawer",
+				"commandResults": "Command results",
+				"contextNavigation": "Context navigation",
+				"openCommandPalette": "Open command palette",
+				"searchPrograms": "Search programs"
+			},
+			"categories": {
+				"actions": "Actions",
+				"navigation": "Navigation",
+				"other": "Other",
+				"quick": "Quick Actions",
+				"recent": "Recent",
+				"settings": "Settings"
+			},
+			"drawer": {
+				"admins": {
+					"assigned": "Assigned",
+					"cancel": "Cancel",
+					"error": "Failed to update admin assignments",
+					"saveChanges": "Save Changes",
+					"searchLabel": "Search admins",
+					"searchPlaceholder": "Search admins by name or email",
+					"success": "Admin assignments updated successfully",
+					"title": "Assign Admin",
+					"toggleAssignment": "Toggle assignment for {{name}}",
+					"unassigned": "Unassigned"
+				},
+				"close": "Close drawer (Esc)",
+				"consentFormModal": {
+					"buttons": {
+						"cancel": "Cancel",
+						"save": "Save"
+					},
+					"checkbox": "I accept the consent form on behalf of this user",
+					"labels": {
+						"currentStatus": "Current Status:",
+						"name": "Name:",
+						"profileData": "Profile Data:",
+						"user": "User:",
+						"userId": "User ID:"
+					},
+					"status": {
+						"accepted": "Accepted",
+						"notAccepted": "Not Accepted"
+					},
+					"title": "Consent Form - {{firstName}} {{lastName}}"
+				},
+				"consentForms": {
+					"actions": {
+						"delete": "Delete",
+						"download": "Download",
+						"view": "View"
+					},
+					"deleteConfirm": {
+						"cancelText": "Cancel",
+						"content": "Are you sure you want to delete \"{{fileName}}\"? This action cannot be undone.",
+						"okText": "Delete",
+						"title": "Delete Consent Form"
+					},
+					"messages": {
+						"deleteError": "Failed to delete consent form",
+						"deleteSuccess": "Consent form deleted successfully",
+						"downloadStarted": "Download started",
+						"uploadError": "Failed to upload consent form",
+						"uploadSuccess": "Consent form uploaded successfully"
+					},
+					"status": {
+						"approved": "Approved",
+						"pending": "Pending",
+						"rejected": "Rejected"
+					},
+					"title": "Consent Forms",
+					"upload": "Upload Consent Form (PDF or Image, max 10MB)",
+					"uploaded": "Uploaded:",
+					"validation": {
+						"maxSize": "File size exceeds 10MB limit",
+						"onlyPdfImages": "Only PDF and images (JPEG, PNG) are allowed"
+					}
+				},
+				"programs": {
+					"deselectAll": "Deselect All",
+					"error": "Failed to update program assignments",
+					"saveAssignments": "Save Assignments",
+					"selectAll": "Select All",
+					"selected": "programs selected",
+					"success": "Program assignments updated successfully",
+					"title": "Assign Programs"
+				}
+			},
+			"empty": {
+				"clearSearch": "Clear Search",
+				"noActions": {
+					"message": "You don't have permission to perform actions on this user",
+					"title": "No actions available"
+				},
+				"noCommands": {
+					"message": "No commands match \"{{query}}\"",
+					"messageFallback": "Try typing to search for commands or users",
+					"title": "No commands found"
+				},
+				"noConsentForms": "No consent forms found",
+				"noPrograms": "No programs found",
+				"noResults": {
+					"message": "Try a different search",
+					"title": "No results"
+				},
+				"noRoutes": "No routes found for \"{{query}}\"",
+				"noUsers": {
+					"message": "No users match \"{{query}}\"",
+					"messageFallback": "Start typing to search for users",
+					"title": "No users found"
+				}
+			},
+			"fileSizes": {
+				"bytes": "Bytes",
+				"kb": "KB",
+				"mb": "MB"
+			},
+			"loading": {
+				"default": "Loading...",
+				"searchingUsers": "Searching users..."
+			},
+			"mobile": {
+				"commands": "Commands",
+				"trigger": "Search commands"
+			},
+			"navigation": {
+				"analytics": {
+					"description": "View analytics and reports",
+					"label": "Go to Analytics"
+				},
+				"dashboard": {
+					"description": "Navigate to home dashboard",
+					"label": "Go to Dashboard"
+				},
+				"patients": {
+					"description": "View patient management",
+					"label": "Go to Patients"
+				},
+				"settings": {
+					"description": "Open settings",
+					"label": "Go to Settings"
+				},
+				"tools": {
+					"description": "Access clinical tools",
+					"label": "Go to Tools"
+				}
+			},
+			"search": {
+				"ariaLabels": {
+					"filterActions": "Filter user actions",
+					"navigateFeaturesLocked": "Navigate user features (selection locked)",
+					"searchCommands": "Search commands or users"
+				},
+				"noMatch": "No commands found. Press <strong>Enter</strong> to search users instead.",
+				"placeholders": {
+					"filterActions": "Filter actions...",
+					"navigateFeatures": "Navigate to your features...",
+					"searchCommands": "Type a command or search users...",
+					"searchPrograms": "Search programs by name"
+				},
+				"yourAccount": "Your Account"
+			},
+			"superAdmin": {
+				"systemHealth": {
+					"description": "View system health and diagnostics",
+					"label": "System Health"
+				},
+				"userRoles": {
+					"tags": "Tags",
+					"description": "Assign roles to users",
+					"label": "Manage User Roles"
+				}
+			},
+			"title": "Command Palette",
+			"userContext": {
+				"clearTitle": "Clear user (Cmd+Backspace)",
+				"lastLogin": "Last login:"
+			}
+		},
+		"datePicker": {
+			"selectAppointmentDate": "Select appointment date",
+			"selectBirthDate": "Select birth date",
+			"selectDate": "Select a date",
+			"selectDateTime": "Select date and time",
+			"selectMonth": "Select month",
+			"selectYear": "Select year"
+		},
+		"dateRange": {
+			"selector": {
+				"label": "Date range selection",
+				"more": "More",
+				"nextPeriod": "Next period",
+				"previousPeriod": "Previous period",
+				"quickFilters": "Quick date filters"
+			}
+		},
+		"dayDetail": {
+			"modal": {
+				"hasImage": "Has image",
+				"hasVideo": "Has video"
+			}
+		},
+		"difficulty": "Difficulty",
+		"escKey": "Esc",
+		"exercise": {
+			"difficulty": "Difficulty: {{level}}",
+			"streak": {
+				"ariaLabel": "{{count}} day streak",
+				"plural": "{{count}} days!",
+				"single": "{{count}} day!"
+			}
+		},
+		"feedback": {
+			"button": {
+				"ariaLabel": "Report Issue",
+				"reportIssue": "Report Issue"
+			},
+			"form": {
+				"description": {
+					"ariaLabel": "Feedback Description",
+					"extra": "What happened? What did you expect?",
+					"label": "Description",
+					"minLength": "Please provide more details (at least 20 characters)",
+					"placeholder": "Describe the issue in detail. Include what you were doing when it occurred and what you expected to happen.",
+					"required": "Please enter a description"
+				},
+				"issueType": {
+					"ariaLabel": "Issue Type",
+					"label": "Issue Type",
+					"options": {
+						"bug": "Bug - Something is broken",
+						"featureRequest": "Feature Request - New idea or enhancement",
+						"performance": "Performance - Slow, freezing, unresponsive",
+						"security": "Security - Privacy or security concern",
+						"uxFeedback": "UX Feedback - Confusing, difficult to use"
+					},
+					"placeholder": "Select issue type",
+					"required": "Please select an issue type"
+				},
+				"screenshot": {
+					"ariaLabel": "Upload Screenshot",
+					"extra": "Attach a screenshot to help illustrate the issue",
+					"label": "Screenshot (Optional)",
+					"upload": "Upload"
+				},
+				"stepsToReproduce": {
+					"ariaLabel": "Steps to Reproduce",
+					"extra": "Help us recreate the issue",
+					"label": "Steps to Reproduce (Optional)",
+					"placeholder": "1. Go to dashboard page\n2. Click on \"Export\" button\n3. Nothing happens"
+				},
+				"title": {
+					"ariaLabel": "Feedback Title",
+					"extra": "Brief description (max 80 characters)",
+					"label": "Title",
+					"maxLength": "Title must be 80 characters or less",
+					"placeholder": "e.g., Dashboard fails to load on Safari",
+					"required": "Please enter a title"
+				}
+			},
+			"messages": {
+				"error": "Failed to submit feedback. Please try again or email beta-support@vitalflow.ai",
+				"infoText": "Your feedback will be reviewed within 24 hours. You'll receive a confirmation email with a ticket number.",
+				"success": "Feedback submitted! Ticket ID: {{ticketId}}"
+			},
+			"modal": {
+				"cancel": "Cancel",
+				"submit": "Submit Feedback",
+				"title": "Beta Feedback"
+			}
+		},
+		"heroBannerAlt": "Hero banner",
+		"keyboardShortcuts": "Keyboard Shortcuts",
+		"markdown": {
+			"imageAlt": "Image"
+		},
+		"metrics": {
+			"activePatients": "Active Patients",
+			"currentStreak": "Current Streak",
+			"level": "Level",
+			"program": "Program",
+			"progressRate": "Progress Rate",
+			"romScore": "ROM Score",
+			"sessionsCompleted": "Sessions Completed",
+			"sessionsThisMonth": "Sessions This Month",
+			"status": "Status",
+			"totalSessions": "Total Sessions",
+			"weeklySession": "Weekly Sessions"
+		},
+		"ml": {
+			"errors": {
+				"failedToLoadAILibrary": "Failed to load AI library"
+			},
+			"loading": {
+				"initializingAI": "Initializing AI...",
+				"initializingAIFeatures": "Initializing AI features...",
+				"loadingGestureRecognitionAI": "Loading gesture recognition AI...",
+				"loadingPostureAnalysisAI": "Loading posture analysis AI...",
+				"mayTakeFewSeconds": "This may take a few seconds..."
+			}
+		},
+		"postureScan": {
+			"fullScreenPrompt": {
+				"description": "Posture Scan works better in full screen. Would you like to switch now?",
+				"goFullScreen": "Go Full Screen",
+				"notNow": "Not now",
+				"notSupported": "Your browser doesn't support Full Screen on this device.",
+				"title": "Go Full Screen?"
+			},
+			"calibration": {
+				"captions": {
+					"front": {
+						"visibility": "Face the camera with your whole body visible.",
+						"wrongSide": "You're facing away from the camera. Please turn around.",
+						"frame": "Step back until you fit in the frame.",
+						"instruction": "Stand tall facing the camera, arms relaxed at your sides. Hold still for the capture.",
+						"congratulations": "Great job! Capture complete."
+					},
+					"back": {
+						"visibility": "Turn your back toward the camera.",
+						"wrongSide": "You're facing the camera. Please turn around.",
+						"frame": "Step back until you fit in the frame.",
+						"instruction": "Stand tall with your back to the camera. Arms relaxed. Hold still.",
+						"congratulations": "Great job! Capture complete."
+					},
+					"left": {
+						"visibility": "Turn your left side toward the camera.",
+						"frame": "Step back until you fit in the frame.",
+						"instruction": "Stand tall with your left shoulder facing the camera, arms relaxed, hold still.",
+						"wrongSide": "That's your right side. Please turn the other way.",
+						"congratulations": "Great job! Capture complete."
+					},
+					"right": {
+						"visibility": "Turn your right side toward the camera.",
+						"frame": "Step back until you fit in the frame.",
+						"instruction": "Stand tall with your right shoulder facing the camera. Arms relaxed. Hold still.",
+						"wrongSide": "That's your left side. Please turn the other way.",
+						"congratulations": "Great job! Capture complete."
+					},
+					"shared": {
+						"poseLost": "Hold still, we lost your position."
+					},
+					"viewTransitions": {
+						"title1": "Let's start your posture analysis. Pose 1 of 4.",
+						"title2": "Great! Now for pose 2 of 4.",
+						"title3": "Perfect! Pose 3 of 4.",
+						"title4": "Almost done! Last pose."
+					}
+				}
+			},
+			"result": {
+				"scanComplete": "Scan Complete",
+				"uploading": "Uploading, please wait..."
+			},
+			"holdStill": "Hold Still"
+		},
+		"postureScanAlt": "Posture scan",
+		"preferences": {
+			"cancel": "Cancel",
+			"export": {
+				"defaultFormat": {
+					"description": "Preferred format for data exports",
+					"options": {
+						"csv": "CSV",
+						"json": "JSON",
+						"pdf": "PDF",
+						"xlsx": "Excel (XLSX)"
+					},
+					"title": "Default Export Format"
+				},
+				"includeMetadata": {
+					"description": "Include export date and user info",
+					"label": "Include Metadata"
+				}
+			},
+			"keyboard": {
+				"customization": {
+					"description": "Coming soon: Customize keyboard shortcuts",
+					"title": "Shortcut Customization"
+				},
+				"enable": {
+					"description": "Use keyboard shortcuts for navigation",
+					"label": "Enable Keyboard Shortcuts"
+				}
+			},
+			"language": {
+				"description": "Choose your preferred language",
+				"options": {
+					"de": "German",
+					"en": "English",
+					"es": "Spanish",
+					"fr": "French",
+					"zh": "Chinese"
+				},
+				"title": "Language Preference"
+			},
+			"layout": {
+				"defaultView": {
+					"description": "Page to show when you log in",
+					"options": {
+						"analytics": "Analytics",
+						"dashboard": "Dashboard",
+						"patients": "Patients",
+						"tools": "Tools"
+					},
+					"title": "Default View"
+				},
+				"sidebarBehavior": {
+					"description": "Control how the sidebar behaves",
+					"options": {
+						"alwaysCollapsed": "Always Collapsed",
+						"alwaysExpanded": "Always Expanded",
+						"auto": "Auto (Remember Last State)"
+					},
+					"title": "Sidebar Behavior"
+				}
+			},
+			"messages": {
+				"resetToDefaults": "Preferences reset to defaults",
+				"savedSuccessfully": "Preferences saved successfully"
+			},
+			"notifications": {
+				"desktop": {
+					"description": "Show browser desktop notifications",
+					"label": "Desktop Notifications"
+				},
+				"email": {
+					"description": "Receive notifications via email",
+					"label": "Email Notifications"
+				},
+				"enable": {
+					"description": "Show notifications for updates",
+					"label": "Enable Notifications"
+				},
+				"sound": {
+					"description": "Play sound when notifications appear",
+					"label": "Notification Sound"
+				}
+			},
+			"reset": "Reset",
+			"saveChanges": "Save Changes",
+			"tabs": {
+				"export": "Export",
+				"keyboard": "Keyboard",
+				"language": "Language",
+				"layout": "Layout",
+				"notifications": "Notifications",
+				"theme": "Theme"
+			},
+			"theme": {
+				"compactMode": {
+					"description": "Reduce spacing and padding",
+					"label": "Compact Mode"
+				},
+				"description": "Choose your preferred color theme",
+				"displayMode": "Display Mode",
+				"options": {
+					"dark": "Dark",
+					"default": "Default Purple",
+					"light": "Light",
+					"vibrant": "Vibrant"
+				},
+				"sectionTitle": "Theme Selection"
+			},
+			"title": "User Preferences"
+		},
+		"quickActions": "Quick Actions",
+		"recommendations": {
+			"completeAssessmentsHint": "Complete your assessments to receive personalized recommendations.",
+			"errorLoadingDescription": "Unable to load recommendations. Please try again.",
+			"errorLoadingTitle": "Error Loading Recommendations",
+			"fallbackDescription": "We couldn't find personalized recommendations for your profile. Here are some general suggestions.",
+			"fallbackTitle": "Showing general recommendations",
+			"noRecommendationsAvailable": "No recommendations available yet"
+		},
+		"recurrence": {
+			"after": "After",
+			"continuesIndefinitely": "+ continues indefinitely",
+			"days": "Day(s)",
+			"daysOfWeek": {
+				"fri": "Fri",
+				"mon": "Mon",
+				"sat": "Sat",
+				"sun": "Sun",
+				"thu": "Thu",
+				"tue": "Tue",
+				"wed": "Wed"
+			},
+			"ends": "Ends",
+			"months": "Month(s)",
+			"never": "Never",
+			"occurrences": "occurrences",
+			"on": "On",
+			"repeatActivity": "Repeat this activity",
+			"repeatEvery": "Repeat every",
+			"repeatOn": "Repeat on",
+			"upcomingOccurrences": "Upcoming Occurrences",
+			"weeks": "Week(s)"
+		},
+		"savedSuccessfully": "Saved successfully",
+		"search": {
+			"clear": "Clear",
+			"keyboardShortcut": "Cmd/Ctrl + K",
+			"noResults": "Try a different search term",
+			"recentSearches": "Recent Searches",
+			"searching": "Searching..."
+		},
+		"settings": "Settings",
+		"shortcuts": {
+			"back": "Back",
+			"clearUser": "Clear User",
+			"closeModal": "Close",
+			"esc": "Esc",
+			"modal": {
+				"close": "Close keyboard shortcuts help",
+				"note": "Note:"
+			},
+			"navigate": "Navigate",
+			"select": "Select"
+		},
+		"templatePreview": {
+			"close": "Close",
+			"emailPlaceholder": "Enter email address",
+			"title": "Template Preview"
+		},
+		"ui": {
+			"loadingStates": {
+				"loading": "Loading",
+				"time": "Time"
+			}
+		},
+		"userStatus": {
+			"activeNow": "Active Now",
+			"away": "Away"
+		},
+		"videoPlayer": {
+			"browserNotSupported": "Your browser does not support the video tag.",
+			"captionLanguageEnglish": "English",
+			"captions": "Captions",
+			"failedToLoad": "Failed to load video.",
+			"fullscreen": "Fullscreen",
+			"fullscreenWithKey": "Fullscreen (F)",
+			"loop": "Loop",
+			"noVideoAvailable": "No video available.",
+			"pause": "Pause",
+			"play": "Play",
+			"playbackSpeed": "Playback speed {{speed}}x",
+			"toggleCaptions": "Toggle captions",
+			"toggleLoop": "Toggle loop",
+			"tryAgain": "Try again",
+			"videoDemo": "Exercise demonstration video",
+			"videoProgress": "Video progress",
+			"volume": "Volume"
+		},
+		"viewEvaluation": "View Evaluation",
+		"ok": "OK"
+	},
+	"emptyState": {
+		"completeFirstAssessment": "Complete your first posture assessment to see results here",
+		"noAssessmentsYet": "No assessments yet"
+	},
+	"examples": {
+		"logo": {
+			"vitalflow": "VitalFlow",
+			"colorLight": "Color - Light:",
+			"darkTheme": "Dark Theme:",
+			"description": "Healthcare technology platform for modern care delivery",
+			"fullHorizontalColor": "Full Horizontal - Color",
+			"fullLogos": "Full Logos",
+			"icons": "Icons",
+			"iconsVariousSizes": "Icons (Various Sizes)",
+			"johnDoe": "John Doe",
+			"lightTheme": "Light Theme:",
+			"logoVariants": "Logo Variants",
+			"monoWhite": "Mono - White:",
+			"productManager": "Product Manager, VitalFlow",
+			"returnToHomepage": "VitalFlow - Return to homepage",
+			"toggleTheme": "Toggle Theme",
+			"wordmarks": "Wordmarks"
+		},
+		"modal": {
+			"alert": {
+				"content": "Action completed successfully!",
+				"title": "Alert"
+			},
+			"confirm": {
+				"content": "Are you sure you want to proceed?",
+				"title": "Confirm Action"
+			},
+			"details": {
+				"title": "User Details"
+			},
+			"form": {
+				"title": "Edit Profile"
+			},
+			"fullWidth": {
+				"title": "Dashboard"
+			},
+			"largeForm": {
+				"title": "Create Program"
+			},
+			"loading": {
+				"content": "Please wait...",
+				"title": "Processing..."
+			},
+			"standard": {
+				"content": "Are you sure?",
+				"title": "Confirmation"
+			},
+			"table": {
+				"title": "Data Table"
+			},
+			"xlargeForm": {
+				"title": "Advanced Settings"
+			}
+		}
+	},
+	"form": {
+		"phone": {
+			"label": "Mobile Number",
+			"placeholder": "Enter phone number",
+			"placeholderWithDigits": "Enter 10-digit phone number"
+		}
+	},
+	"patient": {
+		"activity": {
+			"addMessage": "Add Message",
+			"areReady": "Are Ready",
+			"attachImage": "Attach Image",
+			"calendarNavigation": "Calendar Navigation",
+			"clear": "Clear",
+			"clearMsg": "Clear Msg",
+			"closeAttachMenu": "Close Attach Menu",
+			"closeReply": "Close Reply",
+			"dateList": "Date List",
+			"discard": "Discard",
+			"discardRecording": "Discard Recording",
+			"discardTooltip": "Discard Tooltip",
+			"editImage": "Edit Image",
+			"evaluation": "Evaluation",
+			"evaluationDescription": "Evaluation Description",
+			"hasEvents": "Has Events",
+			"imageErr": "Image Err",
+			"imageFileInput": "Image File Input",
+			"imageSelected": "Image Selected",
+			"loading": "Loading",
+			"mainContent": "Main Content",
+			"message": "Message",
+			"messageErr": "Message Err",
+			"messageHere": "Message Here",
+			"messageInput": "Message Input",
+			"newMsg": "New Msg",
+			"newProgramAssigned": "New Program Assigned",
+			"newVideoMsg": "New Video Msg",
+			"nextWeek": "Next Week",
+			"omniRom": "Omni Rom",
+			"omniRomDescription": "Omni Rom Description",
+			"openAttachMenu": "Open Attach Menu",
+			"posture": "Posture",
+			"postureDescription": "Posture Description",
+			"pressRecord": "Press Record",
+			"previousWeek": "Previous Week",
+			"program": "Program",
+			"programDescription": "Program Description",
+			"recDiscard": "Rec Discard",
+			"recStarted": "Rec Started",
+			"record": "Record",
+			"recordVideo": "Record Video",
+			"recorded": "Recorded",
+			"returnToToday": "Return To Today",
+			"selectDate": "Select Date",
+			"selectMonth": "Select month: {{month}}",
+			"send": "Send",
+			"sendMessage": "Send Message",
+			"sendMessageErr": "Send Message Err",
+			"sendingMessage": "Sending Message",
+			"startIn": "Start In",
+			"startVoiceRecording": "Start Voice Recording",
+			"stop": "Stop",
+			"stopRecording": "Stop Recording",
+			"stopTooltip": "Stop Tooltip",
+			"submit": "Submit",
+			"today": "Today",
+			"uploadImage": "Upload Image",
+			"videoErr": "Video Err"
+		},
+		"activityStream": {
+			"addMessage": "Add Message",
+			"areReady": "Are Ready",
+			"attachImage": "Attach Image",
+			"calendarNavigation": "Calendar Navigation",
+			"clear": "Clear",
+			"clearMsg": "Clear Msg",
+			"closeAttachMenu": "Close Attach Menu",
+			"closeReply": "Close Reply",
+			"dateList": "Date List",
+			"discard": "Discard",
+			"discardRecording": "Discard Recording",
+			"discardTooltip": "Discard Tooltip",
+			"editImage": "Edit Image",
+			"evaluation": "Evaluation",
+			"evaluationDescription": "Evaluation Description",
+			"filters": {
+				"activityType": "Activity Type",
+				"applied": "Applied:",
+				"dateRange": "Date Range",
+				"status": "Status"
+			},
+			"hasEvents": "Has Events",
+			"imageErr": "Image Err",
+			"imageFileInput": "Image File Input",
+			"imageSelected": "Image Selected",
+			"loading": "Loading",
+			"mainContent": "Main Content",
+			"message": "Message",
+			"messageErr": "Message Err",
+			"messageHere": "Message Here",
+			"messageInput": "Message Input",
+			"newMsg": "New Msg",
+			"newProgramAssigned": "New Program Assigned",
+			"newVideoMsg": "New Video Msg",
+			"nextWeek": "Next Week",
+			"omniRom": "Omni Rom",
+			"omniRomDescription": "Omni Rom Description",
+			"openAttachMenu": "Open Attach Menu",
+			"posture": "Posture",
+			"postureDescription": "Posture Description",
+			"pressRecord": "Press Record",
+			"previousWeek": "Previous Week",
+			"program": "Program",
+			"programDescription": "Program Description",
+			"recDiscard": "Rec Discard",
+			"recStarted": "Rec Started",
+			"record": "Record",
+			"recordVideo": "Record Video",
+			"recorded": "Recorded",
+			"returnToToday": "Return To Today",
+			"selectDate": "Select Date",
+			"selectMonth": "Select month: {{month}}",
+			"send": "Send",
+			"sendMessage": "Send Message",
+			"sendMessageErr": "Send Message Err",
+			"sendingMessage": "Sending Message",
+			"startIn": "Start In",
+			"startVoiceRecording": "Start Voice Recording",
+			"stop": "Stop",
+			"stopRecording": "Stop Recording",
+			"stopTooltip": "Stop Tooltip",
+			"submit": "Submit",
+			"today": "Today",
+			"uploadImage": "Upload Image",
+			"videoErr": "Video Err"
+		},
+		"adherence": {
+			"heatmap": {
+				"adherence": "Adherence",
+				"adherenceLevelLegend": "Adherence level legend",
+				"completed": "Completed",
+				"dailyAdherenceHeatmap": "Daily adherence heatmap",
+				"dailyExerciseActivity": "Daily Exercise Activity",
+				"days": {
+					"fri": "Fri",
+					"mon": "Mon",
+					"sat": "Sat",
+					"sun": "Sun",
+					"thu": "Thu",
+					"tue": "Tue",
+					"wed": "Wed"
+				},
+				"exerciseAdherenceCalendar": "Exercise Adherence Calendar",
+				"exerciseCount": {
+					"one": "{{count}} exercise",
+					"other": "{{count}} exercises",
+					"zero": "No exercises"
+				},
+				"exercises": "Exercises",
+				"expected": "Expected",
+				"highAdherence": "High adherence",
+				"less": "Less",
+				"lowAdherence": "Low adherence",
+				"mediumAdherence": "Medium adherence",
+				"more": "More",
+				"noActivity": "No activity",
+				"summary": {
+					"completedOfExpected": "Completed {{completed}} of {{expected}} exercises ({{adherence}}% adherence)",
+					"thisWeek": "This Week:"
+				},
+				"thisWeek": "This Week",
+				"tooltips": {
+					"noExercises": "{{date}}: No exercises",
+					"withActivities": "{{date}}: {{count}} exercises ({{percentage}}%)",
+					"withActivity": "{{date}}: {{count}} exercise ({{percentage}}%)"
+				},
+				"weeklyProgress": "Weekly Progress"
+			},
+			"metrics": {
+				"adherenceStatus": {
+					"adherent": "Adherent",
+					"ariaLabel": "Adherence status: {{status}}",
+					"belowThreshold": "Below 50% completion threshold",
+					"meetingGoals": "Meeting exercise goals",
+					"nonAdherent": "Non-Adherent",
+					"title": "Adherence Status",
+					"tooltip": "Overall adherence status based on completion rate (threshold: 50%)"
+				},
+				"ariaLabel": "Adherence Metrics",
+				"completionRate": {
+					"ariaLabel": "Completion rate: {{rate}}%. {{completed}} of {{expected}} exercises completed this week.",
+					"subtitle": "{{completed}} of {{expected}} exercises this week",
+					"title": "Completion Rate",
+					"tooltip": "Percentage of recommended exercises completed"
+				},
+				"consistencyStreak": {
+					"ariaLabel": "Consistency streak: {{streak}} consecutive days",
+					"encourageDaily": "Encourage patient to maintain daily practice",
+					"excellentConsistency": "Excellent consistency!",
+					"goodConsistency": "Good consistency, keep it up!",
+					"subtitle": "consecutive days",
+					"title": "Consistency Streak",
+					"tooltip": "Longest streak of consecutive days with exercise completion"
+				},
+				"lastActivity": {
+					"activeToday": "Active today",
+					"ariaLabel": "Last activity: {{activity}}. {{status}}",
+					"daysAgo": "{{days}}d ago",
+					"inactive": "Inactive - Intervention needed",
+					"recentlyActive": "Recently active",
+					"title": "Last Activity",
+					"today": "Today",
+					"tooltip": "Days since patient last completed an exercise"
+				}
+			}
+		},
+		"dashboard": {
+			"createCustomScan": "Create Custom Scan",
+			"invite": {
+				"appPreviewAlt": "VitalFlow App Preview",
+				"appleStoreAlt": "Apple Store",
+				"careSpace": "Care Space",
+				"downloadApp": "Download App",
+				"googlePlayStoreAlt": "Google Play Store",
+				"improveMobility": "Improve Mobility",
+				"inviteCode": "Invite Code"
+			},
+			"mobilityScore": "Mobility Score",
+			"new": {
+				"enroll": "Enroll",
+				"enrolled": "Enrolled",
+				"exercise": "Exercise",
+				"exercises": "Exercises",
+				"functionalGoals": "Functional Goals",
+				"myProgram": "My Program",
+				"myProgramTips": "Recommended exercises and holistic wellness practices",
+				"programEmptyDescription": "Your program will appear here once it's been assigned.",
+				"programEmptyTitle": "Don't worry - Help is on the way!",
+				"showAll": "Show All",
+				"suggestedPrograms": "Suggested Programs",
+				"suggestedProgramsTips": "suggested programs tips",
+				"viewHistory": "View History"
+			},
+			"postureAnalysis": "Posture Analysis",
+			"romMeasures": "Rom Measures",
+			"startPostureScan": "Start Posture Scan"
+		},
+		"dashboardInvite": {
+			"careSpace": "Care Space",
+			"downloadApp": "Download App",
+			"improveMobility": "Improve Mobility",
+			"inviteCode": "Invite Code"
+		},
+		"dashboardScreen": {
+			"createCustomScan": "Create Custom Scan",
+			"mobilityScore": "Mobility Score",
+			"postureAnalysis": "Posture Analysis",
+			"romMeasures": "Rom Measures",
+			"startPostureScan": "Start Posture Scan"
+		},
+		"menu": {
+			"activity": "Activity",
+			"apply-theme": "Apply Theme",
+			"create-reports": "Create Reports",
+			"download-app": "Download App",
+			"evaluation": "Evaluation",
+			"evaluation-results": "Evaluation Results",
+			"lets-move": "Lets Move",
+			"logout": "Logout",
+			"omni-rom": "Omni Rom",
+			"vitalscan-rom-captures": "ROM Insights",
+			"vitalscan-rom-summary": "ROM Sessions",
+			"posture-captures": "Posture Insights",
+			"posture-summary": "Posture Sessions",
+			"program-list": "Program List",
+			"program-summary": "Program Summary",
+			"report-summary": "Report Summary",
+			"reports": "Reports",
+			"start-evaluation": "Start Evaluation",
+			"start-scan": "Start Scan",
+			"start-survey": "Start Survey",
+			"survey": "Survey",
+			"survey-summary": "Survey Summary",
+			"tools": "Tools"
+		},
+		"mobilityReport": {
+			"birthDate": "Birth Date",
+			"description": "Description",
+			"description1": "Description1",
+			"description2": "Description2",
+			"description4": "Description4",
+			"description5": "Description5",
+			"description6": "Description6",
+			"didYouKnow": "Did You Know",
+			"didYouKnowDescription": "Did You Know Description",
+			"height": "Height",
+			"list1": "List1",
+			"list2": "List2",
+			"list3": "List3",
+			"list4": "List4",
+			"mobilityOverview": "Mobility Overview",
+			"mobilityOverviewDescription": "Mobility Overview Description",
+			"mobilityPersonas": "Mobility Personas",
+			"mobilityProgressReport": "Mobility Progress Report",
+			"range1": "Range1",
+			"range2": "Range2",
+			"range3": "Range3",
+			"range4": "Range4",
+			"range5": "Range5",
+			"range6": "Range6",
+			"reportCreated": "Report Created",
+			"reportCreatedDate": "Report Created Date",
+			"title1": "Title1",
+			"title2": "Title2",
+			"title3": "Title3",
+			"title4": "Title4",
+			"title5": "Title5",
+			"title6": "Title6",
+			"weight": "Weight",
+			"whatThisMeans": "What This Means",
+			"youAre": "You Are"
+		},
+		"myProgress": {
+			"evaluation": {
+				"associatedSymptoms": "Associated Symptoms",
+				"copy": "Copy",
+				"copyClipboard": "Copy Clipboard",
+				"dateOfAssessment": "Date Of Assessment",
+				"doYouHaveAnyOfTheseSymptoms": "Do You Have Any Of These Symptoms",
+				"download": "Download",
+				"haveYouBeenDiagnosedWithAnyOfTheFollowing": "Have You Been Diagnosed With Any Of The Following",
+				"medicalHistory": "Medical History",
+				"painSummary": "Pain Summary",
+				"patientID": "Patient ID",
+				"patientName": "Patient Name"
+			},
+			"omniRom": {
+				"chart": "Chart",
+				"compare": "Compare",
+				"compareImages": "Compare Images",
+				"empty": "Empty",
+				"exercises": "Exercises",
+				"normalToolTip": "Normal Tool Tip",
+				"result": "Result",
+				"wflToolTip": "Wfl Tool Tip"
+			},
+			"rehab": {
+				"startSession": "Start Session"
+			}
+		},
+		"newDashboard": {
+			"enroll": "Enroll",
+			"enrolled": "Enrolled",
+			"exercise": "Exercise",
+			"exercises": "Exercises",
+			"functionalGoals": "Functional Goals",
+			"myProgram": "My Program",
+			"myProgramTips": "Recommended exercises and holistic wellness practices",
+			"programEmptyDescription": "Program Empty Description",
+			"programEmptyTitle": "Program Empty Title",
+			"showAll": "Show All",
+			"suggestedPrograms": "Suggested Programs",
+			"suggestedProgramsTips": "suggested programs tips",
+			"viewHistory": "View History"
+		},
+		"patientMenus": {
+			"activity": "Activity",
+			"apply-theme": "Apply Theme",
+			"create-reports": "Create Reports",
+			"download-app": "Download App",
+			"evaluation": "Evaluation",
+			"evaluation-results": "Evaluation Results",
+			"lets-move": "Lets Move",
+			"logout": "Logout",
+			"omni-rom": "Omni Rom",
+			"vitalscan-rom-captures": "ROM Insights",
+			"vitalscan-rom-summary": "ROM Sessions",
+			"posture-captures": "Posture Insights",
+			"posture-summary": "Posture Sessions",
+			"program-list": "Program List",
+			"program-summary": "Program Summary",
+			"report-summary": "Report Summary",
+			"reports": "Reports",
+			"start-evaluation": "Start Evaluation",
+			"start-scan": "Start Scan",
+			"start-survey": "Start Survey",
+			"survey": "Survey",
+			"survey-summary": "Survey Summary",
+			"tools": "Tools"
+		},
+		"progress": {
+			"evaluation": {
+				"associatedSymptoms": "Associated Symptoms",
+				"copy": "Copy",
+				"copyClipboard": "Copy Clipboard",
+				"dateOfAssessment": "Date Of Assessment",
+				"doYouHaveAnyOfTheseSymptoms": "Do You Have Any Of These Symptoms",
+				"download": "Download",
+				"haveYouBeenDiagnosedWithAnyOfTheFollowing": "Have You Been Diagnosed With Any Of The Following",
+				"medicalHistory": "Medical History",
+				"painSummary": "Pain Summary",
+				"patientID": "Patient ID",
+				"patientName": "Patient Name"
+			},
+			"milestone": {
+				"achieved": "Achieved:"
+			},
+			"omniRom": {
+				"chart": "Chart",
+				"compare": "Compare",
+				"compareImages": "Compare Images",
+				"empty": "Empty",
+				"noExercisesImageAlt": "No Exercises Image",
+				"normalToolTip": "Normal Tool Tip",
+				"result": "Result",
+				"wflToolTip": "Wfl Tool Tip"
+			},
+			"rehab": {
+				"startSession": "Start Session"
+			}
+		},
+		"reports": {
+			"mobility": {
+				"birthDate": "Birth Date",
+				"didYouKnow": "Did You Know?",
+				"didYouKnowDescription": "Improving your joint mobility not only relieves pain but also boosts posture, balance and energy levels.",
+				"height": "Height",
+				"list1": "Your right shoulder is almost at optimal mobility",
+				"list2": "Your left shoulder extension is close to optimal",
+				"list3": "Lumbar spine needs mobility rehab",
+				"list4": "You’re on track - Keep going!",
+				"mobilityOverview": "Your Mobility Overview",
+				"mobilityOverviewDescription": "This chart provides a snapshot of your current mobility compared to your full potential. Each section represents a joint and its related movement. The more filled the circle, the closer you are to optimal mobility.",
+				"mobilityPersonas": "Mobility Personas",
+				"mobilityProgressReport": "Mobility Progress Report",
+				"reportCreated": "Report Created",
+				"reportCreatedDate": "Report Created Date",
+				"range1": "Optimal Mobility: 90-100",
+				"title1": "Limitless Performer",
+				"description1": "You're in top form! You move with ease, flexibility, and full range—perfect for peak performance. There's no limitation to your movement.",
+				"range2": "Functional Mobility: 75-89",
+				"title2": "Agile Achiever",
+				"description2": "You're strong and agile with a bit of room for improvement. Your daily movements are efficient, though you may have some minor restrictions that don't slow you down.",
+				"range3": "Moderate Restriction: 60-74",
+				"title3": "Functional Mover",
+				"description": "You're doing well, but some stiffness or limitations might affect certain activities. A bit of focused mobility work can help you move even better.",
+				"range4": "Restricted Mobility: 40-59",
+				"title4": "Steady Navigator",
+				"description4": "Your movements are a bit restricted, causing occasional discomfort or inefficiencies. With the right corrective exercises, you'll regain more fluid movement.",
+				"range5": "Severely Restricted: 20-39",
+				"title5": "Resilient Mover",
+				"description5": "You face significant mobility challenges, affecting daily activities. There is an increased risk of stiffness, pain, or injury, requiring focused rehabilitation to restore function.",
+				"range6": "Critically Impaired: Below 20",
+				"title6": "Determined Pathfinder",
+				"description6": "You're dealing with severe mobility restrictions, which may be affecting your independence. Immediate intervention and focused support are needed to improve your mobility.",
+				"weight": "Weight",
+				"whatThisMeans": "What This Means",
+				"youAre": "You Are"
+			}
+		}
+	},
+	"program": {
+		"library": {
+			"noProgramsAvailable": "No programs available",
+			"noProgramsFound": "No programs found",
+			"searchPlaceholder": "Search programs..."
+		}
+	},
+	"tutorial": {
+		"infoInterlude": {
+			"chairInstruction": "Chair instruction",
+			"startNow": "Start now"
+		},
+		"resultScreen": {
+			"finalizingResults": "Finalizing your results…",
+			"noSnapshotAvailable": "No snapshot available.",
+			"preparingResults": "Preparing Your Results"
+		},
+		"scanCompleted": {
+			"completionMessage": "You've successfully completed the entire VitalFlow tutorial tour. Great job following through the exercises with {{assistantName}}!",
+			"congratulations": "Congratulations!",
+			"goToHome": "Go to Home",
+			"min": "Min:",
+			"normal": "Normal:",
+			"restartTour": "Restart Tour",
+			"score": "Score:",
+			"wfl": "WFL:"
+		},
+		"scanSelection": {
+			"back": "Back",
+			"baselineScan": "Baseline Scan",
+			"bodyFrame": "Body frame",
+			"estimatedTime": "2 min 25 seconds",
+			"startScan": "Start Scan"
+		},
+		"tourPrologue": {
+			"enterFullscreen": "Enter Fullscreen",
+			"exit": "Exit",
+			"exitFullscreen": "Exit Fullscreen",
+			"fullscreen": "Fullscreen",
+			"loading": "Loading video",
+			"pause": "Pause",
+			"play": "Play",
+			"seek": "Seek",
+			"skip": "Skip",
+			"skipIntro": "Skip intro and begin the guided tour"
+		},
+		"tutorialPlayer": {
+			"arrangeChair": "Arrange a stable chair",
+			"capturedPosture": "Captured posture",
+			"sitInstructions": "Sit in a hard back chair with your full body visible to the camera."
+		}
+	},
+	"CameraPermission": {
+		"title": "Camera Access Required",
+		"titleWithAudio": "Camera & Microphone Access",
+		"description": "This assessment uses your camera. Please allow access to continue.",
+		"descriptionWithAudio": "This assessment uses your camera and microphone for guidance. Please allow access to continue.",
+		"checking": "Checking camera access...",
+		"promptText": "Click below to enable camera access",
+		"enableCamera": "Enable Camera",
+		"tryAgain": "Try Again",
+		"retry": "Retry",
+		"loadingFeed": "Loading camera...",
+		"cameraReady": "Camera ready",
+		"starting": "Starting...",
+		"continue": "Continue",
+		"cancel": "Cancel",
+		"accessBlocked": "Camera access is blocked",
+		"enableInstructions": "To enable camera in your browser:",
+		"yourBrowser": "your browser",
+		"tip": "If you previously denied permission, you may need to clear site data or use the steps above.",
+		"instructions": {
+			"chrome": {
+				"step1": "Click the lock icon in the address bar",
+				"step2": "Click \"Site settings\"",
+				"step3": "Find \"Camera\" and select \"Allow\"",
+				"step4": "Click \"Try Again\" below"
+			},
+			"safari": {
+				"step1": "Click \"Safari\" in the menu bar",
+				"step2": "Select \"Settings\" → \"Websites\"",
+				"step3": "Click \"Camera\" and find this website",
+				"step4": "Change permission to \"Allow\"",
+				"step5": "Click \"Try Again\" below"
+			},
+			"firefox": {
+				"step1": "Click the lock icon in the address bar",
+				"step2": "Click \"Connection secure\" → \"More Information\"",
+				"step3": "Go to \"Permissions\" tab",
+				"step4": "Find \"Use the Camera\" and click \"Allow\"",
+				"step5": "Click \"Try Again\" below"
+			},
+			"edge": {
+				"step1": "Click the lock icon in the address bar",
+				"step2": "Click \"Permissions for this site\"",
+				"step3": "Find \"Camera\" and select \"Allow\"",
+				"step4": "Click \"Try Again\" below"
+			},
+			"unknown": {
+				"step1": "Open your browser settings",
+				"step2": "Find \"Privacy\" or \"Site Settings\"",
+				"step3": "Enable camera for this website",
+				"step4": "Click \"Try Again\" below"
+			}
+		}
+	}
+}

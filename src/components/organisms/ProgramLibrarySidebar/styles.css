@@ -1,0 +1,144 @@
+/* ProgramLibrarySidebar Styles */
+
+.program-library-sidebar .ant-drawer-body {
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.program-library-sidebar__content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: var(--spacing-4);
+	gap: var(--spacing-3);
+}
+
+.program-library-sidebar__search {
+	flex-shrink: 0;
+}
+
+.program-library-sidebar__tabs {
+	flex: 1;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.program-library-sidebar__tabs .ant-tabs-content {
+	flex: 1;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.program-library-sidebar__tabs .ant-tabs-tabpane {
+	height: 100%;
+}
+
+.program-library__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+	padding: var(--spacing-2) 0;
+	overflow-y: auto;
+	max-height: calc(100vh - 280px);
+}
+
+.program-library__list::-webkit-scrollbar {
+	width: var(--spacing-1-5);
+}
+
+.program-library__list::-webkit-scrollbar-track {
+	background: var(--color-background-secondary);
+	border-radius: 3px;
+}
+
+.program-library__list::-webkit-scrollbar-thumb {
+	background: var(--color-border-primary);
+	border-radius: 3px;
+}
+
+.program-library__list::-webkit-scrollbar-thumb:hover {
+	background: var(--color-border-secondary);
+}
+
+.program-library-sidebar__hint {
+	flex-shrink: 0;
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-2);
+	padding: var(--spacing-3);
+	background: var(--color-info-50);
+	border-radius: var(--border-radius-md);
+	border: 1px solid var(--color-info-200);
+	margin-top: auto;
+}
+
+.program-library-sidebar__hint .anticon {
+	color: var(--color-info-600);
+	margin-top: var(--spacing-0-5);
+	flex-shrink: 0;
+}
+
+.program-library-sidebar__loading {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 200px;
+}
+
+/* Dark Mode Support */
+[data-theme='dark'] .program-library-sidebar__hint {
+	background: var(--color-info-900);
+	border-color: var(--color-info-700);
+}
+
+[data-theme='dark'] .program-library-sidebar__hint .anticon {
+	color: var(--color-info-400);
+}
+
+[data-theme='dark'] .program-library__list::-webkit-scrollbar-track {
+	background: var(--color-background-tertiary);
+}
+
+[data-theme='dark'] .program-library__list::-webkit-scrollbar-thumb {
+	background: var(--color-border-secondary);
+}
+
+[data-theme='dark'] .program-library__list::-webkit-scrollbar-thumb:hover {
+	background: var(--color-border-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.program-library-sidebar {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	.program-library__list {
+		max-height: calc(100vh - 320px);
+	}
+}
+
+/* Empty State */
+.program-library__list .ant-empty {
+	margin: var(--spacing-6) 0;
+}
+
+/* Animations */
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.program-library-sidebar .ant-drawer-content {
+	animation: slideInRight 0.3s ease-out;
+}

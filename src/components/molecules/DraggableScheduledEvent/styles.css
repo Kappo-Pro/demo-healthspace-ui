@@ -1,0 +1,42 @@
+/* DraggableScheduledEvent Styles */
+
+.draggable-scheduled-event {
+  cursor: move;
+  user-select: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.draggable-scheduled-event.dragging {
+  opacity: 0.6;
+  box-shadow: var(--shadow-xl);
+  z-index: 1000;
+}
+
+/* Hover state when not dragging */
+.draggable-scheduled-event:hover:not(.dragging) {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+/* Touch Support */
+@media (hover: none) and (pointer: coarse) {
+  .draggable-scheduled-event {
+    cursor: grab;
+  }
+
+  .draggable-scheduled-event:active {
+    cursor: grabbing;
+  }
+}
+
+/* Accessibility */
+.draggable-scheduled-event:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Dark Mode Support */
+[data-theme='dark'] .draggable-scheduled-event.dragging {
+  box-shadow: var(--shadow-3xl);
+}

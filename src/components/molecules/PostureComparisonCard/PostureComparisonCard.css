@@ -1,0 +1,166 @@
+/**
+ * PostureComparisonCard Styles
+ * Uses design system tokens for consistent theming
+ */
+
+.posture-comparison-card {
+	/* Card uses Ant Design Card component styles */
+}
+
+/* Header Section */
+.posture-comparison-card__header {
+	margin-bottom: var(--spacing-8);
+}
+
+/* Session Details */
+.posture-comparison-card__session {
+	text-align: center;
+	padding: var(--spacing-4);
+	border-radius: var(--radius-lg);
+	background: var(--surface-secondary);
+}
+
+.posture-comparison-card__session--baseline {
+	opacity: 0.9;
+}
+
+.posture-comparison-card__session-title {
+	margin: 0 0 var(--spacing-1) 0;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-secondary);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wider);
+}
+
+.posture-comparison-card__session-date {
+	margin: 0 0 var(--spacing-4) 0;
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary);
+}
+
+.posture-comparison-card__score {
+	margin-bottom: var(--spacing-3);
+}
+
+/* Divider Column */
+.posture-comparison-card__divider-col {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.posture-comparison-card__divider {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	min-height: 120px;
+}
+
+/* Metrics Section */
+.posture-comparison-card__metrics {
+	border-top: 1px solid var(--border-secondary);
+	padding-top: var(--spacing-6);
+	margin-top: var(--spacing-6);
+}
+
+.posture-comparison-card__metrics-title {
+	margin: 0 0 var(--spacing-4) 0;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+}
+
+.posture-comparison-card__metrics-grid {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+/* Individual Metric Row */
+.posture-comparison-card__metric-row {
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	align-items: center;
+	gap: var(--spacing-4);
+	padding: var(--spacing-3);
+	background: var(--surface-secondary);
+	border-radius: var(--radius-md);
+	transition: background 0.2s ease;
+}
+
+.posture-comparison-card__metric-row:hover {
+	background: var(--surface-hover);
+}
+
+.posture-comparison-card__metric-name {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--text-primary);
+	text-transform: capitalize;
+}
+
+.posture-comparison-card__metric-values {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	font-size: var(--font-size-sm);
+}
+
+.posture-comparison-card__metric-current {
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+}
+
+.posture-comparison-card__metric-separator {
+	color: var(--text-tertiary);
+	font-size: var(--font-size-xs);
+}
+
+.posture-comparison-card__metric-baseline {
+	color: var(--text-secondary);
+}
+
+.posture-comparison-card__metric-change {
+	min-width: var(--spacing-20);
+	text-align: right;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+	.posture-comparison-card__header .ant-row {
+		flex-direction: column;
+	}
+
+	.posture-comparison-card__divider {
+		min-height: auto;
+		padding: var(--spacing-4) 0;
+	}
+
+	.posture-comparison-card__divider-col {
+		order: 2;
+	}
+
+	.posture-comparison-card__session--baseline {
+		order: 3;
+	}
+
+	.posture-comparison-card__metric-row {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-2);
+	}
+
+	.posture-comparison-card__metric-values,
+	.posture-comparison-card__metric-change {
+		text-align: left;
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.posture-comparison-card__metric-row {
+		transition: none;
+	}
+}

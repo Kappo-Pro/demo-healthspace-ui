@@ -1,0 +1,151 @@
+/**
+ * Camera Presets Component Styles
+ * Provides preset camera view buttons with keyboard shortcuts
+ */
+
+.camera-presets {
+	display: flex;
+	gap: var(--spacing-2);
+	padding: var(--spacing-2);
+	background: var(--surface-primary);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+}
+
+.camera-presets:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+}
+
+.preset-button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-1);
+	min-width: var(--spacing-20);
+	padding: var(--spacing-3) var(--spacing-4);
+	background: var(--surface-secondary);
+	border: 2px solid transparent;
+	border-radius: var(--radius-sm);
+	color: var(--text-primary);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	transition: all var(--transition-normal);
+	position: relative;
+}
+
+.preset-button:hover:not(.disabled) {
+	background: var(--surface-tertiary);
+	transform: translateY(-1px);
+	box-shadow: var(--shadow-sm);
+}
+
+.preset-button:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+}
+
+.preset-button:active:not(.disabled) {
+	transform: translateY(0);
+	box-shadow: none;
+}
+
+.preset-button.active {
+	background: var(--brand-primary);
+	color: var(--text-inverse);
+	border-color: var(--brand-primary-hover);
+	font-weight: var(--font-weight-semibold);
+}
+
+.preset-button.active:hover:not(.disabled) {
+	background: var(--brand-primary-hover);
+}
+
+.preset-button.disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.preset-label {
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-tight);
+}
+
+.preset-shortcut {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: var(--spacing-5);
+	height: var(--spacing-5);
+	padding: var(--spacing-0-5) var(--spacing-1-5);
+	background: var(--surface-primary);
+	border-radius: var(--radius-xs);
+	color: var(--text-secondary);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-semibold);
+	font-family: var(--font-family-mono);
+}
+
+.preset-button.active .preset-shortcut {
+	background: var(--color-white-alpha-30);
+	color: var(--text-inverse);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+	.camera-presets {
+		gap: var(--spacing-1-5);
+		padding: var(--spacing-1-5);
+	}
+
+	.preset-button {
+		min-width: 70px;
+		padding: var(--spacing-2-5) var(--spacing-3);
+		gap: var(--spacing-0-5);
+	}
+
+	.preset-label {
+		font-size: var(--font-size-xs);
+	}
+
+	.preset-shortcut {
+		font-size: 11px;
+		min-width: 18px;
+		height: 18px;
+	}
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	.camera-presets {
+		background: var(--surface-primary);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.preset-button {
+		background: var(--surface-secondary);
+		color: var(--text-primary);
+	}
+
+	.preset-button:hover:not(.disabled) {
+		background: var(--surface-tertiary);
+	}
+
+	.preset-button.active {
+		background: var(--brand-primary);
+		color: var(--text-inverse);
+	}
+
+	.preset-shortcut {
+		background: var(--surface-primary);
+		color: var(--text-secondary);
+	}
+
+	.preset-button.active .preset-shortcut {
+		background: var(--color-white-alpha-20);
+		color: var(--text-inverse);
+	}
+}

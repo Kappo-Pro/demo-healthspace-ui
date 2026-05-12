@@ -1,0 +1,274 @@
+{
+	"Admin": {
+		"data": {
+			"menu": {
+				"home": {
+					"home": "Home",
+					"dashboard": {
+						"dashboard": "Dashboard",
+						"newPatients": "New Patients",
+						"pendingReview": "Pending Review",
+						"outOfParameters": "Out of Parameters",
+						"followUpRequired": "Follow-up Required",
+						"escalationRequired": "Escalation Required",
+						"reviewed": "Reviewed"
+					}
+				},
+				"userRoles": {
+					"allPatients": {
+						"label": "All Patients"
+					},
+					"newPatients": {
+						"label": "New Patients"
+					},
+					"unAssignedPatients": {
+						"label": "Unassigned Patients",
+						"userLabel": "Unassigned Users"
+					},
+					"reviewed": {
+						"label": "Reviewed"
+					},
+					"pendingReview": {
+						"label": "Pending Review"
+					},
+					"outOfParams": {
+						"label": "Out of Parameters"
+					},
+					"escalationRequired": {
+						"label": "Escalation Required"
+					},
+					"followUpRequired": {
+						"label": "Follow-up Required"
+					},
+					"registeredPatients": {
+						"label": "Registered Patients",
+						"userLabel": "Registered Users"
+					},
+					"PatientsLabel": "Patients",
+					"usersLabel": "Users",
+					"invitePatients": "Invite Patients",
+					"physiotherapist": "Physiotherapist"
+				},
+				"setting": {
+					"generalLabel": "General Settings",
+					"openAi": {
+						"label": "OpenAI Configuration",
+						"description": "Configure OpenAI API settings for AI-powered features",
+						"description2": "Learn more about API keys",
+						"apikeyPlaceholder": "Enter your OpenAI API key",
+						"save": "Save Settings",
+						"shareCode": "Share Invite Code"
+					},
+					"plan1": "Getting Started",
+					"plan1description": "Introduction to the platform",
+					"plan2": "Health Assessment",
+					"plan2description": "Complete your health assessment",
+					"plan3": "Wellness Goals",
+					"plan3description": "Set your wellness goals",
+					"update": "Update"
+				},
+				"patientDetail": {
+					"aiAssistantPrograms": {
+						"save": "Save Changes"
+					},
+					"aiAssistantListSessions": {
+						"unsavedChanges": "You have unsaved changes"
+					}
+				},
+				"noUser": "No user found"
+			},
+			"adminMenus": {
+				"careSpaceplan": "VitalFlow Plan",
+				"templates": "Templates",
+				"content-manager": "Content Manager",
+				"tools": "Tools",
+				"reports": "Reports",
+				"activity": "Activity",
+				"evaluation": "Evaluation",
+				"start-evaluation": "Start Evaluation",
+				"evaluation-results": "Evaluation Results",
+				"omni-rom": "OmniROM",
+				"start-scan": "Start Scan",
+				"omnirom-summary": "ROM Summary",
+				"omnirom-captures": "ROM Captures",
+				"posture-summary": "Posture Summary",
+				"posture-captures": "Posture Captures",
+				"lets-move": "Let's Move",
+				"generate-program": "Generate Program",
+				"program-list": "Program List",
+				"program-summary": "Program Summary",
+				"survey": "Survey",
+				"create": "Create",
+				"start-survey": "Start Survey",
+				"survey-summary": "Survey Summary",
+				"create-reports": "Create Report",
+				"report-summary": "Report Summary",
+				"apply-theme": "Apply Theme",
+				"settings": "Settings",
+				"download-app": "Download App",
+				"logout": "Logout"
+			},
+			"theme": {
+				"themeSelectorText": "Theme Settings",
+				"blockUser": "Block User Access",
+				"inviteCodeText": "Invite Code",
+				"bandwithText": "Bandwidth Mode",
+				"high": "High Bandwidth",
+				"low": "Low Bandwidth",
+				"selfRegistration": "Self-Registration",
+				"enable": "Enable",
+				"disable": "Disable",
+				"addTag": "Add Tags",
+				"noTagFound": "No tags found"
+			},
+			"newPatients": {
+				"newPatients": "New Patients",
+				"name": "Name",
+				"status": "Status",
+				"date": "Date",
+				"users": "Users",
+				"imported": "Imported",
+				"noPatientsFound": "No patients found"
+			},
+			"inbox": {
+				"inbox": "Inbox"
+			},
+			"managePatient": {
+				"yearsOld": "years old",
+				"na": "N/A",
+				"height": "Height",
+				"noIcon": "No Icon",
+				"noFunctionalGoals": "No functional goals set",
+				"functionalGoals": "Functional Goals",
+				"edit": "Edit",
+				"editFunctionalGoal": "Edit Functional Goal",
+				"wellnesscheck": {
+					"label": "Wellness Check",
+					"title": "How are you feeling?",
+					"description": "Please let us know if you are experiencing any discomfort",
+					"stillDiscomfort": "Still experiencing discomfort?",
+					"noBetter": "No better"
+				}
+			}
+		}
+	},
+	"admin": {
+		"home": "Home",
+		"patients": {
+			"all": "All Patients",
+			"new": "New Patients",
+			"unassigned": "Unassigned Patients",
+			"registered": "Registered Patients",
+			"reviewed": "Reviewed",
+			"pendingReview": "Pending Review",
+			"outOfParameters": "Out of Parameters",
+			"escalationRequired": "Escalation Required",
+			"followUpRequired": "Follow-up Required",
+			"label": "Patients",
+			"invite": "Invite Patients"
+		},
+		"users": {
+			"unassigned": "Unassigned Users",
+			"registered": "Registered Users",
+			"label": "Users"
+		},
+		"roles": {
+			"physiotherapist": "Physiotherapist"
+		},
+		"settings": {
+			"general": "General Settings",
+			"openai": {
+				"label": "OpenAI Configuration",
+				"description": "Configure OpenAI API settings for AI-powered features",
+				"description2": "Learn more about API keys",
+				"apikeyPlaceholder": "Enter your OpenAI API key",
+				"save": "Save Settings",
+				"shareCode": "Share Invite Code"
+			},
+			"plan1": "Getting Started",
+			"plan1Description": "Introduction to the platform",
+			"plan2": "Health Assessment",
+			"plan2Description": "Complete your health assessment",
+			"plan3": "Wellness Goals",
+			"plan3Description": "Set your wellness goals",
+			"update": "Update"
+		},
+		"patientDetail": {
+			"programs": {
+				"save": "Save Changes"
+			},
+			"sessions": {
+				"unsavedChanges": "You have unsaved changes"
+			}
+		},
+		"noUser": "No user found",
+		"dashboard": {
+			"title": "Dashboard",
+			"newPatients": "New Patients",
+			"pendingReview": "Pending Review",
+			"outOfParameters": "Out of Parameters",
+			"followUpRequired": "Follow-up Required",
+			"escalationRequired": "Escalation Required",
+			"reviewed": "Reviewed"
+		},
+		"menu": {
+			"vitalflowPlan": "VitalFlow Plan",
+			"templates": "Templates",
+			"contentManager": "Content Manager",
+			"tools": "Tools",
+			"reports": "Reports",
+			"activity": "Activity",
+			"evaluation": {
+				"title": "Evaluation",
+				"start": "Start Evaluation",
+				"results": "Evaluation Results"
+			},
+			"omnirom": {
+				"title": "OmniROM",
+				"startScan": "Start Scan",
+				"summary": "ROM Summary",
+				"captures": "ROM Captures"
+			},
+			"posture": {
+				"summary": "Posture Summary",
+				"captures": "Posture Captures"
+			},
+			"letsMove": {
+				"title": "Let's Move",
+				"generateProgram": "Generate Program",
+				"programList": "Program List",
+				"programSummary": "Program Summary"
+			},
+			"survey": {
+				"title": "Survey",
+				"create": "Create",
+				"start": "Start Survey",
+				"summary": "Survey Summary"
+			},
+			"applyTheme": "Apply Theme",
+			"settings": "Settings",
+			"downloadApp": "Download App",
+			"logout": "Logout"
+		},
+		"inbox": {
+			"title": "Inbox"
+		},
+		"patient": {
+			"yearsOld": "years old",
+			"na": "N/A",
+			"height": "Height",
+			"noIcon": "No Icon",
+			"noFunctionalGoals": "No functional goals set",
+			"functionalGoals": "Functional Goals",
+			"edit": "Edit",
+			"editFunctionalGoal": "Edit Functional Goal",
+			"wellnessCheck": {
+				"label": "Wellness Check",
+				"title": "How are you feeling?",
+				"description": "Please let us know if you are experiencing any discomfort",
+				"stillDiscomfort": "Still experiencing discomfort?",
+				"noBetter": "No better"
+			}
+		}
+	}
+}

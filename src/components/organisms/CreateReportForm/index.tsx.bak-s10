@@ -1,0 +1,147 @@
+import React, { useMemo } from 'react';
+import { Button, Flex, Input, TreeSelect } from 'antd';
+import { MdOutlineAssignment } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '@providers/ThemeProvider';
+import UploadExport from '@vitalflow-icons/general/uploadExport';
+import { Compass } from '@vitalflow-icons/education/compass';
+import { HeartHand } from '@vitalflow-icons/general/heartHand';
+import ReportSectionHeader from '@molecules/ReportSectionHeader';
+import ReportDateRangePicker from '@molecules/ReportDateRangePicker';
+import { CREATE_REPORT_RANGE_PRESETS } from './CreateReportForm.constants';
+import { useCreateReportForm } from './CreateReportForm.hooks';
+import { CreateReportFormProps } from './CreateReportForm.types';
+
+export const CreateReportForm: React.FC<CreateReportFormProps> = (props) => {
+  const { t } = useTranslation();
+  const { isDark } = useTheme();
+  const { values, updateField, handleSubmit, isSubmitting } = useCreateReportForm(props);
+
+  const iconColor = isDark ? 'stroke-white' : 'stroke-black';
+
+  const treeData = useMemo(() => [
+    {
+      value: 'evaluation',
+      title: t('Admin.data.addToReports.evaluation') || 'Evaluation',
+      key: 'evaluation',
+    },
+    {
+      value: 'omniRom-group',
+      title: (
+        <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
+          {t('Admin.data.addToReports.omniRom') || 'OmniROM'}
+        </span>
+      ),
+      key: 'omniRom-group',
+      selectable: false,
+      disableCheckbox: true,
+      children: [
+        {
+          value: 'romSummary',
+          title: t('Admin.data.addToReports.romSummary') || 'ROM Summary',
+          key: 'romSummary',
+        },
+        {
+          value: 'romCaptures',
+          title: t('Admin.data.addToReports.captures') || 'ROM Captures',
+          key: 'romCaptures',
+        },
+        {
+          value: 'postureCaptures',
+          title: t('Patient.data.postures.postureSummary') || 'Posture Summary',
+          key: 'postureCaptures',
+        },
+      ],
+    },
+    {
+      value: 'letsMove-group',
+      title: (
+        <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
+          {t('Admin.data.managePatient.letsMove.letsMove') || "Let's Move"}
+        </span>
+      ),
+      key: 'letsMove-group',
+      selectable: false,
+      disableCheckbox: true,
+      children: [
+        {
+          value: 'letsMoveSessions',
+          title: t('Admin.data.addToReports.sessions') || 'Sessions',
+          key: 'letsMoveSessions',
+        },
+      ],
+    },
+    {
+      value: 'survey-group',
+      title: (
+        <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
+          {t('Admin.data.survey.survey') || 'Survey'}
+        </span>
+      ),
+      key: 'survey-group',
+      selectable: false,
+      disableCheckbox: true,
+      children: [
+        {
+          value: 'surveySessions',
+          title: t('Admin.data.survey.surveySummary') || 'Survey Summary',
+          key: 'surveySessions',
+        },
+      ],
+    },
+  ], [t]);
+
+  return (
+    <>
+      <ReportSectionHeader title={`${t('Admin.data.addToReports.create')} Report`} />
+
+      <Flex align="center" className="mb-4">
+        <Input
+          placeholder={t('Admin.data.addToReports.reportName')}
+          value={values.reportName}
+          onChange={(e) => updateField('reportName', e.target.value)}
+          suffix={<MdOutlineAssignment color="gray" />}
+          style={{ marginRight: '4px', flex: '6', height: '40px' }}
+        />
+        <ReportDateRangePicker
+          value={values.dateRange}
+          onChange={(dates) => updateField('dateRange', dates)}
+          presets={CREATE_REPORT_RANGE_PRESETS}
+          style={{ flex: '4', marginLeft: '4px' }}
+        />
+      </Flex>
+
+      <div
+        style={{
+          padding: '12px',
+          borderRadius: '8px',
+          marginBottom: '10px',
+        }}
+      >
+        <TreeSelect
+          style={{ width: '100%', minHeight: '40px' }}
+          value={values.selectedSections}
+          placeholder={t('Admin.data.addToReports.selectSections') || 'Select report sections'}
+          allowClear
+          multiple
+          treeCheckable
+          showCheckedStrategy="SHOW_CHILD"
+          treeDefaultExpandAll
+          onChange={(newValue) => updateField('selectedSections', newValue || [])}
+          treeData={treeData}
+          maxTagCount="responsive"
+          dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+        />
+      </div>
+
+      <Button onClick={handleSubmit} block disabled={isSubmitting} loading={isSubmitting}>
+        <Flex align="center" justify="center">
+          <UploadExport />
+          {t('Admin.data.addToReports.create')}
+        </Flex>
+      </Button>
+    </>
+  );
+};
+
+export default CreateReportForm;

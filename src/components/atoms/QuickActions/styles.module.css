@@ -1,0 +1,199 @@
+/**
+ * QuickActions Styles
+ *
+ * FAB with smooth animations and hover effects
+ */
+
+.quickActions {
+	position: fixed;
+	z-index: 1000;
+}
+
+.fabGroup :global(.ant-float-btn-group) {
+	right: var(--spacing-6);
+	bottom: var(--spacing-6);
+}
+
+.fabGroup :global(.ant-float-btn-primary) {
+	background: var(--color-brand-primary, var(--brand-primary));
+	box-shadow: var(--shadow-md);
+	transition: all 200ms ease-out;
+}
+
+.fabGroup :global(.ant-float-btn-primary:hover) {
+	background: var(--color-brand-primary-hover, #7c3aed);
+	transform: scale(1.05);
+	box-shadow: var(--shadow-lg);
+}
+
+.fabGroup :global(.ant-float-btn-primary:active) {
+	transform: scale(0.95);
+}
+
+.fabButton :global(.ant-float-btn) {
+	background: var(--surface-primary, var(--surface-primary));
+	border: 1px solid var(--border-default, var(--color-gray-200));
+	transition: all 150ms ease-out;
+}
+
+.fabButton :global(.ant-float-btn:hover) {
+	background: var(--surface-secondary, var(--color-gray-50));
+	border-color: var(--color-brand-primary, var(--brand-primary));
+	transform: translateX(-4px);
+}
+
+.fabButton :global(.ant-float-btn-icon) {
+	color: var(--text-primary, var(--color-gray-900));
+}
+
+.fabButton :global(.ant-float-btn:hover .ant-float-btn-icon) {
+	color: var(--color-brand-primary, var(--brand-primary));
+}
+
+.settingsFab :global(.ant-float-btn) {
+	background: var(--surface-secondary, var(--color-gray-100));
+	transition: all 200ms ease-out;
+}
+
+.settingsFab :global(.ant-float-btn:hover) {
+	background: var(--surface-tertiary, var(--color-gray-200));
+	transform: rotate(90deg);
+}
+
+.menuHeader {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1-5);
+	font-size: 11px;
+	font-weight: var(--font-weight-semibold);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wider);
+	color: var(--text-tertiary, var(--color-gray-400));
+	padding: var(--spacing-1) 0;
+}
+
+/* Ripple effect on click */
+@keyframes ripple {
+	0% {
+		transform: scale(0);
+		opacity: 0.5;
+	}
+	100% {
+		transform: scale(2.5);
+		opacity: 0;
+	}
+}
+
+.fabGroup :global(.ant-float-btn-primary)::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: radial-gradient(
+		circle,
+		var(--color-brand-primary, var(--brand-primary)) 0%,
+		transparent 70%
+	);
+	opacity: 0;
+	pointer-events: none;
+}
+
+.fabGroup :global(.ant-float-btn-primary:active)::before {
+	animation: ripple 600ms ease-out;
+}
+
+/* Stagger animation for group items */
+.fabGroup :global(.ant-float-btn-group-circle) {
+	animation: fadeInUp 300ms ease-out backwards;
+}
+
+.fabGroup :global(.ant-float-btn-group-circle:nth-child(1)) {
+	animation-delay: 0ms;
+}
+
+.fabGroup :global(.ant-float-btn-group-circle:nth-child(2)) {
+	animation-delay: 50ms;
+}
+
+.fabGroup :global(.ant-float-btn-group-circle:nth-child(3)) {
+	animation-delay: 100ms;
+}
+
+.fabGroup :global(.ant-float-btn-group-circle:nth-child(4)) {
+	animation-delay: 150ms;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+	.fabGroup :global(.ant-float-btn-primary),
+	.fabButton :global(.ant-float-btn),
+	.settingsFab :global(.ant-float-btn) {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+
+	.fabGroup :global(.ant-float-btn-primary:hover),
+	.fabButton :global(.ant-float-btn:hover) {
+		transform: none;
+	}
+
+	.settingsFab :global(.ant-float-btn:hover) {
+		transform: none;
+	}
+
+	.fabGroup :global(.ant-float-btn-primary)::before {
+		animation: none !important;
+	}
+
+	.fabGroup :global(.ant-float-btn-group-circle) {
+		animation: none !important;
+	}
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+	.fabGroup :global(.ant-float-btn-group) {
+		right: var(--spacing-4);
+		bottom: var(--spacing-4);
+	}
+
+	.settingsFab {
+		right: var(--spacing-4) !important;
+		bottom: 84px !important;
+	}
+}
+
+/* Dark Theme */
+@media (prefers-color-scheme: dark) {
+	.fabButton :global(.ant-float-btn) {
+		background: var(--surface-primary, var(--color-gray-800));
+		border-color: var(--border-default, var(--color-gray-700));
+	}
+
+	.fabButton :global(.ant-float-btn:hover) {
+		background: var(--surface-secondary, var(--color-gray-900));
+	}
+
+	.fabButton :global(.ant-float-btn-icon) {
+		color: var(--text-primary, var(--color-gray-50));
+	}
+
+	.settingsFab :global(.ant-float-btn) {
+		background: var(--surface-secondary, var(--color-gray-700));
+	}
+
+	.settingsFab :global(.ant-float-btn:hover) {
+		background: var(--surface-tertiary, var(--color-gray-600));
+	}
+}

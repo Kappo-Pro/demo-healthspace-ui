@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsTabSkeleton - Story 4.3 Rendering should match snapshot 1`] = `
+<div
+  style="padding: 24px;"
+>
+  <div
+    class="ant-skeleton ant-skeleton-active css-dev-only-do-not-override-1cj4ms"
+  >
+    <div
+      class="ant-skeleton-content"
+    >
+      <h3
+        class="ant-skeleton-title"
+        style="width: 38%;"
+      />
+      <ul
+        class="ant-skeleton-paragraph"
+      >
+        <li />
+        <li
+          style="width: 61%;"
+        />
+      </ul>
+    </div>
+  </div>
+  <div
+    class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-skeleton-block css-dev-only-do-not-override-1cj4ms"
+  >
+    <span
+      class="ant-skeleton-input"
+      style="width: 100%; margin-top: 24px; height: 40px;"
+    />
+  </div>
+  <div
+    class="ant-skeleton ant-skeleton-active css-dev-only-do-not-override-1cj4ms"
+    style="margin-top: 24px;"
+  >
+    <div
+      class="ant-skeleton-content"
+    >
+      <h3
+        class="ant-skeleton-title"
+        style="width: 38%;"
+      />
+      <ul
+        class="ant-skeleton-paragraph"
+      >
+        <li />
+        <li />
+        <li
+          style="width: 61%;"
+        />
+      </ul>
+    </div>
+  </div>
+  <div
+    class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-skeleton-block css-dev-only-do-not-override-1cj4ms"
+  >
+    <span
+      class="ant-skeleton-input"
+      style="width: 100%; margin-top: 24px; height: 40px;"
+    />
+  </div>
+  <div
+    class="ant-skeleton ant-skeleton-active css-dev-only-do-not-override-1cj4ms"
+    style="margin-top: 24px;"
+  >
+    <div
+      class="ant-skeleton-content"
+    >
+      <h3
+        class="ant-skeleton-title"
+        style="width: 38%;"
+      />
+      <ul
+        class="ant-skeleton-paragraph"
+      >
+        <li />
+        <li
+          style="width: 61%;"
+        />
+      </ul>
+    </div>
+  </div>
+</div>
+`;

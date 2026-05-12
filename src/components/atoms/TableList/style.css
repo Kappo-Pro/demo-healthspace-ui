@@ -1,0 +1,141 @@
+/* TableList Component Styles - Ant Design Table Integration */
+
+.table-list-container {
+	width: 100%;
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-sm);
+	border: 2px solid var(--color-gray-200);
+	background-color: var(--color-gray-100);
+	overflow: hidden;
+}
+
+/* Ant Design Table customizations */
+.table-list-table.ant-table-wrapper {
+	background-color: transparent;
+}
+
+.table-list-table .ant-table {
+	background-color: transparent;
+}
+
+.table-list-table .ant-table-thead > tr > th {
+	background-color: transparent;
+	/* Border applied by Ant Design theme (1px from lineWidth token) */
+	height: var(--spacing-11);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-gray-600);
+	font-size: var(--font-size-xs);
+	padding: var(--spacing-2);
+}
+
+.table-list-table .ant-table-tbody > tr {
+	/* Border applied by Ant Design theme (1px from lineWidth token) */
+	font-size: var(--font-size-sm);
+	color: var(--color-gray-600);
+	cursor: pointer;
+}
+
+.table-list-table .ant-table-tbody > tr:hover > td {
+	background-color: var(--table-row-hover-bg, var(--color-gray-50)) !important;
+}
+
+.table-list-table .ant-table-tbody > tr > td {
+	padding: var(--spacing-2);
+	vertical-align: middle;
+}
+
+/* Custom cell styles - Flex now handled by Ant Design Flex component */
+.table-list-cell-name {
+	/* Flex layout managed by <Flex> component */
+}
+
+.table-list-name-text {
+	display: block;
+	color: var(--color-gray-900);
+	margin-bottom: var(--spacing-0-5);
+}
+
+.table-list-email-text {
+	display: block;
+	color: var(--color-gray-600);
+	font-size: 13px;
+}
+
+/* Status badges - Flex now handled by Ant Design Flex component */
+.table-list-status-badge {
+	font-weight: var(--font-weight-medium);
+	font-size: var(--font-size-xs);
+	border-radius: var(--radius-2xl);
+	padding: var(--spacing-1) var(--spacing-2);
+	/* display: inline-flex; - removed, now handled by <Flex> */
+	/* align-items: center; - removed, now handled by <Flex> */
+	/* gap: var(--spacing-1); - removed, now handled by <Flex> */
+}
+
+.table-list-status-assigned {
+	color: var(--color-primary-700);
+	background-color: var(--color-primary-50);
+}
+
+.table-list-status-new {
+	color: var(--color-blue-700);
+	background-color: var(--color-blue-50);
+}
+
+.table-list-bullet {
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-none);
+}
+
+.table-list-date-badge-offset {
+	margin-top: 1px;
+}
+
+/* Date styling */
+.table-list-date-offset {
+	color: var(--color-gray-600);
+}
+
+/* Actions - Flex now handled by Ant Design Flex component */
+.table-list-actions {
+	/* display: flex; - removed, now handled by <Flex> */
+	/* align-items: center; - removed, now handled by <Flex> */
+	/* gap: var(--spacing-2); - removed, now handled by <Flex> */
+}
+
+.table-list-action-icon {
+	/* display: inline-flex; - removed, now handled by <Flex> */
+	/* align-items: center; - removed, now handled by <Flex> */
+	/* justify-content: center; - removed, now handled by <Flex> */
+	cursor: pointer;
+	padding: var(--spacing-1);
+	border-radius: var(--radius-sm);
+	transition: background-color var(--motion-duration-fast);
+}
+
+.table-list-action-icon:hover {
+	background-color: var(--color-gray-100);
+}
+
+/* Empty state */
+.table-list-table .ant-table-placeholder {
+	border-bottom: none;
+}
+
+/* Checkbox customization */
+.table-list-table .ant-checkbox-wrapper {
+	margin: 0;
+}
+
+/* Remove Ant Design default hover background (we use custom) */
+.table-list-table .ant-table-tbody > tr.ant-table-row:hover > td {
+	background: var(--table-row-hover-bg, var(--color-gray-50));
+}
+
+.table-list-table .ant-table-tbody > tr.ant-table-row-selected > td {
+	background-color: var(--table-row-selected-bg, var(--surface-brand));
+}
+
+.table-list-table .ant-table-tbody > tr.ant-table-row-selected:hover > td {
+	background-color: var(--table-row-hover-bg, var(--color-gray-50));
+}

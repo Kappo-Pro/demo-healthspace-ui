@@ -1,0 +1,207 @@
+/* Body Score Metrics - Main Layout */
+.body-score-metrics {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: var(--spacing-6);
+	align-items: start;
+}
+
+/* Left Column - Body Silhouette */
+.body-score-metrics__body {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	min-width: 200px;
+	max-width: 280px;
+}
+
+/* Body silhouette card - remove background and border-radius */
+.body-score-metrics__body .card-hotspots,
+.body-score-metrics__body .card-hotspots.ant-card {
+	background: transparent;
+	border-radius: 0;
+}
+
+.body-score-metrics__body .card-hotspots .ant-card-body {
+	background: transparent;
+	padding: 0;
+}
+
+/* Right Column - Cards */
+.body-score-metrics__cards {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+	flex: 1;
+}
+
+/* Card Styles - Shared */
+.attention-points-card,
+.joint-side-card {
+	background: var(--surface-secondary);
+	border-radius: var(--radius-lg);
+}
+
+.attention-points-card .ant-card-body,
+.joint-side-card .ant-card-body {
+	padding: var(--spacing-4);
+	background: var(--bg-page);
+	border-radius: var(--radius-lg);
+	height: 100%;
+}
+
+/* Card Header */
+.attention-points-card .card-header,
+.joint-side-card .card-header {
+	margin-bottom: var(--spacing-3);
+	padding-bottom: var(--spacing-3);
+	border-bottom: 1px solid var(--border-secondary);
+}
+
+.attention-points-card .card-title,
+.joint-side-card .card-title {
+	margin: 0;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+}
+
+.attention-points-card .card-subtitle,
+.joint-side-card .card-subtitle {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary);
+}
+
+/* Card Body - Joint Rows */
+.card-body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.joint-row {
+	padding: var(--spacing-2) var(--spacing-3);
+	background: var(--surface-tertiary);
+	border-radius: var(--radius-md);
+}
+
+
+.joint-name {
+	font-size: var(--font-size-sm);
+	color: var(--text-primary);
+}
+
+.joint-score {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--text-primary);
+}
+
+/* Score Indicator Dot */
+.score-indicator {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: var(--radius-full);
+	flex-shrink: 0;
+}
+
+/* Joint Cards Row - Side by Side */
+.joint-cards-row {
+	display: flex;
+	gap: var(--spacing-4);
+}
+
+.joint-cards-row .joint-side-card {
+	flex: 1;
+	min-width: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+	.body-score-metrics {
+		grid-template-columns: 1fr;
+	}
+
+	.body-score-metrics__body {
+		max-width: none;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 768px) {
+	.joint-cards-row {
+		flex-direction: column;
+	}
+}
+
+/* Legacy styles - kept for backward compatibility */
+.rom-joints-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.rom-joints-body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.rom-joints-table {
+	width: 100%;
+}
+
+.rom-joints-table .ant-table {
+	background: transparent;
+}
+
+.rom-joints-table .ant-table-thead > tr > th,
+.rom-joints-table .ant-table-thead > tr > td {
+	background: transparent;
+}
+
+.rom-joints-table .ant-table-thead > tr > th::before {
+	display: none;
+}
+
+.rom-joints-table .ant-table-thead > tr > th:last-child,
+.rom-joints-table .ant-table-tbody > tr > td:last-child {
+	text-align: right;
+}
+
+.rom-joints-body .card-hotspots,
+.rom-joints-body .card-hotspots.ant-card {
+	background: transparent;
+	border-radius: 0;
+}
+
+.rom-joints-body .card-hotspots .ant-card-body {
+	background: transparent;
+}
+
+.rom-joints-empty {
+	min-height: 100px;
+}
+
+.flex-wrapper {
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+	gap: var(--spacing-3);
+}
+
+.flex-wrapper > * {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+@media (max-width: 1800px) {
+	.flex-wrapper {
+		flex-direction: column;
+	}
+
+	.flex-wrapper > * {
+		flex: 1 1 100%;
+		width: 100% !important;
+	}
+}

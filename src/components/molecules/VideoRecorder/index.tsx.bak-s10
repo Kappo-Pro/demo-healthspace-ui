@@ -1,0 +1,270 @@
+import ReactVideoRecorder, { VideoActionsProps } from 'react-video-recorder';
+import {
+	forwardRef,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+	useCallback,
+} from 'react';
+import './style.css';
+import counterSound from '../../organisms/RomFlow/TransitionTime/counterSound.mp3';
+import { RehabVideoState } from '@types';
+import { useTranslation } from 'react-i18next';
+import { useTypedSelector } from '@stores/index';
+import { Flex, Tooltip } from 'antd';
+import { FaVolumeMute } from 'react-icons/fa';
+import { AiFillSound } from 'react-icons/ai';
+interface IVideoRecordProps {
+	timeLimit: number;
+	cameraId: string | null;
+	onRecordFinished: (videoBlob: Blob) => void;
+	audio?: boolean;
+	videoBlob?: null | Blob;
+	videoState?: RehabVideoState;
+	isFullscreen?: boolean;
+	getTimeLeft: (timeLeft: number) => void;
+	bandwidth?: boolean;
+}
+
+function VideoRecord(props: IVideoRecordProps, ref: object | null) {
+	const {
+		timeLimit,
+		onRecordFinished,
+		videoBlob,
+		videoState,
+		isFullscreen,
+		getTimeLeft,
+		bandwidth = false,
+	} = props;
+	const [saving, setSaving] = useState(false);
+	const [mute, setMute] = useState(false);
+	const [isRunningCountdown, setIsRunningCountdown] = useState(false);
+	const [counterTime, setCounterTime] = useState<number>(0);
+	const audioRef = useRef<HTMLAudioElement>(new Audio(counterSound));
+	const { transitionTime } = useTypedSelector(
+		state => state.patientDetail.program.main,
+	);
+	const countdownRef = useRef<number | null>(null);
+	const { t } = useTranslation();
+	const videoRef = useRef<HTMLVideoElement | null>(null);
+
+	useEffect(() => {
+		if (videoRef.current) {
+			videoRef.current.muted = mute;
+		}
+	}, [mute]);
+
+	const videoElement = useMemo(() => {
+		if (videoBlob) {
+			return (
+				<video
+					ref={videoRef}
+					autoPlay
+					loop
+					muted={mute}
+					src={URL?.createObjectURL(videoBlob)}
+				/>
+			);
+		}
+		return null;
+	}, [videoBlob]);
+
+	const runCountDown = ({ isRunningCountdown }: VideoActionsProps) => {
+		setIsRunningCountdown(isRunningCountdown);
+		if (isRunningCountdown) {
+			return (
+				<>
+					{counterTime >= 1 && (
+						<Flex
+							vertical
+							justify="center"
+							align="center"
+							className="w-full h-full" style={{
+								position: 'absolute',
+								zIndex: 10,
+								color: 'white' }}>
+							<Flex
+								vertical
+								align="center"
+								justify="center"
+								style={{
+									fontSize: 42,
+									color: 'white',
+									fontWeight: 'bold',
+									textShadow: '2px 2px 4px var(--color-black)',
+								}}>
+								{t('Patient.data.omnirom.getPosition')}
+								<br />
+								<Flex
+									className="bg-primary-600 shadow-black shadow-md rounded-full"
+									align="center"
+									justify="center"
+									style={{
+										width: 100,
+										height: 100,
+										fontSize: 42,
+										fontWeight: 'bold',
+										color: 'white',
+									}}>
+									{counterTime}
+								</Flex>
+								{!bandwidth && <audio ref={audioRef} src={counterSound} preload="auto" /> }
+							</Flex>
+						</Flex>
+					)}
+				</>
+			);
+		}
+	};
+
+	const onRecordingComplete = (vidBlob: Blob) => {
+		setSaving(true);
+		if (ref && 'current' in ref && ref.current) {
+			(
+				ref.current as { handleStopReplaying: () => void }
+			).handleStopReplaying();
+		}
+		setTimeout(() => {
+			setSaving(false);
+			if (vidBlob) {
+				onRecordFinished(vidBlob);
+			}
+		}, 3000);
+	};
+
+	const stopStreamedVideo = useCallback(() => {
+		if (ref?.current) {
+			const stream = ref.current.srcObject as MediaStream;
+			if (stream) {
+				const tracks = stream.getTracks();
+
+				tracks.forEach(track => {
+					track.stop();
+				});
+			}
+
+			ref.current.srcObject = null;
+		}
+	}, []);
+
+	useEffect(() => {
+		return () => {
+			stopStreamedVideo();
+		};
+	}, [stopStreamedVideo]);
+
+	useEffect(() => {
+		setMute(true);
+	}, [videoState]);
+
+	useEffect(() => {
+		if (isRunningCountdown) {
+			// TODO: Consider using transitionTime ?? defaultValue or transitionTime?.property instead of transitionTime!
+			setCounterTime(transitionTime!);
+			// TODO: Consider using transitionTime ?? defaultValue or transitionTime?.property instead of transitionTime!
+			let counter = transitionTime!;
+
+			countdownRef.current = window.setInterval(() => {
+				if (audioRef.current && !bandwidth) {
+					audioRef.current.currentTime = 0;
+					counter > 0 && audioRef.current.play();
+				}
+				counter -= 1;
+				setCounterTime(counter);
+
+				if (counter === 0) {
+					// TODO: Consider using current ?? defaultValue or current?.property instead of current!
+					clearInterval(countdownRef.current!);
+				}
+			}, 1000);
+		}
+
+		return () => {
+			if (countdownRef.current) {
+				clearInterval(countdownRef.current);
+				audioRef.current = new Audio(counterSound);
+			}
+		};
+	}, [isRunningCountdown]);
+
+	const TIME_LIMIT_MS = timeLimit + (transitionTime * 1000); // Convert to milliseconds
+  const [timeLeft, setTimeLeft] = useState(TIME_LIMIT_MS / 1000);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+	const handleStartRecording = () => {
+    setTimeLeft(TIME_LIMIT_MS / 1000);
+    intervalRef.current = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          // TODO: Consider using current ?? defaultValue or current?.property instead of current!
+          clearInterval(intervalRef.current!);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+	const handleRecordingComplete = (videoBlob: Blob) => {
+    // TODO: Consider using current ?? defaultValue or current?.property instead of current!
+    clearInterval(intervalRef.current!);
+		onRecordingComplete(videoBlob)
+  };
+
+	useEffect(() => {
+		getTimeLeft && getTimeLeft(timeLeft)
+	},[timeLeft]);
+
+	return (
+		<>
+			<ReactVideoRecorder
+				ref={ref}
+				isOnInitially
+				isReplayingVideo={false}
+				wrapperClassName={`video-record-item program-video-recorder w-full ${isFullscreen ? 'full-height' : ''}`}
+				timeLimit={timeLimit}
+				renderActions={runCountDown}
+				// TODO: Consider using transitionTime ?? defaultValue or transitionTime?.property instead of transitionTime!
+				countdownTime={transitionTime! * 1000}
+        onStartRecording={handleStartRecording}
+        onRecordingComplete={handleRecordingComplete}
+			/>
+			{saving && (
+				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-white text-3xl">
+					Saving...
+				</div>
+			)}
+			{(videoState === RehabVideoState.RATING ||
+				videoState === RehabVideoState.REPLAYING) && (
+				<div className="absolute top-0 left-0 w-[420px]">
+					{videoElement}
+					<div className="absolute left-2 bottom-2 bg-black rounded-full p-2">
+						<Tooltip
+							title={
+								mute
+									? t('Patient.data.rehab.unmute')
+									: t('Patient.data.rehab.mute')
+							}>
+							{!mute ? (
+								<AiFillSound
+									size={20}
+									className="align-middle cursor-pointer"
+									onClick={() => setMute(true)}
+									color="white"
+								/>
+							) : (
+								<FaVolumeMute
+									size={20}
+									className="align-middle cursor-pointer"
+									onClick={() => setMute(false)}
+									color="white"
+								/>
+							)}
+						</Tooltip>
+					</div>
+				</div>
+			)}
+		</>
+	);
+}
+export default forwardRef(VideoRecord);

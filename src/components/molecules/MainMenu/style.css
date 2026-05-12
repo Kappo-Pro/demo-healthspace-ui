@@ -1,0 +1,23 @@
+.ant-menu-dark .ant-menu-sub,
+.ant-menu.ant-menu-dark .ant-menu-sub {
+	color: rgba(255, 255, 255, 0.65);
+	background: transparent;
+}
+ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-dark.menu-profile {
+	position: absolute;
+	bottom: 0;
+}
+.pain-assessment-modal {
+	width: 100%;
+	max-width: 1280px;
+}
+
+.mainmenu-container {
+	color: var(--color-gray-50);
+	line-height: var(--line-height-normal);
+	margin-left: -var(--spacing-5);
+	position: fixed;
+	height: 100%;
+	user-select: none;
+	background-color: var(--mainmenu-bg-color);
+}

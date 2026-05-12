@@ -1,0 +1,33 @@
+.bulk-invite-container {
+	display: flex;
+	margin-top: var(--spacing-5);
+	flex-direction: column;
+	gap: var(--spacing-5);
+
+	.bulk-invite-user-info {
+		padding-bottom: var(--spacing-3);
+		margin-bottom: var(--spacing-2);
+		border-bottom-width: 1px; /* Fixed: was spacing-0-5 (2px) */
+		border-color: inherit;
+	}
+
+	.bulk-invite-data-manipulator {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: var(--spacing-2);
+
+		.add-admin {
+			display: flex;
+			grid-column: span 1 / span 1;
+			gap: var(--spacing-2);
+			cursor: pointer;
+			justify-content: center;
+			align-items: center;
+			background-color: var(--button-color-primary);
+		}
+	}
+}
+
+.bulk-invite-data strong {
+	color: var(--gray-800);
+}

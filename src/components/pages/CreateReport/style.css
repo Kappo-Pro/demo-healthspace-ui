@@ -1,0 +1,35 @@
+.create-report-container {
+	margin: var(--spacing-6);
+}
+.create-report-container .header-container {
+	margin-top: var(--spacing-5);
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 9px;
+	margin-bottom: var(--spacing-6);
+}
+.create-report-container .header-container .magic-band-span-css {
+	border-radius: var(--radius-full);
+	background-color: var(--surface-brand);
+	padding-top: var(--spacing-1);
+	padding-bottom: var(--spacing-1);
+	padding-left: var(--spacing-1-5);
+	padding-right: var(--spacing-1-5);
+}
+
+.header-content-div-css {
+	width: 100%;
+}
+
+.header-content-div-css .ai-assistant-report-title {
+	font-weight: var(--font-weight-bold);
+}
+.header-content-div-css .ai-assistant-report-description {
+	color: var(--color-gray-500);
+}
+
+.create-report-modal-container {
+	margin-left: var(--spacing-5);
+	margin-right: var(--spacing-8);
+}

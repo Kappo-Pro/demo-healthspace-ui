@@ -1,0 +1,38 @@
+.bulk-invite-error-container {
+	color: var(--text-primary) /* TODO: Verify context */;
+}
+
+.close-icon-css {
+	cursor: pointer;
+	font-size: 21px;
+}
+
+.x-close-icon {
+	stroke: gray;
+}
+
+.error-message {
+	margin-bottom: var(--spacing-2-5);
+}
+
+.error-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.error-table th,
+.error-table td {
+	border: 1px solid var(--border-default);
+	padding: var(--spacing-2);
+}
+
+.main-div-icon {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.heading-title {
+	margin-bottom: var(--spacing-2-5);
+	margin-top: 5px;
+}

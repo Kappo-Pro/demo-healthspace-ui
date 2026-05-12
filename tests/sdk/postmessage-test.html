@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>VitalFlow SDK - postMessage Test Harness</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+					'Helvetica Neue', Arial, sans-serif;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				min-height: 100vh;
+				padding: 20px;
+			}
+
+			.container {
+				max-width: 1400px;
+				margin: 0 auto;
+			}
+
+			header {
+				background: white;
+				border-radius: 12px;
+				padding: 24px;
+				margin-bottom: 20px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			}
+
+			h1 {
+				color: #1f2937;
+				font-size: 28px;
+				margin-bottom: 8px;
+			}
+
+			.subtitle {
+				color: #6b7280;
+				font-size: 14px;
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: 1fr 400px;
+				gap: 20px;
+			}
+
+			.iframe-container {
+				background: white;
+				border-radius: 12px;
+				padding: 20px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			}
+
+			.iframe-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 16px;
+				padding-bottom: 16px;
+				border-bottom: 1px solid #e5e7eb;
+			}
+
+			.iframe-title {
+				font-size: 18px;
+				font-weight: 600;
+				color: #1f2937;
+			}
+
+			.status-badge {
+				display: inline-block;
+				padding: 4px 12px;
+				border-radius: 12px;
+				font-size: 12px;
+				font-weight: 600;
+			}
+
+			.status-badge.waiting {
+				background: #fef3c7;
+				color: #92400e;
+			}
+
+			.status-badge.complete {
+				background: #d1fae5;
+				color: #065f46;
+			}
+
+			#sdk-iframe {
+				width: 100%;
+				height: 800px;
+				border: 2px solid #e5e7eb;
+				border-radius: 8px;
+			}
+
+			.sidebar {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			.card {
+				background: white;
+				border-radius: 12px;
+				padding: 20px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			}
+
+			.card-title {
+				font-size: 16px;
+				font-weight: 600;
+				color: #1f2937;
+				margin-bottom: 12px;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+
+			.icon {
+				width: 20px;
+				height: 20px;
+			}
+
+			.icon.pulse {
+				animation: pulse 2s infinite;
+			}
+
+			@keyframes pulse {
+				0%,
+				100% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0.5;
+				}
+			}
+
+			.message-list {
+				font-size: 13px;
+				color: #6b7280;
+			}
+
+			.message-list li {
+				margin-bottom: 8px;
+				padding-left: 20px;
+				position: relative;
+			}
+
+			.message-list li::before {
+				content: '→';
+				position: absolute;
+				left: 0;
+				color: #667eea;
+			}
+
+			.message-count {
+				display: inline-block;
+				background: #667eea;
+				color: white;
+				padding: 2px 8px;
+				border-radius: 10px;
+				font-size: 12px;
+				font-weight: 600;
+			}
+
+			#messages {
+				background: #1f2937;
+				color: #10b981;
+				padding: 16px;
+				border-radius: 8px;
+				font-family: 'Monaco', 'Menlo', monospace;
+				font-size: 12px;
+				line-height: 1.6;
+				max-height: 400px;
+				overflow-y: auto;
+				white-space: pre-wrap;
+				word-break: break-word;
+			}
+
+			.no-messages {
+				color: #6b7280;
+				text-align: center;
+				font-style: italic;
+			}
+
+			.controls {
+				display: flex;
+				gap: 12px;
+			}
+
+			button {
+				flex: 1;
+				padding: 10px 16px;
+				border: none;
+				border-radius: 8px;
+				font-size: 14px;
+				font-weight: 600;
+				cursor: pointer;
+				transition: all 0.2s;
+			}
+
+			button.primary {
+				background: #667eea;
+				color: white;
+			}
+
+			button.primary:hover {
+				background: #5568d3;
+			}
+
+			button.secondary {
+				background: #f3f4f6;
+				color: #1f2937;
+			}
+
+			button.secondary:hover {
+				background: #e5e7eb;
+			}
+
+			.token-info {
+				background: #fef3c7;
+				border: 1px solid #fbbf24;
+				border-radius: 8px;
+				padding: 12px;
+				font-size: 12px;
+				color: #92400e;
+			}
+
+			.token-info strong {
+				display: block;
+				margin-bottom: 4px;
+			}
+
+			.token-info code {
+				font-family: 'Monaco', 'Menlo', monospace;
+				background: white;
+				padding: 2px 6px;
+				border-radius: 4px;
+			}
+
+			.stats {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 12px;
+				margin-top: 12px;
+			}
+
+			.stat {
+				background: #f9fafb;
+				padding: 12px;
+				border-radius: 8px;
+				text-align: center;
+			}
+
+			.stat-value {
+				font-size: 24px;
+				font-weight: 700;
+				color: #667eea;
+			}
+
+			.stat-label {
+				font-size: 12px;
+				color: #6b7280;
+				margin-top: 4px;
+			}
+
+			@media (max-width: 1200px) {
+				.grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Header -->
+			<header>
+				<h1>🔬 SDK postMessage Test Harness</h1>
+				<p class="subtitle">
+					WebView simulation for testing postMessage delivery from embedded SDK
+				</p>
+			</header>
+
+			<!-- Main Grid -->
+			<div class="grid">
+				<!-- Left: SDK iframe -->
+				<div class="iframe-container">
+					<div class="iframe-header">
+						<div class="iframe-title">Embedded SDK (WebView Simulation)</div>
+						<span class="status-badge waiting" id="status-badge"
+							>Waiting for assessment...</span
+						>
+					</div>
+					<iframe id="sdk-iframe" title="VitalFlow SDK"></iframe>
+				</div>
+
+				<!-- Right: Sidebar -->
+				<div class="sidebar">
+					<!-- Controls -->
+					<div class="card">
+						<div class="card-title">
+							<svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+							</svg>
+							Controls
+						</div>
+						<div class="controls">
+							<button class="primary" onclick="reloadIframe()">🔄 Reload SDK</button>
+							<button class="secondary" onclick="clearMessages()">
+								🗑️ Clear Log
+							</button>
+						</div>
+
+						<div class="token-info">
+							<strong>Current Token:</strong>
+							<code id="current-token">ast_demo_123</code>
+						</div>
+					</div>
+
+					<!-- Message Listener -->
+					<div class="card">
+						<div class="card-title">
+							<svg
+								class="icon pulse"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+							</svg>
+							Listening for postMessage
+							<span class="message-count" id="message-count">0</span>
+						</div>
+
+						<ul class="message-list">
+							<li>VITALFLOW_ASSESSMENT_COMPLETE</li>
+							<li>All result fields</li>
+							<li>Token metadata</li>
+							<li>Posture angles</li>
+							<li>Screenshots (base64)</li>
+						</ul>
+
+						<div class="stats">
+							<div class="stat">
+								<div class="stat-value" id="total-messages">0</div>
+								<div class="stat-label">Total Messages</div>
+							</div>
+							<div class="stat">
+								<div class="stat-value" id="last-received">--:--</div>
+								<div class="stat-label">Last Received</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Received Messages -->
+					<div class="card">
+						<div class="card-title">
+							<svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+							</svg>
+							Received Messages
+						</div>
+						<pre id="messages" class="no-messages">No messages yet. Complete an assessment to see results.</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// Configuration
+			const SDK_URL = 'http://localhost:3000/sdk';
+			const DEFAULT_TOKEN = 'ast_demo_123'; // Demo token for testing
+
+			// State
+			let messageCount = 0;
+			let receivedMessages = [];
+
+			// Initialize
+			function init() {
+				loadSDK(DEFAULT_TOKEN);
+				setupMessageListener();
+				updateUI();
+			}
+
+			// Load SDK in iframe
+			function loadSDK(token) {
+				const iframe = document.getElementById('sdk-iframe');
+				const url = `${SDK_URL}?token=${encodeURIComponent(token)}`;
+				iframe.src = url;
+
+				document.getElementById('current-token').textContent = token;
+				console.log('[Test Harness] Loading SDK:', url);
+			}
+
+			// Setup postMessage listener
+			function setupMessageListener() {
+				window.addEventListener('message', event => {
+					console.log('[Test Harness] Received postMessage:', event);
+
+					// Check if message is from our SDK
+					if (event.data && event.data.type === 'VITALFLOW_ASSESSMENT_COMPLETE') {
+						handleAssessmentComplete(event.data);
+					}
+				});
+
+				console.log('[Test Harness] postMessage listener active');
+			}
+
+			// Handle assessment complete message
+			function handleAssessmentComplete(data) {
+				messageCount++;
+				receivedMessages.push({
+					timestamp: new Date().toISOString(),
+					data: data,
+				});
+
+				// Update UI
+				updateMessageDisplay(data);
+				updateStats();
+				updateStatus('complete');
+
+				// Show notification
+				showNotification(data);
+
+				console.log('[Test Harness] Assessment complete:', data);
+			}
+
+			// Update message display
+			function updateMessageDisplay(data) {
+				const messagesEl = document.getElementById('messages');
+				messagesEl.className = ''; // Remove no-messages class
+				messagesEl.textContent = JSON.stringify(data, null, 2);
+			}
+
+			// Update stats
+			function updateStats() {
+				document.getElementById('message-count').textContent = messageCount;
+				document.getElementById('total-messages').textContent = messageCount;
+
+				const now = new Date();
+				const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+				document.getElementById('last-received').textContent = timeStr;
+			}
+
+			// Update status badge
+			function updateStatus(status) {
+				const badge = document.getElementById('status-badge');
+				if (status === 'complete') {
+					badge.className = 'status-badge complete';
+					badge.textContent = '✓ Assessment complete!';
+				} else {
+					badge.className = 'status-badge waiting';
+					badge.textContent = 'Waiting for assessment...';
+				}
+			}
+
+			// Show notification
+			function showNotification(data) {
+				const score = data.results?.overall_score || 0;
+				const riskLevel = data.results?.risk_level || 'unknown';
+
+				// Browser notification (requires permission)
+				if ('Notification' in window && Notification.permission === 'granted') {
+					new Notification('Assessment Complete!', {
+						body: `Score: ${score} | Risk: ${riskLevel}`,
+						icon: '/favicon.ico',
+					});
+				}
+
+				// Console log
+				console.log(`
+╔════════════════════════════════════════╗
+║   🎉 ASSESSMENT COMPLETE!              ║
+╠════════════════════════════════════════╣
+║   Score: ${score.toString().padEnd(30)}║
+║   Risk:  ${riskLevel.padEnd(30)}║
+║   Time:  ${new Date().toLocaleTimeString().padEnd(30)}║
+╚════════════════════════════════════════╝
+				`);
+			}
+
+			// Reload iframe
+			function reloadIframe() {
+				const token = document.getElementById('current-token').textContent;
+				loadSDK(token);
+				updateStatus('waiting');
+				console.log('[Test Harness] SDK reloaded');
+			}
+
+			// Clear messages
+			function clearMessages() {
+				messageCount = 0;
+				receivedMessages = [];
+				document.getElementById('messages').textContent =
+					'No messages yet. Complete an assessment to see results.';
+				document.getElementById('messages').className = 'no-messages';
+				updateStats();
+				console.log('[Test Harness] Messages cleared');
+			}
+
+			// Update UI
+			function updateUI() {
+				updateStats();
+				updateStatus('waiting');
+			}
+
+			// Request notification permission on load
+			if ('Notification' in window && Notification.permission === 'default') {
+				Notification.requestPermission();
+			}
+
+			// Initialize on page load
+			init();
+		</script>
+	</body>
+</html>

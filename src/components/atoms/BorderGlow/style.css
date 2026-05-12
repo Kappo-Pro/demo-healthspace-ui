@@ -1,0 +1,285 @@
+/* ==========================================
+   BorderGlow - Apple Intelligence Style
+   Layered animated gradient border effect
+   ========================================== */
+
+/* Register CSS custom property for gradient rotation */
+@property --glow-angle {
+	syntax: '<angle>';
+	initial-value: 0deg;
+	inherits: false;
+}
+
+/* Register CSS custom property for pulse */
+@property --pulse-opacity {
+	syntax: '<number>';
+	initial-value: 0.6;
+	inherits: false;
+}
+
+/* Base container */
+.border-glow {
+	--glow-duration: 2s;
+	--glow-radius: 0px;
+	--glow-intensity: 1;
+
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	border-radius: var(--glow-radius);
+	overflow: visible;
+}
+
+/* Shared layer styles */
+.border-glow__layer {
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: conic-gradient(
+		from var(--glow-angle),
+		var(--glow-color-1),
+		var(--glow-color-2),
+		var(--glow-color-3),
+		var(--glow-color-4),
+		var(--glow-color-5),
+		var(--glow-color-6),
+		var(--glow-color-1)
+	);
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box, /* mask technique */
+		linear-gradient(#fff 0 0); /* mask technique */
+	mask:
+		linear-gradient(#fff 0 0) content-box, /* mask technique */
+		linear-gradient(#fff 0 0); /* mask technique */
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	animation: glow-rotate var(--glow-duration) linear infinite;
+	opacity: var(--glow-intensity);
+}
+
+/* Layer 1: Sharp edge (no blur) - width 8px */
+.border-glow__layer--1 {
+	padding: 4px;
+	animation-duration: calc(var(--glow-duration) * 1);
+}
+
+/* Layer 2: Soft inner glow - width 14px, blur 6px */
+.border-glow__layer--2 {
+	inset: -3px;
+	padding: 7px;
+	filter: blur(6px);
+	opacity: calc(var(--glow-intensity) * 0.85);
+	animation-duration: calc(var(--glow-duration) * 1.2);
+	animation-delay: -0.5s;
+}
+
+/* Layer 3: Medium outer glow - width 20px, blur 16px */
+.border-glow__layer--3 {
+	inset: -6px;
+	padding: 10px;
+	filter: blur(16px);
+	opacity: calc(var(--glow-intensity) * 0.7);
+	animation-duration: calc(var(--glow-duration) * 1.6);
+	animation-delay: -1s;
+}
+
+/* Layer 4: Diffuse ambient glow - width 28px, blur 24px */
+.border-glow__layer--4 {
+	inset: -10px;
+	padding: 14px;
+	filter: blur(24px);
+	opacity: calc(var(--glow-intensity) * 0.5);
+	animation-duration: calc(var(--glow-duration) * 2);
+	animation-delay: -1.5s;
+}
+
+/* ==========================================
+   Pulsing Overlay - adds breathing effect
+   ========================================== */
+.border-glow__pulse {
+	position: absolute;
+	inset: -4px;
+	border-radius: inherit;
+	border: 6px solid var(--glow-color-1);
+	box-shadow:
+		0 0 30px 8px var(--glow-color-1),
+		0 0 60px 16px var(--glow-color-3),
+		inset 0 0 30px 4px var(--glow-color-1);
+	animation: glow-pulse 2s ease-in-out infinite;
+	opacity: var(--glow-intensity);
+}
+
+@keyframes glow-pulse {
+	0%, 100% {
+		opacity: 0.5;
+		transform: scale(1);
+		box-shadow:
+			0 0 30px 8px var(--glow-color-1),
+			0 0 60px 16px var(--glow-color-3),
+			inset 0 0 20px 2px var(--glow-color-1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.005);
+		box-shadow:
+			0 0 50px 15px var(--glow-color-1),
+			0 0 100px 30px var(--glow-color-3),
+			inset 0 0 40px 8px var(--glow-color-1);
+	}
+}
+
+/* Rotation animation */
+@keyframes glow-rotate {
+	from {
+		--glow-angle: 0deg;
+	}
+	to {
+		--glow-angle: 360deg;
+	}
+}
+
+/* ==========================================
+   Variant: Brand (VitalFlow)
+   Purple palette using design tokens
+   ========================================== */
+.border-glow--brand {
+	--glow-color-1: var(--color-purple-600);
+	--glow-color-2: var(--color-purple-500);
+	--glow-color-3: var(--color-purple-400);
+	--glow-color-4: var(--color-purple-700);
+	--glow-color-5: var(--color-purple-300);
+	--glow-color-6: var(--color-purple-500);
+}
+
+/* ==========================================
+   Variant: Success
+   Green tones using design tokens
+   ========================================== */
+.border-glow--success {
+	--glow-color-1: var(--color-success-600);
+	--glow-color-2: var(--color-success-500);
+	--glow-color-3: var(--color-success-400);
+	--glow-color-4: var(--color-success-700);
+	--glow-color-5: var(--color-success-300);
+	--glow-color-6: var(--color-success-600);
+}
+
+/* ==========================================
+   Variant: Error
+   Red/orange tones using design tokens
+   ========================================== */
+.border-glow--error {
+	--glow-color-1: var(--color-error-600);
+	--glow-color-2: var(--color-error-500);
+	--glow-color-3: var(--color-warning-400); /* Light orange accent */
+	--glow-color-4: var(--color-warning-500); /* Orange accent */
+	--glow-color-5: var(--color-error-300);
+	--glow-color-6: var(--color-error-600);
+}
+
+/* ==========================================
+   Optional: Apple Intelligence Colors
+   Multi-color rainbow for special cases
+   ========================================== */
+.border-glow--apple {
+	--glow-color-1: #bc82f3; /* Purple */
+	--glow-color-2: #f5b9ea; /* Pink */
+	--glow-color-3: #8d9fff; /* Blue */
+	--glow-color-4: #ff6778; /* Red */
+	--glow-color-5: #ffba71; /* Orange */
+	--glow-color-6: #c686ff; /* Lavender */
+}
+
+/* ==========================================
+   Variant: Scanning
+   Lighter purple shades with more activity
+   For readysetgo countdown state
+   ========================================== */
+.border-glow--scanning {
+	--glow-color-1: #a78bfa; /* Light purple - violet-400 */
+	--glow-color-2: #c4b5fd; /* Lighter purple - violet-300 */
+	--glow-color-3: #ddd6fe; /* Very light purple - violet-200 */
+	--glow-color-4: #8b5cf6; /* Medium purple - violet-500 */
+	--glow-color-5: #ede9fe; /* Near white purple - violet-100 */
+	--glow-color-6: #a78bfa; /* Light purple - violet-400 */
+}
+
+/* Scanning variant - more intense pulse animation */
+.border-glow--scanning .border-glow__pulse {
+	animation: glow-pulse-scanning 1.2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-scanning {
+	0%, 100% {
+		opacity: 0.6;
+		transform: scale(1);
+		box-shadow:
+			0 0 40px 10px var(--glow-color-1),
+			0 0 80px 20px var(--glow-color-3),
+			inset 0 0 30px 4px var(--glow-color-1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.008);
+		box-shadow:
+			0 0 60px 20px var(--glow-color-1),
+			0 0 120px 40px var(--glow-color-3),
+			inset 0 0 50px 10px var(--glow-color-1);
+	}
+}
+
+/* ==========================================
+   Variant: Idle
+   Darker purple for default/waiting states
+   Slower animation, lower intensity than scanning
+   ========================================== */
+.border-glow--idle {
+	--glow-color-1: var(--color-purple-700);
+	--glow-color-2: var(--color-purple-800);
+	--glow-color-3: var(--color-purple-600);
+	--glow-color-4: var(--color-purple-900);
+	--glow-color-5: var(--color-purple-700);
+	--glow-color-6: var(--color-purple-800);
+}
+
+/* Idle variant - slower, more subtle pulse */
+.border-glow--idle .border-glow__pulse {
+	animation: glow-pulse-idle 4s ease-in-out infinite;
+}
+
+.border-glow--idle .border-glow__layer {
+	opacity: calc(var(--glow-intensity) * 0.6);
+}
+
+@keyframes glow-pulse-idle {
+	0%, 100% {
+		opacity: 0.35;
+		transform: scale(1);
+		box-shadow:
+			0 0 25px 6px var(--glow-color-1),
+			0 0 50px 14px var(--glow-color-3),
+			inset 0 0 20px 3px var(--glow-color-1);
+	}
+	50% {
+		opacity: 0.6;
+		transform: scale(1.003);
+		box-shadow:
+			0 0 40px 12px var(--glow-color-1),
+			0 0 80px 24px var(--glow-color-3),
+			inset 0 0 35px 6px var(--glow-color-1);
+	}
+}
+
+/* ==========================================
+   Reduced motion support
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+	.border-glow__layer {
+		animation: none;
+		--glow-angle: 45deg;
+	}
+	.border-glow__pulse {
+		animation: none;
+		opacity: 0.75;
+	}
+}

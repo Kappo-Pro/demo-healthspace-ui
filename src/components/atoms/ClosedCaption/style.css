@@ -1,0 +1,126 @@
+/* ==========================================
+   ClosedCaption - Audio-synced caption overlay
+   Pill-shaped with state variants
+   ========================================== */
+
+.closed-caption {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	pointer-events: none;
+	max-width: 100%;
+
+	/* Pill shape */
+	border-radius: 9999px;
+	padding: 16px 32px;
+
+	/* Default background - 40% black overlay */
+	background: rgba(0, 0, 0, 0.4); /* caption overlay */
+
+	/* Animation */
+	animation: caption-fade-in 0.3s ease-out;
+}
+
+.closed-caption__text {
+	font-family: 'Inter', var(--font-family-sans), sans-serif;
+	font-size: 40px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 1.2;
+	text-align: center;
+	color: var(--text-color-on-dark, #fff);
+	display: block;
+}
+
+/* ==========================================
+   State Variants
+   ========================================== */
+
+/* Default - neutral dark */
+.closed-caption--default {
+	background: rgba(0, 0, 0, 0.4); /* caption overlay */
+}
+
+.closed-caption--default .closed-caption__text {
+	color: var(--text-color-on-dark, #fff);
+}
+
+/* Success - green tint */
+.closed-caption--success {
+	background: rgba(34, 197, 94, 0.25); /* green-500 alpha */
+	border: 2px solid rgba(34, 197, 94, 0.5); /* green-500 alpha */
+}
+
+.closed-caption--success .closed-caption__text {
+	color: #86efac; /* green-300 for readability */
+}
+
+/* Error - prominent red background */
+.closed-caption--error {
+	background: var(--color-error-alpha-80); /* error with 80% opacity */
+	border: 2px solid var(--color-error-600);
+}
+
+.closed-caption--error .closed-caption__text {
+	color: var(--color-white);
+}
+
+/* Warning - orange/yellow tint */
+.closed-caption--warning {
+	background: rgba(251, 146, 60, 0.25); /* orange-400 alpha */
+	border: 2px solid rgba(251, 146, 60, 0.5); /* orange-400 alpha */
+}
+
+.closed-caption--warning .closed-caption__text {
+	color: #fed7aa; /* orange-200 for readability */
+}
+
+/* ==========================================
+   Animation
+   ========================================== */
+
+@keyframes caption-fade-in {
+	from {
+		opacity: 0;
+		transform: translateX(-50%) translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+/* ==========================================
+   Responsive sizing
+   ========================================== */
+
+@media (max-width: 768px) {
+	.closed-caption {
+		padding: 12px 24px;
+		max-width: 95%;
+	}
+
+	.closed-caption__text {
+		font-size: 24px;
+	}
+}
+
+@media (max-width: 480px) {
+	.closed-caption {
+		padding: 10px 20px;
+	}
+
+	.closed-caption__text {
+		font-size: 18px;
+	}
+}
+
+/* ==========================================
+   Reduced motion support
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.closed-caption {
+		animation: none;
+	}
+}

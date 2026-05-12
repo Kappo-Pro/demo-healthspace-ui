@@ -1,0 +1,238 @@
+.pain-status-container {
+	text-align: center;
+	margin-top: var(--spacing-4);
+}
+
+.pain-subcontainer {
+	display: flex;
+	justify-content: center;
+	margin-top: var(--spacing-6);
+}
+
+/* Plan Card - Base */
+.plan-card {
+	position: relative;
+	width: 399px;
+	height: 450px;
+	border-radius: var(--radius-2xl);
+	overflow: hidden;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border: var(--border-width-2) solid transparent;
+}
+
+.plan-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+}
+
+.plan-card-selected {
+	border-color: var(--brand-primary);
+}
+
+/* Card Image Background */
+.plan-card-image {
+	position: absolute;
+	inset: 0;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* Card Overlay */
+.plan-card-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+/* Card Content - Single unified state with hover animation */
+/* Figma gradient: from rgba(159,48,237,0) 12% to rgba(28,2,45,0.3) 73.836% */
+.plan-card-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: flex-end;
+	padding: var(--spacing-4);
+	background: linear-gradient(
+		to top,
+		var(--plan-card-gradient-start, rgba(28, 2, 45, 0.3)) 0%,
+		var(--plan-card-gradient-end, rgba(159, 48, 237, 0)) 73.836%
+	);
+	transition: background 0.3s ease;
+}
+
+/* Figma selected: to rgba(28,2,45,0.7) */
+.plan-card:hover .plan-card-content,
+.plan-card-selected .plan-card-content {
+	background: linear-gradient(
+		to top,
+		var(--plan-card-gradient-start-hover, rgba(28, 2, 45, 0.7)) 0%,
+		var(--plan-card-gradient-end, rgba(159, 48, 237, 0)) 73.836%
+	);
+}
+
+.plan-card-inner {
+	background: var(--plan-card-inner-bg, rgba(33, 7, 52, 0.5));
+	border-radius: var(--radius-2xl);
+	padding: var(--spacing-4) var(--spacing-2);
+	padding-bottom: var(--spacing-2);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-4);
+}
+
+.plan-card-title {
+	color: var(--text-on-dark);
+	font-family: var(--font-family-primary);
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	text-align: center;
+	line-height: 1.4;
+	letter-spacing: -0.6px;
+	width: 243px;
+	margin: 0;
+}
+
+/* Description - Hidden by default, animated on hover */
+.plan-card-description {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition:
+		max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.3s ease 0.1s;
+	color: var(--text-on-dark);
+	font-family: var(--font-family-body);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-normal);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-tightest);
+	width: 100%;
+}
+
+.plan-card:hover .plan-card-description,
+.plan-card-selected .plan-card-description {
+	max-height: 200px;
+	opacity: 1;
+	transition:
+		max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.3s ease;
+}
+
+.plan-card-btn-select {
+	width: 100%;
+	height: var(--spacing-8);
+	border-radius: var(--radius-xl);
+	background: var(--surface-primary);
+	border: var(--border-width-1) solid var(--border-default);
+	color: var(--text-primary);
+	font-family: var(--font-family-body);
+	font-weight: var(--font-weight-normal);
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-tightest);
+}
+
+.plan-card-btn-select:hover {
+	background: var(--surface-secondary);
+	color: var(--text-primary);
+	border-color: var(--brand-primary);
+}
+
+.plan-card-list {
+	list-style: disc;
+	padding-left: var(--spacing-5);
+	margin: 0;
+	text-align: left;
+}
+
+.plan-card-list li {
+	margin-bottom: 0;
+	color: var(--text-on-dark);
+}
+
+.plan-card-btn-selected {
+	width: 100%;
+	height: var(--spacing-8);
+	border-radius: var(--radius-xl);
+	border: var(--border-width-1) solid var(--brand-primary);
+	background: var(--surface-primary);
+	color: var(--brand-primary);
+	font-family: var(--font-family-body);
+	font-weight: var(--font-weight-normal);
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-tightest);
+	position: relative;
+}
+
+.plan-card-btn-selected::after {
+	content: '';
+	position: absolute;
+	inset: -1px;
+	border: var(--border-width-4) solid var(--color-purple-200);
+	border-radius: var(--radius-xl);
+	pointer-events: none;
+}
+
+.plan-card-btn-selected:hover {
+	background: var(--surface-primary);
+	color: var(--brand-primary);
+}
+
+/* Continue Button Container */
+.plan-continue-container {
+	display: flex;
+	justify-content: center;
+	margin-top: var(--spacing-6);
+	padding-bottom: var(--spacing-10);
+}
+
+.plan-continue-btn {
+	width: 640px;
+	height: var(--spacing-10);
+	border-radius: var(--radius-2xl);
+	font-family: var(--font-family-body);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-normal);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-tightest);
+}
+
+/* Header Styles */
+.plan-header-container {
+	text-align: center;
+	margin-bottom: var(--spacing-6);
+}
+
+.plan-header-title {
+	font-family: var(--font-family-body);
+	font-size: 2rem; /* 32px - between 2xl and 3xl */
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	line-height: var(--line-height-tight);
+	letter-spacing: var(--letter-spacing-tighter);
+	margin-bottom: var(--spacing-2);
+}
+
+.plan-header-container p {
+	font-family: var(--font-family-body);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-normal);
+	color: var(--text-secondary);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-tightest);
+	margin: 0;
+}
+
+/* Cards container */
+.plan-cards-container {
+	display: flex;
+	justify-content: center;
+	gap: var(--spacing-3);
+}

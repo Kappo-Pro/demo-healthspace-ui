@@ -1,0 +1,14 @@
+.readySetGo {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	right: 0;
+}
+
+.readySetGo svg path {
+	stroke: var(--surface-primary);
+}
+
+.readySetGo svg g g g g g {
+	fill: var(--surface-primary);
+}

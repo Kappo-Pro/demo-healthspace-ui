@@ -1,0 +1,123 @@
+.default-2d-view {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-8);
+	min-height: 400px;
+	text-align: center;
+}
+
+.posture-summary {
+	background: var(--surface-primary);
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-6);
+	margin-bottom: var(--spacing-6);
+	width: 100%;
+	max-width: 400px;
+	box-shadow: var(--shadow-md);
+}
+
+.summary-title {
+	margin: 0 0 var(--spacing-4) 0;
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+}
+
+.metric-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.metric {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: var(--spacing-3) 0;
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+.metric:last-child {
+	border-bottom: none;
+}
+
+.metric-label {
+	color: var(--text-secondary);
+	font-weight: var(--font-weight-medium);
+	font-size: var(--font-size-sm);
+}
+
+.metric-value {
+	font-weight: var(--font-weight-semibold);
+	font-size: var(--font-size-base);
+	color: var(--text-primary);
+}
+
+.quality-badge {
+	padding: var(--spacing-1) var(--spacing-3);
+	border-radius: var(--radius-full);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wider);
+}
+
+.quality-badge[data-quality='excellent'] {
+	background: var(--surface-success);
+}
+
+.quality-badge[data-quality='good'] {
+	background: var(--surface-info);
+}
+
+.quality-badge[data-quality='fair'] {
+	background: var(--surface-warning);
+}
+
+.quality-badge[data-quality='poor'] {
+	background: var(--surface-error);
+}
+
+.upgrade-message {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-3);
+	color: var(--text-secondary);
+	font-size: var(--font-size-sm);
+	max-width: 300px;
+}
+
+.upgrade-icon {
+	color: var(--brand-primary);
+	opacity: 0.6;
+}
+
+.upgrade-message p {
+	margin: 0;
+	line-height: var(--line-height-normal);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.default-2d-view {
+		padding: var(--spacing-4);
+		min-height: 300px;
+	}
+
+	.posture-summary {
+		padding: var(--spacing-4);
+	}
+
+	.summary-title {
+		font-size: var(--font-size-base);
+	}
+
+	.metric-label,
+	.metric-value {
+		font-size: 13px;
+	}
+}

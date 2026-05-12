@@ -1,0 +1,628 @@
+/**
+ * CommandRegistry Security Test Suite
+ *
+ * Tests security properties and attack resistance:
+ * - Command injection attacks (malicious regex, XSS, SQL-like patterns)
+ * - Context poisoning (stack manipulation attacks)
+ * - Event handler injection (malicious listeners)
+ * - Resource exhaustion (memory, CPU)
+ * - Privilege escalation attempts
+ * - Input validation bypass attempts
+ *
+ * Security Standards:
+ * - OWASP Top 10 considerations
+ * - Defense-in-depth principles
+ * - Fail-safe defaults
+ */
+
+import { CommandRegistry } from '../CommandRegistry';
+import { Command } from '../types';
+import { GLOBAL_CONTEXT } from '../constants';
+
+describe('CommandRegistry - Security Tests', () => {
+  let registry: CommandRegistry;
+
+  beforeEach(async () => {
+    registry = CommandRegistry.getInstance();
+    registry.clear();
+    // Wait for rate limit window to clear
+    await new Promise((resolve) => setTimeout(resolve, 150));
+  });
+
+  afterEach(() => {
+    registry.removeAllListeners();
+    registry.clear();
+  });
+
+  describe('SEC-1: Command Injection Protection', () => {
+    it('should safely handle malicious regex patterns in command IDs', () => {
+      // ReDoS (Regular Expression Denial of Service) attempt
+      const maliciousPatterns = [
+        '(a+)+$',
+        '(a|a)*',
+        '(a|ab)*',
+        '([a-zA-Z]+)*',
+        '(.*a){x} for x \\> 10',
+      ];
+
+      maliciousPatterns.forEach((pattern) => {
+        const command: Command = {
+          id: pattern,
+          label: 'Malicious Pattern Command',
+          category: 'test',
+          keywords: ['test'],
+          priority: 50,
+          contexts: [GLOBAL_CONTEXT],
+          handler: async () => {},
+          enabled: true,
+          visible: true,
+          requiresConfirmation: false,
+          metadata: {},
+        };
+
+        // Should not crash or hang
+        expect(() => registry.register([command])).not.toThrow();
+
+        // Should be retrievable
+        const retrieved = registry.getCommand(pattern);
+        expect(retrieved).toBeDefined();
+      });
+    });
+
+    it('should sanitize XSS attempts in command labels and keywords', () => {
+      const xssPayloads = [
+        '<script>alert("XSS")</script>',
+        '<img src=x onerror=alert("XSS")>',
+        'javascript:alert("XSS")',
+        '<svg onload=alert("XSS")>',
+        '"><script>alert(String.fromCharCode(88,83,83))</script>',
+      ];
+
+      xssPayloads.forEach((payload, index) => {
+        const command: Command = {
+          id: `xss-test-${index}`,
+          label: payload,
+          category: 'test',
+          keywords: [payload, 'test'],
+          priority: 50,
+          contexts: [GLOBAL_CONTEXT],
+          handler: async () => {},
+          enabled: true,
+          visible: true,
+          requiresConfirmation: false,
+          metadata: {},
+        };
+
+        // Should register without executing malicious code
+        expect(() => registry.register([command])).not.toThrow();
+
+        // Retrieved command should contain payload as-is (not executed)
+        const retrieved = registry.getCommand(`xss-test-${index}`);
+        expect(retrieved?.label).toBe(payload);
+        expect(retrieved?.keywords).toContain(payload);
+      });
+    });
+
+    it('should handle SQL injection-like patterns safely', () => {
+      const sqlPatterns = [
+        "'; DROP TABLE commands; --",
+        "1' OR '1'='1",
+        "admin'--",
+        "' UNION SELECT * FROM users--",
+        "'; DELETE FROM commands WHERE '1'='1",
+      ];
+
+      sqlPatterns.forEach((pattern, index) => {
+        const command: Command = {
+          id: `sql-test-${index}`,
+          label: pattern,
+          category: 'test',
+          keywords: [pattern],
+          priority: 50,
+          contexts: [GLOBAL_CONTEXT],
+          handler: async () => {},
+          enabled: true,
+          visible: true,
+          requiresConfirmation: false,
+          metadata: {},
+        };
+
+        expect(() => registry.register([command])).not.toThrow();
+        expect(registry.getCommand(`sql-test-${index}`)).toBeDefined();
+      });
+
+      // Registry should still be intact
+      expect(registry.getCommands().length).toBe(sqlPatterns.length);
+    });
+
+    it('should handle path traversal attempts in command IDs', () => {
+      const pathTraversalPatterns = [
+        '../../../etc/passwd',
+        '..\\..\\..\\windows\\system32',
+        'C:\\Windows\\System32\\cmd.exe',
+        '/dev/null',
+        '../../',
+      ];
+
+      pathTraversalPatterns.forEach((pattern, index) => {
+        const command: Command = {
+          id: pattern,
+          label: 'Path Traversal Test',
+          category: 'test',
+          keywords: ['test'],
+          priority: 50,
+          contexts: [GLOBAL_CONTEXT],
+          handler: async () => {},
+          enabled: true,
+          visible: true,
+          requiresConfirmation: false,
+          metadata: {},
+        };
+
+        expect(() => registry.register([command])).not.toThrow();
+        expect(registry.getCommand(pattern)).toBeDefined();
+      });
+    });
+
+    it('should handle Unicode and special characters safely', () => {
+      const specialChars = [
+        '🚀',
+        '中文命令',
+        'العربية',
+        'עברית',
+        '한국어',
+        'Ø̴̡̨̧̢̡̨̨̡̨̢̢̧̨̡̡̧̢̧̢̢̛̛̛̛̛̛̛̛̛̛̛͍̣̦̫̘̺̬̗̟̬̱̺͈̺̭̘̖̗̭͈̱̱̟͚̪͈̗͇̻̗͉̣͉̝̜͇̩͉̘̣̰̥̪̥͈̫͚̹̤͇̠̥͚̻̪̺̣̺͚̬̟̜̹̫͉͓̩̭̤̜͉̞̖͉̖̺̩̥̪̗̙̬̩̼̮̖̦̦̟̺̜͇̘̖̜̖̦̹͍̗̪̲̯̙̲͇̙̘͉̻̘̳͚͈͖̦̲͕̱̼̙͙̫̙͉̘̺͚̹̰̯͍͕̥͔̪̙̦̬̗̫̘̳̣̙̺̫̹̖͍̘̹̞̙̣͚̖̙̹̤̫̺̙͖̗͚̱̜̯̩̥͓̻̮̫̩̻̭̩̪̮̲̬̹͚̦͇̳̦͙̬̯̹̬̹͉̩͚̺̬̦̞͎̺̦̞͎̱͚̣̹̣̩̻̩̙͓̳̰̳̺̞̻̰̘̯̙͇͙̬̹̙̹͇̦̪̳̙̯̬̝̯̻͙͉̙̫̫͓̩̣̤̰͍̰̲̜̹͙̥͙̙̱̳̬̜̻̬̻͙̥̦̘̹̘͔̰̙̜̯̣̜̳̬̞̠̼̟̺̜̰̦̯̮͔̱̟͉̮͙̙̘̝',
+        'null\x00byte',
+        '\r\n\t',
+      ];
+
+      specialChars.forEach((char, index) => {
+        const command: Command = {
+          id: `unicode-test-${index}`,
+          label: char,
+          category: 'test',
+          keywords: [char],
+          priority: 50,
+          contexts: [GLOBAL_CONTEXT],
+          handler: async () => {},
+          enabled: true,
+          visible: true,
+          requiresConfirmation: false,
+          metadata: {},
+        };
+
+        expect(() => registry.register([command])).not.toThrow();
+      });
+    });
+  });
+
+  describe('SEC-2: Context Poisoning Protection', () => {
+    it('should prevent GLOBAL_CONTEXT from being removed from stack', () => {
+      registry.pushContext('user-123');
+      registry.pushContext('admin');
+
+      // Try to clear context
+      registry.clearContext();
+
+      // GLOBAL_CONTEXT should still be present
+      const contexts = registry['contextStack']; // Access private for testing
+      expect(contexts).toContain(GLOBAL_CONTEXT);
+      expect(contexts.length).toBe(1);
+    });
+
+    it('should handle context stack overflow attempts', () => {
+      // Try to push excessive contexts
+      for (let i = 0; i < 1000; i++) {
+        expect(() => registry.pushContext(`context-${i}`)).not.toThrow();
+      }
+
+      // Registry should still function
+      const commands: Command[] = [
+        {
+          id: 'overflow-test',
+          label: 'Overflow Test',
+          category: 'test',
+          keywords: ['test'],
+          priority: 50,
+          contexts: [GLOBAL_CONTEXT],
+          handler: async () => {},
+          enabled: true,
+          visible: true,
+          requiresConfirmation: false,
+          metadata: {},
+        },
+      ];
+
+      expect(() => registry.register(commands)).not.toThrow();
+      expect(registry.getCommand('overflow-test')).toBeDefined();
+    });
+
+    it('should sanitize malicious context identifiers', () => {
+      const maliciousContexts = [
+        '<script>alert("XSS")</script>',
+        '../../../root',
+        'null\x00byte',
+        '',
+        '     ',
+      ];
+
+      maliciousContexts.forEach((ctx) => {
+        expect(() => registry.pushContext(ctx)).not.toThrow();
+      });
+
+      // Registry should still function correctly
+      registry.clearContext();
+      expect(registry.getCommands().length).toBeGreaterThanOrEqual(0);
+    });
+
+    it('should handle context stack manipulation race conditions', async () => {
+      // Simulate concurrent context operations
+      const operations = Array.from({ length: 50 }, (_, i) => async () => {
+        if (i % 2 === 0) {
+          registry.pushContext(`context-${i}`);
+        } else {
+          registry.popContext();
+        }
+      });
+
+      await Promise.all(operations.map((op) => op()));
+
+      // Context stack should still be valid
+      const contexts = registry['contextStack'];
+      expect(contexts).toContain(GLOBAL_CONTEXT);
+      expect(Array.isArray(contexts)).toBe(true);
+    });
+  });
+
+  describe('SEC-3: DoS Protection (Comprehensive)', () => {
+    it('should enforce MAX_COMMANDS limit (500)', async () => {
+      // Register commands up to limit
+      for (let batch = 0; batch < 10; batch++) {
+        const commands: Command[] = Array.from({ length: 50 }, (_, i) => ({
+          id: `dos-cmd-${batch * 50 + i}`,
+          label: `DoS Test ${batch * 50 + i}`,
+          category: 'test',
+          keywords: ['dos'],
+          priority: 50,
+          contexts: [GLOBAL_CONTEXT],
+          handler: async () => {},
+          enabled: true,
+          visible: true,
+          requiresConfirmation: false,
+          metadata: {},
+        }));
+
+        registry.register(commands);
+
+        if (batch < 9) {
+          await new Promise((resolve) => setTimeout(resolve, 150));
+        }
+      }
+
+      expect(registry.getCommands().length).toBe(500);
+
+      // Attempt to exceed limit
+      const excessCommand: Command = {
+        id: 'dos-cmd-501',
+        label: 'DoS Test 501',
+        category: 'test',
+        keywords: ['dos'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {},
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      await new Promise((resolve) => setTimeout(resolve, 150));
+      expect(() => registry.register([excessCommand])).toThrow(/Maximum .* commands allowed/);
+    });
+
+    it('should enforce rate limiting (50 registrations per 100ms)', () => {
+      // Attempt rapid registration
+      const commands: Command[] = Array.from({ length: 51 }, (_, i) => ({
+        id: `rate-cmd-${i}`,
+        label: `Rate Test ${i}`,
+        category: 'test',
+        keywords: ['rate'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {},
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      }));
+
+      expect(() => registry.register(commands)).toThrow(/Too many commands registered too quickly/);
+    });
+
+    it('should handle memory exhaustion attempts', async () => {
+      // Try to register commands with large metadata
+      const largeMetadata = {
+        payload: 'A'.repeat(10000), // 10KB string
+        array: Array.from({ length: 1000 }, (_, i) => i),
+        nested: { deep: { object: { structure: { here: 'value' } } } },
+      };
+
+      const commands: Command[] = Array.from({ length: 50 }, (_, i) => ({
+        id: `memory-cmd-${i}`,
+        label: 'Memory Test',
+        category: 'test',
+        keywords: ['memory'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {},
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: largeMetadata,
+      }));
+
+      // Should not crash
+      expect(() => registry.register(commands)).not.toThrow();
+      expect(registry.getCommands().length).toBe(50);
+
+      // Clean up
+      registry.clear();
+      expect(registry.getCommands().length).toBe(0);
+    });
+
+    it('should handle CPU exhaustion attempts in handlers', async () => {
+      const cpuIntensiveCommand: Command = {
+        id: 'cpu-intensive',
+        label: 'CPU Intensive',
+        category: 'test',
+        keywords: ['cpu'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {
+          // Simulate CPU-intensive operation
+          let sum = 0;
+          for (let i = 0; i < 1000000; i++) {
+            sum += Math.sqrt(i);
+          }
+          return { sum };
+        },
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      registry.register([cpuIntensiveCommand]);
+
+      // Should complete (handler responsibility to timeout)
+      const result = await registry.execute('cpu-intensive', {});
+      expect(result).toHaveProperty('sum');
+    });
+  });
+
+  describe('SEC-4: Event Handler Injection Protection', () => {
+    it('should isolate event handlers from registry state', () => {
+      let maliciousAccess = false;
+
+      registry.on('commandRegistered', () => {
+        // Attempt to modify registry internals
+        try {
+          // @ts-expect-error Intentional access attempt
+          registry.commands = new Map();
+          maliciousAccess = true;
+        } catch {
+          maliciousAccess = false;
+        }
+      });
+
+      const command: Command = {
+        id: 'test-cmd',
+        label: 'Test',
+        category: 'test',
+        keywords: ['test'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {},
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      registry.register([command]);
+
+      // Malicious modification should fail
+      expect(registry.getCommand('test-cmd')).toBeDefined();
+    });
+
+    it('should handle event handler errors without crashing registry', () => {
+      registry.on('commandExecuted', () => {
+        throw new Error('Malicious event handler');
+      });
+
+      const command: Command = {
+        id: 'test-cmd',
+        label: 'Test',
+        category: 'test',
+        keywords: ['test'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => ({ success: true }),
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      registry.register([command]);
+
+      // Execution should complete despite handler error
+      expect(registry.execute('test-cmd', {})).resolves.toEqual({ success: true });
+    });
+
+    it('should limit number of event listeners per event', () => {
+      // Try to attach excessive listeners
+      for (let i = 0; i < 100; i++) {
+        registry.on('commandRegistered', () => {
+          // Listener logic
+        });
+      }
+
+      // Registry should still function
+      const command: Command = {
+        id: 'test-cmd',
+        label: 'Test',
+        category: 'test',
+        keywords: ['test'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {},
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      expect(() => registry.register([command])).not.toThrow();
+    });
+  });
+
+  describe('SEC-5: Privilege Escalation Prevention', () => {
+    it('should not allow commands to modify other commands', async () => {
+      const victimCommand: Command = {
+        id: 'victim-cmd',
+        label: 'Victim',
+        category: 'test',
+        keywords: ['victim'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => ({ status: 'original' }),
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      const attackerCommand: Command = {
+        id: 'attacker-cmd',
+        label: 'Attacker',
+        category: 'test',
+        keywords: ['attacker'],
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {
+          // Attempt to modify victim command
+          const victim = registry.getCommand('victim-cmd');
+          if (victim) {
+            victim.handler = async () => ({ status: 'compromised' });
+          }
+          return { status: 'attacked' };
+        },
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      registry.register([victimCommand, attackerCommand]);
+
+      // Execute attacker
+      await registry.execute('attacker-cmd', {});
+
+      // Victim should remain unchanged
+      const victimResult = await registry.execute('victim-cmd', {});
+      expect(victimResult).toEqual({ status: 'original' });
+    });
+
+    it('should enforce context restrictions during execution', async () => {
+      const restrictedCommand: Command = {
+        id: 'restricted-cmd',
+        label: 'Restricted',
+        category: 'test',
+        keywords: ['restricted'],
+        priority: 50,
+        contexts: ['admin-only'],
+        handler: async () => ({ access: 'granted' }),
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      registry.register([restrictedCommand]);
+
+      // Should fail without proper context
+      await expect(registry.execute('restricted-cmd', {})).rejects.toThrow(
+        /Command not found or not available in current context/
+      );
+
+      // Should succeed with proper context
+      registry.pushContext('admin-only');
+      const result = await registry.execute('restricted-cmd', {});
+      expect(result).toEqual({ access: 'granted' });
+    });
+  });
+
+  describe('SEC-6: Input Validation', () => {
+    it('should reject commands with missing required fields', () => {
+      const invalidCommands = [
+        { label: 'No ID' }, // Missing id
+        { id: 'no-label' }, // Missing label
+        { id: 'no-handler', label: 'No Handler' }, // Missing handler
+      ];
+
+      invalidCommands.forEach((invalid) => {
+        expect(() => registry.register([invalid as Command])).toThrow();
+      });
+    });
+
+    it('should validate command priority bounds', () => {
+      const command: Command = {
+        id: 'priority-test',
+        label: 'Priority Test',
+        category: 'test',
+        keywords: ['test'],
+        priority: -1, // Invalid priority
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {},
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {},
+      };
+
+      // Should handle gracefully or reject
+      expect(() => registry.register([command])).not.toThrow();
+
+      // Retrieve and verify priority was clamped or preserved
+      const retrieved = registry.getCommand('priority-test');
+      expect(retrieved).toBeDefined();
+    });
+
+    it('should handle null and undefined values safely', () => {
+      const command: Command = {
+        id: 'null-test',
+        label: 'Null Test',
+        category: 'test',
+        keywords: ['test', 'null', 'undefined'], // Remove actual null/undefined
+        priority: 50,
+        contexts: [GLOBAL_CONTEXT],
+        handler: async () => {},
+        enabled: true,
+        visible: true,
+        requiresConfirmation: false,
+        metadata: {
+          nullValue: null,
+          undefinedValue: undefined,
+        },
+      };
+
+      expect(() => registry.register([command])).not.toThrow();
+
+      const retrieved = registry.getCommand('null-test');
+      expect(retrieved).toBeDefined();
+      expect(retrieved?.metadata.nullValue).toBeNull();
+      expect(retrieved?.metadata.undefinedValue).toBeUndefined();
+    });
+  });
+});

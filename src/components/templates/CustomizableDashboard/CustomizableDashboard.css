@@ -1,0 +1,139 @@
+/**
+ * CustomizableDashboard Styles
+ * EPIC-026-S2: Base styles for drag-drop dashboard
+ * EPIC-026-S5: Enhanced visual feedback for drag operations
+ */
+
+/* Loading state */
+.customizable-dashboard-loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 400px;
+	width: 100%;
+}
+
+/* Dashboard container */
+.customizable-dashboard {
+	position: relative;
+	width: 100%;
+	min-height: 200px;
+	transition:
+		background-color 0.2s ease,
+		border 0.2s ease;
+}
+
+/* Active dragging state (when hovering over droppable area) - EPIC-026-S5 */
+.customizable-dashboard.dragging-over {
+	background-color: var(--color-bg-tertiary, #f5f5f5);
+	border: 2px dashed var(--color-border-hover, #d9d9d9);
+	border-radius: var(--border-radius-lg, 8px);
+	padding: 8px;
+}
+
+/* Individual dashboard section */
+.dashboard-section {
+	position: relative;
+	margin-bottom: 24px;
+	transition:
+		transform 0.2s ease,
+		margin-bottom 0.2s ease;
+}
+
+/* Section being dragged - EPIC-026-S5: Enhanced ghost styling */
+.dashboard-section.dragging {
+	opacity: 0.5;
+	transform: rotate(3deg);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+	background: var(--color-bg-elevated, #ffffff);
+	border: 2px solid var(--color-primary, #1890ff);
+	border-radius: var(--border-radius-md, 6px);
+	transition: all var(--motion-duration-fast) var(--motion-ease-out);
+	/* Improve rendering performance during drag */
+	will-change: transform, opacity;
+}
+
+/* Last section has no bottom margin */
+.dashboard-section:last-child {
+	margin-bottom: 0;
+}
+
+/* Smooth transitions for sections moving to make space - EPIC-026-S5 */
+.dashboard-section:not(.dragging) {
+	transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+/* Placeholder styling (provided by react-beautiful-dnd) - EPIC-026-S5 */
+.customizable-dashboard [data-rbd-placeholder-context-id] {
+	/* react-beautiful-dnd automatically adds placeholder element */
+	/* Placeholder inherits height from dragged section automatically */
+	border: 2px dashed var(--color-primary, #1890ff);
+	border-radius: var(--border-radius-md, 6px);
+	background: var(--color-bg-tertiary, #f5f5f5);
+	transition: height 0.2s ease;
+}
+
+/* Drag handle icon */
+.drag-handle {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--color-bg-secondary, #f5f5f5);
+	border: 1px solid var(--color-border, #d9d9d9);
+	border-radius: var(--border-radius-sm, 4px);
+	cursor: grab;
+	opacity: 0;
+	transition:
+		opacity 0.2s ease,
+		background-color 0.2s ease;
+	z-index: 10;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Show drag handle on hover */
+.dashboard-section:hover .drag-handle {
+	opacity: 1;
+}
+
+/* Drag handle active state */
+.drag-handle:active {
+	cursor: grabbing;
+	background: var(--color-bg-tertiary, #e8e8e8);
+}
+
+/* Drag handle icon styling */
+.drag-handle svg {
+	font-size: 20px;
+	color: var(--color-text-secondary, #8c8c8c);
+}
+
+/* Section content wrapper */
+.section-content {
+	position: relative;
+	width: 100%;
+}
+
+/* Hide drag handle on mobile (< 768px) */
+@media (max-width: 768px) {
+	.drag-handle {
+		display: none;
+	}
+
+	.dashboard-section {
+		margin-bottom: 16px;
+	}
+
+	.customizable-dashboard.dragging-over {
+		padding: 4px;
+	}
+}
+
+/* Ensure proper stacking for drag handle */
+.dashboard-section {
+	isolation: isolate;
+}

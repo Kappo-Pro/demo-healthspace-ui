@@ -1,0 +1,269 @@
+/**
+ * ClinicalSummaryCard.css
+ *
+ * Styles for clinical summary card
+ * Story 2.7 - FR26 Clinical Reasoning Transparency
+ */
+
+.clinical-summary-card {
+	border-radius: var(--border-radius-lg);
+	box-shadow: var(--shadow-md);
+	transition: box-shadow 0.2s ease;
+}
+
+.clinical-summary-card:hover {
+	box-shadow: var(--shadow-md);
+}
+
+/* Header */
+.clinical-summary-card__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: var(--spacing-xs);
+}
+
+.clinical-summary-card__title {
+	margin-bottom: 0 !important;
+	color: var(--color-text-primary) !important;
+}
+
+.clinical-summary-card__date {
+	font-size: var(--font-size-sm);
+}
+
+/* Section titles */
+.clinical-summary-card__section-title {
+	margin-bottom: var(--spacing-sm) !important;
+	font-size: var(--font-size-md) !important;
+	font-weight: var(--font-weight-semibold) !important;
+	color: var(--color-text-primary) !important;
+}
+
+/* Dividers */
+.clinical-summary-card__divider {
+	margin: var(--spacing-md) 0 !important;
+}
+
+/* Overall assessment */
+.clinical-summary-card__assessment-text {
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-relaxed);
+	color: var(--color-text-secondary);
+	margin-bottom: 0 !important;
+}
+
+/* Top concerns */
+.clinical-summary-card__concerns {
+	margin-bottom: 0;
+}
+
+.clinical-summary-card__concern {
+	padding: var(--spacing-sm);
+	background: var(--color-background-secondary);
+	border-radius: var(--border-radius-sm);
+	border: 1px solid var(--color-border);
+	transition: border-color 0.2s ease;
+}
+
+.clinical-summary-card__concern:hover {
+	border-color: var(--color-primary);
+}
+
+.clinical-summary-card__concern-content {
+	flex: 1;
+	min-width: 0;
+}
+
+.clinical-summary-card__concern-number {
+	font-size: var(--font-size-lg);
+	color: var(--color-text-tertiary);
+	min-width: var(--spacing-6);
+}
+
+.clinical-summary-card__concern-area {
+	font-size: var(--font-size-md);
+	color: var(--color-text-primary);
+	display: block;
+}
+
+.clinical-summary-card__concern-measurement {
+	font-size: var(--font-size-sm);
+	color: var(--color-primary);
+	font-weight: var(--font-weight-medium);
+	display: block;
+	margin-top: var(--spacing-2xs);
+}
+
+.clinical-summary-card__concern-description {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-secondary);
+	margin-top: var(--spacing-2xs);
+	margin-bottom: 0 !important;
+	line-height: var(--line-height-normal);
+}
+
+.clinical-summary-card__priority-tag {
+	font-size: var(--font-size-xs);
+	border-radius: var(--border-radius-sm);
+	margin: 0 !important;
+}
+
+/* Treatment plan */
+.clinical-summary-card__treatment-text {
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-relaxed);
+	color: var(--color-text-secondary);
+	margin-bottom: 0 !important;
+}
+
+/* Progress indicators */
+.clinical-summary-card__indicators-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xs);
+}
+
+.clinical-summary-card__indicator-item {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-xs);
+	font-size: var(--font-size-base);
+	color: var(--color-text-secondary);
+	line-height: var(--line-height-relaxed);
+}
+
+.clinical-summary-card__indicator-icon {
+	color: var(--color-success);
+	flex-shrink: 0;
+	margin-top: 3px;
+}
+
+/* Timeline */
+.clinical-summary-card__timeline {
+	padding: var(--spacing-sm);
+	background: var(--color-background-secondary);
+	border-radius: var(--border-radius-sm);
+	border-left: var(--spacing-1) solid var(--color-primary);
+}
+
+.clinical-summary-card__timeline-icon {
+	font-size: var(--font-size-lg);
+	color: var(--color-primary);
+}
+
+.clinical-summary-card__timeline-label {
+	font-size: var(--font-size-sm);
+	display: block;
+	margin-bottom: var(--spacing-2xs);
+}
+
+.clinical-summary-card__timeline-value {
+	font-size: var(--font-size-lg);
+	color: var(--color-text-primary);
+}
+
+.clinical-summary-card__timeline-note {
+	font-size: var(--font-size-sm);
+}
+
+/* Compact variant */
+.clinical-summary-card--compact .clinical-summary-card__title {
+	font-size: var(--font-size-md) !important;
+	margin-bottom: var(--spacing-xs) !important;
+}
+
+.clinical-summary-card__concerns-compact {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xs);
+}
+
+.clinical-summary-card__concern-compact {
+	padding: var(--spacing-xs) var(--spacing-sm);
+	background: var(--color-background-secondary);
+	border-radius: var(--border-radius-sm);
+}
+
+.clinical-summary-card--compact .clinical-summary-card__timeline-text {
+	font-size: var(--font-size-sm);
+}
+
+.clinical-summary-card--compact .clinical-summary-card__timeline-icon {
+	font-size: var(--font-size-base);
+	color: var(--color-text-tertiary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.clinical-summary-card {
+		box-shadow: var(--shadow-sm);
+	}
+
+	.clinical-summary-card__header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.clinical-summary-card__concern {
+		padding: var(--spacing-xs);
+	}
+
+	.clinical-summary-card__concern-number {
+		font-size: var(--font-size-md);
+	}
+
+	.clinical-summary-card__title {
+		font-size: var(--font-size-lg) !important;
+	}
+
+	.clinical-summary-card__section-title {
+		font-size: var(--font-size-base) !important;
+	}
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+	.clinical-summary-card {
+		border: 2px solid var(--color-border);
+	}
+
+	.clinical-summary-card__concern {
+		border-width: var(--spacing-0-5);
+	}
+
+	.clinical-summary-card__timeline {
+		border-left-width: var(--spacing-1-5);
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.clinical-summary-card,
+	.clinical-summary-card__concern {
+		transition: none;
+	}
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	.clinical-summary-card {
+		box-shadow: var(--shadow-lg);
+	}
+
+	.clinical-summary-card:hover {
+		box-shadow: var(--shadow-xl);
+	}
+
+	.clinical-summary-card__concern {
+		background: var(--color-background-elevated);
+	}
+
+	.clinical-summary-card__timeline {
+		background: var(--color-background-elevated);
+	}
+}

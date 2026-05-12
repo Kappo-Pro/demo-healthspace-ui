@@ -1,0 +1,208 @@
+/* Animated Border Component */
+.animated-border {
+	position: absolute;
+	inset: 0;
+	border-width: 4px;
+	border-style: solid;
+	pointer-events: none;
+	animation: border-glow-pulse 1s ease-in-out infinite;
+}
+
+/* Success variant (green) - aligned/ready state */
+.animated-border--success {
+	border-color: var(--color-success-500);
+	box-shadow:
+		0 0 20px var(--color-success-500),
+		inset 0 0 20px var(--color-success-500);
+	animation-name: border-glow-pulse-success;
+}
+
+/* Error variant (red) - misaligned/error state */
+.animated-border--error {
+	border-color: var(--color-error-500);
+	box-shadow:
+		0 0 20px var(--color-error-500),
+		inset 0 0 20px var(--color-error-500);
+	animation-name: border-glow-pulse-error;
+}
+
+/* Warning variant (orange/yellow) */
+.animated-border--warning {
+	border-color: var(--color-warning-500);
+	box-shadow:
+		0 0 20px var(--color-warning-500),
+		inset 0 0 20px var(--color-warning-500);
+	animation-name: border-glow-pulse-warning;
+}
+
+/* Info variant (blue) */
+.animated-border--info {
+	border-color: var(--brand-primary);
+	box-shadow:
+		0 0 20px var(--brand-primary),
+		inset 0 0 20px var(--brand-primary);
+	animation-name: border-glow-pulse-info;
+}
+
+/* Animation keyframes for each variant */
+@keyframes border-glow-pulse-success {
+	0%,
+	100% {
+		opacity: 0.7;
+		box-shadow:
+			0 0 20px var(--color-success-500),
+			inset 0 0 10px var(--color-success-500);
+	}
+	50% {
+		opacity: 1;
+		box-shadow:
+			0 0 40px var(--color-success-500),
+			inset 0 0 20px var(--color-success-500);
+	}
+}
+
+@keyframes border-glow-pulse-error {
+	0%,
+	100% {
+		opacity: 0.7;
+		box-shadow:
+			0 0 20px var(--color-error-500),
+			inset 0 0 10px var(--color-error-500);
+	}
+	50% {
+		opacity: 1;
+		box-shadow:
+			0 0 40px var(--color-error-500),
+			inset 0 0 20px var(--color-error-500);
+	}
+}
+
+@keyframes border-glow-pulse-warning {
+	0%,
+	100% {
+		opacity: 0.7;
+		box-shadow:
+			0 0 20px var(--color-warning-500),
+			inset 0 0 10px var(--color-warning-500);
+	}
+	50% {
+		opacity: 1;
+		box-shadow:
+			0 0 40px var(--color-warning-500),
+			inset 0 0 20px var(--color-warning-500);
+	}
+}
+
+@keyframes border-glow-pulse-info {
+	0%,
+	100% {
+		opacity: 0.7;
+		box-shadow:
+			0 0 20px var(--brand-primary),
+			inset 0 0 10px var(--brand-primary);
+	}
+	50% {
+		opacity: 1;
+		box-shadow:
+			0 0 40px var(--brand-primary),
+			inset 0 0 20px var(--brand-primary);
+	}
+}
+
+/* ==========================================
+   Border Beam Animation
+   A traveling light effect that circles the border
+   ========================================== */
+
+.animated-border--with-beam {
+	--beam-duration: 3s;
+	overflow: visible;
+}
+
+/* Beam container - uses ::before for the rotating gradient */
+.animated-border--with-beam::before {
+	content: '';
+	position: absolute;
+	inset: -2px;
+	border-radius: inherit;
+	padding: 4px;
+	background: conic-gradient(
+		from var(--beam-angle, 0deg),
+		transparent 0deg,
+		transparent 340deg,
+		var(--beam-color) 350deg,
+		var(--beam-color-bright) 355deg,
+		var(--beam-color) 360deg
+	);
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box, /* mask technique */
+		linear-gradient(#fff 0 0); /* mask technique */
+	mask:
+		linear-gradient(#fff 0 0) content-box, /* mask technique */
+		linear-gradient(#fff 0 0); /* mask technique */
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	animation: border-beam-rotate var(--beam-duration) linear infinite;
+	pointer-events: none;
+}
+
+/* Glow trail behind the beam */
+.animated-border--with-beam::after {
+	content: '';
+	position: absolute;
+	inset: -6px;
+	border-radius: inherit;
+	background: conic-gradient(
+		from var(--beam-angle, 0deg),
+		transparent 0deg,
+		transparent 320deg,
+		var(--beam-color-glow) 350deg,
+		var(--beam-color-glow) 360deg
+	);
+	filter: blur(8px);
+	opacity: 0.6;
+	animation: border-beam-rotate var(--beam-duration) linear infinite;
+	pointer-events: none;
+}
+
+/* Variant-specific beam colors */
+.animated-border--success.animated-border--with-beam {
+	--beam-color: var(--color-success-500);
+	--beam-color-bright: var(--color-success-300, #86efac);
+	--beam-color-glow: var(--color-success-500);
+}
+
+.animated-border--error.animated-border--with-beam {
+	--beam-color: var(--color-error-500);
+	--beam-color-bright: var(--color-error-300, #fca5a5);
+	--beam-color-glow: var(--color-error-500);
+}
+
+.animated-border--warning.animated-border--with-beam {
+	--beam-color: var(--color-warning-500);
+	--beam-color-bright: var(--color-warning-300, #fcd34d);
+	--beam-color-glow: var(--color-warning-500);
+}
+
+.animated-border--info.animated-border--with-beam {
+	--beam-color: var(--brand-primary);
+	--beam-color-bright: var(--brand-primary-light, #93c5fd);
+	--beam-color-glow: var(--brand-primary);
+}
+
+/* Rotation animation using @property for smooth gradient rotation */
+@keyframes border-beam-rotate {
+	from {
+		--beam-angle: 0deg;
+	}
+	to {
+		--beam-angle: 360deg;
+	}
+}
+
+/* Register custom property for animation (CSS Houdini) */
+@property --beam-angle {
+	syntax: '<angle>';
+	initial-value: 0deg;
+	inherits: false;
+}

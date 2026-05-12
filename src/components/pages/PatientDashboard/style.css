@@ -1,0 +1,135 @@
+.my-suggested-program-container {
+	display: flex;
+	padding-bottom: 1rem;
+	font-weight: 700;
+	font-size: 24px;
+	justify-content: space-between;
+	color: var(--primary-800);
+}
+
+.program-text-container-custom-class {
+	color: var(--color-white);
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 40px;
+}
+
+.suggested-programs-tips {
+	font-size: var(--font-size-base);
+	font-weight: normal;
+	color: var(--text-secondary);
+}
+
+.hotspot-circle {
+	width: var(--spacing-4);
+	height: var(--spacing-4);
+	background: var(--color-gray-300);
+	border-radius: var(--radius-full);
+	position: absolute;
+	cursor: pointer;
+}
+
+.intake-programs {
+	background: linear-gradient(
+			13deg,
+			var(--suggested-card-bg) 0%,
+			var(--mainmenu-bg-color) 100%
+		)
+		50% 0% / cover;
+	background-size: cover;
+	border-radius: 12px;
+	overflow: hidden;
+	height: 590px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	box-shadow: 0 4px 12px var(--color-shadow-umbra);
+	border: none;
+	margin-bottom: 20px;
+}
+
+.intake-programs .ant-card-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	padding: 50px 70px;
+	background-image: url('../../../../public/images/woman-bg.png');
+	background-size: 700px;
+	background-position-x: right;
+	background-position-y: 0;
+	background-repeat: no-repeat;
+}
+.feature-styles {
+	width: 100%;
+	padding: 50px;
+}
+
+.goal-selection-card {
+	height: '350px';
+	max-height: '500px';
+	overflow-y: 'auto';
+}
+
+.select-features-program .area-highlight {
+	background: var(--color-white);
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	z-index: 9999;
+	opacity: 0.1;
+	border-radius: 1000px;
+	left: 25px;
+	top: 195px;
+}
+
+.select-features-program .area-highlight.upper {
+	top: 20px;
+}
+
+.select-features-program .area-highlight.upper.right {
+	left: 64px;
+	top: 56px;
+	width: 150px;
+	height: 150px;
+}
+
+.select-features-program .area-highlight.upper.left {
+	left: -31px;
+	top: 57px;
+	width: 150px;
+	height: 150px;
+}
+
+.select-features-program .area-highlight.lower {
+	left: 5px;
+	top: 122px;
+	width: 170px;
+	height: 170px;
+}
+
+.select-features-program .area-highlight.full {
+	left: -44px;
+	top: 25px;
+	width: 270px;
+	height: 270px;
+}
+
+.select-features-program .area-highlight.spine {
+	left: 20px;
+	top: 36px;
+	width: 140px;
+	height: 140px;
+}
+
+.select-features-program .hotspot-circle.active {
+	background: var(--color-status-success);
+	border: 2px solid transparent;
+	cursor: default;
+}
+
+.select-features-program .hotspot-circle.active:after {
+	border: 3px solid var(--color-status-success);
+	width: 20px;
+	height: 20px;
+}

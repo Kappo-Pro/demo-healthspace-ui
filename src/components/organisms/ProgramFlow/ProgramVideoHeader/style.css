@@ -1,0 +1,66 @@
+.header-height {
+	height: 36px !important;
+}
+
+.cursor-pointer-css {
+	cursor: pointer;
+}
+
+.custom-white-stroke {
+	stroke: var(--color-white) !important;
+	fill: var(--color-white) !important;
+}
+
+.voice-instructions-container {
+	background-color: var(--color-black);
+	display: flex;
+	justify-content: flex-end;
+	gap: 16px;
+	align-items: center;
+	max-width: 500px;
+	position: absolute;
+	z-index: 10;
+	top: 80px;
+	right: 0;
+	padding: 16px 28px;
+	border-radius: 9999px 0 0 9999px;
+}
+
+.voice-instructions-inner {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.lottie-animation-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 144px;
+	height: 48px;
+}
+
+@media (max-width: 768px) {
+	.lottie-animation-container {
+		width: 80px;
+		height: 20px;
+	}
+}
+
+.voice-instruction-text {
+	font-weight: 600;
+	font-size: 18px;
+	color: var(--color-white);
+	margin: 0;
+}
+
+@media (max-width: 768px) {
+	.voice-instruction-text {
+		font-size: 14px;
+	}
+}
+
+.camera-switch-icon {
+	vertical-align: middle;
+	cursor: pointer;
+}

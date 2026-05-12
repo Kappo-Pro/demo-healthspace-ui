@@ -1,0 +1,54 @@
+/* Instructional Video - "True to Form" Badge Styles */
+
+/**
+ * Animated slide-in badge for "True to Form" label
+ * Color: var(--color-lime-500) (bright lime green) - brand accent for emphasis
+ * Animation: slideIn - slides from left with fade-in over 1 second
+ */
+.true-to-form-label {
+	margin-top: 30px;
+	color: var(--color-purple-600); /* Purple text for contrast */
+	width: 238px;
+	height: 50px;
+	background-color: var(
+		--color-lime-500
+	); /* Bright lime green - brand accent */
+	border-bottom-right-radius: 9999px; /* Full pill shape on right */
+	border-top-right-radius: 9999px;
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	animation: slideIn 1s ease-out forwards;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/**
+ * Slide-in animation from left
+ * Creates smooth entrance effect for the True to Form badge
+ */
+@keyframes slideIn {
+	0% {
+		transform: translateX(-100%); /* Start off-screen left */
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0); /* End at natural position */
+		opacity: 1;
+	}
+}
+
+/**
+ * Close button for True to Form overlay
+ * Positioned in top-right corner with matching brand accent color
+ */
+.true-to-form-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	padding: var(--spacing-2-5);
+	border-radius: var(--radius-full); /* Fully circular */
+	background-color: var(--color-lime-500); /* Matching brand accent */
+	cursor: pointer;
+}

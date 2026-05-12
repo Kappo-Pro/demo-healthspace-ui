@@ -1,0 +1,271 @@
+/**
+ * PostureJourneyView Organism Styles
+ * Story 2.1: Patient Journey Timeline View
+ * Story 2.6: Mobile Touch Optimization
+ *
+ * Design System Tokens Used:
+ * - Spacing: var(--spacing-*)
+ * - Colors: var(--color-*)
+ * - Typography: var(--font-size-*, --line-height-*)
+ * - Borders: var(--border-radius-*)
+ *
+ * Responsive Design:
+ * - Mobile (<768px): Vertical timeline, swipeable
+ * - Tablet/Desktop (≥768px): Alternating timeline
+ *
+ * Accessibility:
+ * - Keyboard navigation support
+ * - Screen reader announcements
+ * - Focus indicators
+ * - Reduced motion support
+ * - Touch targets ≥44px (WCAG AA)
+ */
+
+.posture-journey-view {
+	padding: var(--spacing-6);
+	background-color: var(--color-bg-canvas);
+	border-radius: var(--border-radius-lg);
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* Header (Story 2.5: Enhanced with tour trigger) */
+.posture-journey-view__header {
+	margin-bottom: var(--spacing-6);
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: var(--spacing-4);
+}
+
+.posture-journey-view__header-content {
+	flex: 1;
+	text-align: left;
+}
+
+.posture-journey-view__header-content h3 {
+	margin-bottom: var(--spacing-2);
+	color: var(--color-text-primary);
+}
+
+.posture-journey-view__tour-trigger {
+	flex-shrink: 0;
+	color: var(--color-primary-600);
+}
+
+.posture-journey-view__tour-trigger:hover {
+	color: var(--color-primary-700);
+	background: var(--surface-hover);
+}
+
+/* Timeline container */
+.posture-journey-view__timeline {
+	margin-top: var(--spacing-6);
+	padding: var(--spacing-4);
+	background-color: var(--color-bg-surface);
+	border-radius: var(--border-radius-md);
+}
+
+.posture-journey-view__timeline h4 {
+	margin-bottom: var(--spacing-4);
+	color: var(--color-text-primary);
+}
+
+/* Timeline styling */
+.posture-journey-timeline {
+	padding: var(--spacing-4) 0;
+}
+
+.posture-journey-timeline__item {
+	padding-bottom: var(--spacing-4);
+}
+
+/* Ant Design Timeline overrides */
+.posture-journey-timeline .ant-timeline-item-tail {
+	border-left-width: var(--spacing-0-5);
+	border-left-style: dashed;
+}
+
+.posture-journey-timeline .ant-timeline-item-head {
+	background-color: transparent;
+}
+
+/* Encouragement message */
+.posture-journey-view__encouragement {
+	margin-top: var(--spacing-6);
+	padding: var(--spacing-4);
+	text-align: center;
+	background: linear-gradient(
+		135deg,
+		var(--color-success-50) 0%,
+		var(--color-success-100) 100%
+	);
+	border-radius: var(--border-radius-md);
+	border: 2px solid var(--color-success-300);
+}
+
+/* Loading state */
+.posture-journey-view--loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 400px;
+}
+
+/* Empty state */
+.posture-journey-view--empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 400px;
+	padding: var(--spacing-8);
+}
+
+.posture-journey-view--empty h4 {
+	color: var(--color-text-primary);
+	margin-bottom: var(--spacing-2);
+}
+
+/* Compact mode */
+.posture-journey-view--compact {
+	padding: var(--spacing-4);
+}
+
+.posture-journey-view--compact .posture-journey-view__header {
+	margin-bottom: var(--spacing-4);
+}
+
+.posture-journey-view--compact .posture-journey-view__timeline {
+	margin-top: var(--spacing-4);
+	padding: var(--spacing-3);
+}
+
+/* Mobile mode (AC4) */
+.posture-journey-view--mobile {
+	padding: var(--spacing-3);
+}
+
+.posture-journey-view--mobile .posture-journey-view__timeline {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+	scroll-behavior: smooth;
+}
+
+.posture-journey-view--mobile .posture-journey-timeline {
+	min-width: max-content;
+	padding: var(--spacing-3) 0;
+}
+
+/* Swipeable indicator (mobile) */
+.posture-journey-view--mobile .posture-journey-view__timeline::after {
+	content: 'Swipe to navigate →';
+	display: block;
+	text-align: center;
+	margin-top: var(--spacing-2);
+	color: var(--color-text-tertiary);
+	font-size: var(--font-size-xs);
+}
+
+/* Story 2.6: Touch optimization */
+.posture-journey-view--mobile .posture-journey-view__timeline {
+	/* Momentum scrolling */
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+	/* GPU acceleration */
+	transform: translateZ(0);
+	will-change: scroll-position;
+}
+
+.posture-journey-view--mobile .timeline-item {
+	/* Scroll snap for smooth navigation */
+	scroll-snap-align: start;
+}
+
+/* Touch target sizing (WCAG 2.5.5 AA) */
+.posture-journey-view__tour-trigger {
+	min-width: var(--spacing-11);
+	min-height: var(--spacing-11);
+	padding: var(--spacing-2) var(--spacing-3);
+}
+
+/* Responsive: Mobile optimization */
+@media (max-width: 768px) {
+	.posture-journey-view {
+		padding: var(--spacing-4);
+	}
+
+	.posture-journey-view__header {
+		margin-bottom: var(--spacing-4);
+	}
+
+	.posture-journey-view__header h3 {
+		font-size: var(--font-size-xl);
+	}
+
+	.posture-journey-view__timeline {
+		margin-top: var(--spacing-4);
+		padding: var(--spacing-3);
+	}
+
+	.posture-journey-view__timeline h4 {
+		font-size: var(--font-size-base);
+		margin-bottom: var(--spacing-3);
+	}
+
+	.posture-journey-view__encouragement {
+		margin-top: var(--spacing-4);
+		padding: var(--spacing-3);
+	}
+
+	/* Stack timeline items vertically on mobile */
+	.posture-journey-timeline .ant-timeline-item {
+		padding-left: 0;
+	}
+}
+
+/* Dark mode support */
+[data-theme='dark'] .posture-journey-view {
+	background-color: var(--color-bg-canvas-dark);
+}
+
+[data-theme='dark'] .posture-journey-view__timeline {
+	background-color: var(--color-bg-surface-dark);
+}
+
+[data-theme='dark'] .posture-journey-view__encouragement {
+	background: linear-gradient(
+		135deg,
+		var(--color-success-900) 0%,
+		var(--color-success-800) 100%
+	);
+	border-color: var(--color-success-600);
+}
+
+/* Reduced motion (AC1) */
+@media (prefers-reduced-motion: reduce) {
+	.posture-journey-view,
+	.posture-journey-timeline__item,
+	.posture-journey-view__encouragement {
+		animation: none !important;
+		transition: none !important;
+	}
+
+	.posture-journey-view__timeline {
+		scroll-behavior: auto;
+	}
+}
+
+/* Print styles */
+@media print {
+	.posture-journey-view {
+		break-inside: avoid;
+	}
+
+	.posture-journey-view__timeline {
+		overflow: visible;
+	}
+
+	.posture-journey-view--mobile .posture-journey-view__timeline::after {
+		display: none;
+	}
+}

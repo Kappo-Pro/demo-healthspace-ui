@@ -1,0 +1,17 @@
+.performance-monitor {
+	position: fixed;
+	top: var(--spacing-4);
+	right: var(--spacing-4);
+	background: var(--color-black-alpha-75);
+	padding: var(--spacing-3);
+	border-radius: var(--radius-md);
+	font-family: var(--font-family-mono);
+	font-size: var(--font-size-sm);
+	color: var(--color-white);
+	z-index: 1000;
+	pointer-events: none;
+}
+
+.performance-monitor .metric {
+	margin: var(--spacing-1) 0;
+}

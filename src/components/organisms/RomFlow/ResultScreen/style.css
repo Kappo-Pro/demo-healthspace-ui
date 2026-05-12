@@ -1,0 +1,45 @@
+.result-screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+}
+
+.result-screen-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.result-screen-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--overlay-dark);
+	backdrop-filter: blur(5px);
+}
+
+.result-screen-content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+}
+
+.result-screen-title {
+	font-size: var(--font-size-5xl) !important;
+	font-weight: var(--font-weight-semibold) !important;
+	color: var(--color-white) !important;
+	margin: 0 !important;
+	letter-spacing: -1.8px;
+	text-shadow: var(--shadow-text-on-media);
+}

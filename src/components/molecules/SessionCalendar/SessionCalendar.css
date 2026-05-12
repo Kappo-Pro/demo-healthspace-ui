@@ -1,0 +1,124 @@
+/**
+ * SessionCalendar Styles
+ * EPIC-022-S1: Session Calendar Molecule
+ */
+
+/* Container */
+.session-calendar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: var(--spacing-4);
+	background-color: var(--surface-primary);
+	border-radius: var(--radius-lg);
+}
+
+/* SVG */
+.session-calendar-svg {
+	margin-bottom: var(--spacing-4);
+}
+
+/* Calendar Cells */
+.session-calendar-cell {
+	cursor: pointer;
+	transition:
+		opacity var(--transition-fast),
+		stroke var(--transition-fast);
+}
+
+.session-calendar-cell:hover {
+	opacity: 0.8;
+	stroke: var(--text-primary);
+	stroke-width: 1;
+}
+
+.session-calendar-cell:focus {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+}
+
+/* Legend */
+.session-calendar-legend {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	font-size: var(--font-size-xs);
+	color: var(--text-secondary);
+}
+
+.legend-cell {
+	width: var(--spacing-3);
+	height: var(--spacing-3);
+	border-radius: var(--radius-xs);
+	border: 1px solid var(--border-subtle);
+}
+
+.legend-label {
+	margin: 0 var(--spacing-1);
+	font-weight: var(--font-weight-medium);
+}
+
+/* Loading State */
+.session-calendar-loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 200px;
+	padding: var(--spacing-8);
+	background-color: var(--surface-primary);
+	border-radius: var(--radius-lg);
+}
+
+.session-calendar-loading .loading-content {
+	padding: var(--spacing-8);
+	text-align: center;
+	color: var(--text-secondary);
+	font-size: var(--font-size-sm);
+}
+
+/* Empty State */
+.session-calendar-empty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 200px;
+	padding: var(--spacing-8);
+	background-color: var(--surface-primary);
+	border-radius: var(--radius-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.session-calendar {
+		padding: var(--spacing-2);
+	}
+
+	.session-calendar-svg {
+		transform: scale(0.85);
+		transform-origin: center;
+	}
+
+	.session-calendar-legend {
+		font-size: 10px;
+		gap: var(--spacing-0-5);
+	}
+
+	.legend-cell {
+		width: var(--spacing-2-5);
+		height: var(--spacing-2-5);
+	}
+
+	.legend-label {
+		margin: 0 var(--spacing-0-5);
+	}
+}
+
+@media (max-width: 480px) {
+	.session-calendar-svg {
+		transform: scale(0.7);
+	}
+
+	.session-calendar-legend {
+		font-size: 9px;
+	}
+}

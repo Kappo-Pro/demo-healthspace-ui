@@ -1,0 +1,117 @@
+.custom-col {
+	border: 2px dashed var(--color-gray-200);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-32);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.upload-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.custom-text {
+	font-family: 'inter', sans-serif;
+	text-align: center;
+	font-size: var(--font-size-base);
+	font-weight: normal;
+	line-height: var(--spacing-5);
+	letter-spacing: var(--letter-spacing-normal);
+	color: var(--gray-500);
+}
+
+.custom-border {
+	border-color: var(--color-gray-300);
+	border-radius: var(--radius-lg);
+	width: 'auto';
+	height: var(--spacing-78-75);
+}
+
+.absolute-bottom-left {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-2);
+	border-radius: var(--radius-sm);
+	color: var(--text-on-dark);
+	padding: var(--spacing-1);
+	background-color: var(--overlay-backdrop-medium);
+	cursor: pointer;
+}
+
+.activity-stream-label {
+	font-family: 'inter', sans-serif;
+	font-weight: var(--font-weight-semibold);
+	font-size: var(--font-size-lg);
+	line-height: var(--line-height-none);
+	letter-spacing: var(--letter-spacing-normal);
+	text-align: left;
+	margin-bottom: var(--spacing-0-5);
+}
+
+.custom-label {
+	font-family: 'inter', sans-serif;
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-none);
+	letter-spacing: var(--letter-spacing-normal);
+	text-align: left;
+	margin-bottom: var(--spacing-2);
+}
+
+.scan-image-modal .ant-modal-content {
+	padding: 0;
+}
+
+.action-button-css,
+.action-button-css:hover {
+	background-color: var(--stepper-color) !important;
+	color: var(--text-on-dark) /* TODO: Verify context */ !important;
+	border: none !important;
+}
+
+.extra-margin-bottom {
+	margin-bottom: var(--spacing-3);
+}
+
+.video-element {
+	width: 100%;
+	max-height: calc(100vh - 350px);
+	object-fit: contain;
+	display: block;
+}
+
+/* Responsive adjustments */
+@media screen and (max-height: 768px) {
+	.video-element {
+		max-height: calc(100vh - var(--spacing-70));
+	}
+
+	.custom-col {
+		min-height: var(--spacing-25);
+		padding: var(--spacing-16);
+	}
+}
+
+@media screen and (max-height: 600px) {
+	.video-element {
+		max-height: calc(100vh - var(--spacing-55));
+	}
+
+	.custom-col {
+		min-height: var(--spacing-20);
+		padding: var(--spacing-8);
+	}
+
+	.extra-margin-bottom {
+		margin-bottom: var(--spacing-1);
+	}
+}

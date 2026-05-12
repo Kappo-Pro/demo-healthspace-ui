@@ -1,0 +1,99 @@
+.evaluation-data-item {
+	.pain-summary-editor {
+		margin-top: var(--spacing-1);
+		border-radius: var(--radius-lg);
+		border-width: var(--border-width-1);
+
+		.summary-option-list-container {
+			border-bottom-width: var(--spacing-0-5);
+			border-color: inherit;
+		}
+	}
+
+	.associated-sysmptoms-title-container {
+		margin-top: var(--spacing-3);
+		margin-bottom: var(--spacing-3);
+		text-align: left;
+
+		.associated-sysmptoms-title {
+			font-size: var(--font-size-base);
+			line-height: var(--spacing-6);
+			font-weight: var(--font-weight-semibold);
+			color: var(--color-gray-900);
+		}
+	}
+
+	.associated-sysmptoms-container {
+		margin-top: var(--spacing-1);
+		border-radius: var(--radius-lg);
+		border-width: var(--border-width-1);
+		background-color: var(--bg-card-color);
+		border-color: inherit;
+
+		.do-you-have-sysmptoms-container {
+			padding: var(--spacing-4);
+			border-bottom-width: var(--spacing-0-5);
+			border-color: inherit;
+
+			.do-you-have-sysmptoms {
+				font-size: var(--font-size-sm);
+				line-height: var(--spacing-5);
+				font-weight: var(--font-weight-bold);
+			}
+		}
+
+		.strapi-health-signs {
+			display: grid;
+			padding-left: var(--spacing-4);
+			margin-top: var(--spacing-1);
+			margin-bottom: var(--spacing-1);
+			font-size: var(--font-size-sm);
+			line-height: var(--spacing-5);
+			line-height: var(--spacing-7);
+		}
+	}
+
+	.medical-history-title-container {
+		margin-top: var(--spacing-3);
+		margin-bottom: var(--spacing-3);
+		text-align: left;
+
+		.medical-history-title {
+			font-size: var(--font-size-base);
+			line-height: var(--spacing-6);
+			font-weight: var(--font-weight-semibold);
+			color: var(--color-gray-900);
+		}
+	}
+
+	.medical-history-container {
+		margin-top: var(--spacing-1);
+		border-radius: var(--radius-lg);
+		border-width: var(--border-width-1);
+		background-color: var(--evaluation-bg-colors);
+		border-color: inherit;
+
+		.have-you-been-diagnosed-container {
+			padding: var(--spacing-4);
+			border-bottom-width: var(--spacing-0-5);
+			border-color: inherit;
+
+			.have-you-been-diagnosed {
+				font-size: var(--font-size-sm);
+				line-height: var(--spacing-5);
+				font-weight: var(--font-weight-bold);
+				color: var(--evaluation-title-color);
+			}
+		}
+
+		.medical-history-data {
+			display: grid;
+			padding-left: var(--spacing-4);
+			margin-top: var(--spacing-1);
+			margin-bottom: var(--spacing-1);
+			font-size: var(--font-size-sm);
+			line-height: var(--spacing-5);
+			line-height: var(--spacing-7);
+		}
+	}
+}

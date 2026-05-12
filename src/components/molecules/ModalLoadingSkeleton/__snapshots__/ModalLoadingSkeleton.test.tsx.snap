@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalLoadingSkeleton matches snapshot 1`] = `
+<body>
+  <div />
+  <div>
+    <div
+      class="ant-modal-root css-dev-only-do-not-override-1cj4ms"
+      data-testid="modal-loading-skeleton"
+    >
+      <div
+        class="ant-modal-mask"
+      />
+      <div
+        class="ant-modal-wrap ant-modal-centered"
+        tabindex="-1"
+      >
+        <div
+          aria-modal="true"
+          class="ant-modal css-dev-only-do-not-override-1cj4ms sc-bRKDuR iqJPjV ant-zoom-appear ant-zoom-appear-prepare ant-zoom"
+          role="dialog"
+        >
+          <div
+            style="outline: none;"
+            tabindex="0"
+          >
+            <div
+              class="ant-modal-content"
+            >
+              <div
+                class="ant-modal-body"
+              >
+                <div
+                  class="sc-hvigdm eNxNgx"
+                >
+                  <div
+                    class="ant-skeleton ant-skeleton-element ant-skeleton-active css-dev-only-do-not-override-1cj4ms"
+                  >
+                    <span
+                      class="ant-skeleton-input"
+                      style="width: 300px; height: 28px;"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="sc-fhHczv hOfyrV"
+                >
+                  <div
+                    class="ant-skeleton ant-skeleton-active css-dev-only-do-not-override-1cj4ms"
+                  >
+                    <div
+                      class="ant-skeleton-content"
+                    >
+                      <h3
+                        class="ant-skeleton-title"
+                        style="width: 38%;"
+                      />
+                      <ul
+                        class="ant-skeleton-paragraph"
+                      >
+                        <li />
+                        <li />
+                        <li />
+                        <li />
+                        <li
+                          style="width: 61%;"
+                        />
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="width: 0px; height: 0px; overflow: hidden; outline: none;"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

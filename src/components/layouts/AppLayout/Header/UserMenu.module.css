@@ -1,0 +1,307 @@
+/**
+ * UserMenu Component Styles
+ *
+ * User profile dropdown menu with:
+ * - Avatar display
+ * - User info
+ * - Dropdown menu
+ * - Menu items with icons
+ * - Click outside detection
+ */
+
+/* ============================================
+   USER MENU CONTAINER
+   ============================================ */
+
+.userMenu {
+	position: relative;
+}
+
+/* ============================================
+   USER BUTTON (Trigger)
+   ============================================ */
+
+.userButton {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+	padding: var(--space-1) var(--space-2);
+	border: none;
+	background: transparent;
+	border-radius: var(--radius-base);
+	cursor: pointer;
+	transition: all var(--transition-fast);
+	color: var(--text-primary);
+}
+
+/* Hover background removed - matches Breadcrumb dropdown trigger style (2025-11-13) */
+.userButton:hover {
+	/* background: var(--surface-hover); */
+}
+
+.userButton svg {
+	width: 16px;
+	height: 16px;
+	color: var(--icon-color);
+	transition: transform var(--transition-fast);
+}
+
+.userButton[aria-expanded='true'] svg {
+	transform: rotate(180deg);
+}
+
+/* ============================================
+   USER AVATAR
+   ============================================ */
+
+.userAvatar {
+	width: 32px;
+	height: 32px;
+	border-radius: var(--radius-full);
+	color: var(--text-on-dark) /* TODO: Verify context */;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.875rem;
+	font-weight: 600;
+	flex-shrink: 0;
+	overflow: hidden;
+}
+
+.userAvatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* ============================================
+   USER INFO
+   ============================================ */
+
+.userInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2px;
+	min-width: 0;
+}
+
+.userName {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--text-primary);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 150px;
+}
+
+.userRole {
+	font-size: 0.75rem;
+	color: var(--text-tertiary);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 150px;
+}
+
+/* Hide user info on mobile */
+@media (max-width: 767px) {
+	.userInfo {
+		display: none;
+	}
+}
+
+/* ============================================
+   DROPDOWN MENU
+   ============================================ */
+
+.dropdown {
+	position: absolute;
+	bottom: calc(100% + var(--space-2));
+	left: 0;
+	width: 240px;
+	background: var(--bg-page);
+	border: none;
+	border-radius: var(--radius-base);
+	box-shadow: var(--shadow-lg);
+	overflow: hidden;
+	z-index: 9999;
+	animation: dropdownSlideUp 150ms ease-out;
+}
+
+@keyframes dropdownSlide {
+	from {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes dropdownSlideUp {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ============================================
+   DROPDOWN HEADER
+   ============================================ */
+
+.dropdownHeader {
+	padding: var(--space-3);
+	background: var(--surface-secondary);
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+.userEmail {
+	font-size: 0.875rem;
+	color: var(--text-secondary);
+	word-break: break-all;
+}
+
+/* ============================================
+   DROPDOWN DIVIDER
+   ============================================ */
+
+.dropdownDivider {
+	height: 1px;
+	background: color-mix(in srgb, var(--surface-tertiary) 96%, white);
+	margin: var(--space-1) 0;
+}
+
+/* ============================================
+   THEME SELECTOR
+   ============================================ */
+
+.themeSelector {
+	padding: var(--space-2) var(--space-3);
+}
+
+.themeSelectorLabel {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	margin-bottom: var(--space-2);
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--text-primary);
+}
+
+.themeSelectorLabel svg {
+	width: 18px;
+	height: 18px;
+	color: var(--icon-color);
+	flex-shrink: 0;
+}
+
+.themeSelect {
+	width: 100%;
+}
+
+/* Custom styling for Ant Design Select dropdown */
+.themeSelectDropdown {
+	/* Dropdown inherits theme styles from Ant Design ConfigProvider */
+}
+
+/* ============================================
+   DROPDOWN ITEMS
+   ============================================ */
+
+.dropdownItem {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	padding: var(--space-2) var(--space-3);
+	width: 100%;
+	border: none;
+	background: transparent;
+	color: var(--text-primary);
+	font-size: 0.875rem;
+	font-weight: 500;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all var(--transition-fast);
+	text-align: left;
+}
+
+.dropdownItem:hover {
+	background: color-mix(in srgb, var(--surface-tertiary) 96%, white);
+	color: var(--text-primary);
+}
+
+.dropdownItem:active {
+	background: var(--surface-active);
+}
+
+.dropdownItem svg {
+	width: 18px;
+	height: 18px;
+	color: var(--icon-color);
+	flex-shrink: 0;
+}
+
+.dropdownItem:hover svg {
+	color: var(--text-secondary);
+}
+
+/* Danger action (sign out) */
+.dropdownItem.danger {
+	color: var(--text-error);
+}
+
+.dropdownItem.danger:hover {
+	background: var(--surface-error);
+	color: var(--text-error);
+}
+
+.dropdownItem.danger svg {
+	color: var(--text-error);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.userButton:focus-visible {
+	outline: 2px solid var(--brand-primary);
+	outline-offset: 2px;
+}
+
+.dropdownItem:focus-visible {
+	outline: 2px solid var(--brand-primary);
+	outline-offset: -2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.dropdown {
+		animation: none;
+	}
+
+	.userButton svg,
+	.dropdownItem {
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* ============================================
+   DARK THEME ADJUSTMENTS
+   ============================================ */
+
+[data-theme='dark'] .dropdown {
+	background: var(--bg-page);
+	border: none;
+}
+
+[data-theme='dark'] .dropdownHeader {
+	background: var(--surface-tertiary);
+}

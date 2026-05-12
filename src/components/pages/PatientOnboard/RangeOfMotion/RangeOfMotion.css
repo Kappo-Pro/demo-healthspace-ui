@@ -1,0 +1,353 @@
+.rom-medical-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-container-rom {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-title-rom {
+	font-size: 27px;
+	color: var(--onboard-button-color);
+	font-weight: var(--font-weight-bold);
+}
+
+.header-subtitle {
+	font-size: var(--font-size-lg);
+	color: var(--text-tertiary);
+	font-weight: var(--font-weight-light);
+}
+
+.rom-container {
+	height: 720px;
+}
+
+.rom-omni-button-container {
+	margin: var(--spacing-4) var(--spacing-0) var(--spacing-4) var(--spacing-0);
+	width: 595px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	gap: var(--spacing-2);
+}
+
+.rom-main-container {
+	display: flex;
+	margin-bottom: var(--spacing-5);
+	margin-top: var(--spacing-5);
+}
+
+.rom-inner-container {
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+	gap: var(--spacing-4);
+	height: 350px;
+	width: 750px;
+}
+
+.rom-card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: var(--surface-primary);
+	border-radius: var(--radius-3xl);
+	flex: 1;
+}
+
+.rom-image {
+	width: 100%;
+	max-width: 50%;
+	border-top-left-radius: var(--spacing-6);
+	border-top-right-radius: var(--spacing-6);
+	margin-bottom: var(--spacing-2);
+}
+
+.rom-info {
+	padding: var(--spacing-6);
+}
+
+.rom-text {
+	font-weight: var(--font-weight-light);
+	font-size: var(--font-size-base);
+	color: var(--brand-primary-hover);
+	margin-top: var(--spacing-6);
+	line-height: var(--spacing-6);
+}
+
+.rom-btn-container {
+	width: 100%;
+	padding-top: var(--spacing-2);
+}
+
+.rom-start-session-btn {
+	margin-top: var(--spacing-5);
+}
+
+.rom-btn-text {
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-lg);
+	color: var(--text-on-dark) /* TODO: Verify context */;
+	line-height: 38px;
+}
+
+.rom-back-btn {
+	margin-top: var(--spacing-2);
+	border-radius: var(--radius-full);
+	font-size: var(--font-size-base);
+	line-height: var(--spacing-6);
+	font-weight: var(--font-weight-bold);
+	line-height: var(--spacing-6);
+	background-color: var(--surface-interactive-active);
+	color: var(--brand-primary-hover);
+}
+@media (min-width: 768px) {
+	.rom-card {
+		flex-direction: row;
+	}
+}
+
+@media (min-width: 768px) {
+	.rom-image {
+		border-top-left-radius: var(--spacing-6);
+		border-bottom-left-radius: var(--spacing-6);
+		width: 50%;
+	}
+	.rom-info {
+		width: 60%;
+		padding: var(--spacing-8);
+	}
+	.rom-text {
+		font-size: 22px;
+		line-height: var(--line-height-relaxed);
+	}
+}
+
+.rom-opacity {
+	opacity: 0.5;
+}
+
+.rom-skip-btn {
+	border-radius: var(--radius-full);
+	font-size: var(--font-size-base);
+	line-height: var(--spacing-6);
+	font-weight: var(--font-weight-bold);
+	line-height: var(--spacing-6);
+}
+
+.rom-image-dashboard {
+	width: 1000px;
+	height: 650px;
+}
+
+/* VitalScan ROM Intro Screen */
+.vitalscan-rom-intro-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.vitalscan-rom-title {
+	font-size: 32px;
+	font-weight: 400;
+	color: var(--text-primary);
+	letter-spacing: -0.96px;
+	line-height: 28px;
+	margin: 0;
+}
+
+.vitalscan-rom-title-bold {
+	font-weight: 600;
+}
+
+.vitalscan-rom-description {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--text-secondary);
+	text-align: center;
+	line-height: 24px;
+	letter-spacing: -0.48px;
+	max-width: 538px;
+	margin: 0;
+}
+
+.vitalscan-rom-image-container {
+	width: 100%;
+	max-width: 481px;
+	display: flex;
+	justify-content: center;
+}
+
+.vitalscan-rom-image {
+	width: 100%;
+	height: auto;
+	max-height: 480px;
+	object-fit: contain;
+}
+
+.vitalscan-rom-button {
+	width: 100%;
+	max-width: 640px;
+	height: 40px;
+	border-radius: 16px;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: -0.48px;
+}
+
+.rom-intakeing-container {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 30px;
+	text-align: center;
+}
+
+.rom-intakeing-heading {
+	font-size: var(--font-size-xl);
+	font-weight: bold;
+	color: var(--color-purple-700);
+	margin-bottom: var(--spacing-5);
+}
+
+.rom-intakeing-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: var(--radius-2xl);
+	padding: var(--spacing-5);
+	margin-bottom: var(--spacing-5);
+	color: var(--surface-primary);
+}
+
+.rom-intake-card {
+	position: relative;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: var(--spacing-8);
+	border-radius: var(--radius-2xl);
+	overflow: hidden;
+	background-size: cover;
+	background-position: center;
+}
+
+.rom-intake-content {
+	position: relative;
+	z-index: 1;
+	color: var(--surface-primary);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-20);
+}
+
+.acknowledge-box {
+	background: var(--bg-page);
+
+	border-radius: 30px;
+	padding: 15px var(--spacing-5);
+	display: inline-block;
+	margin-bottom: var(--spacing-5);
+}
+
+.rom-intake-acknowledge {
+	background: var(--color-white-alpha-80);
+	padding: var(--spacing-3) var(--spacing-4);
+	border-radius: 20px;
+	align-self: flex-start;
+}
+
+.rom-intake-checkbox-label {
+	font-weight: var(--font-weight-bold);
+	font-style: normal;
+	font-size: var(--font-size-base);
+	line-height: var(--spacing-6);
+	letter-spacing: 0;
+	text-align: start;
+	padding-left: var(--spacing-2-5);
+	display: flex;
+	color: var(--purple-800, #601b90);
+}
+
+.posture-intake-footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: var(--surface-secondary);
+	border-top: var(--spacing-0-5) solid var(--border-default);
+	padding: 15px;
+	z-index: 100;
+}
+
+.posture-intakeing-button-container {
+	display: flex;
+	justify-content: center;
+}
+
+.button-row {
+	display: inline-flex;
+	gap: var(--spacing-5);
+	margin-left: 40%;
+}
+
+.modal-topbar-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+	display: flex;
+	align-items: center;
+	color: var(--text-color);
+	transition: all 0.2s ease;
+	border-radius: 4px;
+}
+
+.modal-topbar-button:hover {
+	background-color: var(--color-gray-100);
+}
+
+.modal-topbar-button:active {
+	background-color: var(--color-gray-200);
+}
+
+.start-scan .splash {
+	max-width: none !important;
+	margin: 0 !important;
+	padding: 20px !important;
+	height: 100%;
+}
+
+.start-scan .splash-header {
+	height: 85%;
+	max-height: 85%;
+}
+
+/* Override ROM Main component aspect ratio to fill modal */
+.start-scan .ant-layout-content {
+	aspect-ratio: unset !important;
+	height: 100% !important;
+}
+
+/* Ensure video player canvas fills available space */
+.start-scan canvas {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+.start-scan video {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}

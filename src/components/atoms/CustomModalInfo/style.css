@@ -1,0 +1,68 @@
+/* Video Modal - 16:9 Aspect Ratio */
+.video-modal-16-9 .ant-modal-content {
+	padding: 0 !important;
+	background: var(--color-black);
+}
+
+/* Reset Modal.info() wrapper structure */
+.video-modal-16-9 .ant-modal-body {
+	padding: 0 !important;
+}
+
+.video-modal-16-9 .ant-modal-confirm-body {
+	display: block;
+	margin: 0;
+}
+
+.video-modal-16-9 .ant-modal-confirm-content {
+	margin: 0;
+	max-width: 100%;
+}
+
+.video-modal-16-9 .ant-modal-confirm-paragraph {
+	max-width: 100%;
+	row-gap: 0;
+}
+
+.video-modal-16-9 .ant-modal-close {
+	top: var(--spacing-3);
+	right: var(--spacing-3);
+	color: var(--color-white);
+	background: var(--color-gray-alpha-50);
+	border-radius: var(--radius-full);
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+}
+
+.video-modal-16-9 .ant-modal-close:hover {
+	background: var(--color-gray-alpha-70);
+	color: var(--color-white);
+}
+
+.video-modal-container {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	background: var(--color-black);
+}
+
+.video-modal-player {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.video-modal-title-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: var(--spacing-4) var(--spacing-5);
+	background: linear-gradient(to bottom, var(--color-gray-alpha-70) 0%, transparent 100%);
+	pointer-events: none;
+}

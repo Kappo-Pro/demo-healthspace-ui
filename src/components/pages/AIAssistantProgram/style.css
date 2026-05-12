@@ -1,0 +1,15 @@
+.create-upload-button {
+	width: 100%;
+	margin-bottom: 0.5rem; /* mb-2 */
+	height: 2.75rem; /* h-11 */
+	border-width: 2px; /* border-2 */
+	border-style: dashed; /* border-dashed */
+	border-color: var(--text-placeholder); /* border-gray-300 */
+	font-weight: 600; /* font-semibold */
+	border-radius: 0.75rem; /* rounded-xl */
+	cursor: pointer; /* cursor-pointer */
+
+	display: flex; /* ant-flex */
+	align-items: center; /* ant-flex-align-center */
+	justify-content: center; /* ant-flex-justify-center */
+}

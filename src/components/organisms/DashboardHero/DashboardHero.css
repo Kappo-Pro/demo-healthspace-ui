@@ -1,0 +1,74 @@
+/**
+ * DashboardHero Organism Styles
+ * EPIC-010-S1: Design system token-based styling
+ *
+ * Uses CSS custom properties from design system:
+ * - Background colors
+ * - Border radius
+ * - Spacing/padding
+ * - Text colors
+ */
+
+.dashboard-hero {
+	padding: var(--spacing-lg, var(--spacing-6));
+	background: var(--color-background-container, var(--color-white));
+	border-radius: var(--border-radius-lg, 8px);
+	margin-bottom: var(--spacing-lg, var(--spacing-6));
+}
+
+.dashboard-hero-greeting {
+	margin-bottom: var(--spacing-xs, var(--spacing-2)) !important;
+	color: var(--color-text-primary, var(--color-black));
+	font-weight: var(--font-weight-semibold);
+}
+
+.dashboard-hero-subtitle {
+	color: var(--color-text-secondary, #666666);
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-normal);
+}
+
+.dashboard-hero-cta {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.dashboard-hero-metrics {
+	margin-top: var(--spacing-lg, var(--spacing-6));
+}
+
+/* Responsive Design - Mobile First */
+@media (max-width: 768px) {
+	.dashboard-hero {
+		padding: var(--spacing-md, var(--spacing-4));
+	}
+
+	.dashboard-hero-cta {
+		justify-content: flex-start;
+	}
+
+	.dashboard-hero-greeting {
+		font-size: var(--font-size-xl);
+	}
+}
+
+/* Tablet breakpoint */
+@media (min-width: 769px) and (max-width: 1024px) {
+	.dashboard-hero-greeting {
+		font-size: 1.75rem;
+	}
+}
+
+/* Dark mode support (if theme provider supports it) */
+[data-theme='dark'] .dashboard-hero {
+	background: var(--color-background-container-dark, #1f1f1f);
+}
+
+[data-theme='dark'] .dashboard-hero-greeting {
+	color: var(--color-text-primary-dark, var(--color-white));
+}
+
+[data-theme='dark'] .dashboard-hero-subtitle {
+	color: var(--color-text-secondary-dark, #cccccc);
+}

@@ -1,0 +1,65 @@
+.wellness-check-card {
+	background: var(--sidebar-subnav-bg);
+	border-radius: var(--radius-lg);
+	padding: var(--spacing-4);
+	margin: var(--spacing-4) var(--spacing-2);
+	border: 1px solid var(--border-subtle);
+	box-shadow: var(--shadow-sm);
+	transition: all var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.wellness-check-header {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	margin-bottom: var(--spacing-3);
+}
+
+.wellness-check-label {
+	font-weight: var(--font-weight-bold) !important;
+	font-size: var(--font-size-sm) !important;
+	color: var(--text-primary);
+	margin: 0 !important;
+}
+
+.wellness-check-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.wellness-check-title {
+	font-weight: var(--font-weight-semibold);
+	font-size: var(--font-size-xs);
+	color: var(--text-secondary);
+}
+
+.wellness-check-description {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary);
+	line-height: var(--line-height-tight);
+}
+
+.wellness-check-action {
+	margin-top: var(--spacing-4);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+	align-items: center;
+	text-align: center;
+}
+
+.wellness-check-question {
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-medium);
+	color: var(--text-primary);
+}
+
+.wellness-button {
+	width: 100%;
+	height: auto !important;
+	padding: var(--spacing-2) var(--spacing-3) !important;
+	font-size: var(--font-size-xs) !important;
+	font-weight: var(--font-weight-semibold) !important;
+	border-radius: var(--radius-md) !important;
+}

@@ -1,0 +1,83 @@
+/* RecurrencePicker Styles */
+
+.recurrence-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.recurrence-picker__options {
+  margin-top: var(--spacing-2);
+  background: var(--color-background-secondary);
+}
+
+.recurrence-picker__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.recurrence-picker__days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.recurrence-picker__days .ant-checkbox-wrapper {
+  min-width: 60px;
+}
+
+.recurrence-picker__preview {
+  padding-top: var(--spacing-3);
+  border-top: 1px solid var(--color-border-secondary);
+}
+
+.recurrence-picker__preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}
+
+.recurrence-picker__preview-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1);
+  background: var(--surface-primary);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+}
+
+.recurrence-picker__preview-item .anticon {
+  color: var(--color-primary-500);
+}
+
+/* Dark Mode Support */
+[data-theme='dark'] .recurrence-picker__options {
+  background: var(--color-background-tertiary);
+}
+
+[data-theme='dark'] .recurrence-picker__preview-item {
+  background: var(--color-background-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .recurrence-picker__days {
+    gap: var(--spacing-1);
+  }
+
+  .recurrence-picker__days .ant-checkbox-wrapper {
+    min-width: 50px;
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Accessibility */
+.recurrence-picker .ant-checkbox-wrapper:focus-visible,
+.recurrence-picker .ant-radio-wrapper:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-sm);
+}

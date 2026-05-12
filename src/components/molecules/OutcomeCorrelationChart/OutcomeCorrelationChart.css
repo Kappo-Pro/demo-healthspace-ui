@@ -1,0 +1,121 @@
+/**
+ * OutcomeCorrelationChart Styles
+ *
+ * Design system-based styling for dual-axis correlation chart.
+ * Uses CSS custom properties for theming consistency.
+ */
+
+.outcome-correlation-chart {
+	width: 100%;
+	background: var(--surface-elevated);
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-md);
+}
+
+/* Correlation Header */
+.outcome-correlation-chart .correlation-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--spacing-md);
+	padding-bottom: var(--spacing-sm);
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+.outcome-correlation-chart .correlation-stat {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xs);
+}
+
+.outcome-correlation-chart .stat-label {
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+}
+
+.outcome-correlation-chart .stat-value {
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-semibold);
+}
+
+.outcome-correlation-chart .correlation-interpretation {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm);
+}
+
+.outcome-correlation-chart .significance {
+	font-size: var(--font-size-sm);
+	font-style: italic;
+}
+
+/* Loading State */
+.outcome-correlation-chart-loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 350px;
+	background: var(--surface-elevated);
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-md);
+}
+
+/* Empty State */
+.outcome-correlation-chart-empty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 350px;
+	background: var(--surface-elevated);
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-md);
+}
+
+/* Tooltip Styling */
+.outcome-correlation-tooltip {
+	background: var(--surface-overlay);
+	border: 1px solid var(--border-default);
+	border-radius: var(--radius-sm);
+	padding: var(--spacing-sm);
+	box-shadow: var(--shadow-md);
+}
+
+.outcome-correlation-tooltip p {
+	margin: 0;
+	padding: var(--spacing-0-5) 0;
+	font-size: var(--font-size-sm);
+	color: var(--text-primary);
+}
+
+.outcome-correlation-tooltip .tooltip-date {
+	font-weight: var(--font-weight-semibold);
+	margin-bottom: var(--spacing-xs);
+	padding-bottom: var(--spacing-xs);
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+.outcome-correlation-tooltip .tooltip-posture {
+	color: var(--brand-primary);
+}
+
+.outcome-correlation-tooltip .tooltip-outcome {
+	color: var(--status-error);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.outcome-correlation-chart {
+		padding: var(--spacing-sm);
+	}
+
+	.outcome-correlation-chart .correlation-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--spacing-sm);
+	}
+
+	.outcome-correlation-chart .stat-value {
+		font-size: var(--font-size-lg);
+	}
+}

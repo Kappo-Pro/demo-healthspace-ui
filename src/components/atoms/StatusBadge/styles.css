@@ -1,0 +1,32 @@
+/* StatusBadge Styles */
+
+.status-badge {
+	font-weight: var(--font-weight-medium);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	border-radius: var(--border-radius-sm);
+}
+
+.status-badge--small {
+	font-size: var(--font-size-xs);
+	padding: var(--spacing-0-5) var(--spacing-1-5);
+	line-height: var(--line-height-tight);
+}
+
+.status-badge--default {
+	font-size: var(--font-size-sm);
+	padding: var(--spacing-0-5) var(--spacing-2);
+	line-height: var(--line-height-snug);
+}
+
+/* Icon sizing */
+.status-badge .anticon {
+	font-size: inherit;
+}
+
+/* Accessibility */
+.status-badge:focus-visible {
+	outline: 2px solid var(--color-primary-500);
+	outline-offset: 2px;
+}

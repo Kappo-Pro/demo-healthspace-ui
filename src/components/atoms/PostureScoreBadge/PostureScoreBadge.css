@@ -1,0 +1,105 @@
+/* src/components/atoms/PostureScoreBadge/PostureScoreBadge.css */
+
+.posture-score-badge-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-sm, var(--spacing-2));
+}
+
+.posture-score-badge__label {
+	font-size: var(--font-size-sm, 14px);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wider);
+}
+
+.posture-score-badge {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--radius-full);
+	box-shadow: 0 4px 12px var(--color-black-alpha-10);
+	position: relative;
+}
+
+/* Size variants */
+.posture-score-badge--small {
+	width: var(--spacing-20);
+	height: var(--spacing-20);
+}
+
+.posture-score-badge--medium {
+	width: 120px;
+	height: 120px;
+}
+
+.posture-score-badge--large {
+	width: 160px;
+	height: 160px;
+}
+
+/* Score display */
+.posture-score-badge__score {
+	font-size: var(--font-size-4xl);
+	font-weight: var(--font-weight-bold);
+	line-height: var(--line-height-none);
+	color: white;
+}
+
+.posture-score-badge--small .posture-score-badge__score {
+	font-size: var(--font-size-2xl);
+}
+
+.posture-score-badge--large .posture-score-badge__score {
+	font-size: 64px;
+}
+
+.posture-score-badge__max {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-white-alpha-80);
+	margin-top: -var(--spacing-1);
+}
+
+/* Color variants */
+.posture-score-badge--success {
+	background: linear-gradient(135deg, #52c41a, #73d13d);
+}
+
+.posture-score-badge--warning {
+	background: linear-gradient(135deg, #faad14, #ffc53d);
+}
+
+.posture-score-badge--error {
+	background: linear-gradient(135deg, #ff4d4f, #ff7875);
+}
+
+/* Animation */
+.posture-score-badge--animated {
+	animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.posture-score-badge--medium {
+		width: 100px;
+		height: 100px;
+	}
+
+	.posture-score-badge--medium .posture-score-badge__score {
+		font-size: 40px;
+	}
+}

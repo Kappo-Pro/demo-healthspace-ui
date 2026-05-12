@@ -1,0 +1,129 @@
+.modal-style {
+	user-select: none;
+	text-align: center;
+	margin-top: 10%;
+}
+
+.no-select-margin-top {
+	user-select: none;
+	margin-top: var(--spacing-6);
+}
+
+.status {
+	--tw-text-opacity: 1;
+	color: rgb(255 255 255 / var(--tw-text-opacity));
+	padding-left: var(--spacing-3);
+	padding-right: var(--spacing-3);
+	border-radius: var(--radius-full);
+	--tw-bg-opacity: 1;
+}
+
+.status-improving {
+	background-color: rgb(22 179 100 / var(--tw-bg-opacity));
+}
+
+.status-worsening {
+	background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+
+.status-nochange {
+	background-color: rgb(250 197 21 / var(--tw-bg-opacity));
+}
+
+.painlevel {
+	display: flex;
+	gap: var(--spacing-2);
+}
+
+.painlevel-emoji {
+	font-size: var(--font-size-sm);
+	line-height: var(--spacing-5);
+	font-weight: var(--font-weight-semibold);
+}
+
+.emoji-1 {
+	--tw-text-opacity: 1;
+	color: rgb(6 174 212 / var(--tw-text-opacity));
+}
+
+.emoji-2 {
+	--tw-text-opacity: 1;
+	color: rgb(8 116 67 / var(--tw-text-opacity));
+}
+
+.emoji-3 {
+	--tw-text-opacity: 1;
+	color: rgb(22 179 100 / var(--tw-text-opacity));
+}
+
+.emoji-4 {
+	--tw-text-opacity: 1;
+	color: rgb(115 226 163 / var(--tw-text-opacity));
+}
+
+.emoji-5 {
+	--tw-text-opacity: 1;
+	color: rgb(253 226 114 / var(--tw-text-opacity));
+}
+
+.emoji-6 {
+	--tw-text-opacity: 1;
+	color: rgb(250 197 21 / var(--tw-text-opacity));
+}
+
+.emoji-7 {
+	--tw-text-opacity: 1;
+	color: rgb(247 178 122 / var(--tw-text-opacity));
+}
+
+.emoji-8 {
+	--tw-text-opacity: 1;
+	color: rgb(243 135 68 / var(--tw-text-opacity));
+}
+
+.emoji-9 {
+	--tw-text-opacity: 1;
+	color: rgb(246 61 104 / var(--tw-text-opacity));
+}
+
+.emoji-10 {
+	--tw-text-opacity: 1;
+	color: rgb(227 27 84 / var(--tw-text-opacity));
+}
+
+.emoji-11 {
+	--tw-text-opacity: 1;
+	color: rgb(192 16 72 / var(--tw-text-opacity));
+}
+
+.video-id {
+	position: relative;
+	border-radius: var(--radius-md);
+	padding-left: var(--spacing-3);
+	padding-bottom: var(--spacing-3);
+}
+
+.custom-modal {
+	background-color: var(--surface-primary);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-1);
+	cursor: pointer;
+	position: absolute;
+	top: var(--spacing-2);
+	right: var(--spacing-2);
+}
+
+.custom-name-container {
+	background-color: var(--color-gray-700);
+	color: var(--surface-primary);
+	padding: var(--spacing-2);
+	margin-top: -var(--spacing-1);
+	position: relative;
+	border-bottom-left-radius: var(--spacing-1-5);
+	border-bottom-right-radius: var(--spacing-1-5);
+}
+
+.pain-level-icon-css {
+	margin-left: var(--spacing-2);
+	margin-top: -var(--spacing-0-5);
+}

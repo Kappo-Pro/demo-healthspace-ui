@@ -1,0 +1,51 @@
+.rom-template .main-tabs {
+	padding: var(--spacing-4);
+	background-color: var(--color-gray-100);
+}
+
+.rom-template .tab-bar {
+	margin: 0;
+}
+
+.rom-template .no-roms {
+	background-color: var(--color-gray-50);
+	padding: var(--spacing-10);
+	margin: 0;
+}
+
+.rom-template .no-roms-description {
+	color: var(--color-gray-300);
+}
+
+.rom-template .extra-content {
+	margin-right: -var(--spacing-4);
+	display: flex;
+	align-items: center;
+}
+
+.rom-template .select-button {
+	border-radius: var(--radius-md);
+	padding: var(--spacing-0-5) var(--spacing-2);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--spacing-2);
+	cursor: pointer;
+}
+
+.rom-template .select-button.bg-selected {
+	background-color: var(--color-success-500);
+	color: var(--text-on-dark) /* TODO: Verify context */;
+}
+
+.rom-template .select-button.bg-unselected {
+	background-color: var(--color-gray-100);
+}
+
+.rom-template .select-button .check-icon.selected {
+	stroke: var(--color-white);
+}
+
+.rom-template .select-button .check-icon.unselected {
+	stroke: var(--color-black);
+}

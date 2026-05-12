@@ -1,0 +1,247 @@
+import { ModalContentSkeleton } from '@atoms/Skeletons';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { useEffect, useState } from 'react';
+import { Modal, Form, Input, Button, message, Flex, Typography } from 'antd';
+import { MODAL_SIZES } from '@atoms/Modal/modalConfig';
+
+const { Paragraph } = Typography;
+import { PaperClipOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import ReactQuill from 'react-quill';
+import { Loading03 } from '@vitalflow-icons/general/loading03';
+import { sendRomResultInMail } from '@stores/clinical/rom/customRom';
+import { CustomRomSession } from '@types';
+
+const toolbarOptions = [
+	[{ font: [] }],
+	[{ size: ['small', false, 'large', 'huge'] }],
+	['bold', 'italic', 'underline', 'strike'],
+	[{ color: [] }, { background: [] }],
+	[{ align: [] }],
+	[{ list: 'ordered' }, { list: 'bullet' }],
+	['blockquote', 'link'],
+	['clean'],
+];
+
+interface SendResultByEmailModalProps {
+	modalOpen: boolean;
+	setModalOpen: (val: boolean) => void;
+	closable: boolean;
+	selectedRom: CustomRomSession;
+	pdfBlob: Blob | null;
+}
+
+const formattedDate = new Date()
+	.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+	})
+	.replace(/\//g, '-'); // Ex: 04-28-2025
+
+const fileName = `report-${formattedDate}.pdf`;
+
+const SendResultByEmailModal = (props: SendResultByEmailModalProps) => {
+	const { t } = useTranslation();
+	const sendingMail = useTypedSelector(state => state.rom.customRom.sendingMail);
+	const dispatch = useTypedDispatch();
+	const [emailIds, setEmailIds] = useState('');
+	const [content, setContent] = useState('');
+	const { pdfBlob, modalOpen, setModalOpen, closable, selectedRom } = props;
+	const user = useTypedSelector(state => state.user);
+	const romTemplate = useTypedSelector(
+		state => state.settings.templates.rom,
+	);
+	const { selectedUser } = useTypedSelector(state => state.contacts.main);
+
+	const [form] = Form.useForm();
+
+	useEffect(() => {
+		setContent(romTemplate)
+	}, [romTemplate])
+
+	const handleViewPdf = (e: React.MouseEvent<HTMLSpanElement>) => {
+		e.stopPropagation();
+		if (!pdfBlob) return;
+		const blobUrl = URL.createObjectURL(pdfBlob);
+		window.open(blobUrl, '_blank');
+	};
+
+	const handleFinish = async (values: { email: string }) => {
+		if (!pdfBlob) message.info('please wait loading pdf');
+		else if (content === '<p><br></p>' || content === '') message.error(t('Admin.data.menu.userRoles.invitePatientModal.emptyContent'));
+		else {
+			const formData = new FormData();
+			const emailIdList = emailIds.split(',').map(s => s.trim());
+
+			emailIdList?.forEach((item, index) => {
+				formData.append(`emails[${index}]`, item);
+			});
+			formData.append('message', content);
+			formData.append(
+				'name',
+				user.isPhysioterapist
+					? selectedUser?.profile?.fullName
+					: user?.profile?.fullName,
+			);
+			formData.append('assessmentDate', `${selectedRom?.createdAt}`);
+			formData.append('mustSendEmail', 'true');
+			formData.append('attachment', pdfBlob);
+
+			const data = await dispatch(
+				sendRomResultInMail({
+					sessionId: selectedRom?.id,
+					formData: formData,
+				}),
+			);
+			if(data?.payload){
+				message.success(t('Admin.data.menu.userRoles.invitePatientModal.successEmail'));
+			}
+			setModalOpen(false);
+		}
+	};
+
+	return (
+		<Modal
+			open={modalOpen}
+			centered
+			footer={null}
+			destroyOnHidden
+			closable={closable}
+			maskClosable={false}
+			width={MODAL_SIZES.LARGE}
+			className="select-none"
+			onCancel={() => setModalOpen(false)}
+			title={
+				<h2 style={{ textAlign: 'center', margin: 0 }}>
+					{t('Patient.data.omnirom.sendAssessmentResults')}
+				</h2>
+			}>
+			<Form form={form} layout="vertical" onFinish={handleFinish}>
+				<Form.Item
+					label={t('Admin.data.menu.userRoles.invitePatientModal.email')}
+					name="email"
+					className="w-full"
+					rules={[
+						{
+							required: true,
+							message: t(
+								'Admin.data.menu.userRoles.invitePatientModal.emailRequired',
+							),
+						},
+						{
+							validator: (_, value) => {
+								if (!value) return Promise.resolve();
+								const emails = value.split(',').map((e: string) => e.trim());
+								const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+								const invalidEmails = emails.filter(
+									(email: string) => !emailRegex.test(email),
+								);
+								if (invalidEmails.length > 0) {
+									return Promise.reject(
+										t(
+											'Admin.data.menu.userRoles.invitePatientModal.invalidEmail',
+											{
+												emails: invalidEmails.join(', '),
+											},
+										),
+									);
+								}
+								return Promise.resolve();
+							},
+						},
+					]}>
+					<Input
+						className="input-item"
+						onChange={e => setEmailIds(e?.target?.value)}
+						placeholder={t(
+							'Admin.data.menu.userRoles.invitePatientModal.emailPlaceholder',
+						)}
+					/>
+				</Form.Item>
+				<Form.Item style={{ marginBottom: '0px' }}>
+					<Flex justify="flex-end">
+						<span
+							className="settings-templates-reset-to-default"
+							onClick={() => {
+								setContent(romTemplate);
+							}}>
+							{t('Admin.data.menu.setting.reset')}
+						</span>
+					</Flex>
+				</Form.Item>
+				<Form.Item>
+					<ReactQuill
+						modules={{ toolbar: toolbarOptions }}
+						theme="snow"
+						value={content}
+						onChange={setContent}
+						style={{ marginTop: 10 }}
+						className="custom-quill"
+					/>
+				</Form.Item>
+				<Form.Item>
+					<Flex
+						align="center"
+						gap={8}
+						style={{
+							border: '1px solid rgb(204 204 204)',
+							borderRadius: '6px',
+							background: 'var(--surface-primary)',
+							padding: '8px 12px',
+							width: '100%',
+						}}>
+						{!pdfBlob ? (
+							<>
+								<Loading03 style={{ fontSize: '22px', color: 'var(--text-secondary)' }} />
+								<span style={{ color: 'var(--text-link)', cursor: 'pointer' }}>
+									{t('Patient.data.omnirom.generatingPdf')}
+								</span>
+							</>
+						) : (
+							<>
+								<PaperClipOutlined
+									style={{ fontSize: '22px', color: 'var(--text-secondary)' }}
+								/>
+								<span
+									style={{ color: 'var(--text-link)', cursor: 'pointer' }}
+									onClick={handleViewPdf}>
+									{fileName}
+								</span>
+							</>
+						)}
+					</Flex>
+				</Form.Item>
+				<Form.Item>
+					<Button
+						size="large"
+						htmlType="submit"
+						type="primary"
+						style={{
+							width: '100%',
+							backgroundColor: !pdfBlob ? '#a770ff' : '',
+						}}>
+						{pdfBlob ? (
+							sendingMail ? (
+								<Flex align="center" gap={8}>
+									<ModalContentSkeleton />
+									<Paragraph>
+										{t(
+										'Admin.data.menu.patientDetail.aiAssistantRomSummary.saving',
+									)}
+									</Paragraph>
+								</Flex>
+							) : (
+								t('Patient.data.activityStream.send')
+							)
+						) : (
+							t('Patient.data.omnirom.generatingPdf')
+						)}
+					</Button>
+				</Form.Item>
+			</Form>
+		</Modal>
+	);
+};
+
+export default SendResultByEmailModal;

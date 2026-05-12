@@ -1,0 +1,53 @@
+/* src/components/molecules/LastScanInfo/LastScanInfo.css */
+
+.last-scan-info {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-sm, var(--spacing-2));
+}
+
+.last-scan-info__row {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-xs, var(--spacing-1));
+	font-size: var(--font-size-base, 16px);
+}
+
+.last-scan-info__icon {
+	font-size: var(--font-size-base);
+	color: var(--color-primary);
+}
+
+.last-scan-info__label {
+	color: var(--color-text-secondary);
+	font-weight: var(--font-weight-medium);
+}
+
+.last-scan-info__value {
+	color: var(--color-text);
+	font-weight: var(--font-weight-semibold);
+	margin-left: var(--spacing-xs, var(--spacing-1));
+}
+
+.last-scan-info__cta {
+	margin-top: var(--spacing-sm, var(--spacing-2));
+	height: var(--spacing-11); /* WCAG AAA touch target */
+	font-size: var(--font-size-base, 16px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.last-scan-info {
+		align-items: center;
+		text-align: center;
+	}
+
+	.last-scan-info__row {
+		flex-direction: column;
+		gap: var(--spacing-xs, var(--spacing-1));
+	}
+
+	.last-scan-info__cta {
+		width: 100%;
+	}
+}

@@ -1,0 +1,63 @@
+/**
+ * PatientMilestones Styles
+ *
+ * Uses design system tokens for consistent theming.
+ * Story 3.7: Patient Adherence Tracking - Milestone Integration
+ */
+
+.patient-milestones {
+	width: 100%;
+}
+
+/* Celebration section */
+.milestone-celebration {
+	margin-bottom: var(--spacing-lg);
+}
+
+.recent-milestone-item {
+	padding: var(--spacing-sm);
+	background-color: var(--color-bg-container);
+	border-radius: var(--radius-lg);
+	margin-bottom: var(--spacing-xs);
+}
+
+/* Milestone cards */
+.milestone-card {
+	text-align: center;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.milestone-card.earned {
+	border: 2px solid var(--color-success);
+}
+
+.milestone-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 4px 12px var(--color-black-alpha-10);
+}
+
+/* Milestone icons */
+.milestone-icon {
+	width: var(--spacing-12);
+	height: var(--spacing-12);
+	border-radius: var(--radius-full);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--font-size-xl);
+	margin: 0 auto;
+}
+
+.milestone-icon.earned {
+	background-color: var(--color-success-bg);
+	color: var(--color-success);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.milestone-card {
+		margin-bottom: var(--spacing-sm);
+	}
+}

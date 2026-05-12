@@ -1,0 +1,90 @@
+/**
+ * TriageUserHeader Styles
+ *
+ * User header component for triage result modals.
+ * Displays avatar, name, email, demographic badges on left and QR code on right.
+ */
+
+.triage-user-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: var(--spacing-4) 0;
+	margin-bottom: var(--spacing-4);
+}
+
+.triage-user-header__content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+	flex: 1;
+	min-width: 0;
+}
+
+.triage-user-header__info {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+}
+
+.triage-user-header__details {
+	min-width: 0;
+}
+
+.triage-user-header__name {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	line-height: var(--line-height-snug);
+}
+
+.triage-user-header__email {
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+	line-height: var(--line-height-snug);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Demographic Badges */
+.triage-user-header__badges {
+	margin-left: calc(
+		48px + var(--spacing-3)
+	); /* Align with name (avatar width + gap) */
+}
+
+.triage-user-header__badge {
+	margin: 0;
+	padding: var(--spacing-1) var(--spacing-2-5);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-medium);
+	color: var(--text-secondary);
+	background: var(--surface-secondary);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	line-height: var(--line-height-snug);
+}
+
+.triage-user-header__qrcode {
+	flex-shrink: 0;
+	margin-left: var(--spacing-4);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+	.triage-user-header {
+		flex-direction: column;
+		align-items: stretch;
+		gap: var(--spacing-3);
+	}
+
+	.triage-user-header__badges {
+		margin-left: 0;
+	}
+
+	.triage-user-header__qrcode {
+		margin-left: 0;
+		align-self: flex-end;
+	}
+}

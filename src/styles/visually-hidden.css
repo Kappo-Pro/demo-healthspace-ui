@@ -1,0 +1,150 @@
+/**
+ * Visually Hidden Utility Classes
+ * Story 8.2: ARIA Announcements Hook & Live Regions
+ *
+ * CSS utilities to hide elements from visual display while keeping them
+ * accessible to screen readers and other assistive technologies.
+ *
+ * These classes are essential for ARIA live regions and other accessibility
+ * features that need to communicate with screen readers without affecting
+ * the visual layout.
+ *
+ * Usage:
+ * - .sr-only: Screen reader only (completely hidden)
+ * - .visually-hidden: Alternative name for sr-only
+ * - .sr-only-focusable: Becomes visible when focused (skip links)
+ * - .visually-hidden-focusable: Alternative name for sr-only-focusable
+ *
+ * Standards:
+ * - WCAG 2.1 - 4.1.3 Status Messages (Level AA)
+ * - Based on Bootstrap's .sr-only pattern
+ * - Follows A11Y Project recommendations
+ *
+ * @see https://www.a11yproject.com/posts/how-to-hide-content/
+ * @see https://webaim.org/techniques/css/invisiblecontent/
+ */
+
+/**
+ * Screen Reader Only (Visually Hidden)
+ *
+ * Hides element from visual display but keeps it accessible to screen readers.
+ * Used for:
+ * - ARIA live regions (announcements)
+ * - Hidden labels for icon-only buttons
+ * - Additional context for screen reader users
+ * - Skip to content links (when not focused)
+ *
+ * Technique:
+ * - Position absolute removes from document flow
+ * - 1px x 1px size (invisible but not zero-sized)
+ * - Negative margin moves off-screen
+ * - clip: rect(0,0,0,0) hides overflow
+ * - white-space: nowrap prevents wrapping
+ *
+ * Why not display: none or visibility: hidden?
+ * - Those completely hide from screen readers too
+ *
+ * @example HTML
+ * <div class="sr-only" role="status" aria-live="polite">
+ *   5 commands found
+ * </div>
+ */
+.sr-only,
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: var(--border-width-0);
+}
+
+/**
+ * Screen Reader Only - Focusable
+ *
+ * Becomes visible when focused (keyboard navigation).
+ * Used for:
+ * - Skip to main content links
+ * - Skip navigation links
+ * - Bypass blocks for keyboard users
+ *
+ * On focus (:focus):
+ * - Restores normal positioning
+ * - Restores normal dimensions
+ * - Becomes visible in the document flow
+ *
+ * WCAG 2.4.1 Bypass Blocks (Level A):
+ * Provides mechanism to bypass repeated navigation
+ *
+ * @example HTML
+ * <a href="#main-content" class="sr-only-focusable">
+ *   Skip to main content
+ * </a>
+ */
+.sr-only-focusable:focus,
+.sr-only-focusable:active,
+.visually-hidden-focusable:focus,
+.visually-hidden-focusable:active {
+	position: static;
+	width: auto;
+	height: auto;
+	padding: inherit;
+	margin: inherit;
+	overflow: visible;
+	clip: auto;
+	white-space: normal;
+}
+
+/**
+ * Enhanced Focus Styles for Skip Links
+ *
+ * When skip links become visible on focus, they need clear visual indication.
+ * This ensures keyboard users can see the skip link when they Tab to it.
+ */
+.sr-only-focusable:focus,
+.visually-hidden-focusable:focus {
+	z-index: 10000; /* Above all other content */
+	background-color: var(--brand-primary, #6941c6);
+	color: var(--text-on-brand, #ffffff);
+	padding: 0.5rem 1rem;
+	border-radius: 4px;
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color, var(--brand-primary, #6941c6));
+	outline-offset: var(--input-focus-outline-offset, 2px);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+/**
+ * Skip to Content Link Example
+ *
+ * Add this to your layout component for keyboard navigation accessibility:
+ *
+ * @example JSX
+ * <a href="#main-content" className="sr-only-focusable">
+ *   Skip to main content
+ * </a>
+ * <header>...</header>
+ * <main id="main-content">
+ *   <h1>Main Content</h1>
+ * </main>
+ */
+
+/**
+ * ARIA Live Region Example
+ *
+ * The useAriaAnnouncements hook creates a live region with .sr-only class:
+ *
+ * @example JSX
+ * const { announce } = useAriaAnnouncements();
+ *
+ * // This creates a hidden div with class="sr-only"
+ * // <div class="sr-only" role="status" aria-live="polite" aria-atomic="true">
+ * //   5 commands found
+ * // </div>
+ *
+ * announce('5 commands found', 'polite');
+ */

@@ -1,0 +1,169 @@
+/**
+ * MilestoneMarker Atom Styles
+ * Story 2.1: Patient Journey Timeline View
+ *
+ * Design System Tokens Used:
+ * - Spacing: var(--spacing-*)
+ * - Colors: var(--color-*)
+ * - Typography: var(--font-size-*, --line-height-*)
+ * - Focus: var(--focus-ring-width, --focus-ring-color)
+ *
+ * WCAG 2.1 AA Compliance:
+ * - Touch targets ≥44x44px (icon area)
+ * - Focus indicators 3px solid
+ * - Color contrast ≥4.5:1
+ */
+
+.milestone-marker {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-3);
+	padding: var(--spacing-3);
+	border-radius: var(--border-radius-md);
+	transition: all var(--motion-duration-fast) var(--motion-ease-out);
+	position: relative;
+}
+
+/* Clickable state */
+.milestone-marker--clickable {
+	cursor: pointer;
+}
+
+.milestone-marker--clickable:hover {
+	background-color: var(--color-neutral-100);
+	transform: translateY(-2px);
+	box-shadow: 0 2px 8px var(--color-black-alpha-10);
+}
+
+.milestone-marker--clickable:active {
+	transform: translateY(0);
+}
+
+/* Active milestone */
+.milestone-marker--active {
+	background-color: var(--color-primary-50);
+	border: 2px solid var(--color-primary-500);
+}
+
+/* Focus state (keyboard navigation) */
+.milestone-marker--clickable:focus {
+	outline: none;
+	box-shadow: 0 0 0 var(--focus-ring-width, 3px)
+		var(--focus-ring-color, rgba(24, 144, 255, 0.5));
+}
+
+/* Icon container - WCAG AAA touch target (≥44x44px) */
+.milestone-marker__icon {
+	flex-shrink: 0;
+	min-width: var(--spacing-12);
+	min-height: var(--spacing-12);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.milestone-marker__icon-circle {
+	width: var(--spacing-10);
+	height: var(--spacing-10);
+	border-radius: var(--radius-full);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--font-size-lg);
+	transition: all var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.milestone-marker--clickable:hover .milestone-marker__icon-circle {
+	transform: scale(1.1);
+}
+
+/* Content */
+.milestone-marker__content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	min-width: 0; /* Allow text truncation */
+}
+
+.milestone-marker__title {
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-normal);
+	font-weight: var(--font-weight-semibold);
+	margin: 0;
+}
+
+.milestone-marker__description {
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-relaxed);
+	margin: 0;
+}
+
+.milestone-marker__date {
+	font-size: var(--font-size-xs);
+	line-height: var(--line-height-normal);
+	margin: 0;
+}
+
+.milestone-marker__improvement {
+	margin-top: var(--spacing-1);
+	padding: var(--spacing-1) var(--spacing-2);
+	background-color: var(--color-success-50);
+	border-radius: var(--border-radius-sm);
+	display: inline-flex;
+	align-items: center;
+}
+
+/* Achieved state */
+.milestone-marker--achieved .milestone-marker__title {
+	color: var(--color-text-primary);
+}
+
+/* Upcoming state */
+.milestone-marker--upcoming .milestone-marker__title {
+	color: var(--color-text-secondary);
+}
+
+.milestone-marker--upcoming .milestone-marker__icon-circle {
+	border: 2px dashed var(--color-neutral-400);
+	background-color: transparent !important;
+}
+
+/* Responsive: Mobile optimization */
+@media (max-width: 768px) {
+	.milestone-marker {
+		padding: var(--spacing-2);
+		gap: var(--spacing-2);
+	}
+
+	.milestone-marker__icon {
+		min-width: var(--spacing-11);
+		min-height: var(--spacing-11);
+	}
+
+	.milestone-marker__icon-circle {
+		width: var(--spacing-9);
+		height: var(--spacing-9);
+		font-size: var(--font-size-base);
+	}
+
+	.milestone-marker__title {
+		font-size: var(--font-size-sm);
+	}
+
+	.milestone-marker__description {
+		font-size: var(--font-size-xs);
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.milestone-marker,
+	.milestone-marker__icon-circle {
+		transition: none;
+	}
+
+	.milestone-marker--clickable:hover {
+		transform: none;
+	}
+}

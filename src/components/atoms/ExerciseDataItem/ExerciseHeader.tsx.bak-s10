@@ -1,0 +1,84 @@
+import { Edit01 } from "@vitalflow-icons/general/edit01"
+import { PlayCircle } from "@vitalflow-icons/media/playCircle"
+import { updateProgram } from '@stores/shared/patientDetail/program'
+import { useTypedDispatch, useTypedSelector } from "@stores/index"
+import { IProgramData } from '@types'
+import { Button, Flex, message, Switch, Typography } from 'antd'
+
+const { Paragraph } = Typography;
+import { useCallback } from "react"
+import { useTranslation } from "react-i18next"
+
+interface IExerciseHeaderProps {
+  approved: boolean
+  setApproved: (value: boolean) => void
+  program: IProgramData
+  startProgramSession: () => void
+  setModalVisible: (value: boolean) => void
+  hoveredSession: string | null
+}
+
+export default function ExerciseHeader(props: IExerciseHeaderProps) {
+  const { approved, setApproved, program, startProgramSession, setModalVisible, hoveredSession } = props
+  const { t } = useTranslation()
+  const dispatch = useTypedDispatch()
+  const user = useTypedSelector((state) => state.user)
+
+  const buttonStyle = {
+    color: "var(--button-text-color)",
+    border: "inherit",
+    marginTop: "-5px",
+  };
+
+  const handleApproveProgram = useCallback(async (program: IProgramData, value: boolean) => {
+    setApproved(value);
+    const programData = {
+      physioterapistId: user?.id,
+      active: value,
+      status: value ? 'approved' : 'draft'
+    };
+    try {
+      await dispatch(updateProgram({
+        programId: program?.id,
+        programData: programData
+      }));
+      value ? message.success(t('Admin.data.menu.patientDetail.aiAssistantPrograms.approved')) : message.success(t('Admin.data.menu.patientDetail.aiAssistantPrograms.disapproved'));
+    } catch (error) {
+      setApproved(!value);
+      message.error(t('Admin.data.menu.patientDetail.aiAssistantPrograms.updateFailed'));
+    }
+  }, [program, user?.id]);
+
+  return (
+    <Flex gap={12} className="h-6">
+      {hoveredSession === program.id && <>
+        <Flex className="h-fit px-1.5 py-0.5 pb-1 rounded-lg bg-gray-100" align="center" gap={4}
+          onClick={(e) => {
+            e.stopPropagation()
+            setModalVisible(true)
+          }}>
+          <Edit01 width={12} height={12} color="stroke-gray-700" />
+          <Paragraph className="text-gray-700 text-xs">{t('Admin.data.menu.patientDetail.aiAssistantPrograms.edit')}</Paragraph>
+        </Flex>
+        <Flex className="h-fit px-1.5 rounded-lg" align="center" gap={4}>
+          <Switch
+            checked={approved}
+            onChange={(value, event) => {
+              event.stopPropagation()
+              handleApproveProgram(program, value)
+            }}
+            style={{
+              backgroundColor: approved ? 'var(--mainmenu-bg-color)' : 'var(--color-gray-400)',
+            }} />
+        </Flex>
+        {!approved && <Button disabled style={{marginTop: '-5px'}} icon={<PlayCircle height={12} width={12} color="var(--color-gray-300)" />}
+        >{t('Patient.data.myProgress.rehab.startSession')}
+        </Button>}
+      </>}
+      {approved && <Button style={buttonStyle} className='start-session-css' icon={<PlayCircle height={12} width={12} color="var(--color-purple-600)" />} onClick={(e) => {
+        e.stopPropagation()
+        approved && startProgramSession()
+      }}>{t('Patient.data.myProgress.rehab.startSession')}</Button>}
+    </Flex>
+  )
+}

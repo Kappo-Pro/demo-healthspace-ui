@@ -1,0 +1,188 @@
+import { Download01 } from '@vitalflow-icons/general/download01';
+// REMOVED: import { createRoot } from 'react-dom/client';
+// REMOVED: import { Provider } from 'react-redux';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import stores, { useTypedDispatch, useTypedSelector } from '@stores/index';
+import DownloadResults from '@pages/CustomRomScanResult/DownloadResults';
+import { useEffect, useState } from 'react';
+import { message } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { CustomRomSession, SelectedUser } from '@types';
+import { QrCode01 } from '@vitalflow-icons/development/qrCode01';
+import AdminQRCodeModal from '@pages/AdminQRCodeModal';
+import { Mail01 } from '@vitalflow-icons/communication/mail01';
+import SendResultByEmailModal from './SummaryResultReportEmail';
+import { setSelectedRom } from '@stores/clinical/rom/customRom';
+import { Pencil01 } from '@vitalflow-icons/editor/pencil01';
+import { SummaryResultEditModal } from './SummaryResultEditModal';
+import { getRomMobilityReports } from '@stores/clinical/rom/customRom';
+
+interface SummaryResultReportDownloaderProps {
+  selectedRom: CustomRomSession;
+  user: SelectedUser;
+  fetchSessionData?: (sessionId: string, page: number) => void;
+  reportType: 'download' | 'qr' | 'email' | 'edit';
+  color?: string;
+  completedStatus: boolean
+  chartType?: string;
+}
+
+export const SummaryResultReportDownloader = ({
+  selectedRom,
+  user,
+  completedStatus,
+  fetchSessionData,
+  reportType,
+  color,
+  chartType
+}: SummaryResultReportDownloaderProps) => {
+  const { t } = useTranslation();
+  const { pdfLink = '' } = useTypedSelector(state => state.rom.customRom);
+  const [downloadingPhase, setDownLoadingPhase] = useState<string>('');
+  const [emailModalOpen, setEmailModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [qrCodeModalOpen, setQrCodeModalOpen] = useState(false);
+  const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useTypedDispatch();
+
+  useEffect(() => {
+    const key = 'downloadProcess';
+    if (reportType == 'download')
+      if (downloadingPhase.length > 0) {
+        message.loading({
+          content: downloadingPhase,
+          key,
+          duration: 0,
+        });
+      } else {
+        message.destroy(key);
+        if (loading) {
+          message
+            .success({
+              content: t('Admin.data.survey.done'),
+              key,
+              duration: 1,
+            })
+            .then(() => setLoading(false));
+        }
+      }
+  }, [downloadingPhase, loading]);
+
+  const handleQRCodeGeneration = () => {
+    setQrCodeModalOpen(true);
+    handleDownload();
+  };
+
+  const handleEmail = () => {
+    setEmailModalOpen(true);
+    handleDownload();
+  };
+  const handleEdit = () => {
+    dispatch(setSelectedRom(selectedRom));
+    setEditModalOpen(true);
+  };
+
+  const handleDownload = async () => {
+  try {
+    setDownLoadingPhase(t('Patient.data.omnirom.fetchingData'));
+    setLoading(true);
+
+    const response = await dispatch(
+      getRomMobilityReports({ sessionId: selectedRom.id })
+    ).unwrap();
+
+    const reportUrl = response;
+    if (!reportUrl) {
+      message.error('Report URL not found');
+      setLoading(false);
+      setDownLoadingPhase('');
+      return;
+    }
+    setDownLoadingPhase(t('Patient.data.omnirom.generatingPdf'));
+    const fileResponse = await fetch(reportUrl);
+    const pdfBlob = await fileResponse.blob();
+
+    if (reportType === 'email') {
+      setPdfBlob(pdfBlob);
+    } else if (reportType === 'qr') {
+      const formData = new FormData();
+      formData.append('mustSendEmail', 'false');
+      formData.append('attachment', pdfBlob);
+    } else {
+      const url = URL.createObjectURL(pdfBlob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'report.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    setDownLoadingPhase('');
+    setLoading(false);
+  } catch (error) {
+     
+    console.error(error);
+    message.error('Failed to fetch report data');
+    setDownLoadingPhase('');
+    setLoading(false);
+  }
+};
+
+  return reportType === 'email' ? (
+    <div>
+      <div className="cursor-pointer" onClick={() => handleEmail()}>
+        <Mail01 width={20} height={20} color={color ? 'stroke-black' : 'stroke-gray-500'} />
+      </div>
+      {emailModalOpen && (
+        <SendResultByEmailModal
+          selectedRom={selectedRom}
+          pdfBlob={pdfBlob}
+          modalOpen={emailModalOpen}
+          setModalOpen={setEmailModalOpen}
+          closable={true}
+        />
+      )}
+    </div>
+  ) : reportType === 'download' ? (
+    <div onClick={handleDownload} className="cursor-pointer">
+      <Download01 width={20} height={20} color={color ? 'stroke-black' : 'stroke-gray-500'} />
+    </div>
+  ) : reportType === 'edit' ? (
+    <div>
+      <div className="cursor-pointer" onClick={() => handleEdit()}>
+        <Pencil01 width={20} height={20} color={color ? 'stroke-black' : 'stroke-gray-500'} />
+      </div>
+      {editModalOpen && (
+        <SummaryResultEditModal
+        completedStatus={completedStatus}
+        fetchSessionData={fetchSessionData}
+          selectedRom={selectedRom}
+          modalOpen={editModalOpen}
+          setModalOpen={setEditModalOpen}
+          closable={true}
+        />
+      )}
+    </div>
+  ) : (
+    <div>
+      <div
+        className="cursor-pointer"
+        onClick={() => handleQRCodeGeneration()}>
+        <QrCode01 width={20} height={20} color={color ? 'stroke-black' : 'stroke-gray-500'} />
+      </div>
+      {qrCodeModalOpen && (
+        <AdminQRCodeModal
+          qrCodeModalOpen={qrCodeModalOpen}
+          setQrCodeModalOpen={setQrCodeModalOpen}
+          qrCodeUrl={pdfLink}
+          closable={true}
+          loading={loading}
+        />
+      )}
+    </div>
+  );
+};

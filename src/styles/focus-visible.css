@@ -1,0 +1,299 @@
+/**
+ * Focus Visible Styles
+ * Story 8.1: Focus Management Hook & Focus Trap
+ *
+ * WCAG 2.4.7 Focus Visible (AA) compliant styles
+ * - 3px solid outline (minimum 2px required)
+ * - 3:1 contrast ratio against adjacent colors
+ * - 2px offset from element edge
+ * - High visibility on all backgrounds (light/dark)
+ *
+ * Uses :focus-visible pseudo-class to show focus only for keyboard users,
+ * not for mouse/touch users.
+ *
+ * @see https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html
+ */
+
+/* ===== Global Focus Reset ===== */
+
+/**
+ * Remove default browser focus outline
+ * Will be replaced with :focus-visible styles below
+ */
+*:focus {
+	outline: none;
+}
+
+/* ===== Focus Visible for Keyboard Users ===== */
+
+/**
+ * Default focus visible style
+ * AC 8: Focus visible styles for all interactive elements
+ * 3px solid outline, 2px offset, high contrast
+ */
+*:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+	border-radius: 4px;
+}
+
+/* ===== Dark Mode Support ===== */
+
+/**
+ * Brand focus outline for dark mode
+ * Maintains brand consistency in dark theme
+ */
+@media (prefers-color-scheme: dark) {
+	*:focus-visible {
+		outline-color: var(--focus-outline-color-dark);
+	}
+}
+
+/* ===== Command Palette Specific Styles ===== */
+
+/**
+ * Focus visible for command items
+ * Inside border to avoid layout shift
+ */
+.command-item:focus-visible,
+[data-command-index]:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: -3px; /* Inside border to avoid layout shift */
+	background-color: var(--focus-background);
+}
+
+/**
+ * Focus visible for command palette search input
+ */
+/* .command-palette-input:focus-visible,
+input.ant-input:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+	border-color: var(--focus-outline-color);
+} */
+
+/* ===== Button Focus Styles ===== */
+
+/**
+ * Focus visible for buttons
+ * 3px outline, 2px offset
+ */
+button:focus-visible,
+.ant-btn:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+}
+
+/**
+ * Focus visible for icon buttons
+ */
+button.ant-btn-icon-only:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+}
+
+/* ===== Input Focus Styles ===== */
+
+/**
+ * Focus visible for form inputs
+ * 3px outline, 2px offset
+ */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.ant-select:focus-visible,
+.ant-input:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+}
+
+/* ===== Link Focus Styles ===== */
+
+/**
+ * Focus visible for links
+ * 3px outline, 2px offset, underline for additional clarity
+ */
+a:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+	text-decoration: underline;
+}
+
+/* ===== Brand Focus Colors (Design System Integration) ===== */
+
+/**
+ * Brand primary focus outline for light backgrounds
+ * Uses design system tokens for consistency
+ * Falls back to high contrast black if tokens unavailable
+ */
+:root {
+	--focus-outline-color: var(
+		--input-focus-outline-color,
+		var(--brand-primary, #6941c6)
+	);
+	--focus-outline-color-dark: var(
+		--input-focus-outline-color,
+		var(--brand-primary, #6941c6)
+	);
+	--focus-background: rgba(
+		105,
+		65,
+		198,
+		0.1
+	); /* brand-primary with 10% opacity */
+}
+
+/**
+ * Brand focus outline for dark backgrounds
+ * Maintains brand consistency across themes
+ */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--focus-outline-color: var(
+			--input-focus-outline-color,
+			var(--brand-primary, #6941c6)
+		);
+		--focus-outline-color-dark: var(
+			--input-focus-outline-color,
+			var(--brand-primary, #6941c6)
+		);
+		--focus-background: rgba(
+			105,
+			65,
+			198,
+			0.15
+		); /* Slightly more visible in dark mode */
+	}
+}
+
+/* ===== Modal and Dialog Focus ===== */
+
+/**
+ * Focus visible for modal close buttons
+ */
+.ant-modal-close:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+}
+
+/**
+ * Focus visible for drawer close buttons
+ */
+.ant-drawer-close:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+}
+
+/* ===== List Item Focus ===== */
+
+/**
+ * Focus visible for list items (patient list, etc.)
+ */
+.ant-list-item:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: -3px;
+	background-color: var(--focus-background);
+}
+
+/* ===== Card Focus ===== */
+
+/**
+ * Focus visible for interactive cards
+ */
+.ant-card:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+}
+
+/* ===== Tab Focus ===== */
+
+/**
+ * Focus visible for tabs
+ */
+.ant-tabs-tab:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+}
+
+/* ===== Menu Item Focus ===== */
+
+/**
+ * Focus visible for menu items
+ */
+.ant-menu-item:focus-visible,
+.ant-dropdown-menu-item:focus-visible {
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: -3px;
+	background-color: var(--focus-background);
+}
+
+/* ===== Skip to Content Link ===== */
+
+/**
+ * Focus visible for skip to content link
+ * Accessibility feature for keyboard users
+ */
+.skip-to-content {
+	position: absolute;
+	left: -9999px;
+	z-index: 999;
+}
+
+.skip-to-content:focus-visible {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	padding: 12px 24px;
+	background: var(--surface-primary, #ffffff);
+	color: var(--text-primary, #000000);
+	outline: var(--input-focus-outline-width, 3px) solid
+		var(--focus-outline-color);
+	outline-offset: var(--input-focus-outline-offset, 2px);
+	border-radius: 4px;
+	font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+	.skip-to-content:focus-visible {
+		background: var(--surface-primary, #1f1f1f);
+		color: var(--text-primary, #ffffff);
+		outline-color: var(--focus-outline-color-dark);
+	}
+}
+
+/* ===== Reduced Motion Support ===== */
+
+/**
+ * Respect user's reduced motion preference
+ * Remove outline animations if preferred
+ */
+@media (prefers-reduced-motion: reduce) {
+	*:focus-visible {
+		transition: none;
+	}
+}
+
+/* ===== Print Styles ===== */
+
+/**
+ * Remove focus outlines in print
+ */
+@media print {
+	*:focus-visible {
+		outline: none;
+	}
+}

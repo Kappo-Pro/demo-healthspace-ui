@@ -1,0 +1,1562 @@
+/**
+ * VitalFlow UI - Utility Classes
+ *
+ * This file contains reusable utility classes and animations
+ * used throughout the application.
+ *
+ * Categories:
+ * - Design System Variables
+ * - Spacing utilities (padding, margin)
+ * - Sizing utilities (width, height)
+ * - Border radius utilities
+ * - Typography utilities
+ * - Shadow/elevation utilities
+ * - Layout utilities (flexbox, positioning, grid)
+ * - Interaction utilities
+ * - Display & visibility utilities (display, grid, overflow, opacity, cursor)
+ * - Theme selection utilities
+ * - Animations
+ */
+
+/* ============================================
+   DESIGN SYSTEM VARIABLES
+   ============================================ */
+
+:root {
+	/* Spacing Scale (8px baseline grid) */
+	--spacing-0: 0;
+	--spacing-1: 4px; /* 0.25rem */
+	--spacing-2: 8px; /* 0.5rem */
+	--spacing-3: 12px; /* 0.75rem */
+	--spacing-4: 16px; /* 1rem */
+	--spacing-5: 20px; /* 1.25rem */
+	--spacing-6: 24px; /* 1.5rem */
+	--spacing-8: 32px; /* 2rem */
+	--spacing-10: 40px; /* 2.5rem */
+	--spacing-12: 48px; /* 3rem */
+	--spacing-16: 64px; /* 4rem */
+
+	/* Border Radius Scale */
+	--radius-none: 0;
+	--radius-sm: 4px;
+	--radius-default: 8px; /* 0.5rem - most common */
+	--radius-md: 12px;
+	--radius-lg: 16px;
+	--radius-xl: 20px;
+	--radius-2xl: 24px;
+	--radius-full: 9999px; /* For circles */
+
+	/* Font Size Scale */
+	--text-xs: 12px;
+	--text-sm: 14px;
+	--text-base: 16px;
+	--text-lg: 18px;
+	--text-xl: 20px;
+	--text-2xl: 22px;
+	--text-3xl: 24px;
+	--text-4xl: 28px;
+	--text-5xl: 32px;
+
+	/* Shadow/Elevation Scale */
+	/* Note: Shadow definitions require rgba for opacity - these are design tokens */
+	--shadow-none: none;
+	--shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* design-token-shadow */
+	--shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); /* design-token-shadow */
+	--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* design-token-shadow */
+	--shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -4px rgba(0, 0, 0, 0.1); /* design-token-shadow */
+	--shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+		0 8px 10px -6px rgba(0, 0, 0, 0.1); /* design-token-shadow */
+	--shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* design-token-shadow */
+	--shadow-2xl: 0 50px 100px -20px rgba(0, 0, 0, 0.25); /* design-token-shadow */
+	--shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05); /* design-token-shadow */
+
+	/* Ant Design-specific elevations */
+	--shadow-card: 0 2px 8px rgba(0, 0, 0, 0.15); /* design-token-shadow */
+	--shadow-dropdown: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+		0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); /* design-token-shadow */
+	--shadow-modal: 0 10px 40px rgba(0, 0, 0, 0.2); /* design-token-shadow */
+
+	/* Text shadows for media overlays (camera feeds, video) */
+	--shadow-text-on-media: 0 2px 8px rgba(0, 0, 0, 0.3); /* design-token-shadow */
+}
+
+/* ============================================
+   SPACING UTILITIES
+   ============================================ */
+
+/* ----------------
+   Padding Utilities
+   ---------------- */
+
+/* Padding - All sides */
+.p-0 {
+	padding: 0;
+}
+.p-1 {
+	padding: var(--spacing-1, 4px);
+}
+.p-2 {
+	padding: var(--spacing-2, 8px);
+}
+.p-3 {
+	padding: var(--spacing-3, 12px);
+}
+.p-4 {
+	padding: var(--spacing-4, 16px);
+}
+.p-5 {
+	padding: var(--spacing-5, 20px);
+}
+.p-6 {
+	padding: var(--spacing-6, 24px);
+}
+.p-8 {
+	padding: var(--spacing-8, 32px);
+}
+.p-10 {
+	padding: var(--spacing-10, 40px);
+}
+.p-12 {
+	padding: var(--spacing-12, 48px);
+}
+
+/* Padding - Horizontal (left + right) */
+.px-0 {
+	padding-left: 0;
+	padding-right: 0;
+}
+.px-1 {
+	padding-left: var(--spacing-1);
+	padding-right: var(--spacing-1);
+}
+.px-2 {
+	padding-left: var(--spacing-2);
+	padding-right: var(--spacing-2);
+}
+.px-3 {
+	padding-left: var(--spacing-3);
+	padding-right: var(--spacing-3);
+}
+.px-4 {
+	padding-left: var(--spacing-4);
+	padding-right: var(--spacing-4);
+}
+.px-5 {
+	padding-left: var(--spacing-5);
+	padding-right: var(--spacing-5);
+}
+.px-6 {
+	padding-left: var(--spacing-6);
+	padding-right: var(--spacing-6);
+}
+.px-8 {
+	padding-left: var(--spacing-8);
+	padding-right: var(--spacing-8);
+}
+
+/* Padding - Vertical (top + bottom) */
+.py-0 {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.py-1 {
+	padding-top: var(--spacing-1);
+	padding-bottom: var(--spacing-1);
+}
+.py-2 {
+	padding-top: var(--spacing-2);
+	padding-bottom: var(--spacing-2);
+}
+.py-3 {
+	padding-top: var(--spacing-3);
+	padding-bottom: var(--spacing-3);
+}
+.py-4 {
+	padding-top: var(--spacing-4);
+	padding-bottom: var(--spacing-4);
+}
+.py-5 {
+	padding-top: var(--spacing-5);
+	padding-bottom: var(--spacing-5);
+}
+.py-6 {
+	padding-top: var(--spacing-6);
+	padding-bottom: var(--spacing-6);
+}
+.py-8 {
+	padding-top: var(--spacing-8);
+	padding-bottom: var(--spacing-8);
+}
+
+/* Padding - Individual sides */
+.pt-0 {
+	padding-top: 0;
+}
+.pt-1 {
+	padding-top: var(--spacing-1);
+}
+.pt-2 {
+	padding-top: var(--spacing-2);
+}
+.pt-3 {
+	padding-top: var(--spacing-3);
+}
+.pt-4 {
+	padding-top: var(--spacing-4);
+}
+.pt-5 {
+	padding-top: var(--spacing-5);
+}
+.pt-6 {
+	padding-top: var(--spacing-6);
+}
+.pt-8 {
+	padding-top: var(--spacing-8);
+}
+
+.pb-0 {
+	padding-bottom: 0;
+}
+.pb-1 {
+	padding-bottom: var(--spacing-1);
+}
+.pb-2 {
+	padding-bottom: var(--spacing-2);
+}
+.pb-3 {
+	padding-bottom: var(--spacing-3);
+}
+.pb-4 {
+	padding-bottom: var(--spacing-4);
+}
+.pb-5 {
+	padding-bottom: var(--spacing-5);
+}
+.pb-6 {
+	padding-bottom: var(--spacing-6);
+}
+.pb-8 {
+	padding-bottom: var(--spacing-8);
+}
+
+.pl-0 {
+	padding-left: 0;
+}
+.pl-1 {
+	padding-left: var(--spacing-1);
+}
+.pl-2 {
+	padding-left: var(--spacing-2);
+}
+.pl-3 {
+	padding-left: var(--spacing-3);
+}
+.pl-4 {
+	padding-left: var(--spacing-4);
+}
+.pl-5 {
+	padding-left: var(--spacing-5);
+}
+.pl-6 {
+	padding-left: var(--spacing-6);
+}
+.pl-8 {
+	padding-left: var(--spacing-8);
+}
+
+.pr-0 {
+	padding-right: 0;
+}
+.pr-1 {
+	padding-right: var(--spacing-1);
+}
+.pr-2 {
+	padding-right: var(--spacing-2);
+}
+.pr-3 {
+	padding-right: var(--spacing-3);
+}
+.pr-4 {
+	padding-right: var(--spacing-4);
+}
+.pr-5 {
+	padding-right: var(--spacing-5);
+}
+.pr-6 {
+	padding-right: var(--spacing-6);
+}
+.pr-8 {
+	padding-right: var(--spacing-8);
+}
+
+/* ----------------
+   Margin Utilities
+   ---------------- */
+
+/* Margin - All sides */
+.m-0 {
+	margin: 0;
+}
+.m-1 {
+	margin: var(--spacing-1);
+}
+.m-2 {
+	margin: var(--spacing-2);
+}
+.m-3 {
+	margin: var(--spacing-3);
+}
+.m-4 {
+	margin: var(--spacing-4);
+}
+.m-5 {
+	margin: var(--spacing-5);
+}
+.m-6 {
+	margin: var(--spacing-6);
+}
+.m-8 {
+	margin: var(--spacing-8);
+}
+.m-auto {
+	margin: auto;
+}
+
+/* Margin - Horizontal (left + right) */
+.mx-0 {
+	margin-left: 0;
+	margin-right: 0;
+}
+.mx-1 {
+	margin-left: var(--spacing-1);
+	margin-right: var(--spacing-1);
+}
+.mx-2 {
+	margin-left: var(--spacing-2);
+	margin-right: var(--spacing-2);
+}
+.mx-3 {
+	margin-left: var(--spacing-3);
+	margin-right: var(--spacing-3);
+}
+.mx-4 {
+	margin-left: var(--spacing-4);
+	margin-right: var(--spacing-4);
+}
+.mx-6 {
+	margin-left: var(--spacing-6);
+	margin-right: var(--spacing-6);
+}
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Margin - Vertical (top + bottom) */
+.my-0 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.my-1 {
+	margin-top: var(--spacing-1);
+	margin-bottom: var(--spacing-1);
+}
+.my-2 {
+	margin-top: var(--spacing-2);
+	margin-bottom: var(--spacing-2);
+}
+.my-3 {
+	margin-top: var(--spacing-3);
+	margin-bottom: var(--spacing-3);
+}
+.my-4 {
+	margin-top: var(--spacing-4);
+	margin-bottom: var(--spacing-4);
+}
+.my-6 {
+	margin-top: var(--spacing-6);
+	margin-bottom: var(--spacing-6);
+}
+.my-8 {
+	margin-top: var(--spacing-8);
+	margin-bottom: var(--spacing-8);
+}
+
+/* Margin - Individual sides */
+.mt-0 {
+	margin-top: 0;
+}
+.mt-1 {
+	margin-top: var(--spacing-1);
+}
+.mt-2 {
+	margin-top: var(--spacing-2);
+}
+.mt-3 {
+	margin-top: var(--spacing-3);
+}
+.mt-4 {
+	margin-top: var(--spacing-4);
+}
+.mt-5 {
+	margin-top: var(--spacing-5);
+}
+.mt-6 {
+	margin-top: var(--spacing-6);
+}
+.mt-8 {
+	margin-top: var(--spacing-8);
+}
+
+.mb-0 {
+	margin-bottom: 0;
+}
+.mb-1 {
+	margin-bottom: var(--spacing-1);
+}
+.mb-2 {
+	margin-bottom: var(--spacing-2);
+}
+.mb-3 {
+	margin-bottom: var(--spacing-3);
+}
+.mb-4 {
+	margin-bottom: var(--spacing-4);
+}
+.mb-5 {
+	margin-bottom: var(--spacing-5);
+}
+.mb-6 {
+	margin-bottom: var(--spacing-6);
+}
+.mb-8 {
+	margin-bottom: var(--spacing-8);
+}
+
+.ml-0 {
+	margin-left: 0;
+}
+.ml-1 {
+	margin-left: var(--spacing-1);
+}
+.ml-2 {
+	margin-left: var(--spacing-2);
+}
+.ml-3 {
+	margin-left: var(--spacing-3);
+}
+.ml-4 {
+	margin-left: var(--spacing-4);
+}
+.ml-5 {
+	margin-left: var(--spacing-5);
+}
+.ml-6 {
+	margin-left: var(--spacing-6);
+}
+.ml-8 {
+	margin-left: var(--spacing-8);
+}
+
+.mr-0 {
+	margin-right: 0;
+}
+.mr-1 {
+	margin-right: var(--spacing-1);
+}
+.mr-2 {
+	margin-right: var(--spacing-2);
+}
+.mr-3 {
+	margin-right: var(--spacing-3);
+}
+.mr-4 {
+	margin-right: var(--spacing-4);
+}
+.mr-5 {
+	margin-right: var(--spacing-5);
+}
+.mr-6 {
+	margin-right: var(--spacing-6);
+}
+.mr-8 {
+	margin-right: var(--spacing-8);
+}
+
+/* Negative margins (useful for overlapping) */
+.-mt-1 {
+	margin-top: calc(-1 * var(--spacing-1));
+}
+.-mt-2 {
+	margin-top: calc(-1 * var(--spacing-2));
+}
+.-mt-3 {
+	margin-top: calc(-1 * var(--spacing-3));
+}
+.-mt-4 {
+	margin-top: calc(-1 * var(--spacing-4));
+}
+
+.-mb-1 {
+	margin-bottom: calc(-1 * var(--spacing-1));
+}
+.-mb-2 {
+	margin-bottom: calc(-1 * var(--spacing-2));
+}
+
+.-ml-1 {
+	margin-left: calc(-1 * var(--spacing-1));
+}
+.-ml-2 {
+	margin-left: calc(-1 * var(--spacing-2));
+}
+
+.-mr-1 {
+	margin-right: calc(-1 * var(--spacing-1));
+}
+.-mr-2 {
+	margin-right: calc(-1 * var(--spacing-2));
+}
+
+/* ============================================
+   BORDER RADIUS UTILITIES
+   ============================================ */
+
+/* Border Radius - All corners */
+.rounded-none {
+	border-radius: 0;
+}
+.rounded-sm {
+	border-radius: var(--radius-sm, 4px);
+}
+.rounded {
+	border-radius: var(--radius-default, 8px);
+}
+.rounded-md {
+	border-radius: var(--radius-md, 12px);
+}
+.rounded-lg {
+	border-radius: var(--radius-lg, 16px);
+}
+.rounded-xl {
+	border-radius: var(--radius-xl, 20px);
+}
+.rounded-2xl {
+	border-radius: var(--radius-2xl, 24px);
+}
+.rounded-full {
+	border-radius: var(--radius-full, 9999px);
+}
+
+/* Border Radius - Edges */
+.rounded-t-none {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.rounded-t-sm {
+	border-top-left-radius: var(--radius-sm);
+	border-top-right-radius: var(--radius-sm);
+}
+.rounded-t {
+	border-top-left-radius: var(--radius-default);
+	border-top-right-radius: var(--radius-default);
+}
+.rounded-t-lg {
+	border-top-left-radius: var(--radius-lg);
+	border-top-right-radius: var(--radius-lg);
+}
+
+.rounded-b-none {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.rounded-b-sm {
+	border-bottom-left-radius: var(--radius-sm);
+	border-bottom-right-radius: var(--radius-sm);
+}
+.rounded-b {
+	border-bottom-left-radius: var(--radius-default);
+	border-bottom-right-radius: var(--radius-default);
+}
+.rounded-b-lg {
+	border-bottom-left-radius: var(--radius-lg);
+	border-bottom-right-radius: var(--radius-lg);
+}
+
+.rounded-l-none {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.rounded-l-sm {
+	border-top-left-radius: var(--radius-sm);
+	border-bottom-left-radius: var(--radius-sm);
+}
+.rounded-l {
+	border-top-left-radius: var(--radius-default);
+	border-bottom-left-radius: var(--radius-default);
+}
+.rounded-l-lg {
+	border-top-left-radius: var(--radius-lg);
+	border-bottom-left-radius: var(--radius-lg);
+}
+
+.rounded-r-none {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.rounded-r-sm {
+	border-top-right-radius: var(--radius-sm);
+	border-bottom-right-radius: var(--radius-sm);
+}
+.rounded-r {
+	border-top-right-radius: var(--radius-default);
+	border-bottom-right-radius: var(--radius-default);
+}
+.rounded-r-lg {
+	border-top-right-radius: var(--radius-lg);
+	border-bottom-right-radius: var(--radius-lg);
+}
+
+/* Border Radius - Individual corners */
+.rounded-tl-none {
+	border-top-left-radius: 0;
+}
+.rounded-tl-sm {
+	border-top-left-radius: var(--radius-sm);
+}
+.rounded-tl {
+	border-top-left-radius: var(--radius-default);
+}
+.rounded-tl-lg {
+	border-top-left-radius: var(--radius-lg);
+}
+
+.rounded-tr-none {
+	border-top-right-radius: 0;
+}
+.rounded-tr-sm {
+	border-top-right-radius: var(--radius-sm);
+}
+.rounded-tr {
+	border-top-right-radius: var(--radius-default);
+}
+.rounded-tr-lg {
+	border-top-right-radius: var(--radius-lg);
+}
+
+.rounded-bl-none {
+	border-bottom-left-radius: 0;
+}
+.rounded-bl-sm {
+	border-bottom-left-radius: var(--radius-sm);
+}
+.rounded-bl {
+	border-bottom-left-radius: var(--radius-default);
+}
+.rounded-bl-lg {
+	border-bottom-left-radius: var(--radius-lg);
+}
+
+.rounded-br-none {
+	border-bottom-right-radius: 0;
+}
+.rounded-br-sm {
+	border-bottom-right-radius: var(--radius-sm);
+}
+.rounded-br {
+	border-bottom-right-radius: var(--radius-default);
+}
+.rounded-br-lg {
+	border-bottom-right-radius: var(--radius-lg);
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+/* Font Size Utilities */
+.text-xs {
+	font-size: var(--text-xs, 12px);
+}
+.text-sm {
+	font-size: var(--text-sm, 14px);
+}
+.text-base {
+	font-size: var(--text-base, 16px);
+}
+.text-lg {
+	font-size: var(--text-lg, 18px);
+}
+.text-xl {
+	font-size: var(--text-xl, 20px);
+}
+.text-2xl {
+	font-size: var(--text-2xl, 22px);
+}
+.text-3xl {
+	font-size: var(--text-3xl, 24px);
+}
+.text-4xl {
+	font-size: var(--text-4xl, 28px);
+}
+.text-5xl {
+	font-size: var(--text-5xl, 32px);
+}
+
+/* Font Weight Utilities */
+.font-normal {
+	font-weight: 400;
+}
+.font-medium {
+	font-weight: 500;
+}
+.font-semibold {
+	font-weight: 600;
+}
+.font-bold {
+	font-weight: 700;
+}
+.font-extrabold {
+	font-weight: 800;
+}
+
+/* Line Height Utilities */
+.leading-none {
+	line-height: var(--line-height-none);
+}
+.leading-tight {
+	line-height: var(--line-height-tight);
+}
+.leading-snug {
+	line-height: var(--line-height-snug);
+}
+.leading-normal {
+	line-height: var(--line-height-normal);
+}
+.leading-relaxed {
+	line-height: var(--line-height-relaxed);
+}
+.leading-loose {
+	line-height: var(--line-height-loose);
+}
+
+/* ============================================
+   SHADOW/ELEVATION UTILITIES
+   ============================================ */
+
+/**
+ * Shadow utilities for elevation and depth
+ * Based on Tailwind CSS shadow scale + Ant Design elevation system
+ *
+ * Scale:
+ * - shadow-xs: Subtle shadow for slight elevation
+ * - shadow-sm: Small shadow for cards and buttons
+ * - shadow: Default shadow for standard elevation
+ * - shadow-md: Medium shadow for elevated panels
+ * - shadow-lg: Large shadow for modals and overlays
+ * - shadow-xl: Extra large shadow for prominent elements
+ * - shadow-2xl: Maximum elevation for dramatic effect
+ * - shadow-inner: Inset shadow for sunken elements
+ *
+ * Ant Design specific:
+ * - shadow-card: Standard Ant Design card elevation
+ * - shadow-dropdown: Multi-layer shadow for dropdowns/popovers
+ * - shadow-modal: Deep shadow for modal dialogs
+ */
+
+/* Standard Shadow Scale */
+.shadow-none {
+	box-shadow: var(--shadow-none);
+}
+.shadow-xs {
+	box-shadow: var(--shadow-xs);
+}
+.shadow-sm {
+	box-shadow: var(--shadow-sm);
+}
+.shadow {
+	box-shadow: var(--shadow);
+}
+.shadow-md {
+	box-shadow: var(--shadow-md);
+}
+.shadow-lg {
+	box-shadow: var(--shadow-lg);
+}
+.shadow-xl {
+	box-shadow: var(--shadow-xl);
+}
+.shadow-2xl {
+	box-shadow: var(--shadow-2xl);
+}
+.shadow-inner {
+	box-shadow: var(--shadow-inner);
+}
+
+/* Ant Design-specific Shadows */
+.shadow-card {
+	box-shadow: var(--shadow-card);
+}
+.shadow-dropdown {
+	box-shadow: var(--shadow-dropdown);
+}
+.shadow-modal {
+	box-shadow: var(--shadow-modal);
+}
+
+/* ============================================
+   SIZING UTILITIES
+   ============================================ */
+
+/* Width Utilities */
+.w-auto {
+	width: auto;
+}
+.w-full {
+	width: 100%;
+}
+.w-screen {
+	width: 100vw;
+}
+.w-fit {
+	width: fit-content;
+}
+.w-min {
+	width: min-content;
+}
+.w-max {
+	width: max-content;
+}
+
+/* Common fractional widths */
+.w-1\/2 {
+	width: 50%;
+}
+.w-1\/3 {
+	width: 33.333333%;
+}
+.w-2\/3 {
+	width: 66.666667%;
+}
+.w-1\/4 {
+	width: 25%;
+}
+.w-3\/4 {
+	width: 75%;
+}
+
+/* Common fixed widths */
+.w-16 {
+	width: 4rem;
+} /* 64px */
+.w-20 {
+	width: 5rem;
+} /* 80px */
+.w-24 {
+	width: 6rem;
+} /* 96px */
+.w-32 {
+	width: 8rem;
+} /* 128px */
+.w-40 {
+	width: 10rem;
+} /* 160px */
+.w-48 {
+	width: 12rem;
+} /* 192px */
+.w-64 {
+	width: 16rem;
+} /* 256px */
+
+/* Height Utilities */
+.h-auto {
+	height: auto;
+}
+.h-full {
+	height: 100%;
+}
+.h-screen {
+	height: 100vh;
+}
+.h-fit {
+	height: fit-content;
+}
+.h-min {
+	height: min-content;
+}
+.h-max {
+	height: max-content;
+}
+
+/* Common fixed heights */
+.h-16 {
+	height: 4rem;
+} /* 64px */
+.h-20 {
+	height: 5rem;
+} /* 80px */
+.h-24 {
+	height: 6rem;
+} /* 96px */
+.h-32 {
+	height: 8rem;
+} /* 128px */
+.h-40 {
+	height: 10rem;
+} /* 160px */
+.h-48 {
+	height: 12rem;
+} /* 192px */
+.h-64 {
+	height: 16rem;
+} /* 256px */
+
+/* Min/Max Width */
+.min-w-0 {
+	min-width: 0;
+}
+.min-w-full {
+	min-width: 100%;
+}
+.max-w-full {
+	max-width: 100%;
+}
+.max-w-screen {
+	max-width: 100vw;
+}
+.max-w-fit {
+	max-width: fit-content;
+}
+
+/* Min/Max Height */
+.min-h-0 {
+	min-height: 0;
+}
+.min-h-full {
+	min-height: 100%;
+}
+.min-h-screen {
+	min-height: 100vh;
+}
+.max-h-full {
+	max-height: 100%;
+}
+.max-h-screen {
+	max-height: 100vh;
+}
+.max-h-fit {
+	max-height: fit-content;
+}
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+
+/* ----------------
+   Flexbox Utilities
+   ---------------- */
+
+/**
+ * Basic flexbox display
+ * Usage: <div class="flex">...</div>
+ */
+.flex {
+	display: flex;
+}
+
+/**
+ * Center content using flexbox (both axes)
+ * Usage: <div class="flex-center">...</div>
+ * Replaces: 58+ instances across codebase
+ */
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/**
+ * Flex column direction
+ * Usage: <div class="flex-col">...</div>
+ * Replaces: 121+ instances
+ */
+.flex-col,
+.flex-column {
+	flex-direction: column;
+}
+
+/**
+ * Flex row direction (default, but explicit)
+ * Usage: <div class="flex-row">...</div>
+ */
+.flex-row {
+	flex-direction: row;
+}
+
+/* ----------------
+   Justify Content
+   ---------------- */
+
+.justify-start {
+	justify-content: flex-start;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.justify-end {
+	justify-content: flex-end;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-around {
+	justify-content: space-around;
+}
+
+.justify-evenly {
+	justify-content: space-evenly;
+}
+
+/* ----------------
+   Align Items
+   ---------------- */
+
+.items-start {
+	align-items: flex-start;
+}
+
+.items-center {
+	align-items: center;
+}
+
+.items-end {
+	align-items: flex-end;
+}
+
+.items-baseline {
+	align-items: baseline;
+}
+
+.items-stretch {
+	align-items: stretch;
+}
+
+/* ----------------
+   Gap Utilities
+   ---------------- */
+
+.gap-1 {
+	gap: var(--spacing-1, 4px);
+}
+
+.gap-2 {
+	gap: var(--spacing-2, 8px);
+}
+
+.gap-3 {
+	gap: var(--spacing-3, 12px);
+}
+
+.gap-4 {
+	gap: var(--spacing-4, 16px);
+}
+
+.gap-6 {
+	gap: var(--spacing-6, 24px);
+}
+
+.gap-8 {
+	gap: var(--spacing-8, 32px);
+}
+
+/* ----------------
+   Positioning
+   ---------------- */
+
+.relative {
+	position: relative;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.fixed {
+	position: fixed;
+}
+
+.sticky {
+	position: sticky;
+}
+
+/**
+ * Absolute positioning helpers
+ * Replaces: 156+ absolute positioning patterns across codebase
+ */
+
+.absolute-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.absolute-top-left {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.absolute-top-right {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.absolute-bottom-left {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.absolute-bottom-right {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+/* ----------------
+   Visibility
+   ---------------- */
+
+.hidden {
+	display: none;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+/**
+ * Screen reader only (accessible but visually hidden)
+ * Usage: <span class="sr-only">Screen reader text</span>
+ */
+.sr-only,
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: var(--border-width-0);
+}
+
+/* ----------------
+   Text Utilities
+   ---------------- */
+
+/**
+ * Truncate text with ellipsis
+ * Usage: <p class="truncate">Long text here...</p>
+ * Replaces: 6+ instances
+ */
+.truncate,
+.text-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/**
+ * Break long words
+ * Usage: <p class="text-wrap">VeryLongWordWithNoSpaces</p>
+ */
+.text-wrap {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/**
+ * Text alignment utilities
+ */
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-justify {
+	text-align: justify;
+}
+
+/* ----------------
+   Common Combinations
+   ---------------- */
+
+/**
+ * Centered flex column
+ * Usage: <div class="flex-center-col">...</div>
+ */
+.flex-center-col {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/**
+ * Flex between (common pattern for headers/footers)
+ * Usage: <div class="flex-between">...</div>
+ */
+.flex-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/**
+ * Flex start (align items to start)
+ * Usage: <div class="flex-start">...</div>
+ */
+.flex-start {
+	display: flex;
+	align-items: flex-start;
+}
+
+/**
+ * Flex end (align items to end)
+ * Usage: <div class="flex-end">...</div>
+ */
+.flex-end {
+	display: flex;
+	align-items: flex-end;
+}
+
+/**
+ * Flex wrap
+ * Usage: <div class="flex-wrap">...</div>
+ */
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-nowrap {
+	flex-wrap: nowrap;
+}
+
+/* ============================================
+   INTERACTION UTILITIES
+   ============================================ */
+
+/**
+ * Disable text selection
+ * Usage: <div class="select-none">...</div>
+ */
+.select-none {
+	user-select: none;
+	height: 100%;
+}
+
+/* ============================================
+   DISPLAY & VISIBILITY UTILITIES
+   ============================================ */
+
+/* ----------------
+   Display Types
+   ---------------- */
+
+/**
+ * Display type utilities
+ * Control element display behavior
+ */
+.block {
+	display: block;
+}
+.inline-block {
+	display: inline-block;
+}
+.inline {
+	display: inline;
+}
+.grid {
+	display: grid;
+}
+.inline-flex {
+	display: inline-flex;
+}
+.inline-grid {
+	display: inline-grid;
+}
+.contents {
+	display: contents;
+}
+
+/* ----------------
+   Grid Utilities
+   ---------------- */
+
+/**
+ * Grid template columns
+ * Usage: <div class="grid grid-cols-3">...</div>
+ */
+.grid-cols-1 {
+	grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-cols-3 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid-cols-4 {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.grid-cols-6 {
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.grid-cols-12 {
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+/**
+ * Grid column span
+ * Usage: <div class="col-span-2">...</div>
+ */
+.col-span-1 {
+	grid-column: span 1 / span 1;
+}
+.col-span-2 {
+	grid-column: span 2 / span 2;
+}
+.col-span-3 {
+	grid-column: span 3 / span 3;
+}
+.col-span-4 {
+	grid-column: span 4 / span 4;
+}
+.col-span-6 {
+	grid-column: span 6 / span 6;
+}
+.col-span-full {
+	grid-column: 1 / -1;
+}
+
+/* ----------------
+   Overflow Utilities
+   ---------------- */
+
+/**
+ * Overflow control
+ * Control how content overflows its container
+ */
+.overflow-auto {
+	overflow: auto;
+}
+.overflow-hidden {
+	overflow: hidden;
+}
+.overflow-visible {
+	overflow: visible;
+}
+.overflow-scroll {
+	overflow: scroll;
+}
+.overflow-x-auto {
+	overflow-x: auto;
+}
+.overflow-y-auto {
+	overflow-y: auto;
+}
+.overflow-x-hidden {
+	overflow-x: hidden;
+}
+.overflow-y-hidden {
+	overflow-y: hidden;
+}
+
+/* ----------------
+   Opacity Utilities
+   ---------------- */
+
+/**
+ * Opacity control
+ * Control element transparency
+ */
+.opacity-0 {
+	opacity: 0;
+}
+.opacity-25 {
+	opacity: 0.25;
+}
+.opacity-50 {
+	opacity: 0.5;
+}
+.opacity-75 {
+	opacity: 0.75;
+}
+.opacity-100 {
+	opacity: 1;
+}
+
+/* ----------------
+   Pointer Events & Cursor
+   ---------------- */
+
+/**
+ * Pointer events control
+ * Control whether element responds to pointer events
+ */
+.pointer-events-none {
+	pointer-events: none;
+}
+.pointer-events-auto {
+	pointer-events: auto;
+}
+
+/**
+ * Cursor utilities
+ * Control cursor appearance on hover
+ */
+.cursor-pointer {
+	cursor: pointer;
+}
+.cursor-default {
+	cursor: default;
+}
+.cursor-not-allowed {
+	cursor: not-allowed;
+}
+.cursor-wait {
+	cursor: wait;
+}
+.cursor-move {
+	cursor: move;
+}
+.cursor-grab {
+	cursor: grab;
+}
+.cursor-grabbing {
+	cursor: grabbing;
+}
+
+/* ============================================
+   FORM COMPONENT UTILITIES
+   Reusable form component styling
+   ============================================ */
+
+/**
+ * Checkbox - Brand Style (Figma Design)
+ * Transparent background with purple checkmark
+ * Usage: <Checkbox className="checkbox-brand">...</Checkbox>
+ *
+ * Design: Figma node 146:182
+ * - Unchecked: Transparent with border
+ * - Checked: Transparent bg, purple checkmark (--brand-primary)
+ * - Size: 16x16px
+ */
+.checkbox-brand .ant-checkbox-inner {
+	background-color: transparent;
+	border: 2px solid var(--border-default);
+	border-radius: var(--radius-xs, 4px);
+	width: 16px;
+	height: 16px;
+}
+
+.checkbox-brand .ant-checkbox-checked .ant-checkbox-inner {
+	background-color: transparent;
+	border-color: var(--brand-primary);
+}
+
+.checkbox-brand .ant-checkbox-checked .ant-checkbox-inner::after {
+	border-color: var(--brand-primary);
+	border-width: 2px;
+}
+
+.checkbox-brand .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.checkbox-brand:hover .ant-checkbox-inner {
+	border-color: var(--brand-primary);
+}
+
+/* ============================================
+   THEME SELECTION UTILITIES
+   Component-specific utilities for theme picker UI
+   ============================================ */
+
+.radio-wraper-vibrant,
+.radio-wraper-default,
+.radio-wraper-dark {
+	color: var(--surface-primary);
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.radio-wraper-vibrant {
+	background: var(--color-warning-600);
+}
+
+.radio-wraper-default {
+	background: var(--brand-primary);
+}
+
+.radio-wraper-dark {
+	background: var(--color-black);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/**
+ * Background position animation
+ * Used for animated gradient backgrounds
+ * Usage: animation: BgAnimaiton 10s ease infinite;
+ */
+@-webkit-keyframes BgAnimaiton {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@-moz-keyframes BgAnimaiton {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes BgAnimaiton {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

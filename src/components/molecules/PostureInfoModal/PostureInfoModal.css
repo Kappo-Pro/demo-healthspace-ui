@@ -1,0 +1,127 @@
+/**
+ * PostureInfoModal Styles
+ * Story 2.5: Empty States with Contextual Guidance
+ */
+
+.posture-info-modal {
+	border-radius: var(--radius-lg);
+}
+
+.posture-info-modal__content {
+	width: 100%;
+}
+
+.posture-info-modal__header {
+	text-align: center;
+	padding-bottom: var(--spacing-4);
+	border-bottom: 1px solid var(--border-default);
+}
+
+.posture-info-modal__header h3 {
+	margin-bottom: var(--spacing-2);
+	color: var(--text-primary);
+}
+
+.posture-info-modal__sections {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-6);
+}
+
+.posture-info-modal__section {
+	padding: var(--spacing-4);
+	background: var(--surface-secondary);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border-subtle);
+}
+
+.posture-info-modal__section-header {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	margin-bottom: var(--spacing-2);
+}
+
+.posture-info-modal__section-icon {
+	font-size: var(--font-size-xl);
+	color: var(--color-primary-600);
+}
+
+.posture-info-modal__section h5 {
+	margin: 0;
+	color: var(--text-primary);
+}
+
+.posture-info-modal__section p {
+	margin: 0;
+	color: var(--text-secondary);
+	line-height: var(--line-height-relaxed);
+}
+
+.posture-info-modal__process {
+	padding: var(--spacing-4);
+	background: var(--surface-tertiary);
+	border-radius: var(--radius-md);
+}
+
+.posture-info-modal__process h5 {
+	margin-bottom: var(--spacing-3);
+	color: var(--text-primary);
+}
+
+.posture-info-modal__step-number {
+	display: inline-block;
+	min-width: var(--spacing-6);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-primary-600);
+}
+
+.posture-info-modal__privacy-note {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-3);
+	padding: var(--spacing-4);
+	background: var(--surface-info);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border-info);
+}
+
+.posture-info-modal__privacy-icon {
+	font-size: var(--font-size-xl);
+	color: var(--color-info-600);
+	flex-shrink: 0;
+	margin-top: var(--spacing-0-5);
+}
+
+.posture-info-modal__privacy-text {
+	margin: 0;
+	color: var(--text-secondary);
+	line-height: var(--line-height-relaxed);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .posture-info-modal__section {
+	background: var(--surface-raised);
+}
+
+[data-theme='dark'] .posture-info-modal__process {
+	background: var(--surface-raised);
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.posture-info-modal {
+		animation: none;
+	}
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.posture-info-modal {
+		margin: var(--spacing-4);
+	}
+
+	.posture-info-modal__content {
+		padding: var(--spacing-2);
+	}
+}

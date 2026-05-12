@@ -1,0 +1,452 @@
+import { ChevronLeft } from '@vitalflow-icons/arrows/chevronLeft';
+import { ChevronRight } from '@vitalflow-icons/arrows/chevronRight';
+import {
+	selectExercise,
+	selectProgram,
+	updateProgram,
+} from '@stores/shared/patientDetail/program';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import {
+	Empty,
+	Flex,
+	Modal,
+	Spin,
+	Typography,
+	Collapse,
+	message,
+	Button,
+	Tag,
+} from 'antd';
+import { ModalContentSkeleton } from '@atoms/Skeletons';
+
+const { Paragraph } = Typography;
+import moment from 'moment';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import {
+	CustomModalProps,
+	IProgramData,
+	IProgramExercise,
+} from '@types';
+import { PlayCircle } from '@vitalflow-icons/media/playCircle';
+import { AddProgramPopup } from '@organisms/CreateProgramModal/AddProgramPopup';
+import { useNavigate } from 'react-router-dom';
+import './style.css';
+import ExerciseHeader from './ExerciseHeader';
+import { setActiveTab } from '@stores/shared/patientDetail/patientDetail';
+import { useBlockNavigation } from '@atoms/BlockNavigation';
+import { router } from '@routers/routers';
+import { useTheme } from "@providers/ThemeProvider";
+
+const CustomModalInfo = (props: CustomModalProps) => {
+	const { name, description, video } = props;
+
+	const modalContent = (
+		<Flex vertical align="center" justify="center" className="select-none" style={{ textAlign: 'center', marginTop: '10%' }}>
+			<video
+				controls
+				className="video"
+				preload="metadata"
+				src={video}
+				width="100%"
+				height="100%"
+			/>
+			<div className="select-none mt-6">
+				<Typography.Title level={5}>{name}</Typography.Title>
+				<Typography.Text>{description}</Typography.Text>
+			</div>
+		</Flex>
+	);
+	Modal.info({
+		title: null,
+		content: modalContent,
+		maskClosable: true,
+		icon: null,
+		okButtonProps: { style: { display: 'none' } },
+		closable: true,
+	});
+};
+
+interface ExerciseDataItemProps {
+	index: number;
+	refresh: boolean;
+	program: IProgramData;
+	programExercises: IProgramExercise[];
+	isLoading: boolean;
+	setLoading: (isLoading: boolean) => void;
+	setRefresh: (refresh: boolean) => void;
+	session: boolean;
+	setSession: (value: boolean) => void;
+}
+
+export const ExerciseDataItem = ({
+	setSession,
+	session,
+	refresh,
+	programExercises,
+	program,
+	isLoading,
+	setRefresh,
+}: ExerciseDataItemProps) => {
+	const { t } = useTranslation();
+	const programs = useTypedSelector(state => state.patientDetail.program.program);
+	const [bulletPosition, setBulletPosition] = useState<number>();
+	const [exercises, setExercises] = useState<IProgramExercise[]>(() => {
+		const sortedExercise = [...(program?.exercises ?? [])];
+		return sortedExercise.sort((a, b) => a.order - b.order);
+	});
+	const navigate = useNavigate();
+	const { clearNavigation } = useBlockNavigation();
+	const dispatch = useTypedDispatch();
+	const user = useTypedSelector(state => state.user);
+	const [showNextPrevious, setShowNextPrevious] = useState(false);
+	const [isModalVisible, setModalVisible] = useState(false);
+	const { selectedUser } = useTypedSelector(state => state.contacts.main);
+	const scrollRef = useRef(null);
+	const [approved, setApproved] = useState(
+		program?.status?.toLowerCase() == 'approved',
+	);
+	const [isOpen, setIsOpen] = useState(false);
+	const [hoveredSession, setHoveredSession] = useState<string | null>(null);
+	const { theme } = useTheme(); 
+
+	useEffect(() => {
+		if (
+			programs?.data?.length === 1 &&
+			session &&
+			programs?.data[0]?.status === 'approved'
+		) {
+			startProgramSession();
+			setSession(false);
+		}
+	}, []);
+
+	useEffect(() => {
+		setApproved(program?.status?.toLowerCase() == 'approved');
+		setExercises(() => {
+			const sortedExercise = [...(program?.exercises ?? [])];
+			return sortedExercise.sort((a, b) => a.order - b.order);
+		});
+	}, [program, isModalVisible]);
+
+	const onScroll = () => {
+		setBulletPosition(
+			Math.floor(
+				(scrollRef.current?.scrollLeft * position()) /
+				scrollRef.current?.scrollWidth,
+			),
+		);
+	};
+
+	const position = () =>
+		Math.floor(scrollRef.current?.scrollWidth / 1300) < 10
+			? Math.floor(scrollRef.current?.scrollWidth / 1300)
+			: 10;
+	const scrollWidth = () => scrollRef.current?.scrollWidth;
+
+	useEffect(() => {
+		setBulletPosition(1);
+	}, [user, selectedUser, refresh]);
+
+	const scrollLeft = () => {
+		const currentPosition = scrollRef.current?.scrollLeft;
+		const targetPosition = currentPosition - 400;
+		scrollToPosition(targetPosition, 300);
+	};
+
+	const scrollRight = () => {
+		const currentPosition = scrollRef.current?.scrollLeft;
+		const targetPosition = currentPosition + 400;
+		scrollToPosition(targetPosition, 300);
+	};
+
+	const scrollToPosition = (targetPosition: number, duration: number) => {
+		const startTime = performance.now();
+		const start = scrollRef.current?.scrollLeft;
+
+		const scroll = timestamp => {
+			const elapsed = timestamp - startTime;
+			const progress = Math.min(elapsed / duration, 1);
+			scrollRef.current.scrollLeft =
+				start + (targetPosition - start) * progress;
+
+			if (progress < 1) {
+				requestAnimationFrame(scroll);
+			}
+		};
+
+		requestAnimationFrame(scroll);
+	};
+
+	const handleApproveProgram = async (
+		program: IProgramData,
+		value: boolean,
+	) => {
+		const programData = {
+			physioterapistId: user?.id,
+			active: value,
+			status: value ? 'approved' : 'draft',
+		};
+		await dispatch(
+			updateProgram({
+				programId: program?.id,
+				programData: programData,
+			}),
+		).then(() =>
+			value
+				? message.success(
+					t('Admin.data.menu.patientDetail.aiAssistantPrograms.approved'),
+				)
+				: message.success(
+					t('Admin.data.menu.patientDetail.aiAssistantPrograms.disapproved'),
+				),
+		);
+		setRefresh(!refresh);
+	};
+
+	const deleteProgram = async (program: IProgramData) => {
+		const programData = {
+			name: program?.name,
+			active: false,
+			duration: program?.duration,
+			durationType: program?.durationType,
+		};
+		await dispatch(
+			updateProgram({
+				programId: program?.id,
+				programData: programData,
+			}),
+		);
+		setRefresh(!refresh);
+	};
+
+	const startProgramSession = () => {
+		dispatch(selectProgram(program));
+		dispatch(selectExercise(exercises));
+		clearNavigation();
+		navigate(
+			`/${user.isPhysioterapist ? selectedUser.id : user.id}${router.AIASSISTANT_PROGRAM_START}`,
+		);
+		dispatch(setActiveTab(''));
+	};
+
+	const startSessionButton = {
+		color: 'var(--button-text-color)',
+		border: 'inherit',
+		backgroundColor:'var(--button-color)',
+		marginTop: '-6px',
+	};
+
+	return (
+		<Collapse
+			className="collapse-panel-container"
+			bordered={false}
+			activeKey={isOpen ? program.id : undefined}>
+			<Collapse.Panel
+				className="header-panel !w-full bg-white !border !border-gray-200 !rounded-xl !mt-2"
+				key={program.id}
+				onClick={() => setIsOpen(!isOpen)}
+				header={
+					<Flex
+						justify="space-between"
+						className="exercise-start-session-button"
+						onMouseEnter={() => setHoveredSession(program.id)}
+						onMouseLeave={() => setHoveredSession(null)}>
+						<Flex gap={4} align="center">
+							<Paragraph className="text-sm font-semibold text-gray-600">
+								{program?.name}
+							</Paragraph>
+							{program?.originType === 'manual' ? (
+								<Tag color="purple">
+									{t('Admin.data.menu.patientDetail.aiAssistantPrograms.byPT')}
+								</Tag>
+							) : (
+								<Tag color="blue">
+									{t('Admin.data.menu.patientDetail.aiAssistantPrograms.byAI')}
+								</Tag>
+							)}
+						</Flex>
+						{user.isPhysioterapist ? (
+							<ExerciseHeader
+								approved={approved}
+								setApproved={setApproved}
+								program={program}
+								startProgramSession={startProgramSession}
+								setModalVisible={setModalVisible}
+								hoveredSession={hoveredSession}
+							/>
+						) : (
+							<div className="!h-6">
+								{' '}
+								<Button
+									style={startSessionButton}
+									className="start-session-css"
+									icon={<PlayCircle height={12} width={12} color="var(--button-text-color)" />}
+									onClick={e => {
+										e.stopPropagation();
+										startProgramSession();
+									}}>
+									{t('Patient.data.myProgress.rehab.startSession')}
+								</Button>
+							</div>
+						)}
+					</Flex>
+				}>
+				{!isLoading ? (
+					program ? (
+						<div
+							className="w-full p-[15px] bg-gray-50 rounded-lg overflow-hidden"
+							onClick={e => e.stopPropagation()}>
+							<Flex align="center" justify="center" className="mb-2">
+								<span className="font-semibold mr-1">
+									{t(
+										'Admin.data.menu.patientDetail.aiAssistantCreateProgramModal.startDate',
+									)}
+								</span>
+								<span className="mx-1">
+									{program?.startAt ? moment(program?.startAt).local().format('LL') : "N/A"}
+								</span>
+								|
+								<span className="ml-1 font-semibold mr-1">
+									{t(
+										'Admin.data.menu.patientDetail.aiAssistantCreateProgramModal.duration',
+									)}
+								</span>
+								<span>{`${program?.duration} ${program?.durationType}`}</span>
+							</Flex>
+							{exercises?.length === 0 ? (
+								<Empty
+									image={Empty.PRESENTED_IMAGE_SIMPLE}
+									description={
+										<span className="text-gray-300">
+											{t(
+												'Admin.data.menu.patientDetail.aiAssistantPrograms.noProgram',
+											)}
+										</span>
+									}
+								/>
+							) : (
+								<div
+									onMouseOver={() => setShowNextPrevious(true)}
+									onMouseOut={() => setShowNextPrevious(false)}
+									className="w-full relative">
+									<Flex
+										ref={scrollRef}
+										className="overflow-x-auto"
+										gap={16}
+										style={{backgroundColor:'var(--collapse-bg-color)', padding:'8px', borderRadius:'8px'}}
+										onScroll={onScroll}>
+										{exercises?.map(item => {
+											return (
+												<div
+													className="border-2 border-gray-200 rounded-lg hover:shadow-2xl cursor-pointer"
+													style={{ minWidth: '220px', maxWidth: '250px' }}>
+													<div
+														onClick={() =>
+															CustomModalInfo({
+																video:
+																	item?.video ||
+																	item?.exerciseLibrary?.videoUrl,
+																name:
+																	item?.name || item?.exerciseLibrary?.title,
+																description:
+																	item?.description ||
+																	item?.exerciseLibrary?.description,
+															})
+														}
+														className="w-full h-auto rounded-lg relative image-wrapper">
+														{item?.image ? (
+															<img
+																src={item?.image}
+																alt=""
+																className="w-full h-[200px] rounded-t-lg"
+																style={{borderTopLeftRadius:'6px', borderTopRightRadius:'6px'}}
+															/>
+														) : (
+															<video
+																className="video"
+																preload="metadata"
+																src={item?.exerciseLibrary?.videoUrl}
+																width="100%"
+																height="100%"
+															/>
+														)}
+														<div className="play-button">
+															<PlayCircle width={50} height={50} />
+														</div>
+													</div>
+													<div className="p-3 w-full">
+														<Paragraph className="text-gray-600 font-semibold text-lg mb-2">
+															{item?.name || item?.exerciseLibrary?.title}
+														</Paragraph>
+														<Paragraph className="text-gray-400 font-semibold text-xs mb-2">
+															{t('Patient.data.rehab.weekly').toLowerCase()}{' '}
+															{item?.weeklyReps}X{' '}
+															{t('Patient.data.rehab.daily').toLowerCase()}{' '}
+															{item?.dailyReps}X{' '}
+															{t('Patient.data.rehab.sets').toLowerCase()}{' '}
+															{item?.sets}X{' '}
+															{t('Patient.data.rehab.reps').toLowerCase()}{' '}
+															{item?.reps}X
+														</Paragraph>
+														<Paragraph className="text-gray-500">
+															{item?.description ||
+																item?.exerciseLibrary?.description}
+														</Paragraph>
+													</div>
+												</div>
+											);
+										})}
+									</Flex>
+									{exercises?.length > 4 && showNextPrevious && (
+										<div>
+											<span
+												className="p-3 absolute top-1/2 left-0 transform -translate-y-1/2 bg-primary-300 hover:bg-primary-600 rounded-r-full cursor-pointer"
+												onClick={scrollLeft}>
+												<ChevronLeft />
+											</span>
+											<span
+												className="p-3 absolute top-1/2 right-0 transform -translate-y-1/2 bg-primary-300 hover:bg-primary-600 rounded-l-full cursor-pointer"
+												onClick={scrollRight}>
+												<ChevronRight />
+											</span>
+										</div>
+									)}
+								</div>
+							)}
+						</div>
+					) : (
+						<Empty
+							image={Empty.PRESENTED_IMAGE_SIMPLE}
+							description={
+								<span className="text-gray-300">
+									{t(
+										'Admin.data.menu.patientDetail.aiAssistantPrograms.noProgram',
+									)}
+								</span>
+							}
+						/>
+					)
+				) : (
+					<ModalContentSkeleton />
+				)}
+			</Collapse.Panel>
+			<AddProgramPopup
+				isEdit
+				onOk={() => {
+					setModalVisible(false);
+					setExercises([]);
+					setRefresh(!refresh);
+				}}
+				deleteProgram={deleteProgram}
+				refresh={refresh}
+				setRefresh={setRefresh}
+				isVisible={isModalVisible}
+				onCancel={() => setModalVisible(false)}
+				selectedExercises={exercises}
+				setSelectedExercises={setExercises}
+				program={program}
+			/>
+		</Collapse>
+	);
+};

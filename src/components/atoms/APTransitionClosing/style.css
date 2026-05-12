@@ -1,0 +1,19 @@
+.closing {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+}
+
+@keyframes flash-fade {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.closing-flash {
+	will-change: opacity;
+}

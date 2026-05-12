@@ -1,0 +1,229 @@
+/* ==========================================
+   ScanVisualState - Unified Visual Feedback
+   Background + Overlay + BorderGlow controller
+   ========================================== */
+
+.scan-visual-state {
+	--scan-transition: 400ms;
+	--content-opacity: 1;
+
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/* Background layer - smooth color transitions */
+.scan-visual-state__background {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background-color: var(--surface-dark);
+	transition: background-color var(--scan-transition) ease-in-out;
+}
+
+/* State-specific background colors using design tokens */
+.scan-visual-state--title .scan-visual-state__background {
+	background-color: var(--color-black-alpha-80);
+}
+
+.scan-visual-state--idle .scan-visual-state__background {
+	background-color: transparent;
+}
+
+.scan-visual-state--calibrating .scan-visual-state__background {
+	background-color: var(--color-black-alpha-80);
+}
+
+.scan-visual-state--error .scan-visual-state__background {
+	background-color: var(--color-error-900);
+}
+
+.scan-visual-state--active .scan-visual-state__background {
+	background-color: var(--color-purple-900);
+}
+
+.scan-visual-state--success .scan-visual-state__background {
+	background-color: var(--color-success-900);
+}
+
+.scan-visual-state--scanning .scan-visual-state__background {
+	background-color: var(--color-purple-900);
+}
+
+/* Content container with opacity for video visibility */
+/* z-index: 10 places content above grid (2) but below overlay (50) */
+/* opacity < 1 creates stacking context, so z-index ensures children stay visible above grid */
+.scan-visual-state__content {
+	position: relative;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	opacity: var(--content-opacity);
+	transition: opacity var(--scan-transition) ease-in-out;
+}
+
+/* Flickering grid overlay - below content so titles appear on top */
+.scan-visual-state__grid {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	pointer-events: none;
+}
+
+/* ==========================================
+   Vignette overlay for idle state
+   Radial gradient: transparent center, dark edges
+   ========================================== */
+.scan-visual-state__vignette {
+	position: absolute;
+	inset: 0;
+	z-index: 50;
+	pointer-events: none;
+	background: radial-gradient(
+		ellipse 60% 50% at center,
+		transparent 0%,
+		transparent 30%,
+		var(--color-black-alpha-30) 50%,
+		var(--color-black-alpha-60) 70%,
+		var(--color-black-alpha-85) 100%
+	);
+	transition: opacity var(--scan-transition) ease-in-out;
+}
+
+/* ==========================================
+   Title slot - above overlay, below captions
+   For title screens with video underneath
+   ========================================== */
+.scan-visual-state__title {
+	position: absolute;
+	inset: 0;
+	z-index: 80;
+	pointer-events: none;
+	animation: title-blur-in 0.8s ease-out forwards;
+}
+
+@keyframes title-blur-in {
+	0% {
+		opacity: 0;
+		filter: blur(20px);
+		transform: scale(1.05);
+	}
+	100% {
+		opacity: 1;
+		filter: blur(0);
+		transform: scale(1);
+	}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.scan-visual-state__title {
+		animation: none;
+		opacity: 1;
+		filter: none;
+		transform: none;
+	}
+}
+
+/* ==========================================
+   Success state content
+   Built-in title and upload progress
+   ========================================== */
+.scan-visual-state__success {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	color: var(--text-color-on-dark);
+	text-align: center;
+}
+
+.scan-visual-state__success-title {
+	font-family: 'Poppins', sans-serif;
+	font-size: 48px;
+	font-weight: var(--font-weight-bold);
+	line-height: 1.2;
+	color: var(--text-on-dark);
+	margin: 0;
+}
+
+.scan-visual-state__upload {
+	width: 100%;
+	max-width: 600px;
+	margin: var(--spacing-5) auto 0;
+	padding: 0 var(--spacing-5);
+}
+
+.scan-visual-state__upload-label {
+	text-align: center;
+	margin-top: var(--spacing-6);
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-color-on-dark);
+}
+
+.scan-visual-state__upload-bar {
+	width: 100%;
+	margin-top: var(--spacing-6);
+	height: 25px;
+	border-radius: 9999px;
+	padding: 2px;
+	border: 1px solid var(--border-primary-on-dark);
+	overflow: hidden;
+	position: relative;
+}
+
+.scan-visual-state__upload-progress {
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		var(--color-success-600),
+		var(--color-success-400),
+		var(--color-success-600)
+	);
+	border-radius: 9999px;
+	animation: upload-shimmer 7s infinite linear;
+	transition: width 0.3s ease-in-out;
+}
+
+@keyframes upload-shimmer {
+	0% {
+		background-position: -200px 0;
+	}
+	100% {
+		background-position: 200px 0;
+	}
+}
+
+/* Responsive success title */
+@media (max-width: 768px) {
+	.scan-visual-state__success-title {
+		font-size: 36px;
+	}
+}
+
+/* ==========================================
+   Captions slot - always on top
+   Above all overlays including BorderGlow
+   ========================================== */
+.scan-visual-state__captions {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 120;
+	pointer-events: auto;
+}
+
+/* ==========================================
+   Reduced motion support
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+	.scan-visual-state__background,
+	.scan-visual-state__content {
+		transition: none;
+	}
+}

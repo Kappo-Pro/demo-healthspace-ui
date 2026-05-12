@@ -1,0 +1,168 @@
+/* DateRangeSelector Component Styles */
+
+.date-range-selector {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+/* Navigation buttons */
+.date-range-selector__nav-button {
+	min-width: var(--spacing-8);
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.date-range-selector__nav-button:hover:not(:disabled) {
+	background-color: var(--color-primary-50);
+	border-color: var(--color-primary-500);
+	color: var(--color-primary-600);
+}
+
+.date-range-selector__nav-button:active:not(:disabled) {
+	transform: scale(0.95);
+}
+
+/* Display button */
+.date-range-selector__display-button {
+	min-width: 200px;
+	justify-content: flex-start;
+	font-weight: var(--font-weight-medium);
+}
+
+.date-range-selector__display-button:hover:not(:disabled) {
+	background-color: var(--color-primary-50);
+	border-color: var(--color-primary-500);
+	color: var(--color-primary-600);
+}
+
+/* Picker dropdown */
+.date-range-selector__picker-dropdown {
+	background: var(--surface-primary);
+	border-radius: var(--border-radius-lg);
+	box-shadow: var(--shadow-lg);
+	padding: var(--spacing-2);
+}
+
+.date-range-selector__panel {
+	/* Ant Design RangePicker panel will be rendered here */
+}
+
+/* Quick filter buttons */
+.date-range-selector__quick-filters {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	flex-wrap: wrap;
+}
+
+.date-range-selector__preset-button {
+	transition: all var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.date-range-selector__preset-button:hover:not(:disabled) {
+	transform: translateY(-1px);
+	box-shadow: var(--shadow-sm);
+}
+
+.date-range-selector__preset-button:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+/* Active preset button */
+.date-range-selector__preset-button.ant-btn-primary {
+	background-color: var(--color-primary-600);
+	border-color: var(--color-primary-600);
+}
+
+.date-range-selector__preset-button.ant-btn-primary:hover {
+	background-color: var(--color-primary-700);
+	border-color: var(--color-primary-700);
+}
+
+/* Dark mode support */
+[data-theme='dark'] .date-range-selector__nav-button:hover:not(:disabled) {
+	background-color: var(--color-primary-900);
+	border-color: var(--color-primary-600);
+	color: var(--color-primary-400);
+}
+
+[data-theme='dark'] .date-range-selector__display-button:hover:not(:disabled) {
+	background-color: var(--color-primary-900);
+	border-color: var(--color-primary-600);
+	color: var(--color-primary-400);
+}
+
+[data-theme='dark'] .date-range-selector__picker-dropdown {
+	background: var(--color-background-secondary);
+	border: 1px solid var(--color-border-secondary);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.date-range-selector {
+		flex-wrap: wrap;
+	}
+
+	.date-range-selector__display-button {
+		min-width: 160px;
+		font-size: var(--font-size-sm);
+	}
+
+	.date-range-selector__quick-filters {
+		width: 100%;
+		justify-content: flex-start;
+	}
+
+	.date-range-selector__preset-button {
+		font-size: var(--font-size-xs);
+		padding: 0 var(--spacing-2);
+		height: var(--spacing-7);
+	}
+}
+
+@media (max-width: 480px) {
+	.date-range-selector__display-button {
+		min-width: 140px;
+	}
+
+	.date-range-selector__quick-filters {
+		gap: var(--spacing-1);
+	}
+
+	.date-range-selector__preset-button {
+		font-size: 11px;
+		padding: 0 var(--spacing-1);
+		height: var(--spacing-6);
+	}
+}
+
+/* Focus states for accessibility */
+.date-range-selector__nav-button:focus-visible,
+.date-range-selector__display-button:focus-visible,
+.date-range-selector__preset-button:focus-visible {
+	outline: 2px solid var(--color-primary-500);
+	outline-offset: 2px;
+}
+
+/* Loading state */
+.date-range-selector--loading {
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+/* Print styles */
+@media print {
+	.date-range-selector__nav-button,
+	.date-range-selector__quick-filters {
+		display: none;
+	}
+
+	.date-range-selector__display-button {
+		border: none;
+		background: transparent;
+		color: var(--color-text-primary);
+	}
+}

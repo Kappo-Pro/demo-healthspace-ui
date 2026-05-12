@@ -1,0 +1,19 @@
+/* Admin Layout Styles */
+
+.admin-layout-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode header */
+[data-theme='dark'] .admin-layout-header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Content area */
+.admin-layout-content {
+  background: var(--bg-page);
+  min-height: calc(100vh - 64px);
+}

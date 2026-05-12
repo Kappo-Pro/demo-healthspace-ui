@@ -1,0 +1,37 @@
+/**
+ * Body Model 3D Styles
+ *
+ * @since EPIC-001-S12
+ */
+
+.body-model-3d {
+	position: relative;
+	width: 100%;
+	height: 600px;
+	background: linear-gradient(
+		to bottom,
+		var(--background-secondary, #1a1a1a),
+		var(--background-tertiary, #0a0a0a)
+	);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+/* Ensure canvas fills container */
+.body-model-3d canvas {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+/* Loading state */
+.body-model-3d--loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.body-model-3d__loading-text {
+	color: var(--text-secondary, #999);
+	font-size: 14px;
+}

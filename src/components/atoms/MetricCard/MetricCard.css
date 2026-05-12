@@ -1,0 +1,81 @@
+/**
+ * MetricCard Component Styles
+ *
+ * Uses design system semantic tokens for consistent styling
+ */
+
+.metric-card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-base);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+.metric-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.metric-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+}
+
+.metric-card-icon {
+  font-size: var(--font-size-xl);
+  color: var(--brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-card-title {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+.metric-card-value {
+  margin-bottom: var(--spacing-2);
+}
+
+.metric-card-value .ant-statistic-content {
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.metric-card-value .ant-statistic-content-suffix {
+  font-size: var(--font-size-xl);
+  color: var(--text-tertiary);
+  margin-left: var(--spacing-1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .metric-card-value .ant-statistic-content {
+    font-size: 1.75rem;
+  }
+
+  .metric-card-value .ant-statistic-content-suffix {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .metric-card-value .ant-statistic-content {
+    font-size: var(--font-size-xl);
+  }
+
+  .metric-card-value .ant-statistic-content-suffix {
+    font-size: var(--font-size-sm);
+  }
+
+  .metric-card-icon {
+    font-size: var(--font-size-lg);
+  }
+}

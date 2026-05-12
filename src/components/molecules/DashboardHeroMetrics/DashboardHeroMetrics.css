@@ -1,0 +1,21 @@
+/**
+ * DashboardHeroMetrics Component Styles
+ */
+
+.dashboard-hero-metrics {
+  width: 100%;
+}
+
+/* Ensure proper spacing on mobile devices */
+@media (max-width: 576px) {
+  .dashboard-hero-metrics .ant-col {
+    margin-bottom: 0;
+  }
+}
+
+/* Consistent card heights on desktop */
+@media (min-width: 576px) {
+  .dashboard-hero-metrics .metric-card {
+    height: 100%;
+  }
+}

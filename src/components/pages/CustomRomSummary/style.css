@@ -1,0 +1,71 @@
+.lightbox-modal.ant-modal {
+	max-width: 1134px;
+}
+
+.lightbox-modal.ant-modal .ant-modal-content {
+	background-color: transparent;
+	box-shadow: var(--shadow-none);
+	padding: 0;
+}
+.collapse-categories-results .ant-collapse-item {
+	position: relative;
+}
+.collapse-categories-results .header-panel {
+	border: 1px solid var(--color-gray-300);
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+}
+
+.collapse-categories-results .header-panel > .ant-collapse-header {
+	position: relative;
+	padding-left: var(--spacing-3); /* Espaço para a faixa */
+	display: flex;
+	align-items: center;
+}
+
+.collapse-categories-results .ant-collapse-item::before {
+	content: '';
+	position: absolute;
+	width: 7px;
+	background-color: var(--panel-color);
+	transition: height 0.3s ease-in-out;
+	height: 100%;
+	border-radius: var(--radius-lg) 0 0 0.5rem;
+}
+
+.collapse-categories-results .header-panel-active::before {
+	height: 100%;
+}
+
+.collapse-categories-results
+	.header-panel[data-color='Optimal Mobility']::before {
+	background-color: var(--color-success-500);
+}
+
+.collapse-categories-results
+	.header-panel[data-color='Functional Mobility']::before {
+	background-color: var(--color-success-400);
+}
+
+.collapse-categories-results
+	.header-panel[data-color='Moderate Restriction']::before {
+	background-color: var(--color-warning-500);
+}
+
+.collapse-categories-results
+	.header-panel[data-color='Restricted Mobility']::before {
+	background-color: var(--color-warning-500);
+}
+
+.collapse-categories-results
+	.header-panel[data-color='Severely Restricted']::before {
+	background-color: var(--color-error-500);
+}
+
+.collapse-categories-results
+	.header-panel[data-color='Critically Impaired']::before {
+	background-color: var(--color-error-600);
+}
+.report-checkbox .ant-checkbox-inner {
+	border: 1px solid var(--color-gray-300) !important;
+}

@@ -1,0 +1,391 @@
+/**
+ * Dark Theme (True Dark Mode)
+ *
+ * A properly designed dark mode with excellent contrast and
+ * reduced eye strain. Uses brand purple accent.
+ * Updated: 2025-11-30 from Figma Design System (node 234:2431)
+ */
+
+[data-theme='dark'] {
+	/* ============================================
+     BRAND (from Figma Dark Mode)
+     ============================================ */
+
+	--brand-primary: #ba57ff; /* Figma: colorPrimary */
+	--brand-primary-hover: #c066ff; /* Figma: colorPrimaryActive */
+	--brand-primary-light: var(--color-purple-400);
+	--brand-secondary: var(--color-purple-500);
+	--brand-accent: var(--color-purple-400);
+
+	/* ============================================
+     SURFACES & BACKGROUNDS (from Figma Dark Mode)
+     Dark purple surfaces with proper hierarchy
+     ============================================ */
+
+	--surface-primary: #261e36; /* Figma: colorBgContainer */
+	--rom-card-primary: #261e36;
+	--pie-chart-text-color: #fff;
+	--video-bg-text: var(--color-black);
+	--surface-secondary: #1a1325; /* Figma: purple-1 */
+	--surface-tertiary: #261e36; /* Figma: colorBgContainer */
+	--surface-elevated: #301c4d; /* Figma: purple-3 */
+	--surface-overlay: #24163a;
+
+	--surface-interactive: #24163a; /* Figma: purple-2 */
+	--surface-interactive-hover: #301c4d; /* Figma: purple-3 */
+	--surface-interactive-active: #3e2069; /* Figma: purple-4 */
+	--surface-hover: #301c4d; /* Figma: purple-3 */
+	--surface-active: #3e2069; /* Figma: purple-4 */
+
+	--surface-brand: #1a1325; /* Figma: purple-1 */
+	--surface-brand-subtle: #24163a; /* Figma: purple-2 */
+	--surface-success: #061c00; /* Figma: green-1 */
+	--surface-warning: #2b2111; /* Figma: gold-1 */
+	--surface-error: #551d1d; /* Figma: red-1 */
+	--surface-info: #111a2c; /* Figma: blue-1 */
+
+	--bg-page: #1a1527; /* Figma: colorBgLayout */
+	--bg-canvas: #261e36; /* Figma: colorBgContainer */
+	--bg-input: #24163a; /* Figma: purple-2 */
+	--bg-disabled: #1a1325; /* Figma: purple-1 */
+
+	/* Fill colors (Ant Design colorFill tokens) */
+	--fill-secondary: rgba(
+		255,
+		255,
+		255,
+		0.06
+	); /* Figma: colorFillSecondary - subtle fill for inactive elements */
+
+	/* Split/Separator color (Ant Design colorSplit token) */
+	--color-split: rgba(
+		255,
+		255,
+		255,
+		0.06
+	); /* Figma: colorSplit - subtle dividers, step connectors */
+
+	/* ============================================
+     TEXT COLORS (from Figma Dark Mode)
+     High contrast for readability
+     ============================================ */
+
+	--text-primary: rgba(255, 255, 255, 0.88); /* Figma: colorText #ffffffe0 */
+	--text-secondary: rgba(
+		255,
+		255,
+		255,
+		0.75
+	); /* Figma: colorTextLabel #ffffffbf */
+	--text-tertiary: rgba(
+		255,
+		255,
+		255,
+		0.45
+	); /* Figma: colorTextDescription #ffffff73 */
+	--text-quaternary: rgba(255, 255, 255, 0.35);
+	--text-placeholder: rgba(255, 255, 255, 0.25);
+	--text-disabled: rgba(255, 255, 255, 0.15);
+
+	--text-on-brand: var(--color-black);
+	--text-on-dark: rgba(255, 255, 255, 0.88);
+	--text-on-light: var(--color-black);
+
+	--text-brand: #ba57ff; /* Figma: colorPrimaryText */
+	--text-link: #ba57ff;
+	--text-link-hover: #c066ff; /* Figma: colorPrimaryActive */
+
+	/* Semantic text (adjusted for dark mode) */
+	--text-success: #60e561; /* Figma: green-6 */
+	--text-warning: #ffb624; /* Figma: gold-6 */
+	--text-error: #f97272; /* Figma: red-6 */
+	--text-info: #1668dc; /* Figma: blue-6 */
+
+	/* ============================================
+     ICON COLORS (from Figma Dark Mode)
+     ============================================ */
+	--icon-color: #b0a0ce; /* Figma: colorStrokeIcon3 */
+	--icon-action: #b0a0ce; /* Action icons in modal headers */
+
+	/* ============================================
+     BORDERS (from Figma Dark Mode)
+     Purple-tinted borders for dark backgrounds
+     ============================================ */
+
+	--border-subtle: #2a1238; /* 2.5:1 contrast - subtle but visible with purple tint */
+	--border-default: var(--color-purple-850); /* #574973 - purple tint */
+	--border-strong: #3d1f4a; /* 4.2:1 contrast - clear separation */
+	--border-brand: var(--brand-primary);
+	--border-focus: var(--brand-primary);
+
+	/* Semantic borders */
+	--border-error: #f97272; /* Figma: red-6 */
+	--border-success: #60e561; /* Figma: green-6 */
+	--border-warning: #ffb624; /* Figma: gold-6 */
+
+	/* ============================================
+     INTERACTIVE STATES (from Figma Dark Mode)
+     ============================================ */
+
+	/* Primary Button */
+	--button-primary-bg: #ba57ff; /* Figma: colorPrimary */
+	--button-primary-bg-hover: #c066ff; /* Figma: colorPrimaryActive */
+	--button-primary-bg-active: #854eca; /* Figma: purple-7 */
+	--button-primary-bg-disabled: #51258f; /* Figma: purple-5 */
+	--button-primary-text: var(--color-black);
+	--button-primary-text-disabled: rgba(255, 255, 255, 0.25);
+
+	/* Secondary Button */
+	--button-secondary-bg: #24163a; /* Figma: purple-2 */
+	--button-secondary-bg-hover: #301c4d; /* Figma: purple-3 */
+	--button-secondary-bg-active: #3e2069; /* Figma: purple-4 */
+	--button-secondary-text: rgba(255, 255, 255, 0.88);
+	--button-secondary-border: #8674a7; /* Figma: colorBorder */
+
+	/* Tertiary Button */
+	--button-tertiary-bg: transparent;
+	--button-tertiary-bg-hover: #24163a; /* Figma: purple-2 */
+	--button-tertiary-bg-active: #301c4d; /* Figma: purple-3 */
+	--button-tertiary-text: rgba(255, 255, 255, 0.88);
+
+	/* Destructive Button */
+	--button-destructive-bg: #d24949; /* Figma: red-4 */
+	--button-destructive-bg-hover: #e35656; /* Figma: red-5 */
+	--button-destructive-bg-active: #ac3b3b; /* Figma: red-3 */
+	--button-destructive-text: var(--color-white);
+
+	/* ============================================
+     FORM ELEMENTS (from Figma Dark Mode node 1460:55335)
+     ============================================ */
+
+	/* Input backgrounds */
+	--input-bg: var(--surface-primary); /* #261e36 - colorBgContainer */
+	--input-bg-hover: var(--surface-primary);
+	--input-bg-focus: var(--surface-primary);
+	--input-bg-disabled: var(--surface-primary);
+	--input-disabled-overlay: var(
+		--color-black-alpha-20
+	); /* Figma: rgba(0,0,0,0.2) */
+
+	/* Input borders */
+	--input-border: #8674a7; /* Figma: colorBorder */
+	--input-border-hover: var(--border-default);
+	--input-border-focus: var(--border-focus); /* #ba57ff - colorPrimary */
+	--input-border-error: var(--border-error);
+
+	/* Input focus ring */
+	--input-focus-ring: 0 0 0 2px var(--border-focus-ring); /* outer glow */
+
+	/* Input text */
+	--input-text: var(--text-primary);
+	--input-text-placeholder: var(
+		--text-placeholder
+	); /* rgba(255,255,255,0.25) */
+	--input-text-disabled: var(--text-disabled);
+
+	/* Input icons */
+	--input-icon: var(--icon-color); /* #b0a0ce - colorStrokeIcon3 */
+
+	/* ============================================
+     COMPONENT-SPECIFIC (from Figma Dark Mode)
+     ============================================ */
+
+	/* Navigation */
+	--nav-bg: #1a1325; /* Figma: purple-1 */
+	--nav-text: rgba(255, 255, 255, 0.88);
+	--nav-text-hover: #c066ff; /* Figma: colorPrimaryActive */
+	--nav-item-active-bg: #301c4d; /* Figma: purple-3 */
+	--nav-item-hover-bg: #24163a; /* Figma: purple-2 */
+	--nav-divider: #3e2069; /* Figma: purple-4 */
+
+	/* Sidebar */
+	--sidebar-bg: #1a1325; /* Figma: purple-1 */
+	--sidebar-border: #3e2069; /* Figma: purple-4 */
+	--sidebar-item-hover-bg: #24163a; /* Figma: purple-2 */
+	--sidebar-item-active-bg: #1b062b; /* purple-950 */
+	--sidebar-item-active-text: #ba57ff; /* Figma: colorPrimary */
+	--sidebar-subnav-bg: #2f273e;
+
+	/* Cards */
+	--card-bg: #261e36; /* Figma: colorBgContainer */
+	--stroke-default-white: var(--color-white);
+	--card-border: #3e2069; /* Figma: purple-4 */
+	--card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5),
+		0 2px 4px -1px rgba(0, 0, 0, 0.3);
+	--card-header-bg: #1a1325; /* Figma: purple-1 */
+	--card-header-border: #3e2069; /* Figma: purple-4 */
+
+	/* Modal */
+	--modal-bg: #261e36; /* Figma: colorBgContainer */
+	--modal-overlay: rgba(26, 19, 37, 0.85); /* Based on purple-1 */
+	--modal-border: #3e2069; /* Figma: purple-4 */
+	--modal-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7),
+		0 10px 10px -5px rgba(0, 0, 0, 0.5);
+
+	/* Dropdown */
+	/* Dropdown components now use Ant Design defaults */
+	/* --dropdown-bg: #252127; */
+	/* --dropdown-border: #2a1238; */
+	/* --dropdown-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5),
+		0 4px 6px -2px rgba(0, 0, 0, 0.3); */
+	/* --dropdown-item-hover-bg: #210c2f; */
+	/* --dropdown-item-active-bg: #210c2f; */
+
+	/* Tooltip */
+	--tooltip-bg: #301c4d; /* Figma: purple-3 */
+	--tooltip-text: rgba(255, 255, 255, 0.88);
+	--tooltip-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+
+	/* Badge */
+	--badge-bg-default: #24163a; /* Figma: purple-2 */
+	--badge-text-default: rgba(255, 255, 255, 0.75);
+	--badge-bg-brand: #301c4d; /* Figma: purple-3 */
+	--badge-text-brand: #ba57ff; /* Figma: colorPrimary */
+	--badge-bg-success: #061c00; /* Figma: green-1 */
+	--badge-text-success: #60e561; /* Figma: green-6 */
+	--badge-bg-warning: #2b2111; /* Figma: gold-1 */
+	--badge-text-warning: #ffb624; /* Figma: gold-6 */
+	--badge-bg-error: #551d1d; /* Figma: red-1 */
+	--badge-text-error: #f97272; /* Figma: red-6 */
+
+	/* Progress */
+	--progress-bg: #24163a; /* Figma: purple-2 */
+	--progress-fill: #ba57ff; /* Figma: colorPrimary */
+	--progress-text: rgba(255, 255, 255, 0.75);
+
+	/* Tabs */
+	--tab-border: #3e2069; /* Figma: purple-4 */
+	--tab-text: rgba(255, 255, 255, 0.45);
+	--tab-text-hover: rgba(255, 255, 255, 0.75);
+	--tab-text-active: #ba57ff; /* Figma: colorPrimary */
+	--tab-indicator: #ba57ff; /* Figma: colorPrimary */
+	--tab-bg-active: #301c4d; /* Figma: purple-3 */
+
+	/* Table */
+	/* --table-border: Uses Ant Design default for proper light/dark mode support */
+	--table-header-bg: #1a1325; /* Figma: purple-1 */
+	--table-header-text: rgba(255, 255, 255, 0.75);
+	--table-row-bg: #261e36; /* Figma: colorBgContainer */
+	--table-row-hover-bg: #301c4d; /* Figma: purple-3 */
+	--table-row-selected-bg: #3e2069; /* Figma: purple-4 */
+
+	/* Card */
+	--card-hover-bg: #2f273e;
+
+	/* Stepper */
+	--stepper-active-bg: #ba57ff; /* Figma: colorPrimary */
+	--stepper-active-text: var(--color-black);
+	--stepper-inactive-bg: var(--fill-secondary); /* Figma: colorFillSecondary */
+	--stepper-inactive-text: rgba(255, 255, 255, 0.45);
+	--stepper-completed-bg: #3e2069; /* Figma: colorPrimaryBg dark - purple-4 */
+	--stepper-completed-icon: #ba57ff; /* Figma: checkmark color in dark mode */
+	--stepper-line-active: #ba57ff; /* Figma: colorPrimary */
+	--stepper-line-inactive: var(--color-split); /* Figma: colorSplit */
+
+	/* Plan Card Overlays - same as light (dark images) */
+	--plan-card-gradient-start: rgba(28, 2, 45, 0.3);
+	--plan-card-gradient-start-hover: rgba(28, 2, 45, 0.7);
+	--plan-card-gradient-end: rgba(159, 48, 237, 0);
+	--plan-card-inner-bg: rgba(33, 7, 52, 0.5);
+
+	/* Loader/Spinner */
+	--loader-primary: #ba57ff; /* Figma: colorPrimary */
+	--loader-secondary: #1a1325; /* Figma: purple-1 */
+
+	/* Divider */
+	--divider-color: #3e2069; /* Figma: purple-4 */
+	--divider-strong: #51258f; /* Figma: purple-5 */
+
+	/* Status */
+	--status-success-bg: #44a345; /* Figma: green-4 */
+	--status-warning-bg: #b37313; /* Figma: gold-4 */
+	--status-error-bg: #d24949; /* Figma: red-4 */
+	--status-info-bg: #15417e; /* Figma: blue-4 */
+
+	/* ============================================
+     LEGACY COMPATIBILITY (updated for Figma Dark Mode)
+     ============================================ */
+
+	--layout-bg-color: #261e36; /* Figma: colorBgContainer */
+	--mainmenu-bg-color: #1a1325; /* Figma: purple-1 */
+	--adminmenu-bg-color: #24163a; /* Figma: purple-2 */
+	--stepper-color: #ba57ff; /* Figma: colorPrimary */
+	--stepper-secondary-color: #c066ff; /* Figma: colorPrimaryActive */
+	--text-color: #ba57ff; /* Figma: colorPrimaryText */
+	--text-color-root: rgba(255, 255, 255, 0.88); /* Figma: colorText */
+	--evaluation-bg-colors: #261e36; /* Figma: colorBgContainer */
+	--evaluation-title-color: #b9aad8; /* Figma: gray-7 */
+	--bodyPoint-label-color: #ba57ff; /* Figma: colorPrimaryText */
+	--settings-button-bg-color: #ba57ff; /* Figma: colorPrimary */
+	--settings-button-text-color: var(--color-black);
+	--content-manager-card-bg-color: #261e36; /* Figma: colorBgContainer */
+	--content-manager-card-header-bg-color: #1a1325; /* Figma: purple-1 */
+	--content-manager-card-header-text-color: rgba(255, 255, 255, 0.88);
+	--tabs-text-color: rgba(255, 255, 255, 0.88);
+	--button-color-primary: #ba57ff; /* Figma: colorPrimary */
+	--loader-bg-color: #ba57ff; /* Figma: colorPrimary */
+	--summary-bg-colors: #261e36; /* Figma: colorBgContainer */
+	--color-background-video-element: #261e36; /* Figma: colorBgContainer */
+	--functional-goal-color: #24163a;
+	--functional-goal-color-unslected: #261e3673;
+}
+
+/* ============================================
+   DARK THEME CSS OVERRIDES (2025-11-30)
+   Applied after CSS variable definitions
+   Uses semantic tokens for consistency
+   ============================================ */
+
+/* Default state - uses semantic input tokens */
+[data-theme='dark'] .ant-input-outlined,
+[data-theme='dark'] .ant-input-outlined:hover,
+[data-theme='dark'] .ant-input-affix-wrapper,
+[data-theme='dark'] .ant-input-affix-wrapper:hover,
+[data-theme='dark'] .ant-select-selector,
+[data-theme='dark'] .ant-select-selector:hover,
+[data-theme='dark'] .ant-picker,
+[data-theme='dark'] .ant-picker:hover {
+	background-color: var(--input-bg);
+	border-color: var(--input-border);
+	box-shadow: none;
+}
+
+/* Focus state - purple border with focus ring */
+[data-theme='dark'] .ant-input-outlined:focus,
+[data-theme='dark'] .ant-input-outlined:focus-within,
+[data-theme='dark'] .ant-input-affix-wrapper:focus,
+[data-theme='dark'] .ant-input-affix-wrapper:focus-within,
+[data-theme='dark'] .ant-input-affix-wrapper-focused,
+[data-theme='dark'] .ant-select-focused .ant-select-selector,
+[data-theme='dark'] .ant-picker-focused {
+	background-color: var(--input-bg-focus);
+	border-color: var(--input-border-focus);
+	box-shadow: var(--input-focus-ring);
+}
+
+/* Disabled state - overlay effect using semantic tokens */
+[data-theme='dark'] .ant-input-disabled,
+[data-theme='dark'] .ant-input-affix-wrapper-disabled,
+[data-theme='dark'] .ant-select-disabled .ant-select-selector,
+[data-theme='dark'] .ant-picker-disabled {
+	background: linear-gradient(
+			var(--input-disabled-overlay),
+			var(--input-disabled-overlay)
+		),
+		var(--input-bg-disabled);
+	border-color: var(--input-border);
+	color: var(--input-text-disabled);
+	cursor: not-allowed;
+}
+
+[data-theme='dark'] .ant-input-disabled::placeholder,
+[data-theme='dark'] .ant-input-affix-wrapper-disabled input::placeholder {
+	color: var(--input-text-placeholder);
+}
+
+/* Update kbd tag background to match table header bg formula */
+[data-theme='dark'] kbd,
+html[data-theme='dark'] kbd {
+	background: color-mix(in srgb, var(--surface-tertiary) 96%, white);
+	border-color: var(--border-subtle);
+}

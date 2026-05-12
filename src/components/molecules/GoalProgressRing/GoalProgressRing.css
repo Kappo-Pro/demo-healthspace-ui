@@ -1,0 +1,172 @@
+/**
+ * GoalProgressRing Styles
+ *
+ * Styles for the circular progress ring component using design system tokens
+ */
+
+/* ============================================
+   Container
+   ============================================ */
+
+.goal-progress-ring {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.goal-progress-ring-svg {
+	display: block;
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+
+.goal-progress-ring-loading {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--color-gray-50);
+	border-radius: var(--radius-full, 50%);
+}
+
+/* ============================================
+   Progress Rings
+   ============================================ */
+
+.progress-ring-background {
+	transition: stroke 0.3s ease;
+}
+
+.progress-ring-circle {
+	transition:
+		stroke-dashoffset 1s ease-in-out,
+		stroke 0.3s ease;
+	transform-origin: center;
+}
+
+/* Color variants */
+.progress-ring-circle-warning {
+	stroke: var(--color-warning-600);
+}
+
+.progress-ring-circle-primary {
+	stroke: var(--color-purple-700);
+}
+
+.progress-ring-circle-success {
+	stroke: var(--color-success-600);
+}
+
+/* ============================================
+   Centered Content
+   ============================================ */
+
+.progress-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	width: 70%;
+	pointer-events: none;
+}
+
+.progress-percentage {
+	font-size: var(--font-size-2xl, 24px);
+	font-weight: var(--font-weight-bold, 700);
+	line-height: var(--line-height-tight, 1);
+	margin-bottom: var(--spacing-1, var(--spacing-1));
+	transition: color 0.3s ease;
+}
+
+/* Color variants for percentage */
+.progress-percentage-warning {
+	color: var(--color-warning-600);
+}
+
+.progress-percentage-primary {
+	color: var(--color-purple-700);
+}
+
+.progress-percentage-success {
+	color: var(--color-success-600);
+}
+
+.progress-title {
+	font-size: var(--font-size-xs, 12px);
+	color: var(--color-gray-600);
+	font-weight: var(--font-weight-medium, 500);
+	line-height: var(--line-height-snug, 1.2);
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+/* Small rings (< 100px) */
+@media (max-width: 100px) {
+	.progress-percentage {
+		font-size: var(--font-size-lg, 18px);
+	}
+
+	.progress-title {
+		font-size: var(--font-size-2xs, 10px);
+	}
+}
+
+/* Large rings (> 150px) */
+@media (min-width: 150px) {
+	.progress-percentage {
+		font-size: var(--font-size-3xl, 30px);
+	}
+
+	.progress-title {
+		font-size: var(--font-size-sm, 14px);
+	}
+}
+
+/* ============================================
+   Dark Mode Support
+   ============================================ */
+
+[data-theme='dark'] .goal-progress-ring-loading {
+	background-color: var(--color-gray-800);
+}
+
+[data-theme='dark'] .progress-ring-background {
+	stroke: var(--color-gray-700);
+}
+
+[data-theme='dark'] .progress-title {
+	color: var(--color-gray-400);
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.progress-ring-circle {
+		transition: none;
+	}
+
+	.progress-percentage {
+		transition: none;
+	}
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.progress-ring-background {
+		stroke: var(--color-gray-400);
+	}
+
+	.progress-title {
+		color: var(--color-gray-900);
+	}
+}

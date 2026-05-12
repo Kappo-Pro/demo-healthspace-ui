@@ -1,0 +1,199 @@
+/* Navigation Bar - Fixed at top */
+.onboard-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 50;
+	background: var(--bg-page); /* Figma: colorBgLayout #1a1527 */
+	user-select: none;
+}
+
+.onboard-nav-top {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	padding: var(--spacing-3) var(--spacing-5);
+	min-height: 56px;
+}
+
+.onboard-nav-left {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.onboard-nav-center {
+	display: flex;
+	justify-content: center;
+}
+
+.onboard-nav-right {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.onboard-nav-back {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border: none;
+	background: transparent;
+	border-radius: var(--radius-full);
+	cursor: pointer;
+	color: var(--text-primary);
+	transition: background-color 0.2s ease;
+}
+
+.onboard-nav-back:hover {
+	background: var(--surface-secondary);
+}
+
+.onboard-nav-avatar {
+	cursor: pointer;
+}
+
+.onboard-nav-logout {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: var(--spacing-2);
+	cursor: pointer;
+}
+
+.onboard-nav-stepper {
+	padding: 0 var(--spacing-5);
+	padding-bottom: var(--spacing-4);
+	overflow-x: auto;
+}
+
+/* Stepper Styling - Match Figma Design */
+.onboard-stepper.ant-steps {
+	gap: 8px;
+	flex-wrap: nowrap;
+	min-width: max-content;
+}
+
+.onboard-stepper .ant-steps-item {
+	flex: 1 1 auto;
+	min-width: 0;
+	position: relative;
+}
+
+/* Custom connector line between steps - inactive by default */
+.onboard-stepper .ant-steps-item:not(:last-child)::after {
+	content: '';
+	position: absolute;
+	top: 12px;
+	left: 100%;
+	width: calc(100% - -80px);
+	height: 1px;
+	background-color: var(--stepper-line-inactive, rgba(0, 0, 0, 0.06));
+	transform: translateX(-50%);
+}
+
+/* Active connector line - from completed to current step */
+.onboard-stepper .ant-steps-item-finish:not(:last-child)::after {
+	background-color: var(--stepper-line-active, var(--brand-primary));
+}
+
+.onboard-stepper .ant-steps-item:last-child {
+	flex: 0 0 auto;
+}
+
+.onboard-stepper .ant-steps-item:last-child .ant-steps-item-tail {
+	display: none !important;
+}
+
+.onboard-stepper .ant-steps-item-icon {
+	width: 24px;
+	height: 24px;
+	font-size: 14px;
+	line-height: 22px;
+	margin-inline-end: 8px;
+}
+
+/* Active step - purple background */
+.onboard-stepper .ant-steps-item-process .ant-steps-item-icon {
+	background-color: var(--brand-primary);
+	border-color: var(--brand-primary);
+}
+
+.onboard-stepper .ant-steps-item-process .ant-steps-item-title {
+	color: var(--text-primary);
+}
+
+/* Waiting steps - subtle background per Figma colorFillSecondary */
+.onboard-stepper .ant-steps-item-wait .ant-steps-item-icon {
+	background-color: var(--stepper-inactive-bg);
+	border-color: transparent;
+}
+
+.onboard-stepper .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon {
+	color: var(--text-tertiary);
+}
+
+.onboard-stepper .ant-steps-item-wait .ant-steps-item-title {
+	color: var(--text-tertiary);
+}
+
+/* Finished steps - light purple bg with gray checkmark (Figma: colorPrimaryBg) */
+.onboard-stepper .ant-steps-item-finish .ant-steps-item-icon {
+	background-color: var(--stepper-completed-bg, #f5eafd);
+	border-color: transparent;
+}
+
+.onboard-stepper .ant-steps-item-finish .ant-steps-item-icon .ant-steps-icon {
+	color: var(--text-on-brand);
+}
+
+.onboard-stepper .ant-steps-item-finish .ant-steps-item-title {
+	color: var(--text-primary);
+}
+
+/* Hide default Ant Design tail - using custom connector instead */
+.onboard-stepper .ant-steps-item-tail {
+	display: none !important;
+}
+
+/* Title styling */
+.onboard-stepper .ant-steps-item-title {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 22px;
+	letter-spacing: -0.42px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 150px;
+}
+
+/* Page Header - Title and Description */
+.onboard-page-header {
+	text-align: center;
+	margin-bottom: var(--spacing-6);
+}
+
+.onboard-page-header-title {
+	font-family: var(--font-family-primary);
+	font-size: 2rem;
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	letter-spacing: -0.96px;
+	line-height: 28px;
+	margin-bottom: var(--spacing-2);
+}
+
+.onboard-page-header-description {
+	font-family: var(--font-family-body);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-normal);
+	color: var(--text-secondary);
+	line-height: var(--line-height-relaxed);
+	margin: 0;
+	max-width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	white-space: pre-line;
+}

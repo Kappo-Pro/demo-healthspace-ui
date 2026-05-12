@@ -1,0 +1,95 @@
+/**
+ * Breadcrumbs Component Styles
+ *
+ * Wrapper styles for Ant Design Breadcrumb component.
+ * Most styling is handled by Ant Design's built-in styles.
+ */
+
+/* ============================================
+   BREADCRUMBS CONTAINER
+   ============================================ */
+
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	min-width: 0; /* Allow truncation */
+}
+
+/* Override Ant Design breadcrumb styles to match our design system */
+.breadcrumbs :global(.ant-breadcrumb) {
+	font-size: 0.875rem;
+	line-height: var(--line-height-normal);
+}
+
+.breadcrumbs :global(.ant-breadcrumb-link) {
+	color: var(--text-secondary);
+	transition: color var(--transition-fast);
+}
+
+.breadcrumbs :global(.ant-breadcrumb-link):hover {
+	color: var(--text-primary);
+}
+
+.breadcrumbs :global(.ant-breadcrumb-separator) {
+	color: var(--text-tertiary);
+}
+
+/* Last breadcrumb (current page) */
+.breadcrumbs
+	:global(.ant-breadcrumb)
+	> :global(ol)
+	> :global(li):last-child
+	:global(.ant-breadcrumb-link) {
+	color: var(--text-primary);
+	font-weight: 500;
+}
+
+/* ============================================
+   RESPONSIVE BEHAVIOR
+   ============================================ */
+
+/* Mobile: Smaller font size */
+@media (max-width: 767px) {
+	.breadcrumbs :global(.ant-breadcrumb) {
+		font-size: 0.8125rem;
+	}
+}
+
+/* ============================================
+   DROPDOWN MENU STYLING
+   ============================================ */
+
+/* Ensure dropdown menu items are theme-aware */
+.breadcrumbs :global(.ant-dropdown-menu) {
+	background: var(--surface-primary);
+	border: 1px solid var(--border-default);
+}
+
+.breadcrumbs :global(.ant-dropdown-menu-item) {
+	color: var(--text-primary);
+}
+
+.breadcrumbs :global(.ant-dropdown-menu-item):hover {
+	background: var(--surface-hover);
+}
+
+/* ============================================
+   DARK THEME ADJUSTMENTS
+   ============================================ */
+
+[data-theme='dark'] .breadcrumbs :global(.ant-breadcrumb-link):hover {
+	color: var(--text-primary);
+}
+
+[data-theme='dark'] .breadcrumbs :global(.ant-dropdown-menu) {
+	background: var(--surface-primary);
+	border-color: var(--border-default);
+}
+
+[data-theme='dark'] .breadcrumbs :global(.ant-dropdown-menu-item) {
+	color: var(--text-primary);
+}
+
+[data-theme='dark'] .breadcrumbs :global(.ant-dropdown-menu-item):hover {
+	background: var(--surface-hover);
+}

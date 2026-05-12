@@ -1,0 +1,556 @@
+/**
+ * Design System - Semantic Tokens
+ *
+ * These tokens provide meaning and purpose to primitive values.
+ * They are context-aware and theme-specific, making it easy to
+ * understand the intended use of each token.
+ *
+ * Use these tokens in your components, NOT the primitive tokens.
+ *
+ * Organization:
+ * - Brand Colors
+ * - Surface/Background Colors
+ * - Text Colors
+ * - Border Colors
+ * - Interactive States
+ * - Component-Specific
+ */
+
+:root {
+	/* ============================================
+     BRAND
+     The primary brand identity colors
+     ============================================ */
+
+	--brand-primary: var(--color-purple-700);
+	--brand-primary-hover: var(--color-purple-800);
+	--brand-primary-light: var(--color-purple-100);
+	--brand-secondary: var(--color-purple-600);
+	--brand-accent: var(--color-purple-500);
+
+	/* ============================================
+     SURFACES & BACKGROUNDS
+     Used for cards, panels, modals, etc.
+     ============================================ */
+
+	/* Primary surfaces */
+	--surface-primary: var(--color-white);
+	--surface-secondary: var(--color-gray-50);
+	--surface-tertiary: var(--color-gray-100);
+
+	/* Elevated surfaces (cards, modals) */
+	--surface-elevated: var(--color-white);
+	--surface-overlay: var(--color-white);
+
+	/* Interactive surfaces */
+	--surface-interactive: var(--color-gray-50);
+	--surface-interactive-hover: var(--color-gray-100);
+	--surface-interactive-active: var(--color-gray-200);
+
+	/* Colored surfaces */
+	--surface-brand: var(--color-purple-50);
+	--surface-brand-subtle: var(--color-purple-25);
+	--surface-success: var(--color-success-50);
+	--surface-warning: var(--color-warning-50);
+	--surface-info: var(--color-info-50);
+
+	/* Interactive surface states - fallback values for initial render */
+	/* These provide default values before ThemeProvider's useEffect runs */
+	/* Theme-specific values in theme files will override these */
+	--surface-hover: var(--color-gray-100);
+	--surface-active: var(--color-gray-200);
+	--surface-error: var(--color-error-50);
+
+	/* Background utilities */
+	--bg-page: var(--color-gray-50);
+	--bg-canvas: var(--color-white);
+	--bg-input: var(--color-white);
+	--bg-disabled: var(--color-gray-100);
+
+	/* Fill colors (Ant Design colorFill tokens) */
+	--fill-secondary: var(
+		--color-black-alpha-5
+	); /* Light: subtle fill for inactive elements */
+
+	/* Split/Separator color (Ant Design colorSplit token) */
+	--color-split: var(
+		--color-black-alpha-5
+	); /* Subtle dividers, step connectors */
+
+	/* ============================================
+     TEXT COLORS
+     Hierarchical text colors for readability
+     ============================================ */
+
+	/* Text hierarchy */
+	--text-primary: var(--color-gray-900);
+	--text-secondary: var(--color-gray-700);
+	--text-tertiary: var(--color-gray-600);
+	--text-quaternary: var(--color-gray-500);
+	--text-placeholder: var(--color-gray-400);
+	--text-disabled: var(--color-gray-400);
+
+	/* Text on colored backgrounds */
+	--text-on-brand: var(--color-white);
+	--text-on-dark: var(--color-white);
+	--text-on-light: var(--color-gray-900);
+
+	/* Semantic text */
+	--text-brand: var(--color-purple-700);
+	--text-success: var(--color-success-700);
+	--text-warning: var(--color-warning-700);
+	--text-error: var(--color-error-700);
+	--text-info: var(--color-info-700);
+
+	/* Interactive text */
+	--text-link: var(--color-purple-700);
+	--text-link-hover: var(--color-purple-800);
+	--text-link-visited: var(--color-purple-900);
+
+	/* Icon colors */
+	--icon-color: var(--color-neutral-800); /* Default for light themes, overridden in dark */
+	--icon-action: var(--color-vf-gray-6); /* #635D65 - Action icons in modal headers */
+
+	/* ============================================
+     BORDER COLORS
+     Subtle to prominent borders
+     ============================================ */
+
+	--border-subtle: var(--color-gray-200);
+	--border-default: var(--color-gray-300);
+	--border-strong: var(--color-gray-400);
+	--border-brand: var(--color-purple-700);
+	--border-error: var(--color-error-500);
+	--border-success: var(--color-success-500);
+	--border-warning: var(--color-warning-500);
+	--border-focus: var(--color-purple-700);
+	--border-disabled: var(--color-gray-200);
+
+	/* ============================================
+     INTERACTIVE STATES
+     Buttons, links, and interactive elements
+     ============================================ */
+
+	/* Primary Button */
+	--button-primary-bg: var(--color-purple-700);
+	--button-primary-bg-hover: var(--color-purple-800);
+	--button-primary-bg-active: var(--color-purple-900);
+	--button-primary-bg-disabled: var(
+		--color-purple-600
+	); /* WCAG AA: 4.96:1 with white text (was purple-300 at 1.70:1) */
+	--button-primary-text: var(--color-white);
+	--button-primary-text-disabled: var(--color-white);
+	--button-primary-border: var(--color-purple-700);
+
+	/* Secondary Button */
+	--button-secondary-bg: var(--color-white);
+	--button-secondary-bg-hover: var(--color-gray-50);
+	--button-secondary-bg-active: var(--color-gray-100);
+	--button-secondary-bg-disabled: var(--color-gray-100);
+	--button-secondary-text: var(--color-gray-700);
+	--button-secondary-text-hover: var(--color-gray-800);
+	--button-secondary-text-active: var(--color-gray-900);
+	--button-secondary-text-disabled: var(--text-disabled);
+	--button-secondary-border: var(--color-gray-300);
+	--button-secondary-border-hover: var(--color-gray-400);
+	--button-secondary-border-active: var(--color-gray-500);
+	--button-secondary-border-disabled: var(--border-disabled);
+
+	/* Tertiary Button (Ghost) */
+	--button-tertiary-bg: transparent;
+	--button-tertiary-bg-hover: var(--color-gray-50);
+	--button-tertiary-bg-active: var(--color-gray-100);
+	--button-tertiary-bg-disabled: transparent;
+	--button-tertiary-text: var(--color-gray-700);
+	--button-tertiary-text-hover: var(--color-gray-800);
+	--button-tertiary-text-active: var(--color-gray-900);
+	--button-tertiary-text-disabled: var(--text-disabled);
+	--button-tertiary-border: transparent;
+	--button-tertiary-border-hover: transparent;
+	--button-tertiary-border-active: transparent;
+	--button-tertiary-border-disabled: transparent;
+
+	/* Destructive Button */
+	--button-destructive-bg: var(--color-error-600);
+	--button-destructive-bg-hover: var(--color-error-700);
+	--button-destructive-bg-active: var(--color-error-800);
+	--button-destructive-text: var(--color-white);
+
+	/* ============================================
+     FORM ELEMENTS
+     Inputs, selects, checkboxes, etc.
+     ============================================ */
+	/* Form components now use Ant Design defaults for automatic light/dark mode support */
+	/* Uncomment these if you need custom overrides for specific use cases */
+
+	/* --input-bg: var(--color-white); */
+	/* --input-bg-disabled: var(--color-gray-50); */
+	/* --input-border: var(--color-gray-300); */
+	/* --input-border-hover: var(--color-gray-400); */
+	/* --input-border-focus: var(--color-purple-700); */
+	/* --input-border-error: var(--color-error-500); */
+	/* --input-text: var(--color-gray-900); */
+	/* --input-text-placeholder: var(--color-gray-400); */
+	/* --input-text-disabled: var(--color-gray-500); */
+
+	/* Focus outline (used by Ant Design inputs) */
+	/* --input-focus-outline-color: var(--color-purple-700); */
+	/* --input-focus-outline-width: 3px; */
+	/* --input-focus-outline-offset: 2px; */
+
+	/* Checkbox/Radio */
+	/* --checkbox-bg: var(--color-white); */
+	/* --checkbox-bg-checked: var(--color-purple-700); */
+	/* --checkbox-bg-disabled: var(--color-gray-100); */
+	/* --checkbox-border: var(--color-gray-300); */
+	/* --checkbox-border-checked: var(--color-purple-700); */
+	/* --checkbox-checkmark: var(--color-white); */
+
+	/* ============================================
+     CONTROL SIZE TOKENS (Semantic Layer)
+     Component-specific size mappings
+     ============================================ */
+
+	/* Button Sizes */
+	--button-height-sm: var(--control-height-sm);
+	--button-height-md: var(--control-height-md);
+	--button-height-lg: var(--control-height-lg);
+	--button-padding-sm: var(--control-padding-sm);
+	--button-padding-md: var(--control-padding-md);
+	--button-padding-lg: var(--control-padding-lg);
+	--button-font-sm: var(--control-font-sm);
+	--button-font-md: var(--control-font-md);
+	--button-font-lg: var(--control-font-lg);
+	--button-radius-sm: var(--control-radius-sm);
+	--button-radius-md: var(--control-radius-md);
+	--button-radius-lg: var(--control-radius-lg);
+	--button-icon-sm: var(--control-icon-sm);
+	--button-icon-md: var(--control-icon-md);
+	--button-icon-lg: var(--control-icon-lg);
+
+	/* Input Sizes */
+	--input-height-sm: var(--control-height-sm);
+	--input-height-md: var(--control-height-md);
+	--input-height-lg: var(--control-height-lg);
+	--input-padding-sm: var(--control-padding-sm);
+	--input-padding-md: var(--control-padding-md);
+	--input-padding-lg: var(--control-padding-lg);
+	--input-padding-vertical-sm: var(--control-padding-vertical-sm);
+	--input-padding-vertical-md: var(--control-padding-vertical-md);
+	--input-padding-vertical-lg: var(--control-padding-vertical-lg);
+	--input-font-sm: var(--control-font-sm);
+	--input-font-md: var(--control-font-md);
+	--input-font-lg: var(--control-font-lg);
+	--input-line-height-sm: var(--control-line-height-sm);
+	--input-line-height-md: var(--control-line-height-md);
+	--input-line-height-lg: var(--control-line-height-lg);
+
+	/* Select Sizes */
+	--select-height-sm: var(--control-height-sm);
+	--select-height-md: var(--control-height-md);
+	--select-height-lg: var(--control-height-lg);
+	--select-padding-sm: var(--control-padding-sm);
+	--select-padding-md: var(--control-padding-md);
+	--select-padding-lg: var(--control-padding-lg);
+
+	/* Dropdown Sizes */
+	--dropdown-item-height-sm: var(--control-height-sm);
+	--dropdown-item-height-md: var(--control-height-md);
+	--dropdown-item-height-lg: var(--control-height-lg);
+	--dropdown-item-padding-sm: var(--control-padding-sm);
+	--dropdown-item-padding-md: var(--control-padding-md);
+	--dropdown-item-padding-lg: var(--control-padding-lg);
+
+	/* ============================================
+     COMPONENT-SPECIFIC
+     Special tokens for specific components
+     ============================================ */
+
+	/* Navigation */
+	--nav-bg: var(--color-purple-700);
+	--nav-text: var(--color-white);
+	--nav-text-hover: var(--color-purple-100);
+	--nav-item-active-bg: var(--color-purple-600);
+	--nav-item-hover-bg: var(--color-purple-800);
+	--nav-divider: var(--color-purple-600);
+
+	/* Sidebar */
+	--sidebar-bg: var(--color-white);
+	--sidebar-border: var(--color-gray-200);
+	--sidebar-item-hover-bg: var(--color-gray-50);
+	--sidebar-item-active-bg: var(--color-purple-950);
+	--sidebar-item-active-text: var(--color-white);
+
+	/* Cards */
+	--card-bg: var(--color-white);
+	--card-border: var(--color-gray-200);
+	--card-shadow: var(--shadow-sm);
+	--card-header-bg: var(--color-gray-50);
+	--card-header-border: var(--color-gray-200);
+
+	/* Modal */
+	--modal-bg: var(--color-white);
+	--modal-overlay: var(--color-black-alpha-50);
+	--modal-border: var(--color-gray-200);
+	--modal-shadow: var(--shadow-2xl);
+
+	/* Dropdown */
+	--dropdown-bg: var(--color-white);
+	--dropdown-border: var(--color-gray-200);
+	--dropdown-shadow: var(--shadow-lg);
+	--dropdown-item-hover-bg: var(--color-gray-50);
+	--dropdown-item-active-bg: var(--color-purple-50);
+
+	/* Tooltip */
+	--tooltip-bg: var(--color-gray-900);
+	--tooltip-text: var(--color-white);
+	--tooltip-shadow: var(--shadow-lg);
+
+	/* Badge */
+	--badge-bg-default: var(--color-gray-100);
+	--badge-text-default: var(--color-gray-700);
+	--badge-bg-brand: var(--color-purple-100);
+	--badge-text-brand: var(
+		--color-purple-800
+	); /* WCAG AA: 5.74:1 on purple-100 bg (was purple-700 at 4.26:1) */
+	--badge-bg-success: var(--color-success-100);
+	--badge-text-success: var(--color-success-700);
+	--badge-bg-warning: var(--color-warning-100);
+	--badge-text-warning: var(--color-warning-700);
+	--badge-bg-error: var(--color-error-100);
+	--badge-text-error: var(--color-error-700);
+
+	/* Progress */
+	--progress-bg: var(--color-gray-200);
+	--progress-fill: var(--color-purple-700);
+	--progress-text: var(--color-gray-700);
+
+	/* Tabs */
+	--tab-border: var(--color-gray-200);
+	--tab-text: var(--color-gray-600);
+	--tab-text-hover: var(--color-gray-800);
+	--tab-text-active: var(--color-purple-700);
+	--tab-indicator: var(--color-purple-700);
+	--tab-bg-active: var(--color-purple-50);
+
+	/* Table */
+	/* --table-border: Uses Ant Design default for proper light/dark mode support */
+	--table-header-bg: var(--color-gray-50);
+	--table-header-text: var(--color-gray-700);
+	--table-row-bg: var(
+		--surface-elevated
+	); /* Explicit table row background token */
+	--table-row-hover-bg: var(--color-gray-50);
+	--table-row-selected-bg: var(--color-purple-50);
+
+	/* Stepper */
+	--stepper-active-bg: var(--color-purple-700);
+	--stepper-active-text: var(--color-white);
+	--stepper-inactive-bg: var(--color-gray-200);
+	--stepper-inactive-text: var(--color-gray-600);
+	--stepper-completed-bg: var(--color-purple-600);
+	--stepper-line: var(--color-gray-300);
+
+	/* Loader/Spinner */
+	--loader-primary: var(--color-purple-700);
+	--loader-secondary: var(--color-purple-200);
+
+	/* Divider */
+	--divider-color: var(--color-gray-200);
+	--divider-strong: var(--color-gray-300);
+
+	/* ============================================
+     STATUS COLORS
+     For status indicators, notifications, etc.
+     ============================================ */
+
+	--status-success-bg: var(--color-success-500);
+	--status-success-text: var(--color-white);
+	--status-warning-bg: var(--color-warning-500);
+	--status-warning-text: var(--color-white);
+	--status-error-bg: var(--color-error-500);
+	--status-error-text: var(--color-white);
+	--status-info-bg: var(--color-info-500);
+	--status-info-text: var(--color-white);
+	--status-neutral-bg: var(--color-gray-500);
+	--status-neutral-text: var(--color-white);
+
+	/* ============================================
+     ROLE COLORS
+     For user role indicators in tables
+     ============================================ */
+
+	--role-user-text: #0e7490;
+	--role-admin-text: #c4320a;
+	--role-super-admin-text: #6e3ff3;
+
+	/* ============================================
+     TABLE STATUS COLORS
+     For status indicators in table rows
+     ============================================ */
+
+	--table-status-accepted-text: var(--color-success-700);
+	--table-status-active-text: var(--color-success-700);
+	--table-status-not-accepted-text: var(--color-error-700);
+	--table-status-inactive-text: var(--color-error-700);
+
+	/* ============================================
+     CHART & DATA VISUALIZATION COLORS
+     For charts, graphs, and data visualizations
+     ============================================ */
+
+	/* Body part tracking colors (posture analysis) */
+	--chart-body-ear: #5b8ff9; /* Blue - Ear tracking */
+	--chart-body-shoulder: var(
+		--color-success-400
+	); /* Green - Shoulder tracking */
+	--chart-body-elbow: var(--color-warning-300); /* Yellow - Elbow tracking */
+	--chart-body-hip: var(--color-warning-600); /* Orange - Hip tracking */
+	--chart-body-knee: var(--brand-secondary); /* Purple - Knee tracking */
+	--chart-body-ankle: #00CED1; /* Cyan/Teal - Ankle tracking */
+
+	/* Generic data series colors (for general charts) */
+	--chart-series-1: #5b8ff9; /* Blue - Primary data series */
+	--chart-series-2: var(
+		--color-success-400
+	); /* Green - Secondary data series */
+	--chart-series-3: var(
+		--color-warning-300
+	); /* Yellow - Tertiary data series */
+	--chart-series-4: var(
+		--color-warning-600
+	); /* Orange - Quaternary data series */
+	--chart-series-5: var(--brand-secondary); /* Purple - Quinary data series */
+	--chart-series-6: #101323; /* Dark - Senary data series */
+
+	/* ============================================
+     ALPHA OPACITY - SEMANTIC TOKENS
+     Purpose-based transparent colors
+     ============================================ */
+
+	/* Overlay Tokens - for modal backdrops and overlays */
+	--overlay-backdrop-light: var(--color-black-alpha-20);
+	--overlay-backdrop-medium: var(--color-black-alpha-45);
+	--overlay-backdrop-dark: var(--color-black-alpha-60);
+	--overlay-backdrop-heavy: var(--color-black-alpha-80);
+
+	/* Hover State Overlays - for interactive elements */
+	--hover-overlay-brand: var(--color-purple-alpha-10);
+	--hover-overlay-subtle: var(--color-gray-alpha-5);
+	--hover-overlay-default: var(--color-gray-alpha-10);
+	--hover-overlay-strong: var(--color-gray-alpha-20);
+
+	/* Active/Pressed State Overlays */
+	--active-overlay-brand: var(--color-purple-alpha-20);
+	--active-overlay-default: var(--color-gray-alpha-15);
+
+	/* Surface Overlays - for tooltips and elevated surfaces */
+	--surface-overlay-opaque: var(--color-white-alpha-95);
+	--surface-overlay-translucent: var(--color-white-alpha-90);
+	--surface-overlay-frosted: var(--color-white-alpha-80);
+
+	/* Disabled State Overlays */
+	--disabled-overlay: var(--color-gray-alpha-50);
+	--disabled-overlay-light: var(--color-gray-alpha-30);
+
+	/* Focus Indicator Overlays */
+	--focus-overlay: var(--color-purple-alpha-15);
+
+	/* Semantic State Overlays */
+	--success-overlay-subtle: var(--color-success-alpha-5);
+	--success-overlay-default: var(--color-success-alpha-10);
+	--warning-overlay-subtle: var(--color-warning-alpha-5);
+	--warning-overlay-default: var(--color-warning-alpha-10);
+	--error-overlay-subtle: var(--color-error-alpha-5);
+	--error-overlay-default: var(--color-error-alpha-10);
+	--info-overlay-subtle: var(--color-info-alpha-5);
+	--info-overlay-default: var(--color-info-alpha-10);
+
+	/* Border Overlays - for subtle borders with transparency */
+	--border-overlay-subtle: var(--color-gray-alpha-10);
+	--border-overlay-default: var(--color-gray-alpha-20);
+	--border-overlay-strong: var(--color-gray-alpha-40);
+
+	/* Loading/Shimmer Overlays */
+	--shimmer-overlay: var(--color-white-alpha-40);
+	--skeleton-overlay: var(--color-gray-alpha-10);
+
+	/* Scrim/Mask Overlays - for image overlays and masks */
+	--scrim-gradient-start: var(--color-black-alpha-60);
+	--scrim-gradient-end: var(--color-black-alpha-10);
+
+	/* ============================================
+     SEMANTIC MOTION TOKENS
+     Component-specific animation transitions
+     ============================================ */
+
+	/* Button Transitions */
+	--transition-button: background-color var(--motion-duration-fast)
+			var(--motion-ease-out),
+		border-color var(--motion-duration-fast) var(--motion-ease-out),
+		color var(--motion-duration-fast) var(--motion-ease-out),
+		box-shadow var(--motion-duration-fast) var(--motion-ease-out);
+
+	/* Input/Form Transitions */
+	--transition-input: border-color var(--motion-duration-fast)
+			var(--motion-ease-out),
+		box-shadow var(--motion-duration-fast) var(--motion-ease-out),
+		background-color var(--motion-duration-fast) var(--motion-ease-out);
+
+	/* Modal Transitions */
+	--transition-modal: all var(--motion-duration-base)
+		var(--motion-ease-out-circ);
+	--transition-modal-mask: opacity var(--motion-duration-base)
+		var(--motion-ease-linear);
+
+	/* Dropdown/Menu Transitions */
+	--transition-dropdown: all var(--motion-duration-fast)
+		var(--motion-ease-out-circ);
+
+	/* Tooltip Transitions (fastest - instant feedback) */
+	--transition-tooltip: opacity var(--motion-duration-instant)
+		var(--motion-ease-out);
+
+	/* Drawer Transitions (slide animation) */
+	--transition-drawer: transform var(--motion-duration-base)
+		var(--motion-ease-out-circ);
+
+	/* Card Transitions */
+	--transition-card: box-shadow var(--motion-duration-fast)
+			var(--motion-ease-out),
+		transform var(--motion-duration-fast) var(--motion-ease-out);
+
+	/* Tab Transitions */
+	--transition-tab: color var(--motion-duration-fast) var(--motion-ease-out),
+		background-color var(--motion-duration-fast) var(--motion-ease-out),
+		border-color var(--motion-duration-fast) var(--motion-ease-out);
+
+	/* Switch/Toggle Transitions */
+	--transition-switch: background-color var(--motion-duration-instant)
+			var(--motion-ease-out),
+		transform var(--motion-duration-instant) var(--motion-ease-out);
+
+	/* Collapse/Accordion Transitions */
+	--transition-collapse: height var(--motion-duration-base)
+		var(--motion-ease-in-out);
+
+	/* Notification/Alert Transitions */
+	--transition-notification: all var(--motion-duration-base)
+		var(--motion-ease-out-back);
+
+	/* Page Transitions (complex) */
+	--transition-page: opacity var(--motion-duration-slower)
+		var(--motion-ease-in-out);
+
+	/* Hover State Transitions (general interactive elements) */
+	--transition-hover: background-color var(--motion-duration-fast)
+			var(--motion-ease-out),
+		color var(--motion-duration-fast) var(--motion-ease-out),
+		border-color var(--motion-duration-fast) var(--motion-ease-out),
+		box-shadow var(--motion-duration-fast) var(--motion-ease-out);
+
+	/* Focus State Transitions */
+	--transition-focus: box-shadow var(--motion-duration-instant)
+			var(--motion-ease-out),
+		border-color var(--motion-duration-instant) var(--motion-ease-out);
+}

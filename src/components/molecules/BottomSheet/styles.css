@@ -1,0 +1,65 @@
+/* Mobile Bottom Sheet Styles */
+
+.mobile-bottom-sheet {
+	/* Ensure proper stacking */
+	z-index: 1000;
+}
+
+.mobile-bottom-sheet .ant-drawer-content-wrapper {
+	border-top-left-radius: var(--border-radius-xl);
+	border-top-right-radius: var(--border-radius-xl);
+	overflow: hidden;
+}
+
+.mobile-bottom-sheet .ant-drawer-header {
+	border-bottom: 1px solid var(--color-border-secondary);
+	padding: var(--spacing-4);
+	border-top-left-radius: var(--border-radius-xl);
+	border-top-right-radius: var(--border-radius-xl);
+}
+
+.mobile-bottom-sheet .ant-drawer-body {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Pull handle indicator */
+.mobile-bottom-sheet .ant-drawer-header::before {
+	content: '';
+	display: block;
+	width: var(--spacing-10);
+	height: var(--spacing-1);
+	background: var(--color-border-tertiary);
+	border-radius: var(--border-radius-full);
+	margin: 0 auto var(--spacing-2);
+}
+
+/* Touch-friendly close button */
+.mobile-bottom-sheet .ant-drawer-close {
+	min-width: var(--spacing-11);
+	min-height: var(--spacing-11);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Responsive behavior */
+@media (min-width: 768px) {
+	/* On larger screens, show as centered modal instead */
+	.mobile-bottom-sheet .ant-drawer-content-wrapper {
+		max-width: 600px;
+		margin: 0 auto;
+		border-radius: var(--border-radius-xl);
+	}
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	.mobile-bottom-sheet .ant-drawer-content {
+		background: var(--surface-primary);
+	}
+
+	.mobile-bottom-sheet .ant-drawer-header {
+		background: var(--color-background-secondary);
+	}
+}

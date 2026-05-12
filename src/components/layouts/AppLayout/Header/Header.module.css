@@ -1,0 +1,440 @@
+/**
+ * Header Component Styles
+ *
+ * Top navigation bar with:
+ * - Fixed/sticky positioning
+ * - Responsive layout
+ * - Search bar
+ * - User menu
+ * - Theme toggle
+ * - Mobile menu button
+ */
+
+/* ============================================
+   HEADER CONTAINER
+   ============================================ */
+
+.header {
+	position: sticky;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--layout-header-height);
+	padding: var(--space-5) 0 var(--space-3) 0; /* 24px top, 12px bottom - gap to content */
+	background: transparent; /* Background moved to headerContainer */
+	border-bottom: 1px solid var(--header-border);
+	z-index: var(--z-header);
+	transition: all var(--transition-fast);
+	max-width: var(
+		--layout-content-max-width
+	); /* Match content max-width for alignment */
+	width: 100%; /* Ensure it spans available space */
+}
+
+.header.sticky {
+	position: sticky;
+}
+
+/* ============================================
+   HEADER INNER CONTAINER
+   ============================================ */
+
+.headerContainer {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-height: 0; /* Prevent flex overflow */
+	background: var(--surface-tertiary);
+	border-radius: var(--radius-xl);
+	overflow: visible; /* Allow dropdowns to overflow */
+	height: 100%; /* Fill header height */
+}
+
+.headerContent {
+	/* Ant Design Flex component handles display, align, justify, and gap */
+	height: 100%;
+	padding: 0 var(--space-4);
+	max-width: 100%;
+}
+
+/* ============================================
+   HEADER SECTIONS (Left, Center, Right)
+   ============================================ */
+
+.headerLeft,
+.headerCenter,
+.headerRight {
+	/* Ant Design Space component handles display, align-items, and gap for Left/Right sections */
+	/* Center section uses div but still needs minimal styling */
+}
+
+.headerLeft {
+	flex: 0 1 auto;
+	min-width: 0; /* Allow flex items to shrink */
+}
+
+/* ============================================
+   PAGE TITLE
+   ============================================ */
+
+.pageTitleWrapper {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.pageTitle {
+	margin: 0;
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* ============================================
+   PAGE BADGE (next to title)
+   ============================================ */
+
+.pageBadge {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 20px;
+	height: 20px;
+	padding: 0 var(--spacing-2);
+	background: var(--brand-primary);
+	color: var(--text-on-brand);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-semibold);
+	border-radius: var(--radius-full);
+}
+
+/* Badge color variants */
+.pageBadge[data-badge-color='primary'] {
+	background: var(--brand-primary);
+	color: var(--text-on-brand);
+}
+
+.pageBadge[data-badge-color='success'],
+.pageBadge[data-badge-color='green'] {
+	background: var(--color-success-500);
+	color: var(--color-white);
+}
+
+.pageBadge[data-badge-color='warning'],
+.pageBadge[data-badge-color='orange'] {
+	background: var(--color-warning-500);
+	color: var(--color-gray-900);
+}
+
+.pageBadge[data-badge-color='yellow'] {
+	background: var(--color-yellow-500);
+	color: var(--color-gray-900);
+}
+
+.pageBadge[data-badge-color='error'],
+.pageBadge[data-badge-color='red'] {
+	background: var(--color-error-500);
+	color: var(--color-white);
+}
+
+.pageBadge[data-badge-color='info'],
+.pageBadge[data-badge-color='blue'] {
+	background: var(--color-info-500);
+	color: var(--color-white);
+}
+
+.pageBadge[data-badge-color='purple'] {
+	background: var(--color-purple-500);
+	color: var(--color-white);
+}
+
+.pageBadge[data-badge-color='default'] {
+	background: var(--text-tertiary);
+	color: var(--color-white);
+}
+
+.headerCenter {
+	flex: 1 1 auto;
+	display: flex; /* Keep display flex for centering single child */
+	justify-content: center;
+	max-width: 400px; /* Limit search bar width */
+}
+
+.headerRight {
+	flex: 0 1 auto;
+}
+
+/* ============================================
+   TOGGLE BUTTON (Desktop sidebar control)
+   ============================================ */
+
+.toggleButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	border: none;
+	background: transparent;
+	border-radius: var(--radius-base);
+	cursor: pointer;
+	color: var(--text-secondary);
+	transition: all var(--transition-fast);
+}
+
+.toggleButton:hover {
+	background: var(--surface-hover);
+	color: var(--brand-primary);
+}
+
+.toggleButton:active {
+	transform: scale(0.95);
+}
+
+/* ============================================
+   MENU BUTTON (Mobile hamburger)
+   ============================================ */
+
+.menuButton {
+	display: none; /* Hidden on desktop */
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	border: none;
+	background: transparent;
+	border-radius: var(--radius-base);
+	cursor: pointer;
+	color: var(--text-secondary);
+	transition: all var(--transition-fast);
+}
+
+.menuButton:hover {
+	background: var(--surface-hover);
+	color: var(--text-primary);
+}
+
+.menuButton svg {
+	width: 24px;
+	height: 24px;
+}
+
+/* Show menu button on mobile */
+@media (max-width: 767px) {
+	.menuButton {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Hide desktop toggle button on mobile */
+	.toggleButton {
+		display: none;
+	}
+}
+
+/* ============================================
+   SEARCH BAR
+   ============================================ */
+
+.searchBar {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+	width: 100%;
+	max-width: 480px;
+	height: 40px;
+	padding: 0 var(--space-3);
+	background: var(--surface-secondary);
+	border: 0;
+	border-radius: var(--radius-base);
+	transition: all var(--transition-fast);
+}
+
+.searchBar:hover {
+	background: var(--surface-secondary);
+}
+
+.searchBar.focused {
+	border-color: var(--brand-primary);
+	background: var(--surface-secondary);
+	box-shadow: 0 0 0 3px var(--brand-primary-alpha);
+}
+
+.searchBar svg {
+	width: 20px;
+	height: 20px;
+	color: var(--text-tertiary);
+	flex-shrink: 0;
+}
+
+.searchInput {
+	flex: 1;
+	border: none;
+	background: transparent;
+	color: var(--text-primary);
+	font-size: 0.875rem;
+	outline: none;
+}
+
+.searchInput::placeholder {
+	color: var(--text-tertiary);
+}
+
+.searchShortcut {
+	display: none; /* Hidden on mobile */
+	padding: var(--space-1) var(--space-2);
+	background: var(--surface-tertiary);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-sm);
+	font-size: 0.75rem;
+	font-family: monospace;
+	color: var(--text-tertiary);
+	flex-shrink: 0;
+}
+
+/* Show keyboard shortcut on larger screens */
+@media (min-width: 768px) {
+	.searchShortcut {
+		display: block;
+	}
+}
+
+/* ============================================
+   THEME TOGGLE
+   ============================================ */
+
+.themeToggle {
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	border: none;
+	background: transparent;
+	border-radius: var(--radius-base);
+	cursor: pointer;
+	color: var(--text-secondary);
+	transition: all var(--transition-fast);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.themeToggle:hover {
+	background: var(--surface-hover);
+	color: var(--text-primary);
+	transform: rotate(15deg);
+}
+
+.themeToggle:active {
+	transform: rotate(0deg) scale(0.95);
+}
+
+.themeToggle svg {
+	width: 20px;
+	height: 20px;
+}
+
+/* ============================================
+   CONTEXT BAR (Optional secondary bar below header)
+   ============================================ */
+
+.contextBar {
+	height: var(--layout-context-bar-height);
+	background: var(--surface-secondary);
+	border-bottom: 1px solid var(--border-subtle);
+	padding: 0 var(--space-4);
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+}
+
+/* ============================================
+   RESPONSIVE BEHAVIOR
+   ============================================ */
+
+/* Mobile: Simplified layout */
+@media (max-width: 767px) {
+	.header {
+		padding: var(--space-3) 0 var(--space-3) 0; /* 12px vertical - gap to content */
+	}
+
+	.headerContainer {
+		border-radius: 15px; /* Smaller radius for mobile */
+	}
+
+	.headerContent {
+		padding: 0 var(--space-3);
+	}
+
+	.headerCenter {
+		flex: 1 1 auto;
+		max-width: none;
+	}
+
+	.searchBar {
+		max-width: none;
+	}
+
+	.headerRight {
+		gap: var(--space-2);
+	}
+}
+
+/* Tablet: Adjust spacing */
+@media (min-width: 768px) and (max-width: 1023px) {
+	.headerCenter {
+		max-width: 400px;
+	}
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.toggleButton:focus-visible,
+.menuButton:focus-visible,
+.themeToggle:focus-visible {
+	outline: 2px solid var(--brand-primary);
+	outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.header,
+	.searchBar,
+	.toggleButton,
+	.themeToggle,
+	.menuButton {
+		transition-duration: 0.01ms !important;
+	}
+
+	.toggleButton:active,
+	.themeToggle:hover,
+	.themeToggle:active {
+		transform: none;
+	}
+}
+
+/* ============================================
+   DARK THEME ADJUSTMENTS
+   ============================================ */
+
+[data-theme='dark'] .header {
+	border-bottom-color: var(--header-border);
+}
+
+[data-theme='dark'] .searchBar {
+	background: var(--bg-page);
+}
+
+[data-theme='dark'] .searchBar:hover {
+	background: var(--bg-page);
+}
+
+[data-theme='dark'] .searchBar.focused {
+	background: var(--bg-page);
+}

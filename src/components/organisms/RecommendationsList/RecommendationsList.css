@@ -1,0 +1,87 @@
+/**
+ * RecommendationsList Styles
+ * EPIC-019-S4: Recommendations List Organism
+ *
+ * Uses design system tokens for consistent theming
+ */
+
+.recommendations-list {
+	width: 100%;
+}
+
+.recommendations-header {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: var(--spacing-4);
+	font-size: var(--font-size-xl);
+	font-weight: bold;
+	color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+	.recommendations-header {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
+
+.recommendations-title {
+	display: block;
+}
+
+.recommendations-description {
+	color: var(--text-secondary);
+	font-size: var(--font-size-base);
+	font-weight: normal;
+}
+
+/* Pagination Container */
+.recommendations-list-pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: var(--spacing-xl, var(--spacing-6));
+	padding-top: var(--spacing-lg, var(--spacing-4));
+}
+
+/* Error State */
+.recommendations-list-error {
+	margin: var(--spacing-xl, var(--spacing-6)) 0;
+}
+
+/* Empty State */
+.recommendations-list-empty {
+	padding: var(--spacing-2xl, var(--spacing-8));
+	margin: var(--spacing-xl, var(--spacing-6)) 0;
+}
+
+.recommendations-list-empty-hint {
+	margin-top: var(--spacing-md, var(--spacing-3));
+	color: var(--color-text-secondary, #666666);
+	font-size: var(--font-size-sm);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+	.recommendations-list {
+		padding: var(--spacing-md, var(--spacing-3));
+	}
+
+	.recommendations-list-pagination {
+		margin-top: var(--spacing-lg, var(--spacing-4));
+	}
+
+	.recommendations-list-empty {
+		padding: var(--spacing-lg, var(--spacing-4));
+	}
+}
+
+@media (max-width: 480px) {
+	.recommendations-list {
+		padding: var(--spacing-sm, var(--spacing-2));
+	}
+
+	.recommendations-list-empty-hint {
+		font-size: 13px;
+	}
+}

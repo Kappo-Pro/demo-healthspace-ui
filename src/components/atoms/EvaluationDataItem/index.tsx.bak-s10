@@ -1,0 +1,59 @@
+import SummuryOptionsList from "@atoms/CoachSummaryButtonExportPainAssessment/SummaryOptionsList";
+import { IStrapiHealthSign, IStrapiMedicalHistory, TDataProps } from '@types';
+import { useTranslation } from "react-i18next";
+import './style.css'
+
+export const EvaluationDataItem = ({ evaluationData }: {evaluationData: TDataProps}) => {
+  const { t } = useTranslation()
+
+  return <div className="evaluation-data-item">
+    <div className="pain-summary-title-container">
+      <span className="pain-summary-title">{t('Patient.data.myProgress.evaluation.painSummary')}</span>
+    </div>
+    <ul id="painSummaryEditor" className="medium-editable pain-summary-editor" style={{color: 'var(--p-text-color-root)'}}>
+      {
+        evaluationData?.painAssessments?.map((item, index) => {
+          return (
+            <li className="summary-option-list-container" key={index} style={{color: 'var(--text-color-root)'}}>
+              <SummuryOptionsList item={item} />
+            </li>
+          )
+        })
+      }
+    </ul>
+    <div className="associated-sysmptoms-title-container" style={{color: 'var(--p-text-color-root)'}}>
+      <span className="associated-sysmptoms-title">{t('Patient.data.myProgress.evaluation.associatedSymptoms')}</span>
+    </div>
+    <ul id="associatedSymptomsEditor" className="associated-sysmptoms-container">
+      <div className="do-you-have-sysmptoms-container">
+        <span className="do-you-have-sysmptoms">{t('Patient.data.myProgress.evaluation.doYouHaveAnyOfTheseSymptoms')}</span>
+      </div>
+      {
+        evaluationData?.healthSigns?.strapiHealthSigns?.map((element: IStrapiHealthSign, index: number) => {
+          return (
+            <li className="strapi-health-signs" key={index} style={{color:'var(--text-color-root)'}}>
+              <span className="font-regular">{element.name}</span>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <div className="medical-history-title-container">
+      <span className="medical-history-title">{t('Patient.data.myProgress.evaluation.medicalHistory')}</span>
+    </div>
+    <ul id="medicalHistoryEditor" className="container medical-history-container">
+      <div className="have-you-been-diagnosed-container">
+        <span className="have-you-been-diagnosed">{t('Patient.data.myProgress.evaluation.haveYouBeenDiagnosedWithAnyOfTheFollowing')}</span>
+      </div>
+      {
+        evaluationData?.medicalHistories?.strapiMedicalHistories?.map((data: IStrapiMedicalHistory, i: number) => {
+          return (
+            <li className="medical-history-data" key={i} style={{color:'var(--text-color-root)'}}>
+              <span className="font-regular">{data.name}</span>
+            </li>
+          )
+        })
+      }
+    </ul>
+  </div>
+}

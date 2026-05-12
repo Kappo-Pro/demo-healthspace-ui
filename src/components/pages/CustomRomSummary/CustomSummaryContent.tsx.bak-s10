@@ -1,0 +1,294 @@
+import { Pencil01 } from '@vitalflow-icons/editor/pencil01';
+import { Check } from '@vitalflow-icons/general/check';
+import { InfoCircle } from '@vitalflow-icons/general/infoCircle';
+import { XClose } from '@vitalflow-icons/general/xClose';
+import { patchRomBodyPoints } from '@stores/clinical/rom/customRom';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { CustomRomBodyPoints, CustomRomExercise, RomPatientResult } from '@types';
+import { Card, Image, Input, List, message, Progress, Tooltip, Flex, Typography } from 'antd';
+
+const { Paragraph } = Typography;
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
+
+interface ICustomSummaryContent {
+  item: RomPatientResult[];
+}
+
+const CustomSummaryContent = (props: ICustomSummaryContent) => {
+  const { item } = props;
+  const kinematicsArray = ['flexion', 'extension', 'abduction', 'external rotation', 'internal rotation'];
+  const { t } = useTranslation();
+  const { user } = useTypedSelector(
+    (state) => ({
+      user: state.user
+    }),
+  );
+
+  const [editedPostures, setEditedPostures] = useState<{ [key: string]: CustomRomBodyPoints }>({});
+  const [labels, setLabels] = useState<string[]>([]);
+  const [itemData, setItemData] = useState<unknown>(item);
+
+  const handleEdit = (index: number, postureId: string) => {
+    const currentItem = itemData[index];
+    setEditedPostures({
+      ...editedPostures,
+      [postureId]: {
+        ...currentItem.romProgramExercise,
+        value: currentItem.value,
+      },
+    });
+  };
+
+
+  const handleCancel = (postureId: string) => {
+    const newEditedPostures = { ...editedPostures };
+    delete newEditedPostures[postureId];
+    setEditedPostures(newEditedPostures);
+  };
+
+  const dispatch = useTypedDispatch();
+
+  const handleSave = async (postureId: string) => {
+    const payload = {
+      name: editedPostures[postureId]?.name,
+      kinematics: editedPostures[postureId]?.kinematics,
+      normal: editedPostures[postureId]?.normal,
+      wfl: editedPostures[postureId]?.wfl,
+      min: editedPostures[postureId]?.min,
+      max: editedPostures[postureId]?.max,
+      value: editedPostures[postureId]?.value
+    };
+    await dispatch(patchRomBodyPoints({ bodyPointId: editedPostures[postureId].id, payload }));
+    handleCancel(postureId);
+
+    const updatedItems = itemData.map((exercise: CustomRomExercise) => {
+      if (exercise?.romProgramExercise && exercise?.romProgramexercise?.id === postureId) {
+        return {
+          ...exercise,
+          romProgramExercise: { ...exercise?.romProgramExercise, ...editedPostures[postureId] },
+          value: editedPostures[postureId].value
+        };
+      }
+      return exercise;
+    });
+    setItemData([...updatedItems]);
+    message.success("Body point values updated successfully");
+  };
+
+  const handleInputChange = (postureId: string, field: string, value: number) => {
+    setEditedPostures({
+      ...editedPostures,
+      [postureId]: {
+        ...editedPostures[postureId],
+        [field]: value,
+      },
+    });
+  };
+
+  const calculateScore = (normal: number, value: number): number => {
+    if (value === 0) {
+      return 0;
+    }
+    const score = Math.round((value / normal) * 100);
+    return isFinite(score) ? score : 0;
+  };
+
+  const calculateRanking = (score: number): number => {
+    if (score >= 91) return 10;
+    if (score >= 81) return 9;
+    if (score >= 71) return 8;
+    if (score >= 61) return 7;
+    if (score >= 51) return 6;
+    if (score >= 41) return 5;
+    if (score >= 31) return 4;
+    if (score >= 21) return 3;
+    if (score >= 11) return 2;
+    if (score >= 1) return 1;
+    return 0;
+  };
+
+  const rankingColor = (ranking: number) => {
+    if (ranking >= 1 && ranking <= 6) return 'var(--color-error-500)';
+    if (ranking >= 7 && ranking <= 9) return 'var(--color-warning-400)';
+    if (ranking === 10) return '#3CCB7F';
+    return 'gray';
+  };
+
+  useEffect(() => {
+    setLabels(['normal', 'wfl', 'value', 'score', 'ranking']);
+  }, [user]);
+
+  return (
+    <div className="posture-card-container">
+      {itemData?.map((exercise: CustomRomExercise, idx: number) => {
+        const score = calculateScore(exercise?.romProgramExercise?.normal, exercise?.value);
+        const ranking = calculateRanking(score);
+        return (
+          <Card
+            key={exercise?.id}
+            className="MCardResults posture-card-section pl-1 pr-1"
+            style={{ margin: '10px' }}
+            size="small"
+            title={
+              <div className="posture-title-container">
+                <Flex className="posture-title" align="center">
+                  <Image
+                    width={64}
+                    height={53}
+                    src={exercise?.screenshot}
+                    preview={{
+                      src: exercise?.screenshot,
+                      mask: <MdOutlineRemoveRedEye size={18} />,
+                      width: "auto",
+                      height: "auto"
+                    }}
+                    style={{ borderRadius: "0.5rem" }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/images/white-image.png";
+                    }}
+                  />&nbsp;
+                  {((exercise?.strapiOmniRomExercise?.name || exercise?.exerciseLibrary?.title) ||
+                    (exercise?.romProgramExercise?.strapiOmniRomExercise?.name || exercise?.romProgramExercise?.exerciseLibrary?.title) || exercise?.title || 'No Title').toUpperCase()}
+                </Flex>
+                {/* To be Used later : user.isPhysioterapist ? "685px" :  */}
+                <div className="posture-label-container" style={{ width: user.isPhysioterapist ? "500px" : "415px", paddingLeft: "5px" }}>
+                  {labels.map((label) => (
+                    <div key={label} className="posture-label">
+                      <Flex className="posture-label-text" align="center" justify="center">
+                        {label === "wfl" ? label.toUpperCase() : label.charAt(0).toUpperCase() + label.slice(1).toLowerCase()}
+                        {(label === "wfl" || label === "normal") && (
+                          <Tooltip
+                            placement="topLeft"
+                            title={
+                              <span className="text-gray-700 font-semibold !p-2">
+                                {label === "wfl"
+                                  ? t('Patient.data.myProgress.omniRom.wflToolTip')
+                                  : t('Patient.data.myProgress.omniRom.normalToolTip')}
+                              </span>
+                            }
+                            color="white"
+                            className="text-gray-700 font-semibold"
+                          >
+                            <div className="ml-1">
+                              <InfoCircle width={16} height={16} color="stroke-gray-600" />
+                            </div>
+                          </Tooltip>
+                        )}
+                      </Flex>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            }
+          >
+            <List>
+              <div key={exercise?.romProgramExercise?.id} className="posture-sides-container">
+                <div className="posture-sides-section">
+                  <Paragraph className="posture-sides-title">
+                    {((exercise?.strapiOmniRomExercise?.name || exercise?.exerciseLibrary?.title) ||
+                      (exercise?.romProgramExercise?.strapiOmniRomExercise?.name || exercise?.romProgramExercise?.exerciseLibrary?.title) || 'No Title').toUpperCase()}
+                  </Paragraph>
+                </div>
+                <div className="posture-side-labels-container">
+                  {labels.map((label) => {
+                    if (label === 'edit') {
+                      return (
+                        <div key={label} className="posture-side-labels-section">
+                          {editedPostures[exercise?.romProgramexercise?.id] ? (
+                            <Flex gap={8}>
+                              <Tooltip title={t('Patient.data.omniRom.cancel')}>
+                                <div onClick={() => handleCancel(exercise?.romProgramexercise?.id)}>
+                                  <XClose color="stroke-rose-500" />
+                                </div>
+                              </Tooltip>
+                              <Tooltip title={t('Patient.data.omniRom.save')}>
+                                <div onClick={() => handleSave(exercise?.romProgramexercise?.id)}>
+                                  <Check color="stroke-green-500" />
+                                </div>
+                              </Tooltip>
+                            </Flex>
+                          ) : (
+                            <Tooltip title={t('Patient.data.omniRom.edit')}>
+                              <div onClick={() => handleEdit(idx, exercise?.romProgramexercise?.id)}>
+                                <Pencil01 color="stroke-gray-600" />
+                              </div>
+                            </Tooltip>
+                          )}
+                        </div>
+                      );
+                    }
+                    const scoreColor = () => {
+                      if (score >= 90) return 'var(--color-success-400)';
+                      if (score >= 60 && score < 90) return 'var(--color-warning-400)';
+                      if (score >= 0 && score < 60) return 'var(--color-error-500)';
+                      return 'gray';
+                    };
+                    return (
+                      <div key={label} className="posture-side-labels-section">
+                        {editedPostures[exercise?.romProgramExercise?.id] ? (
+                          label === 'score' || label === 'ranking' ? (
+                            <p>
+                              {label === 'score' ? (
+                                <Progress
+                                  type="circle"
+                                  percent={score || 0}
+                                  strokeColor={scoreColor()}
+                                  width={50}
+                                  format={(percent) => (
+                                    <span style={{ color: scoreColor(), fontWeight: 'bold' }}>{percent}%</span>
+                                  )}
+                                />
+                              ) : (
+                                <span style={{ color: rankingColor(ranking) }}>{ranking}</span>
+                              )}
+                            </p>
+                          ) : (
+                            <Input
+                              value={label === 'value' ? editedPostures[exercise?.romProgramExercise?.id]?.value : label === 'max' ? editedPostures[exercise?.romProgramexercise?.id][label] || editedPostures[exercise?.romProgramexercise?.id]["normal"] : editedPostures[exercise?.romProgramexercise?.id][label]}
+                              type='number'
+                              style={{ width: "70px" }}
+                              onChange={(e) => handleInputChange(exercise?.romProgramExercise?.id, label, Number(e.target.value))}
+                            />
+
+                          )
+                        ) : (
+                          <p>
+                            {label === 'score' ? (
+                              <Progress
+                                type="circle"
+                                percent={score || 0}
+                                strokeColor={scoreColor()}
+                                width={50}
+                                format={(percent) => (
+                                  <span style={{ color: scoreColor(), fontWeight: 'bold' }}>{percent}%</span>
+                                )}
+                              />
+                            ) : label === 'ranking' ? (
+                              <span style={{ color: rankingColor(ranking) }}>{ranking}</span>
+                            ) : label === 'value' ? (
+                              <span style={{ color: scoreColor() }}>{exercise[label]}</span>
+                            ) : label === 'max' ? (
+                              exercise?.romProgramExercise["max"] || exercise?.romProgramExercise["normal"]
+                            )
+                              : (
+                                exercise?.romProgramExercise[label]
+                              )}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </List>
+          </Card>
+        );
+      })}
+    </div>
+  );
+};
+
+export default CustomSummaryContent;

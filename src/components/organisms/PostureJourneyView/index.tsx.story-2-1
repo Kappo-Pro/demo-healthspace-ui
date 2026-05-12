@@ -1,0 +1,259 @@
+/**
+ * PostureJourneyView Organism Component
+ * Story 2.1: Patient Journey Timeline View (FR6)
+ *
+ * Main timeline organism that visualizes patient's posture improvement journey.
+ *
+ * Features:
+ * - Horizontal timeline with milestone markers (AC1)
+ * - Milestone celebrations with encouraging messages (AC2)
+ * - Progress metrics display (AC3)
+ * - Mobile optimization: swipeable timeline <768px (AC4)
+ * - Keyboard navigation and screen reader support (AC5)
+ * - Framer Motion scroll animations
+ * - Empty state handling
+ *
+ * Composition:
+ * - Ant Design Timeline (base)
+ * - MilestoneMarker atoms
+ * - ProgressMetrics molecule
+ * - Framer Motion animations
+ *
+ * @see selectPatientJourney selector
+ */
+
+import React, { useState, useRef, useEffect } from 'react';
+import { Timeline, Typography, Empty, Spin } from 'antd';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useTypedSelector } from '@stores/index';
+import { selectPatientJourney } from '@stores/posture/postures/selectors';
+import { MilestoneMarker } from '@atoms/MilestoneMarker';
+import { ProgressMetrics } from '@molecules/ProgressMetrics';
+import { PatientMilestone } from '@types';
+import './PostureJourneyView.css';
+
+const { Title, Text } = Typography;
+
+export interface PostureJourneyViewProps {
+	/** Optional: Override default patient ID (uses current user from Redux) */
+	patientId?: string;
+
+	/** Show compact mode (for sidebars) */
+	compact?: boolean;
+
+	/** Loading state */
+	loading?: boolean;
+
+	/** Additional CSS class */
+	className?: string;
+}
+
+/**
+ * Check if user prefers reduced motion
+ */
+function prefersReducedMotion(): boolean {
+	return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * PostureJourneyView component
+ */
+export const PostureJourneyView: React.FC<PostureJourneyViewProps> = ({
+	compact = false,
+	loading = false,
+	className = '',
+}) => {
+	const journeyData = useTypedSelector(selectPatientJourney);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const [activeMilestone, setActiveMilestone] = useState<string | null>(null);
+	const [isMobile, setIsMobile] = useState(false);
+
+	// Detect mobile viewport
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
+
+	// Scroll animation setup (only if motion not reduced)
+	const { scrollYProgress } = useScroll({
+		target: containerRef,
+		offset: ['start end', 'end start'],
+	});
+
+	const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+	const scale = useTransform(
+		scrollYProgress,
+		[0, 0.2, 0.8, 1],
+		[0.8, 1, 1, 0.8],
+	);
+
+	// Handle milestone click
+	const handleMilestoneClick = (milestone: PatientMilestone) => {
+		setActiveMilestone(milestone.id);
+		// Could trigger detail view modal here
+	};
+
+	// Handle keyboard navigation (arrow keys between milestones)
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (!journeyData?.milestones) return;
+
+			const currentIndex = journeyData.milestones.findIndex(
+				m => m.id === activeMilestone,
+			);
+
+			if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+				e.preventDefault();
+				const nextIndex = Math.min(
+					currentIndex + 1,
+					journeyData.milestones.length - 1,
+				);
+				setActiveMilestone(journeyData.milestones[nextIndex].id);
+			} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+				e.preventDefault();
+				const prevIndex = Math.max(currentIndex - 1, 0);
+				setActiveMilestone(journeyData.milestones[prevIndex].id);
+			}
+		};
+
+		window.addEventListener('keydown', handleKeyDown);
+		return () => window.removeEventListener('keydown', handleKeyDown);
+	}, [activeMilestone, journeyData]);
+
+	// Loading state
+	if (loading) {
+		return (
+			<div className="posture-journey-view posture-journey-view--loading">
+				<Spin size="large" tip="Loading your journey..." />
+			</div>
+		);
+	}
+
+	// Empty state (no journey data)
+	if (!journeyData) {
+		return (
+			<div className="posture-journey-view posture-journey-view--empty">
+				<Empty
+					description={
+						<>
+							<Title level={4}>No Posture Journey Yet</Title>
+							<Text type="secondary">
+								Complete your first posture assessment to start tracking your
+								progress!
+							</Text>
+						</>
+					}
+					image={Empty.PRESENTED_IMAGE_SIMPLE}
+				/>
+			</div>
+		);
+	}
+
+	const { milestones, progress } = journeyData;
+	const shouldAnimate = !prefersReducedMotion();
+
+	// Animation variants for timeline items
+	const itemVariants = {
+		hidden: { opacity: 0, x: -20 },
+		visible: (i: number) => ({
+			opacity: 1,
+			x: 0,
+			transition: {
+				delay: shouldAnimate ? i * 0.1 : 0,
+				type: 'spring',
+				stiffness: 100,
+			},
+		}),
+	};
+
+	return (
+		<motion.div
+			ref={containerRef}
+			className={`
+				posture-journey-view
+				${compact ? 'posture-journey-view--compact' : ''}
+				${isMobile ? 'posture-journey-view--mobile' : ''}
+				${className}
+			`}
+			style={shouldAnimate ? { opacity, scale } : {}}
+			role="region"
+			aria-label="Patient Posture Journey Timeline">
+			{/* Header */}
+			<div className="posture-journey-view__header">
+				<Title level={3}>Your Posture Journey</Title>
+				<Text type="secondary">
+					Track your progress from{' '}
+					{new Date(journeyData.startDate).toLocaleDateString()}
+				</Text>
+			</div>
+
+			{/* Progress Metrics */}
+			<ProgressMetrics
+				totalAssessments={progress.totalAssessments}
+				averageScore={progress.averageScore}
+				scoreImprovement={progress.scoreImprovement}
+				adherenceRate={progress.adherenceRate}
+				compact={compact}
+			/>
+
+			{/* Timeline */}
+			<div className="posture-journey-view__timeline">
+				<Title level={4}>Milestones</Title>
+
+				<Timeline
+					mode={isMobile ? 'left' : 'alternate'}
+					className="posture-journey-timeline">
+					{milestones.map((milestone, index) => (
+						<Timeline.Item
+							key={milestone.id}
+							color={
+								milestone.achievedAt
+									? 'var(--color-success-500)'
+									: 'var(--color-neutral-400)'
+							}
+							className="posture-journey-timeline__item">
+							<motion.div
+								custom={index}
+								initial={shouldAnimate ? 'hidden' : 'visible'}
+								whileInView="visible"
+								viewport={{ once: true, margin: '-50px' }}
+								variants={itemVariants}>
+								<MilestoneMarker
+									milestone={milestone}
+									isActive={activeMilestone === milestone.id}
+									onClick={handleMilestoneClick}
+								/>
+							</motion.div>
+						</Timeline.Item>
+					))}
+				</Timeline>
+			</div>
+
+			{/* Encouraging message */}
+			{progress.scoreImprovement > 0 && (
+				<motion.div
+					className="posture-journey-view__encouragement"
+					initial={shouldAnimate ? { opacity: 0, y: 20 } : {}}
+					animate={shouldAnimate ? { opacity: 1, y: 0 } : {}}
+					transition={{ delay: 0.5 }}>
+					<Text
+						strong
+						style={{
+							color: 'var(--color-success-600)',
+							fontSize: 'var(--font-size-lg)',
+						}}>
+						🎉 Great progress! Keep it up!
+					</Text>
+				</motion.div>
+			)}
+		</motion.div>
+	);
+};
+
+export default PostureJourneyView;

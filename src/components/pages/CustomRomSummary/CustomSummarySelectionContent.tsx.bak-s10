@@ -1,0 +1,49 @@
+import { Typography } from 'antd';
+import { ResponsiveImage } from '@atoms/ResponsiveImage';
+
+const { Title } = Typography;
+import { RomPatientResult } from '@types';
+import CustomSummaryContent from './CustomSummaryContent';
+import CustomSummaryContentResult from './CustomSummaryContentResult';
+import { useTranslation } from 'react-i18next';
+
+interface ICustomSummarySelectionContent {
+	item: RomPatientResult[];
+}
+
+const CustomSummarySelectionContent = (
+	props: ICustomSummarySelectionContent,
+) => {
+	const { item } = props;
+	const { t } = useTranslation();
+
+	const hasResults = item.some(
+		exercise => exercise.results && exercise.results.length > 0,
+	);
+	const hasRomExercise = item.some(
+		exercise => exercise.romProgramexercise && exercise.romProgramexercise.id,
+	);
+
+	return (
+		<>
+			{hasResults ? (
+				<CustomSummaryContentResult item={item} />
+			) : hasRomExercise ? (
+				<CustomSummaryContent item={item} />
+			) : (
+				<div className="coach-rom-summary-container-row-div">
+					<ResponsiveImage
+						className="w-25 h-25 coach-rom-summary-container-row-div-img"
+						src="/images/NoExe.png"
+						alt="No Exercises Image"
+					/>
+					<Title level={1} className="coach-rom-summary-container-row-div-h1">
+						{t('Patient.data.myProgress.omniRom.empty')}
+					</Title>
+				</div>
+			)}
+		</>
+	);
+};
+
+export default CustomSummarySelectionContent;

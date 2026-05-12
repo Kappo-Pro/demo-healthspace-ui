@@ -1,0 +1,379 @@
+import { Button, Carousel, Flex, Image, Modal, Typography } from 'antd';
+
+const { Paragraph } = Typography;
+import { useEffect, useRef, useState } from 'react';
+import RateExercise from './RateExercise';
+import { PlayCircle } from '@vitalflow-icons/media/playCircle';
+import { saveProgramExercise, setCompleted } from '@stores/aiAssistant/program';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { IRebhabProgramExercise } from '@types';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { UploadBar } from '../UploadBar';
+import VideoPlayer from './VideoPlayer';
+import { useTranslation } from 'react-i18next';
+import { CarouselRef } from 'antd/es/carousel';
+
+interface CompletionScreenProps {
+	savedVoice: string;
+	exercises: IRebhabProgramExercise[];
+	setExercises: (value: IRebhabProgramExercise[]) => void;
+	onFullscreenChange: () => void;
+	patchAndSave: () => void;
+	bandwidth?: boolean;
+	setActiveStep: (value: number) => void;
+}
+
+export const PreCompletionScreen = (props: CompletionScreenProps) => {
+	const {
+		savedVoice,
+		exercises,
+		setExercises,
+		onFullscreenChange,
+		patchAndSave,
+		bandwidth = false,
+		setActiveStep
+	} = props;
+	const [loading, setLoading] = useState(false);
+	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
+	const dispatch = useTypedDispatch();
+	const { selectedUser } = useTypedSelector(state => state.contacts.main);
+	const { uploadProgress } = useTypedSelector(
+		state => state.aiAssistant.program.main,
+	);
+	const [thumbnails, setThumbnails] = useState<string[]>([]);
+	const [modalOpen, setModalOpen] = useState(false);
+	const { t } = useTranslation();
+
+	useEffect(() => {
+		onFullscreenChange();
+		setActiveStep(7)
+	}, []);
+
+	useEffect(() => {
+		if (
+			savedVoice.toLowerCase().includes('save') ||
+			savedVoice.toLowerCase().includes('save.')
+		) {
+			dispatch(setCompleted(true));
+		}
+	}, [savedVoice]);
+
+	useEffect(() => {
+		setCurrentSlide(currentExerciseIndex);
+	}, [currentExerciseIndex]);
+
+	function base64ToBlob(base64Data: string, contentType = 'image/png'): Blob {
+		const byteCharacters: string = atob(base64Data.split(',')[1]);
+		const byteArrays: Uint8Array[] = [];
+
+		for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+			const slice: string = byteCharacters.slice(offset, offset + 512);
+			const byteNumbers: number[] = new Array(slice.length).fill(0).map((_, i) => slice.charCodeAt(i));
+			const byteArray: Uint8Array = new Uint8Array(byteNumbers);
+			byteArrays.push(byteArray);
+		}
+
+		return new Blob(byteArrays, { type: contentType });
+	}
+
+
+	const handleClick = async () => {
+		setLoading(true);
+		const submitExercisePromises = exercises.map(async (exercise, index) => {
+			const form = new FormData();
+			form.append(bandwidth ? 'image' : 'video', bandwidth ? base64ToBlob(thumbnails[index], 'image/png') : exercise.video);
+			form.append('programSessionId', exercise.programSessionId);
+			form.append('programExerciseId', exercise.programExerciseId);
+			form.append('exerciseDifficultyLevel', exercise.exerciseDifficultyLevel.toString());
+
+			await dispatch(
+				saveProgramExercise({
+					user: selectedUser,
+					exercise: exercise,
+					index: index,
+					form: form,
+				}),
+			);
+		});
+
+		await Promise.all(submitExercisePromises);
+		setLoading(false);
+		patchAndSave();
+	};
+
+	const updateExerciseDifficulty = (index: number, difficulty: number) => {
+		const updatedExercises = exercises.map((exercise, i) =>
+			i === index
+				? { ...exercise, exerciseDifficultyLevel: difficulty }
+				: exercise,
+		);
+		setExercises(updatedExercises);
+	};
+
+	const showModal = (index: number) => {
+		setCurrentExerciseIndex(index);
+		setIsModalVisible(true);
+		setTimeout(() => {
+			carouselRef.current?.goTo(index, true);
+		}, 0);
+	};
+
+	const handleCancel = () => {
+		setIsModalVisible(false);
+	};
+
+	const carouselRef = useRef<CarouselRef>(null);
+	const [currentSlide, setCurrentSlide] = useState(0);
+
+	const handlePrev = () => {
+		carouselRef?.current?.prev();
+	};
+
+	const handleNext = () => {
+		carouselRef?.current?.next();
+	};
+
+
+	useEffect(() => {
+		const generateThumbnails = async () => {
+			const frames = await Promise.all(
+				exercises.map(async (exercise) => {
+					if (!exercise?.video) return '';
+
+					try {
+						const videoBlob = exercise.video instanceof Blob
+							? exercise.video
+							: await (await fetch(exercise.video)).blob();
+
+						const video = document.createElement('video');
+						video.src = URL.createObjectURL(videoBlob);
+						video.crossOrigin = 'anonymous';
+						video.muted = true;
+
+						await new Promise<void>((resolve, reject) => {
+							video.addEventListener('loadedmetadata', () => {
+								video.currentTime = video.duration > 5 ? 5 : Math.min(1, video.duration - 0.1);
+							});
+							video.addEventListener('seeked', () => resolve());
+							video.addEventListener('error', (e) => reject(e));
+						});
+
+						const canvas = document.createElement('canvas');
+						canvas.width = video.videoWidth;
+						canvas.height = video.videoHeight;
+						const ctx = canvas.getContext('2d');
+						if (ctx) {
+							ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+							return canvas.toDataURL('image/png');
+						}
+						return '';
+					} catch (err) {
+						console.error('Error extracting frame:', err);
+						return '';
+					}
+				})
+			);
+
+			setThumbnails(frames);
+		};
+
+		if (bandwidth) {
+			generateThumbnails();
+		}
+	}, [exercises, bandwidth]);
+
+	return (
+		<Flex vertical className="h-full select-none" align="center" gap={12}>
+			<Paragraph className="text-white p-5 pt-10 text-lg font-semibold">
+				{t('Admin.data.rehab.rehabPreAssessment.howDifficult')}
+			</Paragraph>
+			<div style={{ height: '450px', overflowY: 'auto', width: '90%' }}>
+				{exercises?.map((exercise, index) => (
+					<Flex
+						key={index}
+						align="center"
+						justify="space-between"
+						style={{
+							marginBottom: '10px',
+							backgroundColor: 'rgba(83, 56, 158, 0.34)',
+							height: '90px',
+							width: '100%',
+						}}>
+						<Flex align="center">
+							{loading ? (
+								<Flex vertical className="w-[150px] h-[90px] mr-3 bg-black/75" align="center" justify="center" gap={8}>
+									<Paragraph className="text-white">
+										Saving {index + 1} of {exercises.length}
+									</Paragraph>
+									<UploadBar
+										uploadProgress={
+											uploadProgress.length > 0
+												? uploadProgress[uploadProgress.length - 1].progress[
+												index
+												]
+												: 0
+										}
+									/>
+								</Flex>
+							) : (
+								<Flex
+									className="image-wrapper flex-shrink-0 mr-3"
+									align="center"
+									gap={8}
+									onClick={() => !bandwidth ? showModal(index) : setModalOpen(!modalOpen)}>
+									{!bandwidth ? (
+										<VideoPlayer
+											video={exercise?.video}
+											className="h-[90px]"
+											controls={false}
+										/>
+									) : (
+										<Image
+											src={thumbnails[index]}
+											style={{ width: '150px', height: '90px' }}
+											preview={{
+												visible: modalOpen,
+												onVisibleChange: visible => setModalOpen(visible),
+											}}
+										/>
+									)}
+
+									<div className="play-button">
+										<PlayCircle width={50} height={50} />
+									</div>
+								</Flex>
+							)}
+							<Paragraph className="text-white">{exercise?.name?.toUpperCase()}</Paragraph>
+						</Flex>
+						<Flex className="bg-[--mainmenu-bg-color] mr-5 py-2 px-7 rounded-full" justify="center" align="center">
+							<RateExercise
+								selectedRating={exercise?.exerciseDifficultyLevel}
+								exercise={exercise}
+								onRatingChange={rating =>
+									updateExerciseDifficulty(index, rating)
+								}
+							/>
+						</Flex>
+					</Flex>
+				))}
+			</div>
+			{!loading && (
+				<Button
+					className="!bg-success-500 !text-white !border-2 !border-white !py-4 !px-8 !rounded-full !h-10 mt-4"
+					onClick={handleClick}>
+					{t('Admin.data.rehab.rehabPreAssessment.saveText')}
+				</Button>
+			)}
+			<Modal
+				visible={isModalVisible}
+				className="background-color"
+				onCancel={handleCancel}
+				footer={null}
+				width={800}
+				closable={false}
+				bodyStyle={{ background: 'blueviolet', borderRadius: 8 }}>
+				<div
+					style={{
+						backgroundColor: 'rgba(83, 56, 158)',
+						padding: '0px',
+						borderRadius: '8px',
+					}}>
+					<div className="relative">
+						<Carousel
+							ref={carouselRef}
+							afterChange={current => setCurrentSlide(current)}
+							dots={false}>
+							{exercises.map((exercise, index) => (
+								<Flex
+									vertical
+									key={index}
+									align="center"
+									style={{
+										padding: '20px',
+									}}>
+									{exercise?.video && (
+										<VideoPlayer
+											video={exercise?.video}
+											controls={true}
+											className={'w-[100%]'}
+										/>
+									)}
+									<Flex
+										justify="space-between"
+										align="center"
+										style={{
+											width: '100%',
+											padding: '20px',
+										}}>
+										<Paragraph className="text-white font-semibold mt-2">
+											{exercise?.name?.toUpperCase()}
+										</Paragraph>
+										<div className="bg-[--mainmenu-bg-color] py-2 px-4 rounded-full">
+											<RateExercise
+												selectedRating={exercise?.exerciseDifficultyLevel}
+												exercise={exercise}
+												onRatingChange={rating =>
+													updateExerciseDifficulty(index, rating)
+												}
+											/>
+										</div>
+									</Flex>
+								</Flex>
+							))}
+						</Carousel>
+
+						{exercises.length > 1 && currentSlide !== 0 && (
+							<LeftOutlined
+								onClick={handlePrev}
+								style={{
+									position: 'absolute',
+									top: '50%',
+									left: '-200px',
+									transform: 'translateY(-50%)',
+									fontSize: '42px',
+									color: 'white',
+									cursor: 'pointer',
+									zIndex: 1,
+								}}
+							/>
+						)}
+
+						{exercises.length > 1 && currentSlide !== exercises.length - 1 && (
+							<RightOutlined
+								onClick={handleNext}
+								style={{
+									position: 'absolute',
+									top: '50%',
+									right: '-200px',
+									transform: 'translateY(-50%)',
+									fontSize: '42px',
+									color: 'white',
+									cursor: 'pointer',
+									zIndex: 1,
+								}}
+							/>
+						)}
+					</div>
+					<Button
+						type="primary"
+						onClick={handleCancel}
+						style={{
+							bottom: '0px',
+							left: '50%',
+							transform: 'translateX(-50%)',
+							border: '2px solid',
+							borderColor: 'white',
+							color: 'white',
+							borderRadius: '20px',
+							padding: '10px 20px',
+							margin: '20px',
+							zIndex: 1000,
+						}}>
+						{t('Admin.data.rehab.rehabPreAssessment.closeText')}
+					</Button>
+				</div>
+			</Modal>
+		</Flex>
+	);
+};

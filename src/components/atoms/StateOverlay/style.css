@@ -1,0 +1,84 @@
+/* ==========================================
+   StateOverlay - Smooth State Fill
+   Full-screen overlay with color transitions
+   ========================================== */
+
+.state-overlay {
+	--overlay-opacity: 0.1;
+	--overlay-transition: 300ms;
+	--overlay-color: transparent;
+
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background-color: var(--overlay-color);
+	opacity: var(--overlay-opacity);
+	transition:
+		background-color var(--overlay-transition) ease-in-out,
+		opacity var(--overlay-transition) ease-in-out;
+}
+
+/* ==========================================
+   Variant: Brand (VitalFlow)
+   Purple - default/neutral state
+   ========================================== */
+.state-overlay--brand {
+	--overlay-color: var(--brand-primary);
+}
+
+/* ==========================================
+   Variant: Success
+   Dark green - completion state
+   ========================================== */
+.state-overlay--success {
+	--overlay-color: var(--color-success-900, var(--color-success-800));
+}
+
+/* ==========================================
+   Variant: Error
+   Red - error/warning state
+   ========================================== */
+.state-overlay--error {
+	--overlay-color: var(--color-error-600);
+}
+
+/* ==========================================
+   Variant: Scanning
+   Light purple - active scanning/countdown state
+   ========================================== */
+.state-overlay--scanning {
+	--overlay-color: var(--color-purple-400);
+}
+
+/* ==========================================
+   Variant: Idle
+   Darkest purple - default/waiting state
+   ========================================== */
+.state-overlay--idle {
+	--overlay-color: var(--color-purple-950, var(--color-purple-900));
+}
+
+/* ==========================================
+   Variant: Title
+   Darkest purple - instruction audio playing
+   ========================================== */
+.state-overlay--title {
+	--overlay-color: var(--color-purple-950, var(--color-purple-900));
+}
+
+/* ==========================================
+   Variant: Calibrating
+   Dark with slight purple tint - alignment state
+   ========================================== */
+.state-overlay--calibrating {
+	--overlay-color: var(--color-purple-900);
+}
+
+/* ==========================================
+   Reduced motion support
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+	.state-overlay {
+		transition: none;
+	}
+}

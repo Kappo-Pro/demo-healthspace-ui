@@ -1,0 +1,211 @@
+/**
+ * Default Theme (Purple Brand - Light Mode)
+ *
+ * This is the primary VitalFlow theme with purple branding.
+ * Same colors and styles as the light theme.
+ */
+
+[data-theme='default'] {
+	/* ============================================
+     BRAND
+     ============================================ */
+
+	--brand-primary: var(--color-purple-600);
+	--brand-primary-hover: var(--color-purple-700);
+	--brand-primary-light: var(--color-purple-50);
+	--brand-primary-gradient: linear-gradient(
+		130deg,
+		#6435cdf2 0%,
+		#575ebdf2 100%
+	);
+	--brand-primary-alpha: rgba(83, 56, 158, 0.34);
+	--brand-secondary: var(--color-purple-500);
+	--brand-accent: var(--color-purple-400);
+
+	/* ============================================
+     SURFACES & BACKGROUNDS
+     ============================================ */
+
+	--surface-primary: var(--color-white);
+	--rom-card-primary: var(--color-white);
+	--pie-chart-text-color: var(--color-black);
+	--video-bg-text: var(--color-black);
+	--surface-secondary: var(--color-gray-25);
+	--surface-tertiary: #fffef7;
+	--surface-elevated: var(--color-white);
+	--surface-overlay: var(--color-white);
+
+	--surface-interactive: var(--color-gray-25);
+	--surface-interactive-hover: var(--color-gray-50);
+	--surface-interactive-active: var(--color-gray-100);
+
+	--surface-brand: var(--color-purple-25);
+	--surface-brand-subtle: var(--color-purple-25);
+
+	/* Interactive surface states */
+	--surface-hover: var(--color-gray-50);
+	--surface-active: var(--color-gray-100);
+	--surface-error: var(--color-red-25);
+
+	--bg-page: #f1ece1;
+	--bg-canvas: var(--color-white);
+	--bg-input: var(--color-white);
+	--bg-disabled: var(--color-gray-50);
+
+	/* ============================================
+     TEXT COLORS
+     ============================================ */
+
+	--text-primary: var(--color-gray-900);
+	--text-secondary: var(--color-gray-600);
+	--text-tertiary: var(--color-gray-500);
+	--text-quaternary: var(--color-gray-400);
+	--text-placeholder: var(--color-gray-400);
+	--text-disabled: var(--color-gray-300);
+
+	--text-on-brand: var(--color-white);
+	--text-on-dark: var(--color-white);
+	--text-on-light: var(--color-gray-900);
+
+	--text-brand: var(--color-purple-600);
+	--text-link: var(--color-purple-600);
+	--text-link-hover: var(--color-purple-700);
+
+	/* ============================================
+     ICON COLORS
+     Default icon color for light theme
+     ============================================ */
+	--icon-color: var(--color-neutral-800);
+
+	/* ============================================
+     BORDERS
+     ============================================ */
+
+	--border-subtle: var(--color-gray-100);
+	--border-default: var(--color-gray-200);
+	--border-strong: var(--color-gray-300);
+	--border-brand: var(--color-purple-600);
+	--border-focus: var(--color-purple-600);
+
+	/* ============================================
+     INTERACTIVE STATES
+     ============================================ */
+
+	--button-primary-bg: var(--color-purple-600);
+	--button-primary-bg-hover: var(--color-purple-700);
+	--button-primary-bg-active: var(--color-purple-800);
+	--button-primary-bg-disabled: var(--color-purple-200);
+	--button-primary-text: var(--color-white);
+
+	/* ============================================
+     FORM ELEMENTS
+     ============================================ */
+	/* Form components now use Ant Design defaults for automatic light/dark mode support */
+
+	/* --input-bg: var(--color-white); */
+	/* --input-bg-disabled: var(--color-gray-50); */
+	--input-border: var(--color-gray-300); 
+	 --input-border-hover: var(--color-gray-400); 
+	 --input-border-focus: var(--color-purple-700); 
+	 --input-border-error: var(--color-error-500); 
+	/* --input-text: var(--color-gray-900); */
+	/* --input-text-placeholder: var(--color-gray-400); */
+	/* --input-text-disabled: var(--color-gray-500); */
+
+	/* ============================================
+     COMPONENT-SPECIFIC
+     ============================================ */
+
+	/* TABLE */
+	/* --table-border: Uses Ant Design default for proper light/dark mode support */
+	--table-header-bg: var(--color-gray-50);
+	--table-header-text: var(--color-gray-700);
+	--table-row-bg: var(--surface-elevated);
+	--table-row-hover-bg: var(--color-gray-50);
+	--table-row-selected-bg: var(--color-purple-50);
+
+	--nav-bg: var(--color-purple-600);
+	--nav-text: var(--color-white);
+	--nav-item-active-bg: var(--color-purple-500);
+	--nav-item-hover-bg: var(--color-purple-700);
+
+	--card-bg: var(--color-white);
+	--card-hover-bg: #faf9f2;
+	--stroke-default-white: var(--color-white);
+	--card-border: var(--color-gray-100);
+
+	--modal-bg: var(--color-white);
+	--modal-overlay: rgba(0, 0, 0, 0.3);
+
+	--tab-text-active: var(--color-purple-600);
+	--tab-indicator: var(--color-purple-600);
+
+	--stepper-active-bg: var(--color-purple-600);
+	--stepper-completed-bg: var(--color-purple-500);
+
+	--loader-primary: var(--color-purple-600);
+
+	--sidebar-item-active-bg: #f5eafd;
+	--sidebar-item-active-text: var(--color-gray-900);
+	--sidebar-subnav-bg: #faf9f2;
+
+	/* ============================================
+     LEGACY COMPATIBILITY
+     ============================================ */
+
+	--layout-bg-color: var(--color-white);
+	--mainmenu-bg-color: var(--color-purple-600);
+	--adminmenu-bg-color: var(--color-purple-700);
+	--stepper-color: var(--color-purple-700);
+	--stepper-secondary-color: var(--color-purple-500);
+	--text-color: var(--color-purple-600);
+	--text-color-root: var(--color-gray-900);
+	--evaluation-bg-colors: var(--color-white);
+	--evaluation-title-color: var(--color-gray-700);
+	--bodyPoint-label-color: var(--color-purple-600);
+	--settings-button-bg-color: var(--color-purple-600);
+	--settings-button-text-color: var(--color-white);
+	--content-manager-card-bg-color: var(--color-white);
+	--content-manager-card-header-bg-color: var(--color-gray-25);
+	--content-manager-card-header-text-color: var(--color-gray-900);
+	--tabs-text-color: var(--color-gray-900);
+	--button-color-primary: var(--color-purple-600);
+	--loader-bg-color: var(--color-purple-600);
+	--functional-goal-color: var(--color-purple-600);
+	--functional-goal-color-unslected: var(--color-purple-200);
+}
+
+/* ============================================
+   DEFAULT THEME CSS OVERRIDES (2025-11-29)
+   Applied after CSS variable definitions
+   ============================================ */
+
+[data-theme='default'] .ant-input-outlined,
+[data-theme='default'] .ant-input-outlined:hover,
+[data-theme='default'] .ant-input-affix-wrapper,
+[data-theme='default'] .ant-input-affix-wrapper:hover,
+[data-theme='default'] .ant-select-selector,
+[data-theme='default'] .ant-select-selector:hover,
+[data-theme='default'] .ant-picker,
+[data-theme='default'] .ant-picker:hover {
+	background-color: var(--surface-tertiary) !important;
+	border: 1px solid var(--border-default) !important;
+	box-shadow: none !important;
+}
+
+/* Remove active indicator bar from nav items */
+[data-theme='default'] [class*='Navigation_navItem']::before {
+	display: none !important;
+}
+
+[data-theme='default'] .ant-input-outlined:focus,
+[data-theme='default'] .ant-input-outlined:focus-within,
+[data-theme='default'] .ant-input-affix-wrapper:focus,
+[data-theme='default'] .ant-input-affix-wrapper:focus-within,
+[data-theme='default'] .ant-input-affix-wrapper-focused,
+[data-theme='default'] .ant-select-focused .ant-select-selector,
+[data-theme='default'] .ant-picker-focused {
+	background-color: var(--surface-tertiary) !important;
+	border: 1px solid var(--brand-primary) !important;
+	box-shadow: none !important;
+}

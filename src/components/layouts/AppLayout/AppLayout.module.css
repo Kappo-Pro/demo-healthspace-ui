@@ -1,0 +1,111 @@
+/**
+ * AppLayout Styles
+ *
+ * Main layout orchestrator styles for two-tier navigation.
+ * Handles IconMenu (tier 1) + conditional Sidebar (tier 2) layout.
+ */
+
+/* ============================================
+   LAYOUT CONTAINER
+   ============================================ */
+
+.layout {
+	display: flex;
+	min-height: 100vh;
+	background: transparent;
+	position: relative;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+.mainContent {
+	display: flex;
+	background: transparent;
+	flex-direction: column;
+	flex: 1;
+	min-width: 0; /* Prevent flex overflow */
+	margin-left: calc(
+		35px + 25px
+	); /* IconMenu width (98px) + sidebar left padding (25px) */
+	padding-left: var(--space-5); /* 24px - container left padding */
+	padding-right: var(--space-5); /* 24px - container right padding */
+	transition:
+		margin-left var(--transition-sidebar),
+		padding-left var(--transition-sidebar),
+		padding-right var(--transition-sidebar);
+}
+
+/* Tier 2 active: Sidebar visible, add sidebar width to margin */
+.layout.tier2Active .mainContent {
+	margin-left: calc(
+		60px + var(--spacing-2) + var(--layout-sidebar-width) + 25px
+	); /* IconMenu + gap + Sidebar + padding */
+}
+
+/* Tier 2 active + collapsed sidebar */
+.layout.tier2Active.sidebarCollapsed .mainContent {
+	margin-left: calc(
+		98px + var(--spacing-2) + var(--layout-sidebar-collapsed) + 25px
+	); /* IconMenu + gap + collapsed Sidebar + padding */
+}
+
+/* ============================================
+   RESPONSIVE BEHAVIOR
+   ============================================ */
+
+/* Mobile: No margin or padding (sidebar is overlay, IconMenu hidden) */
+@media (max-width: 767px) {
+	.mainContent {
+		margin-left: 0 !important; /* Override tier2Active calculations */
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.layout.sidebarCollapsed .mainContent {
+		margin-left: 0 !important;
+	}
+
+	.layout.tier2Active .mainContent {
+		margin-left: 0 !important;
+	}
+}
+
+/* Tablet: Responsive margin */
+@media (min-width: 768px) and (max-width: 1023px) {
+	.mainContent {
+		margin-left: var(--layout-sidebar-collapsed);
+	}
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.mainContent {
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+	.layout {
+		display: block;
+	}
+
+	.mainContent {
+		margin-left: 0;
+	}
+
+	/* Hide sidebar and header for printing */
+	.layout aside,
+	.layout header {
+		display: none;
+	}
+}

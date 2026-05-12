@@ -1,0 +1,257 @@
+/**
+ * ProgressDashboard Styles
+ *
+ * Responsive grid layout for milestone display and progress tracking
+ * Mobile-first design with design system tokens
+ */
+
+.progress-dashboard {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xl, var(--spacing-8));
+	padding: var(--spacing-lg, var(--spacing-6));
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* Loading State */
+.progress-dashboard--loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 400px;
+}
+
+/* Header Section */
+.progress-dashboard__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: var(--spacing-md, var(--spacing-4));
+	flex-wrap: wrap;
+}
+
+.progress-dashboard__title-section {
+	flex: 1;
+	min-width: 200px;
+}
+
+.progress-dashboard__title {
+	font-size: var(--font-size-2xl, 28px);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-text-primary, var(--color-black));
+	margin: 0 0 var(--spacing-xs, var(--spacing-2)) 0;
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm, var(--spacing-3));
+}
+
+.progress-dashboard__title-icon {
+	color: var(--color-primary-500, var(--brand-primary));
+}
+
+.progress-dashboard__subtitle {
+	font-size: var(--font-size-base, 16px);
+	color: var(--color-text-secondary, #666);
+	margin: 0;
+}
+
+.progress-dashboard__filter {
+	flex-shrink: 0;
+	width: 200px;
+}
+
+/* Earned Milestones Grid */
+.progress-dashboard__earned-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: var(--spacing-md, var(--spacing-4));
+}
+
+.progress-dashboard__milestone-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: var(--spacing-md, var(--spacing-4));
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+	cursor: default;
+}
+
+.progress-dashboard__milestone-card.ant-card-hoverable {
+	cursor: pointer;
+}
+
+.progress-dashboard__milestone-card.ant-card-hoverable:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+}
+
+.progress-dashboard__milestone-info {
+	margin-top: var(--spacing-sm, var(--spacing-3));
+	width: 100%;
+}
+
+.progress-dashboard__milestone-name {
+	font-size: var(--font-size-base, 16px);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary, var(--color-black));
+	margin: 0 0 var(--spacing-xs, var(--spacing-2)) 0;
+}
+
+.progress-dashboard__milestone-date {
+	font-size: var(--font-size-sm, 14px);
+	color: var(--color-text-tertiary, #999);
+	margin: 0;
+}
+
+/* Progress Section */
+.progress-dashboard__progress-section {
+	margin-top: var(--spacing-lg, var(--spacing-6));
+}
+
+.progress-dashboard__section-title {
+	font-size: var(--font-size-xl, 20px);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary, var(--color-black));
+	margin: 0 0 var(--spacing-md, var(--spacing-4)) 0;
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm, var(--spacing-3));
+}
+
+.progress-dashboard__section-title .anticon {
+	color: var(--color-primary-500, var(--brand-primary));
+}
+
+.progress-dashboard__progress-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: var(--spacing-md, var(--spacing-4));
+}
+
+.progress-dashboard__progress-card {
+	padding: var(--spacing-md, var(--spacing-4));
+}
+
+.progress-dashboard__progress-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--spacing-xs, var(--spacing-2));
+}
+
+.progress-dashboard__progress-name {
+	font-size: var(--font-size-base, 16px);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary, var(--color-black));
+	margin: 0;
+}
+
+.progress-dashboard__progress-percentage {
+	font-size: var(--font-size-sm, 14px);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-primary-500, var(--brand-primary));
+}
+
+.progress-dashboard__progress-status {
+	font-size: var(--font-size-sm, 14px);
+	color: var(--color-text-secondary, #666);
+	margin: var(--spacing-xs, var(--spacing-2)) 0 0 0;
+}
+
+/* Empty State */
+.progress-dashboard__empty-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: var(--spacing-2xl, var(--spacing-12))
+		var(--spacing-lg, var(--spacing-6));
+}
+
+.progress-dashboard__empty-state h3 {
+	font-size: var(--font-size-xl, 20px);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary, var(--color-black));
+	margin: var(--spacing-md, var(--spacing-4)) 0
+		var(--spacing-sm, var(--spacing-3)) 0;
+}
+
+.progress-dashboard__empty-state p {
+	font-size: var(--font-size-base, 16px);
+	color: var(--color-text-secondary, #666);
+	max-width: 400px;
+	line-height: var(--line-height-relaxed);
+	margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.progress-dashboard {
+		padding: var(--spacing-md, var(--spacing-4));
+	}
+
+	.progress-dashboard__header {
+		flex-direction: column;
+	}
+
+	.progress-dashboard__filter {
+		width: 100%;
+	}
+
+	.progress-dashboard__earned-grid {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		gap: var(--spacing-sm, var(--spacing-3));
+	}
+
+	.progress-dashboard__title {
+		font-size: var(--font-size-xl, 20px);
+	}
+
+	.progress-dashboard__progress-list {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 576px) {
+	.progress-dashboard__earned-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.progress-dashboard__milestone-card {
+		padding: var(--spacing-sm, var(--spacing-3));
+	}
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+	.progress-dashboard__milestone-card {
+		transition: none;
+	}
+
+	.progress-dashboard__milestone-card.ant-card-hoverable:hover {
+		transform: none;
+	}
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+	.progress-dashboard__title,
+	.progress-dashboard__milestone-name,
+	.progress-dashboard__section-title,
+	.progress-dashboard__progress-name {
+		color: var(--color-text-primary-dark, var(--color-white));
+	}
+
+	.progress-dashboard__subtitle,
+	.progress-dashboard__progress-status {
+		color: var(--color-text-secondary-dark, #ccc);
+	}
+
+	.progress-dashboard__milestone-date {
+		color: var(--color-text-tertiary-dark, #999);
+	}
+}

@@ -1,0 +1,51 @@
+/**
+ * RouteLoadingBar Styles
+ *
+ * Thin loading bar that appears at the top of the viewport during navigation.
+ * Uses primary color for brand consistency.
+ */
+
+.route-loading-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	z-index: 9999;
+	background-color: rgba(22, 119, 255, 0.1);
+}
+
+.route-loading-bar-progress {
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		var(--ant-color-primary, var(--color-info-500)) 0%,
+		var(--ant-color-primary-active, #0958d9) 100%
+	);
+	transition: width 0.2s ease-out;
+	box-shadow: 0 0 var(--spacing-2-5)
+		var(--ant-color-primary, var(--color-info-500));
+}
+
+/* Dark mode support */
+[data-theme='dark'] .route-loading-bar {
+	background-color: rgba(22, 119, 255, 0.15);
+}
+
+[data-theme='dark'] .route-loading-bar-progress {
+	box-shadow: 0 0 10px rgba(22, 119, 255, 0.8);
+}
+
+/* Animation for smooth appearance */
+@keyframes slideIn {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.route-loading-bar-progress {
+	animation: slideIn 0.3s ease-out;
+}

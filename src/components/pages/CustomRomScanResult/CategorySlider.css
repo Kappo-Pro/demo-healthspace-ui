@@ -1,0 +1,154 @@
+/* ============================================
+   CATEGORY SLIDER
+   Slider-style component showing 6 category segments
+   with active category highlighted
+   ============================================ */
+
+/* Persona colors matching rom-persona-card gradients */
+:root {
+	--persona-determined: #9e1068;
+	--persona-resilient: #ac3b3b;
+	--persona-steady: #da4a23;
+	--persona-functional: #da9011;
+	--persona-agile: #0958d9;
+	--persona-limitless: #389e0d;
+
+	/* Inactive segment colors - light theme (gray with increasing transparency) */
+	/* stylelint-disable color-function-notation */
+	--category-slider-segment-1: rgba(100, 100, 100, 0.5);
+	--category-slider-segment-2: rgba(100, 100, 100, 0.4);
+	--category-slider-segment-3: rgba(100, 100, 100, 0.3);
+	--category-slider-segment-4: rgba(100, 100, 100, 0.25);
+	--category-slider-segment-5: rgba(100, 100, 100, 0.2);
+	--category-slider-segment-6: rgba(100, 100, 100, 0.15);
+	/* stylelint-enable color-function-notation */
+}
+
+/* Dark theme - white with increasing transparency */
+/* stylelint-disable color-function-notation */
+[data-theme='dark'] {
+	--category-slider-segment-1: rgba(255, 255, 255, 0.5);
+	--category-slider-segment-2: rgba(255, 255, 255, 0.4);
+	--category-slider-segment-3: rgba(255, 255, 255, 0.3);
+	--category-slider-segment-4: rgba(255, 255, 255, 0.25);
+	--category-slider-segment-5: rgba(255, 255, 255, 0.2);
+	--category-slider-segment-6: rgba(255, 255, 255, 0.15);
+}
+/* stylelint-enable color-function-notation */
+
+.category-slider {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: var(--spacing-2);
+}
+
+/* Hide slider when collapse is disabled */
+.ant-collapse-item-disabled .category-slider {
+	display: none;
+}
+
+/* Score Badge - Tooltip style */
+.category-slider__badge {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-0);
+	padding: var(--spacing-1) var(--spacing-2);
+	background: var(--color-neutral-50);
+	border-radius: var(--radius-sm);
+	box-shadow: var(--shadow-md);
+	margin-bottom: var(--spacing-2);
+	white-space: nowrap;
+}
+
+[data-theme='dark'] .category-slider__badge {
+	background: var(--color-purple-850);
+}
+
+/* Tooltip arrow */
+.category-slider__badge::after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 6px solid transparent;
+	border-top-color: var(--color-neutral-50);
+}
+
+[data-theme='dark'] .category-slider__badge::after {
+	border-top-color: var(--color-purple-850);
+}
+
+.category-slider__badge-label {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary);
+	line-height: 1;
+}
+
+.category-slider__badge-value {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+	line-height: 1;
+}
+
+/* Track */
+.category-slider__track {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 200px;
+	padding: var(--spacing-1) 0;
+	margin-top: 48px; /* Space for tooltip */
+}
+
+.category-slider__segments {
+	display: flex;
+	gap: 3px;
+	width: 100%;
+}
+
+.category-slider__segment {
+	flex: 1;
+	height: 8px;
+	border-radius: var(--radius-xs);
+	transition: background-color var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.category-slider__segment--active {
+	/* Active segment gets category color via inline style */
+}
+
+/* Thumb */
+.category-slider__thumb {
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 20px;
+	height: 20px;
+	background: var(--color-white);
+	border-radius: var(--radius-full);
+	box-shadow: var(--shadow-md);
+	pointer-events: none;
+	transition: left var(--motion-duration-fast) var(--motion-ease-out);
+	overflow: visible;
+}
+
+/* Labels (optional) */
+.category-slider__labels {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: var(--spacing-1);
+}
+
+.category-slider__label {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary);
+}

@@ -1,0 +1,84 @@
+import { Button, Flex, Spin, Typography } from 'antd';
+
+const { Paragraph } = Typography;
+import checkLogo from './CompletionLogo.json';
+import Lottie from 'lottie-react';
+import { useTranslation } from 'react-i18next';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { setActiveStep, setVideoRecordState } from '@stores/shared/onBoard/onBoard';
+import { ArrowNarrowRight } from '@vitalflow-icons/arrows/arrowNarrowRight';
+import { useEffect, useState } from 'react';
+import { getCustomRomSessionById, setSelectedRom } from '@stores/clinical/rom/customRom';
+// REMOVED: import { CustonRomSessionPaginated } from '@types';
+import CustomSummarySelectionContent from '@pages/CustomRomSummary/CustomSummarySelectionContent';
+import './CompletionScreen.css';
+import { closeSession } from '@stores/clinical/rom/main';
+import AiAssistantCustomRomScanResult from '@pages/CustomRomScanResult';
+
+interface ICScreen {
+  isDashboard : boolean
+}
+export const CompletionScreen = (props : ICScreen) => {
+  const { isDashboard } = props;
+  const { t } = useTranslation();
+  const dispatch = useTypedDispatch();
+  const [isLoading, setLoading] = useState(true);
+  const { session } = useTypedSelector(state => state.rom.main);
+
+  const handleClick = async () => {
+    dispatch(setActiveStep(9));
+    dispatch(setVideoRecordState(false));
+  };
+  const customRomSession = useTypedSelector(state => state.rom.main.session);
+  
+  const fetchSessionData = async (sessionId: string, page: number) => {
+    customRomSession?.id && await dispatch(closeSession(customRomSession?.id || ''));
+    const data = await dispatch(
+      getCustomRomSessionById({ customRomId: sessionId, page: page, completed: true }),
+    );
+    dispatch(setSelectedRom(data?.payload?.data[0]));
+  };
+  
+    useEffect(() => {
+      if (session?.id) {
+        fetchSessionData(session?.romProgramId, 1);
+      }
+      setLoading(false);
+    }, []);
+
+  return (
+    <Flex vertical align="center" gap={12} className="h-full" style={{ userSelect: 'none', paddingBottom: '20px' }}>
+      <Flex vertical align="center" gap={8} className="w-full">
+        <Flex align="center" justify="center" style={{ backgroundcolor: 'var(--brand-primary)', borderRadius: '9999px', padding: '1.25rem', height: '60px', width: '60px' }}>
+          <Lottie animationData={checkLogo} loop={false} autoplay={true} />
+        </Flex>
+        <Paragraph className="completion-screen-omnirom-title">
+          {t('Admin.data.rehab.rehabPostAssessment.congratulations')}
+        </Paragraph>
+        <Paragraph className="completion-screen-omnirom-description">
+          {t('Admin.data.rehab.rehabPostAssessment.description')}
+        </Paragraph>
+        {isLoading ? (
+          <Flex align="center" justify="center">
+            <Spin
+            
+              size="large"
+             />
+          </Flex>
+        ) : (
+          <div className="completion-screen-omnirom-summary">
+              // TODO: Consider using isDashboard ?? defaultValue or isDashboard?.property instead of isDashboard!
+              <AiAssistantCustomRomScanResult isDashboard={isDashboard!}/>
+          </div>
+        )}
+
+        <Button
+          className="completion-screen-omnirom-next-button"
+          onClick={() => handleClick()}>
+          {t('Patient.data.onboard.next')}
+          <ArrowNarrowRight width={20} height={20} />
+        </Button>
+      </Flex>
+    </Flex>
+  );
+};

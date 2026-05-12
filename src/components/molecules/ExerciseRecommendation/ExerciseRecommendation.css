@@ -1,0 +1,41 @@
+/**
+ * ExerciseRecommendation Component Styles (Story 2.3)
+ *
+ * Design System Tokens:
+ * - Uses semantic color tokens
+ * - WCAG 2.1 AA compliant
+ * - Responsive grid layout
+ */
+
+.exercise-recommendation {
+	width: 100%;
+	padding: var(--spacing-lg, var(--spacing-6));
+	background: var(--surface-primary);
+	border-radius: var(--border-radius-lg, 12px);
+}
+
+/* Grid layout */
+.exercise-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: var(--spacing-lg, var(--spacing-6));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.exercise-recommendation {
+		padding: var(--spacing-md, var(--spacing-4));
+	}
+
+	.exercise-grid {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-md, var(--spacing-4));
+	}
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+	.exercise-recommendation {
+		border: 2px solid var(--border-strong);
+	}
+}

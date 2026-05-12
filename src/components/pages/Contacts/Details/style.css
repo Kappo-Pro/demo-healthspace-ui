@@ -1,0 +1,294 @@
+.mainTabs > .ant-tabs-nav {
+	margin-bottom: 0;
+}
+
+.mainTabs .card-container p {
+	margin: 0;
+}
+
+.mainTabs .card-container {
+	padding: var(--spacing-3);
+}
+
+.mainTabs .ant-collapse-content > .ant-collapse-content-box {
+	padding: 0;
+}
+
+.mainTabs .ant-collapse-content > .ant-collapse-content-box > .ant-row {
+	padding: 5px;
+}
+
+.mainTabs
+	.card-container
+	> .ant-tabs-card
+	.ant-tabs-content
+	> .ant-tabs-tabpane {
+	padding: var(--spacing-0-5);
+	background: var(--surface-secondary);
+}
+
+.mainTabs .card-container > .ant-tabs-card > .ant-tabs-nav::before {
+	display: none;
+}
+
+.mainTabs .card-container > .ant-tabs-card .ant-tabs-tab,
+[data-theme='compact']
+	.mainTabs
+	.card-container
+	> .ant-tabs-card
+	.ant-tabs-tab {
+	background: transparent;
+	border-color: transparent;
+}
+
+.mainTabs .card-container > .ant-tabs-card .ant-tabs-tab-active,
+[data-theme='compact']
+	.mainTabs
+	.card-container
+	> .ant-tabs-card
+	.ant-tabs-tab-active {
+	background: var(--surface-secondary);
+	border-color: var(--surface-secondary);
+}
+
+#components-tabs-demo-card-top .code-box-demo {
+	padding: var(--spacing-6);
+	overflow: hidden;
+	background: var(--surface-secondary);
+}
+
+[data-theme='compact']
+	.mainTabs
+	.card-container
+	> .ant-tabs-card
+	.ant-tabs-content {
+	height: 120px;
+	margin-top: -var(--spacing-2);
+}
+
+[data-theme='dark'] .mainTabs .card-container > .ant-tabs-card .ant-tabs-tab {
+	background: transparent;
+	border-color: transparent;
+}
+
+[data-theme='dark'] #components-tabs-demo-card-top .code-box-demo {
+	background: var(--color-black);
+}
+
+[data-theme='dark']
+	.mainTabs
+	.card-container
+	> .ant-tabs-card
+	.ant-tabs-content
+	> .ant-tabs-tabpane {
+	background: var(--surface-secondary);
+}
+
+[data-theme='dark']
+	.mainTabs
+	.card-container
+	> .ant-tabs-card
+	.ant-tabs-tab-active {
+	background: var(--surface-secondary);
+	border-color: var(--surface-secondary);
+}
+
+.card-container .ant-carousel .slick-slide img {
+	display: block;
+	max-width: 90%;
+	margin: 0 auto;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.card-container svg {
+	display: block;
+}
+
+.button svg {
+	margin-left: var(--spacing-1);
+	margin-top: 3px;
+}
+
+.active-paragraph .custom-paragraph {
+	max-width: 230px;
+}
+
+.custom-paragraph {
+	max-width: 380px;
+	margin: 0;
+}
+
+.edit-icon {
+	fill: red;
+}
+.ant-table-cell div.ant-typography,
+.ant-table-cell .ant-typography p {
+	margin-bottom: 0em;
+}
+.ant-table-pagination-right {
+	justify-content: center;
+}
+
+.fontStyles {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	letter-spacing: var(--letter-spacing-normal);
+	text-align: left;
+}
+
+.titleStyle {
+	color: var(--bodyPoint-label-color);
+	font-size: 22px;
+	font-weight: var(--font-weight-semibold);
+	line-height: var(--line-height-relaxed);
+	letter-spacing: var(--letter-spacing-normal);
+	text-align: left;
+}
+
+/* Removed overly broad checkbox-tick svg rule that was hiding checkboxes */
+
+.scroll::-webkit-scrollbar {
+	height: var(--spacing-3);
+	width: 13px;
+}
+
+.scroll::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+	border: 3px solid transparent;
+	border-radius: 100px;
+	background-clip: content-box;
+	background-color: var(--surface-tertiary);
+}
+
+.coach-rom-summary-container-row {
+	background-color: var(--surface-secondary);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	padding: 15px 5px 0 5px;
+}
+
+.coach-rom-summary-container-row-col {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	gap: 15px;
+}
+
+@media (max-width: 1280px) {
+	.coach-rom-summary-container-row-col {
+		flex-wrap: wrap;
+	}
+}
+
+.coach-rom-summary-container-row-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: var(--spacing-10);
+	width: 100%;
+}
+
+.coach-rom-summary-container-row-div-img {
+	width: 100px;
+	height: 100px;
+	border-radius: var(--radius-full);
+}
+
+.coach-rom-summary-container-row-div-h1 {
+	font-weight: bold;
+	font-size: var(--font-size-lg);
+	color: var(--text-color-root);
+}
+
+.create-report-content-icon-div {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-2);
+	margin-bottom: var(--spacing-2);
+}
+
+.create-report-content-icon-div .ant-checkbox-wrapper {
+	display: inline-flex;
+	align-items: center;
+	margin: 0;
+	padding-top: var(--spacing-0-5);
+}
+
+.create-report-content-icon-div .ant-checkbox {
+	top: 0;
+}
+
+.create-report-icon-styling {
+	margin: 0;
+	padding: 0;
+	line-height: var(--line-height-normal);
+}
+
+.create-report-icon-span-css {
+	padding-top: var(--spacing-3);
+	padding-right: var(--spacing-4);
+}
+
+.create-report-item-content {
+	align-items: center;
+	padding-bottom: var(--spacing-2);
+	padding-top: var(--spacing-2);
+}
+
+.pain-assessment-progress-data .pain-assesment-panel {
+	margin-top: var(--spacing-2);
+	border-radius: var(--radius-lg) !important;
+	border-width: var(--border-width-1);
+	border-color: var(--border-subtle);
+	background-color: var(--surface-primary);
+}
+
+.health-status {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.health-status-dropdown {
+	padding-right: var(--spacing-3);
+	vertical-align: middle;
+	margin-top: 0.2rem;
+}
+
+.pain-assessment-progress-data .ant-checkbox-inner {
+	border: 2px solid var(--border-default) !important;
+}
+
+.evaulation-checkbox .ant-checkbox-inner {
+	border: 2px solid var(--border-default) !important;
+}
+
+.ant-badge-status-dot {
+	width: 16px !important;
+	height: 16px !important;
+}
+
+.evaluation-container {
+	margin-bottom: 16px;
+}
+
+.container-flex {
+	display: flex;
+}

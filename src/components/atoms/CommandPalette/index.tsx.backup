@@ -1,0 +1,412 @@
+/**
+ * CommandPalette Component
+ *
+ * Global command palette (Cmd+K) with fuzzy search, keyboard navigation,
+ * and command categorization. Supports recent actions history.
+ */
+
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { Modal, Input } from 'antd';
+import {
+  SearchOutlined,
+  ClockCircleOutlined,
+  HomeOutlined,
+  UserOutlined,
+  BarChartOutlined,
+  ToolOutlined,
+  SettingOutlined,
+  PlusOutlined,
+  FileTextOutlined,
+  ThunderboltOutlined
+} from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { useKeyboardShortcut } from '../../../hooks/useKeyboardNavigation';
+import styles from './styles.module.css';
+
+export interface Command {
+  id: string;
+  label: string;
+  description?: string;
+  category: 'navigation' | 'action' | 'settings' | 'search';
+  icon?: React.ReactNode;
+  keywords?: string[];
+  handler: () => void;
+  enabled?: boolean;
+}
+
+interface CommandPaletteProps {
+  /** Custom commands to add */
+  customCommands?: Command[];
+  /** Callback when command is executed */
+  onCommandExecute?: (command: Command) => void;
+}
+
+/**
+ * Simple fuzzy search implementation
+ */
+function fuzzyMatch(query: string, text: string, keywords: string[] = []): number {
+  if (!query) return 1;
+
+  const lowerQuery = query.toLowerCase();
+  const lowerText = text.toLowerCase();
+
+  // Exact match gets highest score
+  if (lowerText.includes(lowerQuery)) return 10;
+
+  // Check keywords
+  for (const keyword of keywords) {
+    if (keyword.toLowerCase().includes(lowerQuery)) return 8;
+  }
+
+  // Character-by-character fuzzy matching
+  let queryIndex = 0;
+  let score = 0;
+
+  for (let i = 0; i < lowerText.length && queryIndex < lowerQuery.length; i++) {
+    if (lowerText[i] === lowerQuery[queryIndex]) {
+      score++;
+      queryIndex++;
+    }
+  }
+
+  return queryIndex === lowerQuery.length ? score : 0;
+}
+
+/**
+ * Get default navigation commands
+ */
+function getNavigationCommands(navigate: ReturnType<typeof useNavigate>): Command[] {
+  return [
+    {
+      id: 'nav-dashboard',
+      label: 'Go to Dashboard',
+      description: 'Navigate to home dashboard',
+      category: 'navigation',
+      icon: <HomeOutlined />,
+      keywords: ['home', 'main'],
+      handler: () => navigate('/'),
+    },
+    {
+      id: 'nav-patients',
+      label: 'Go to Patients',
+      description: 'View patient management',
+      category: 'navigation',
+      icon: <UserOutlined />,
+      keywords: ['users', 'clients'],
+      handler: () => navigate('/patients'),
+    },
+    {
+      id: 'nav-analytics',
+      label: 'Go to Analytics',
+      description: 'View analytics and reports',
+      category: 'navigation',
+      icon: <BarChartOutlined />,
+      keywords: ['reports', 'insights', 'data'],
+      handler: () => navigate('/analytics'),
+    },
+    {
+      id: 'nav-tools',
+      label: 'Go to Tools',
+      description: 'Access clinical tools',
+      category: 'navigation',
+      icon: <ToolOutlined />,
+      keywords: ['rom', 'assessment', 'programs'],
+      handler: () => navigate('/tools'),
+    },
+    {
+      id: 'nav-settings',
+      label: 'Go to Settings',
+      description: 'Open settings',
+      category: 'navigation',
+      icon: <SettingOutlined />,
+      keywords: ['preferences', 'config'],
+      handler: () => navigate('/settings'),
+    },
+  ];
+}
+
+/**
+ * Get default action commands
+ */
+function getActionCommands(navigate: ReturnType<typeof useNavigate>): Command[] {
+  return [
+    {
+      id: 'action-new-patient',
+      label: 'Create New Patient',
+      description: 'Add a new patient',
+      category: 'action',
+      icon: <PlusOutlined />,
+      keywords: ['add', 'invite'],
+      handler: () => {
+        // TODO: Open invite patient modal
+        navigate('/patients');
+      },
+    },
+    {
+      id: 'action-generate-report',
+      label: 'Generate Report',
+      description: 'Create a new report',
+      category: 'action',
+      icon: <FileTextOutlined />,
+      keywords: ['create', 'document'],
+      handler: () => navigate('/analytics/reports/create'),
+    },
+    {
+      id: 'action-start-rom',
+      label: 'Start ROM Scan',
+      description: 'Begin range of motion scan',
+      category: 'action',
+      icon: <ThunderboltOutlined />,
+      keywords: ['scan', 'assessment'],
+      handler: () => navigate('/tools/rom/start-scan'),
+    },
+  ];
+}
+
+/**
+ * CommandPalette Component
+ */
+export const CommandPalette: React.FC<CommandPaletteProps> = ({
+  customCommands = [],
+  onCommandExecute,
+}) => {
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [recentCommands, setRecentCommands] = useState<string[]>([]);
+  const inputRef = useRef<unknown>(null);
+
+  // Build command list
+  const allCommands = useMemo(() => {
+    return [
+      ...getNavigationCommands(navigate),
+      ...getActionCommands(navigate),
+      ...customCommands,
+    ].filter(cmd => cmd.enabled !== false);
+  }, [navigate, customCommands]);
+
+  // Filter and sort commands by search query
+  const filteredCommands = useMemo(() => {
+    if (!searchQuery) {
+      // Show recent commands first when no query
+      const recent = recentCommands
+        .map(id => allCommands.find(cmd => cmd.id === id))
+        .filter(Boolean) as Command[];
+      return recent.length > 0 ? recent : allCommands;
+    }
+
+    return allCommands
+      .map(cmd => ({
+        command: cmd,
+        score: fuzzyMatch(searchQuery, cmd.label, cmd.keywords),
+      }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(({ command }) => command);
+  }, [searchQuery, allCommands, recentCommands]);
+
+  // Group commands by category
+  const groupedCommands = useMemo(() => {
+    const groups: Record<string, Command[]> = {};
+    filteredCommands.forEach(cmd => {
+      if (!groups[cmd.category]) {
+        groups[cmd.category] = [];
+      }
+      groups[cmd.category].push(cmd);
+    });
+    return groups;
+  }, [filteredCommands]);
+
+  // Open/close handlers
+  const open = useCallback(() => {
+    setIsOpen(true);
+    setSearchQuery('');
+    setSelectedIndex(0);
+  }, []);
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+    setSearchQuery('');
+    setSelectedIndex(0);
+  }, []);
+
+  // Execute command
+  const executeCommand = useCallback((command: Command) => {
+    // Add to recent commands
+    setRecentCommands(prev => {
+      const filtered = prev.filter(id => id !== command.id);
+      return [command.id, ...filtered].slice(0, 5);
+    });
+
+    // Execute handler
+    command.handler();
+
+    // Callback
+    onCommandExecute?.(command);
+
+    // Close palette
+    close();
+  }, [close, onCommandExecute]);
+
+  // Keyboard navigation
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedIndex(prev =>
+          prev < filteredCommands.length - 1 ? prev + 1 : prev
+        );
+        break;
+
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedIndex(prev => prev > 0 ? prev - 1 : 0);
+        break;
+
+      case 'Enter':
+        e.preventDefault();
+        if (filteredCommands[selectedIndex]) {
+          executeCommand(filteredCommands[selectedIndex]);
+        }
+        break;
+
+      case 'Escape':
+        e.preventDefault();
+        close();
+        break;
+    }
+  }, [filteredCommands, selectedIndex, executeCommand, close]);
+
+  // Register global shortcut (Cmd+K)
+  useKeyboardShortcut('cmd+k', open);
+  useKeyboardShortcut('ctrl+k', open);
+
+  // Focus input when opened
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
+  }, [isOpen]);
+
+  // Reset selected index when search changes
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [searchQuery]);
+
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case 'navigation': return 'Navigation';
+      case 'action': return 'Actions';
+      case 'settings': return 'Settings';
+      case 'search': return 'Search';
+      default: return 'Other';
+    }
+  };
+
+  return (
+    <Modal
+      open={isOpen}
+      onCancel={close}
+      footer={null}
+      closeIcon={null}
+      className={styles.commandPaletteModal}
+      width={640}
+      centered
+      destroyOnClose
+    >
+      <div className={styles.commandPalette}>
+        {/* Search Input */}
+        <div className={styles.searchContainer}>
+          <SearchOutlined className={styles.searchIcon} />
+          <Input
+            ref={inputRef}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type a command or search..."
+            className={styles.searchInput}
+            bordered={false}
+            size="large"
+          />
+          <kbd className={styles.kbd}>Esc</kbd>
+        </div>
+
+        {/* Command List */}
+        <div className={styles.commandList}>
+          {!searchQuery && recentCommands.length > 0 && (
+            <div className={styles.commandGroup}>
+              <div className={styles.groupHeader}>
+                <ClockCircleOutlined /> Recent
+              </div>
+            </div>
+          )}
+
+          {Object.entries(groupedCommands).map(([category, commands]) => (
+            <div key={category} className={styles.commandGroup}>
+              {searchQuery && (
+                <div className={styles.groupHeader}>
+                  {getCategoryLabel(category)}
+                </div>
+              )}
+
+              {commands.map((command, index) => {
+                const globalIndex = filteredCommands.indexOf(command);
+                const isSelected = globalIndex === selectedIndex;
+
+                return (
+                  <div
+                    key={command.id}
+                    className={`${styles.commandItem} ${isSelected ? styles.selected : ''}`}
+                    onClick={() => executeCommand(command)}
+                    onMouseEnter={() => setSelectedIndex(globalIndex)}
+                  >
+                    {command.icon && (
+                      <span className={styles.commandIcon}>{command.icon}</span>
+                    )}
+                    <div className={styles.commandContent}>
+                      <div className={styles.commandLabel}>{command.label}</div>
+                      {command.description && (
+                        <div className={styles.commandDescription}>
+                          {command.description}
+                        </div>
+                      )}
+                    </div>
+                    {isSelected && <kbd className={styles.kbd}>↵</kbd>}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+
+          {filteredCommands.length === 0 && (
+            <div className={styles.noResults}>
+              No commands found for "{searchQuery}"
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className={styles.footer}>
+          <div className={styles.footerHint}>
+            <kbd className={styles.kbd}>↑</kbd>
+            <kbd className={styles.kbd}>↓</kbd>
+            <span>Navigate</span>
+          </div>
+          <div className={styles.footerHint}>
+            <kbd className={styles.kbd}>↵</kbd>
+            <span>Select</span>
+          </div>
+          <div className={styles.footerHint}>
+            <kbd className={styles.kbd}>Esc</kbd>
+            <span>Close</span>
+          </div>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+export default CommandPalette;

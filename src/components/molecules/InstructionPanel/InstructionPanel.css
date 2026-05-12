@@ -1,0 +1,29 @@
+/**
+ * InstructionPanel Component Styles (Story 2.3)
+ *
+ * High readability focus:
+ * - Line height 1.6
+ * - Font size >= 14px
+ * - Short paragraphs
+ * - Numbered lists
+ */
+
+.instruction-panel {
+	width: 100%;
+}
+
+/* Ensure text contrast meets WCAG AA */
+.instruction-panel .ant-typography {
+	color: var(--text-color);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.instruction-panel .ant-alert {
+		border-width: var(--spacing-0-5);
+	}
+
+	.instruction-panel .ant-card {
+		border-width: var(--spacing-0-5);
+	}
+}

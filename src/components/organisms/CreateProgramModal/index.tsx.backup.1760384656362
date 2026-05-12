@@ -1,0 +1,491 @@
+import {
+	CreateProgramModalProps,
+	IProgramData,
+	IProgramExercise,
+	IProgramTemplate,
+} from '@types';
+import { Collapse, Modal, Tabs, Flex, Typography } from 'antd';
+
+const { Paragraph } = Typography;
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { Check } from '@vitalflow-icons/general/check';
+import { AddProgramPopup } from './AddProgramPopup';
+import { TemplateModalData } from './TemplateModalData';
+import { AiModalData } from './AiModalData';
+import {
+	getOpenAiProgram,
+	getPreviousCarespaceAiProgram,
+	getPreviousOpenAiProgram,
+	resetCarespaceAiProgram,
+	resetOpenAiProgram,
+} from '@stores/aiAssistant/program';
+import { Edit05 } from '@vitalflow-icons/general/edit05';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import loadingAi from './LoadingAi.json';
+import { getSettingApiKey } from '@stores/settings/setings';
+import strapi from 'src/Strapi';
+import './style.css';
+import { MyExrciseModalData } from './MyExerciseModalData';
+import { Plus } from '@vitalflow-icons/general/plus';
+import { getBodyRegions, getCategories, getJoints, getJointWithBodyRegion, setPopoverState } from '@stores/functionalGoals';
+import { getSuggestedProgram, setModalVisible } from '@stores/onBoard/onBoard';
+import { USER_ROLES } from '@stores/constants';
+import { useTheme } from '@pages/Themes/ThemeContext';
+
+
+export const CreateProgramModal = (props: CreateProgramModalProps) => {
+	const {
+		isVisible,
+		onCancel,
+		setRefresh,
+		fetchData,
+		refresh,
+		searchValue,
+		setSearchValue,
+	} = props;
+
+	const { t } = useTranslation();
+	const { theme } = useTheme()
+	const loadRef = useRef<LottieRefCurrentProps>(null);
+	const [loadingMessage, setLoadingMessage] = useState('');
+	const [activeKey, setActiveKey] = useState<string>('1');
+	const [openFilter, setOpenFilter] = useState(false);
+	const [selectedExercises, setSelectedExercises] = useState<
+		IProgramExercise[]
+	>([]);
+	const [selectedProgram, setSelectedProgram] =
+		useState<IProgramTemplate | null>();
+	const [suggestedProgramData, setSuggestedProgramData] = useState([]);
+	const isModalVisible = useTypedSelector(state => state.onBoard.onBoard.isModalVisible)
+	const dispatch = useTypedDispatch();
+	const user = useTypedSelector(state => state.user);
+	const [previousExercises, setPreviousExercises] = useState<
+		IProgramExercise[]
+	>([]);
+	const { selectedUser } = useTypedSelector(state => state.contacts.main);
+	const programTemplate = useTypedSelector(
+		state => state.aiAssistant.program.programTemplate,
+	);
+	const { openAiProgram, vitalflowAiProgram } = useTypedSelector(state => ({
+		openAiProgram: state.aiAssistant.program.openAiProgram,
+		vitalflowAiProgram: state.aiAssistant.program.vitalflowAiProgram,
+	}));
+	const openaiApiKey = useTypedSelector(
+		state => state.settings.settings.openaiApiKey,
+	);
+	const [activeSubKey, setActiveSubKey] = useState('1');
+	const [programId, setProgramId] = useState('null')
+	const [strapiId, setStrapiId] = useState<number>(0);
+
+	useEffect(() => {
+		user?.profile?.role != USER_ROLES.USER && fetchingDataforFilters()
+	}, [])
+
+	const fetchingDataforFilters = async () => {
+		await dispatch(getJoints());
+		await dispatch(getCategories());
+		await dispatch(getBodyRegions());
+		await dispatch(getJointWithBodyRegion());
+	};
+
+	useEffect(() => {
+		setOpenFilter(false);
+	}, [isVisible, activeKey, onCancel]);
+
+	useEffect(() => {
+		dispatch(resetOpenAiProgram());
+		user?.profile?.role != USER_ROLES.USER && dispatch(getSettingApiKey());
+		getTemplate(1);
+	}, [user, selectedUser]);
+
+	useEffect(() => {
+		activeKey == '3' && setActiveKey('1');
+	}, [isVisible]);
+
+	const loadMessages = () => {
+		setLoadingMessage(
+			t('Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.fetchData'
+			));
+		setTimeout(
+			() => setLoadingMessage(t(
+				'Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.collectingResults',
+			)),
+			3500,
+		);
+		setTimeout(
+			() => setLoadingMessage(t(
+				'Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.gatherData',
+			)),
+			6000,
+		);
+		setTimeout(
+			() => setLoadingMessage(t(
+				'Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.reviewGoals',
+			)),
+			9000,
+		);
+		setTimeout(() => setLoadingMessage(t(
+			'Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.evaluatePain',
+		)), 11500);
+		setTimeout(
+			() => setLoadingMessage(t(
+				'Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.determineExercises',
+			)),
+			13000,
+		);
+	};
+
+	const getTemplate = async (current: number) => {
+		try {
+			const data = await dispatch(getSuggestedProgram(current))
+			setSuggestedProgramData(data.payload);
+		} catch {
+			setSuggestedProgramData([]);
+		}
+	};
+
+	const fetchPreviousOpenAiProgram = async () => {
+		loadRef.current?.setSpeed(0.5);
+		loadMessages();
+		dispatch(getPreviousOpenAiProgram(selectedUser?.id));
+	};
+
+	const fetchPreviousCarespaceAiProgram = async () => {
+		loadRef.current?.setSpeed(0.5);
+		loadMessages();
+		dispatch(resetCarespaceAiProgram());
+		dispatch(getPreviousCarespaceAiProgram(selectedUser?.id));
+	};
+
+	const fetchOpenAiProgram = async () => {
+		loadRef.current?.setSpeed(0.5);
+		loadMessages();
+		dispatch(resetOpenAiProgram());
+		await dispatch(getOpenAiProgram(selectedUser?.id));
+	};
+
+	const fetchCarespaceAiProgram = async () => {
+		loadRef.current?.setSpeed(0.5);
+		loadMessages();
+		dispatch(resetCarespaceAiProgram());
+		await dispatch(getPreviousCarespaceAiProgram(selectedUser?.id));
+	};
+
+	const updateSelectedProgramExercises = (exerciseList: IProgramExercise[]) => {
+		setSelectedProgram(prevState => {
+			return prevState ? { ...prevState, exercises: exerciseList } : prevState;
+		});
+	};
+
+	const extraContent = (data: IProgramData | IProgramTemplate) => {
+		 const isSelected = selectedProgram?.id === data.id;
+		const handleSelectClick = () => {
+			if (activeSubKey === '1') {
+				setStrapiId(parseInt(data?.vitalflowId));
+			} else if (activeSubKey === '2') {
+				setProgramId(data?.id);
+			}
+		};
+		return (
+			<Flex gap={8}>
+				<div className="">
+					<p>
+						<span className="font-semibold">
+							{t(
+								'Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.duration',
+							)}
+						</span>{' '}
+						{data?.duration} {data?.durationType}
+					</p>
+				</div>
+				{activeKey === '2' && (
+					<div
+						className="-mr-4 align-middle"
+						onClick={event => {
+							event.stopPropagation();
+						}}>
+						<span
+							onClick={() => {
+								if (isSelected) setSelectedProgram(null);
+								else {
+									if (!('clientId' in data)) {
+										data = {
+											...data,
+											exercises: data?.exercises?.map(item => ({
+												...item,
+												strapiExerciseId:
+													typeof item?.strapiExerciseId === 'number'
+														? item?.strapiExerciseId
+														: item?.strapiExerciseId?.vitalflowId!,
+												image:
+													typeof item?.strapiExerciseId !== 'number'
+														? item?.strapiExerciseId?.exercise_image[0]?.url!
+														: '',
+												name:
+													typeof item?.strapiExerciseId !== 'number'
+														? item?.strapiExerciseId?.name!
+														: '',
+											})),
+										};
+									}
+									setSelectedProgram(data);
+									dispatch(setModalVisible(true))
+								}
+								handleSelectClick();
+							}}
+							className={`select-button ${isSelected ? 'bg-selected' : 'bg-unselected'
+            }`}
+						>
+							<Check
+								onClick={() => handleSelectClick()}
+								width={20}
+								height={20}
+								color={
+									isSelected
+										? 'stroke-white'
+										: 'stroke-black'
+								}
+								 className={`check-icon ${isSelected ? 'selected' : 'unselected'
+              }`}
+							/>
+							{isSelected
+								? t('Admin.data.menu.aiAssistant.aiAssistantPrograms.selected')
+								: t('Admin.data.menu.aiAssistant.aiAssistantPrograms.select')}
+						</span>
+					</div>
+				)}
+			</Flex>
+		);
+	};
+
+	const compare = (a: IProgramExercise, b: IProgramExercise) => {
+		if (a.order < b.order) {
+			return -1;
+		}
+		if (a.order > b.order) {
+			return 1;
+		}
+		return 0;
+	};
+
+	const handleCancel = () => {
+		dispatch(setPopoverState(false))
+		onCancel();
+		setSelectedExercises([]);
+		setSelectedProgram(null);
+		dispatch(setModalVisible(false));
+		setActiveKey('1');
+		setActiveSubKey('1');
+	};
+
+	useEffect(() => {
+		dispatch(setPopoverState(false))
+	}, [activeKey])
+
+	return (
+		<Modal
+			title={
+				<Flex align="center" gap={16}>
+					<Edit05 width={20} height={20} color="stroke-primary-600" />
+					<span className="titleStyle">
+						{t('Admin.data.menu.aiAssistant.aiAssistantPrograms.create')}
+					</span>
+				</Flex>
+			}
+			open={isVisible}
+			onCancel={handleCancel}
+			style={{ top: 20 }}
+			footer={false}
+			width={974}
+			className="select-none create-program-modal">
+			<Tabs
+				defaultActiveKey={activeKey}
+				activeKey={activeKey}
+				className="select-none"
+				tabBarStyle={{ margin: 0 }}
+				onChange={value => setActiveKey(value)}
+				items={[
+					{
+						label: t(
+							'Admin.data.menu.aiAssistant.aiAssistantPrograms.chooseLibrary',
+						),
+						key: '1',
+						children: (
+							<div className="rounded-none">
+								<MyExrciseModalData
+									selectedExercises={selectedExercises}
+									open={openFilter}
+									setOpen={setOpenFilter}
+									setSelectedExercises={setSelectedExercises}
+								/>
+								{selectedExercises.length !== 0 && (
+									<Flex
+										justify="center"
+										align="center"
+										gap={8}
+										className="w-full cursor-pointer bg-success-500 rounded-lg text-white font-semibold p-2"
+										onClick={() => dispatch(setModalVisible(true))}>
+										<Plus />
+										<Paragraph>
+											{t(
+												'Admin.data.menu.aiAssistant.aiAssistantCreateProgramModal.add',
+											)}{' '}
+											{selectedExercises.length}{' '}
+											{selectedExercises.length === 1
+												? t(
+													'Admin.data.menu.aiAssistant.aiAssistantPrograms.exercise',
+												)
+												: t(
+													'Admin.data.menu.aiAssistant.aiAssistantPrograms.exercises',
+												)}
+										</Paragraph>
+									</Flex>
+								)}
+							</div>
+						),
+					},
+					{
+						label: t(
+							'Admin.data.menu.aiAssistant.aiAssistantPrograms.selectTemplate',
+						),
+						key: '2',
+						children: 
+							<TemplateModalData
+								fetchData={fetchData}
+								searchValue={searchValue}
+								setSearchValue={setSearchValue}
+								program={programTemplate}
+								open={openFilter}
+								setOpen={setOpenFilter}
+								extraContent={extraContent}
+								activeSubKey={activeSubKey}
+								setActiveSubKey={setActiveSubKey}
+							/>
+					},
+					openaiApiKey && {
+						label: (
+							<p onClick={() => fetchPreviousOpenAiProgram()}>
+								{t(
+									'Admin.data.menu.aiAssistant.aiAssistantPrograms.generateAi',
+								)}
+							</p>
+						),
+						key: '3',
+						children: openAiProgram.loading ? (
+							<Flex vertical justify="center" align="center" gap={8} className="bg-gray-50" style={{ height: '384px' }}>
+								<Lottie
+									className="w-[300px]"
+									lottieRef={loadRef}
+									animationData={(loadingAi as Record<string, {}>)[theme]}
+									loop={true}
+									autoplay={true}
+								/>
+								<Paragraph className="text-lg font-semibold text-primary-600 absolute top-[60%] left-1/2 -translate-x-1/2">
+									{loadingMessage}
+								</Paragraph>
+							</Flex>
+						) : (
+							<div>
+								<AiModalData
+									program={openAiProgram}
+									refresh={refresh}
+									setRefresh={setRefresh}
+									fetchOpenAiProgram={fetchOpenAiProgram}
+									fetchData={fetchData}
+									searchValue={searchValue}
+									setSearchValue={setSearchValue}
+									extraContent={extraContent}
+								/>
+							</div>
+						),
+					},
+					{
+						label: (
+							<p onClick={() => fetchPreviousCarespaceAiProgram()}>
+								{t(
+									'Admin.data.menu.aiAssistant.aiAssistantPrograms.generateCarespace',
+								)}
+							</p>
+						),
+						key: '4',
+						children: vitalflowAiProgram.loading ? (
+							<Flex vertical justify="center" align="center" gap={8} className="bg-gray-50" style={{ height: '384px' }}>
+								<Lottie
+									className="w-[300px]"
+									lottieRef={loadRef}
+									animationData={(loadingAi as Record<string, {}>)[theme]}
+									loop={true}
+									autoplay={true}
+								/>
+								<Paragraph className="text-lg font-semibold text-primary-600 absolute top-[60%] left-1/2 -translate-x-1/2">
+									{loadingMessage}
+								</Paragraph>
+							</Flex>
+						) : (
+							<div>
+								<AiModalData
+									program={vitalflowAiProgram}
+									refresh={refresh}
+									setRefresh={setRefresh}
+									fetchOpenAiProgram={fetchCarespaceAiProgram}
+									fetchData={fetchData}
+									searchValue={searchValue}
+									setSearchValue={setSearchValue}
+									extraContent={extraContent}
+								/>
+							</div>
+						),
+					},
+				].filter(Boolean)}
+			/>
+			{isModalVisible && (
+				<AddProgramPopup
+					onOk={() => {
+						dispatch(setModalVisible(false));
+						setSelectedExercises([]);
+						handleCancel();
+						fetchData(1);
+						setRefresh(!refresh);
+					}}
+					refresh={refresh}
+					setRefresh={setRefresh}
+					programId={programId}
+					strapiId={strapiId}
+					isVisible={isModalVisible}
+					activeKey={activeKey}
+					setSearchValue={setSearchValue}
+					thumbnailValue={activeSubKey ==='1' ? selectedProgram?.thumbnail?.url : selectedProgram?.thumbnail}
+					onCancel={() => {
+						dispatch(setModalVisible(false));
+						setSelectedProgram(null);
+					}}
+					selectedExercises={
+						activeKey == '1' ? selectedExercises : selectedProgram?.exercises!
+					}
+					setSelectedExercises={
+						activeKey == '1'
+							? setSelectedExercises
+							: updateSelectedProgramExercises
+					}
+					program={activeKey == '1' ? null : selectedProgram}
+					isSaveTemplateVisible={
+						selectedProgram?.exercises?.length === previousExercises?.length &&
+						selectedProgram?.exercises?.every(e1 =>
+							previousExercises.some(e2 => {
+								return (
+									e1.id === e2.id &&
+									e1.reps === e2.reps &&
+									e1.sets === e2.sets &&
+									e1.dailyReps === e2.dailyReps &&
+									e1.weeklyReps === e2.weeklyReps
+								);
+							}),
+						)
+					}
+				/>
+			)}
+		</Modal>
+	);
+};

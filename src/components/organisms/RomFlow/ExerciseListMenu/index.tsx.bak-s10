@@ -1,0 +1,93 @@
+import { useTypedDispatch, useTypedSelector } from '@stores/index';
+import { goToExercise } from '@stores/clinical/rom/main';
+import { RomProgramExercise } from '@types';
+import { Flex, List, Spin, Typography } from 'antd';
+import { CheckOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+
+interface IExerciseListMenu {
+	onToggleMenu: () => void;
+}
+
+const ExerciseListMenu = (props: IExerciseListMenu) => {
+	const { onToggleMenu } = props;
+	const dispatch = useTypedDispatch();
+	const { t } = useTranslation();
+	const { exercises, resultsExercises, currentExercise } = useTypedSelector(
+		state => state.rom.main,
+	);
+
+	const onClickMenu = (exercise: RomProgramExercise) => {
+		if (currentExercise?.id !== exercise.id) {
+			onToggleMenu();
+			dispatch(goToExercise(exercise));
+		}
+	};
+
+	if (!exercises) {
+		return (
+			<Flex
+				justify="center"
+				align="center"
+				className="w-full h-full" style={{
+					backgroundColor: '#ffffffb8',
+					maxHeight: '100%' }}>
+				<Spin
+					spinning
+					size={'large'}
+				/>
+			</Flex>
+		);
+	}
+
+	return (
+		<List
+			className="h-full"
+			style={{
+				maxHeight: '100%',
+			}}
+			header={
+				<Typography.Title
+					level={5}
+					style={{
+						padding: '0 10px 0 40px',
+						margin: 0,
+						color: 'white',
+					}}>
+					{t('Patient.data.omnirom.exercises')}
+				</Typography.Title>
+			}
+			dataSource={exercises || []}
+			renderItem={exercise => {
+				const isCompleted = resultsExercises.find(
+					exer => exer?.id === exercise?.id,
+				);
+				return (
+					<List.Item
+						style={{
+							padding: '10px 20px 10px 40px',
+							borderColor: '#ffffff33',
+							cursor:
+								currentExercise?.id !== exercise.id ? 'pointer' : 'default',
+						}}
+						onClick={() => onClickMenu(exercise)}>
+						<Flex justify="space-between" align="center" className="w-full">
+							<Typography.Text
+								style={{ color: isCompleted ? 'white' : '#ffffff80' }}>
+								{(exercise?.name
+									? exercise?.name
+									: exercise?.title
+								)?.toUpperCase()}
+							</Typography.Text>
+							{isCompleted && (
+								<CheckOutlined className="exercise-check md-icon" style={{ fontSize: '24px' }} />
+							)}
+						</Flex>
+					</List.Item>
+				);
+			}}
+		/>
+	);
+};
+
+export default ExerciseListMenu;

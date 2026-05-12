@@ -1,0 +1,102 @@
+/**
+ * EducationalContentLink.css
+ *
+ * Styles for educational content links
+ * Story 2.7 - FR26 Clinical Reasoning Transparency
+ */
+
+.educational-content-link {
+	transition: opacity var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.educational-content-link:hover {
+	opacity: 0.8;
+}
+
+.educational-content-link:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+	border-radius: var(--border-radius-sm);
+}
+
+/* Button variant */
+.educational-content-link--button {
+	padding: var(--spacing-xs) var(--spacing-sm);
+	font-size: var(--font-size-sm);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-xs);
+}
+
+/* Text link variant */
+.educational-content-link--text {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-xs);
+	color: var(--color-primary);
+	text-decoration: none;
+	font-size: var(--font-size-sm);
+	padding: var(--spacing-2xs);
+	border-radius: var(--border-radius-sm);
+}
+
+.educational-content-link--text:hover {
+	text-decoration: underline;
+	color: var(--color-primary-hover);
+}
+
+.educational-content-link__title {
+	font-weight: var(--font-weight-medium);
+}
+
+/* Tooltip styles */
+.educational-content-link__tooltip {
+	max-width: 300px;
+}
+
+.educational-content-link__tooltip-title {
+	font-weight: var(--font-weight-semibold);
+	margin-bottom: var(--spacing-xs);
+	color: var(--color-text-primary);
+}
+
+.educational-content-link__tooltip-description {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-secondary);
+	margin-bottom: var(--spacing-xs);
+	line-height: var(--line-height-normal);
+}
+
+.educational-content-link__tooltip-duration,
+.educational-content-link__tooltip-type {
+	font-size: var(--font-size-xs);
+	color: var(--color-text-tertiary);
+	margin-top: var(--spacing-2xs);
+}
+
+/* Touch targets for mobile (WCAG AAA) */
+@media (max-width: 768px) {
+	.educational-content-link--text,
+	.educational-content-link--button {
+		min-height: var(--spacing-11);
+		min-width: var(--spacing-11);
+	}
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.educational-content-link--text {
+		text-decoration: underline;
+	}
+
+	.educational-content-link:focus-visible {
+		outline-width: 3px;
+	}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.educational-content-link {
+		transition: none;
+	}
+}

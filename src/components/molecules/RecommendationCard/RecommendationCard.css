@@ -1,0 +1,140 @@
+/**
+ * RecommendationCard Styles
+ * EPIC-019-S1: Recommendation Card Molecule
+ *
+ * Uses design system tokens for consistent theming
+ * Migrated to design system tokens: Phase 2 (2025-10-24)
+ */
+
+.recommendation-card {
+	border-radius: var(--radius-xl);
+	overflow: hidden;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	cursor: pointer;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--card-border);
+	background-color: var(--card-bg);
+}
+
+.recommendation-card:hover {
+	box-shadow: var(--shadow-lg);
+	transform: translateY(-4px);
+	background-color: var(--surface-interactive-hover);
+}
+
+.recommendation-card:active {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-md);
+	background-color: var(--surface-interactive-active);
+}
+
+/* Media Thumbnail */
+.recommendation-card-image {
+	height: 200px;
+	object-fit: cover;
+	width: 100%;
+	background-color: var(--surface-secondary);
+}
+
+/* EPIC-019-S3: Media placeholder for missing/broken images */
+.recommendation-card-placeholder {
+	height: 200px;
+	width: 100%;
+	background-color: var(--surface-secondary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--text-tertiary);
+}
+
+.recommendation-card-placeholder-icon {
+	font-size: var(--font-size-4xl);
+	opacity: 0.5;
+}
+
+/* Card Header (Type Badge) */
+.recommendation-card-header {
+	margin-bottom: var(--spacing-2);
+}
+
+.recommendation-card-type {
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-semibold);
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing-wider);
+}
+
+/* Title */
+.recommendation-card-title {
+	margin-bottom: var(--spacing-3) !important;
+	line-height: var(--line-height-snug);
+	color: var(--text-primary);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* Content Preview */
+.recommendation-card-preview {
+	color: var(--text-secondary);
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-normal);
+	margin-bottom: var(--spacing-4);
+	flex-grow: 1;
+}
+
+/* Functional Goals Tags */
+.recommendation-card-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-2);
+	margin-top: auto;
+	padding-top: var(--spacing-3);
+	border-top: 1px solid var(--border-subtle);
+}
+
+.functional-goal-tag {
+	font-size: var(--font-size-xs);
+	border-radius: var(--radius-lg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+	.recommendation-card-image {
+		height: 160px;
+	}
+
+	.recommendation-card-title {
+		font-size: var(--font-size-sm);
+	}
+
+	.recommendation-card-preview {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 480px) {
+	.recommendation-card-image {
+		height: 140px;
+	}
+
+	.recommendation-card-title {
+		font-size: 15px;
+	}
+
+	.recommendation-card-preview {
+		font-size: var(--font-size-xs);
+		margin-bottom: var(--spacing-3);
+	}
+}
+
+/* Loading State Skeleton */
+.recommendation-card .ant-skeleton {
+	padding: var(--spacing-4);
+}
+
+/* Accessibility: Focus Visible */
+.recommendation-card:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+}

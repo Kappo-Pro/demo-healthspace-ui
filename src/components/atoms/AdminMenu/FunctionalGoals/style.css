@@ -1,0 +1,18 @@
+.medical-container {
+	text-align: center;
+	margin-top: var(--spacing-4);
+}
+
+.medical-subcontainer {
+	width: 627px;
+	display: inline-block;
+}
+
+.content-div {
+	height: 620px;
+	overflow: auto;
+	margin-top: var(--spacing-4);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-5);
+}

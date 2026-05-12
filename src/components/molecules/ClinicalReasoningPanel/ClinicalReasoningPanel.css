@@ -1,0 +1,215 @@
+/**
+ * ClinicalReasoningPanel.css
+ *
+ * Styles for clinical reasoning panel
+ * Story 2.7 - FR26 Clinical Reasoning Transparency
+ */
+
+.clinical-reasoning-panel {
+	padding: var(--spacing-md);
+	background: var(--color-background-secondary);
+	border-radius: var(--border-radius-md);
+	border: 1px solid var(--color-border);
+}
+
+/* Explanation section */
+.clinical-reasoning-panel__explanation {
+	margin-bottom: var(--spacing-sm);
+}
+
+.clinical-reasoning-panel__explanation-title {
+	margin-bottom: var(--spacing-xs) !important;
+	font-size: var(--font-size-lg) !important;
+	color: var(--color-text-primary) !important;
+}
+
+.clinical-reasoning-panel__explanation-text {
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-relaxed);
+	color: var(--color-text-secondary);
+	margin-bottom: 0 !important;
+}
+
+/* Section titles */
+.clinical-reasoning-panel__section-title {
+	margin-bottom: var(--spacing-sm) !important;
+	font-size: var(--font-size-md) !important;
+	font-weight: var(--font-weight-semibold) !important;
+	color: var(--color-text-primary) !important;
+}
+
+/* Dividers */
+.clinical-reasoning-panel__divider {
+	margin: var(--spacing-md) 0 !important;
+}
+
+/* Posture findings */
+.clinical-reasoning-panel__findings {
+	margin-bottom: var(--spacing-sm);
+}
+
+.clinical-reasoning-panel__finding {
+	padding: var(--spacing-sm);
+	background: var(--surface-primary);
+	border-radius: var(--border-radius-sm);
+	border: 1px solid var(--color-border);
+	transition: box-shadow 0.2s ease;
+}
+
+.clinical-reasoning-panel__finding:hover {
+	box-shadow: var(--shadow-sm);
+}
+
+.clinical-reasoning-panel__finding-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2xs);
+}
+
+.clinical-reasoning-panel__finding-area {
+	font-size: var(--font-size-md);
+	color: var(--color-text-primary);
+}
+
+.clinical-reasoning-panel__finding-measurement {
+	font-size: var(--font-size-sm);
+	color: var(--color-primary);
+	font-weight: var(--font-weight-medium);
+}
+
+.clinical-reasoning-panel__finding-description {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-secondary);
+	margin-bottom: 0 !important;
+	line-height: var(--line-height-normal);
+}
+
+.clinical-reasoning-panel__severity-tag,
+.clinical-reasoning-panel__priority-tag {
+	margin: 0 !important;
+	font-size: var(--font-size-xs);
+	border-radius: var(--border-radius-sm);
+}
+
+/* Benefits section */
+.clinical-reasoning-panel__benefits {
+	margin-bottom: var(--spacing-sm);
+}
+
+.clinical-reasoning-panel__benefits-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xs);
+}
+
+.clinical-reasoning-panel__benefit-item {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-xs);
+	font-size: var(--font-size-base);
+	color: var(--color-text-secondary);
+	line-height: var(--line-height-relaxed);
+}
+
+.clinical-reasoning-panel__benefit-icon {
+	color: var(--color-success);
+	flex-shrink: 0;
+	margin-top: 3px;
+}
+
+/* Outcome section */
+.clinical-reasoning-panel__outcome {
+	margin-bottom: var(--spacing-sm);
+}
+
+.clinical-reasoning-panel__outcome-item {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2xs);
+	flex: 1;
+	min-width: 0;
+}
+
+.clinical-reasoning-panel__outcome-label {
+	font-size: var(--font-size-sm);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2xs);
+}
+
+.clinical-reasoning-panel__outcome-value {
+	font-size: var(--font-size-base);
+	color: var(--color-text-primary);
+}
+
+.clinical-reasoning-panel__outcome-divider {
+	height: auto;
+	margin: 0 !important;
+}
+
+/* Resources section */
+.clinical-reasoning-panel__resources {
+	margin-bottom: 0;
+}
+
+/* Debug info (development only) */
+.clinical-reasoning-panel__debug {
+	margin-top: var(--spacing-sm);
+	padding-top: var(--spacing-sm);
+	border-top: 1px dashed var(--color-border);
+	text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.clinical-reasoning-panel {
+		padding: var(--spacing-sm);
+	}
+
+	.clinical-reasoning-panel__finding {
+		flex-direction: column;
+		gap: var(--spacing-xs);
+	}
+
+	.clinical-reasoning-panel__outcome-divider {
+		display: none;
+	}
+
+	.clinical-reasoning-panel__explanation-title,
+	.clinical-reasoning-panel__section-title {
+		font-size: var(--font-size-md) !important;
+	}
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+	.clinical-reasoning-panel {
+		border-width: var(--spacing-0-5);
+	}
+
+	.clinical-reasoning-panel__finding {
+		border-width: var(--spacing-0-5);
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.clinical-reasoning-panel__finding {
+		transition: none;
+	}
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	.clinical-reasoning-panel {
+		background: var(--color-background-elevated);
+	}
+
+	.clinical-reasoning-panel__finding {
+		background: var(--color-background-secondary);
+	}
+}

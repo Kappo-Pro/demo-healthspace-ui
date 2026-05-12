@@ -1,0 +1,28 @@
+/**
+ * LazyImage Styles
+ *
+ * Story 4.3: Performance Optimization - AC3 (Image Optimization)
+ */
+
+.lazy-image-container {
+	display: block;
+	background-color: var(--background-tertiary, var(--color-gray-100));
+}
+
+.lazy-image-placeholder {
+	/* Blur effect applied inline for progressive loading */
+}
+
+.lazy-image {
+	display: block;
+	max-width: 100%;
+}
+
+.lazy-image-loaded {
+	/* Fade-in animation handled by inline styles */
+}
+
+/* Dark mode support */
+[data-theme='dark'] .lazy-image-container {
+	background-color: var(--background-tertiary, #1a1a1a);
+}

@@ -1,0 +1,45 @@
+/* Table Filter Dropdown - Matches Ant Design's table filter styling exactly */
+
+.table-filter-dropdown .ant-select-item {
+	padding: 5px var(--spacing-3);
+	font-size: var(--font-size-sm);
+	transition: background-color var(--motion-duration-fast);
+}
+
+.table-filter-dropdown .ant-select-item-option-selected {
+	background-color: var(--ant-color-primary-bg, rgba(22, 119, 255, 0.06));
+	font-weight: var(--font-weight-medium);
+	position: relative;
+}
+
+.table-filter-dropdown .ant-select-item-option-active {
+	background-color: var(--ant-color-fill-secondary, rgba(0, 0, 0, 0.06));
+}
+
+/* Add checkmark for selected items (like table filter) */
+.table-filter-dropdown .ant-select-item-option-selected::after {
+	content: '✓';
+	position: absolute;
+	right: var(--spacing-3);
+	color: var(--ant-color-primary, var(--color-info-500));
+	font-weight: bold;
+	font-size: var(--font-size-sm);
+}
+
+/* Dark mode support */
+[data-theme='dark'] .table-filter-dropdown .ant-select-item-option-selected {
+	background-color: rgba(22, 119, 255, 0.15);
+}
+
+[data-theme='dark'] .table-filter-dropdown .ant-select-item-option-active {
+	background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Hover effect */
+.table-filter-dropdown .ant-select-item-option:hover {
+	background-color: var(--ant-color-fill-secondary, rgba(0, 0, 0, 0.06));
+}
+
+[data-theme='dark'] .table-filter-dropdown .ant-select-item-option:hover {
+	background-color: rgba(255, 255, 255, 0.08);
+}

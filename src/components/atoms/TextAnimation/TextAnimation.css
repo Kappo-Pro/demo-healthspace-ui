@@ -1,0 +1,101 @@
+:root {
+	--text-anim-color: var(--color-brand-main);
+	--text-anim-bg: var(--color-brand-main-soft);
+	--text-anim-overlay: var(--color-frost-mid);
+}
+
+@keyframes slideInLeftToRight {
+	0% {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slideOutRightToLeft {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+}
+
+.animated-text {
+	font-size: 66px;
+	color: var(--text-anim-color);
+	display: inline-block;
+	min-height: 100px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	background-color: var(--text-anim-overlay);
+	width: 75%;
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+	padding-left: 1.25rem;
+	padding-right: 6.25rem;
+}
+
+.animated-text-wrap {
+	background-color: var(--text-anim-bg);
+	width: 75%;
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+	padding-left: 1.25rem;
+	padding-right: 6.25rem;
+}
+
+.body-side-title-text {
+	font-size: 40px;
+	margin: 0px;
+	color: var(--text-anim-color);
+	display: inline-block;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	background-color: var(--text-anim-bg);
+}
+
+#root div.animation-wrapper div,
+#root div.animation-wrapper p {
+	font-weight: 800;
+	font-family: Montserrat;
+}
+
+.movement-title-text {
+	font-size: 98px;
+	margin: 0px;
+	color: var(--color-text-inverse);
+	display: inline-block;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	background-color: var(--text-anim-bg);
+}
+
+.inner-box {
+	background-color: var(--color-neutral-50);
+	width: 1.25rem;
+	margin-right: 1.25rem;
+}
+
+.animation-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: stretch;
+}
+
+.slide-in {
+	animation: slideInLeftToRight 1s ease-out forwards;
+}
+
+.slide-out {
+	animation: slideOutRightToLeft 1s ease-in forwards;
+}

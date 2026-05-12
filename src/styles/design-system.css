@@ -1,0 +1,266 @@
+/**
+ * VitalFlow Design System
+ *
+ * This is the main entry point for the design system.
+ * Import this file in your application to use all design tokens and themes.
+ *
+ * Usage:
+ * import '@styles/design-system.css'
+ *
+ * @version 2.0.0
+ * @author VitalFlow UX Team
+ */
+
+/* ============================================
+   FONTS
+   Load all font declarations first
+   ============================================ */
+
+@import './fonts.css';
+
+/* ============================================
+   UTILITIES
+   Reusable utility classes and animations
+   ============================================ */
+
+@import './utilities.css';
+
+/* ============================================
+   DESIGN TOKENS
+   Foundation: Primitives and semantic tokens
+   ============================================ */
+
+/* Primitive tokens (raw values) */
+@import './tokens/primitives.css';
+
+/* Design system colors (extracted from Figma) */
+@import './tokens/colors.css';
+
+/* Semantic tokens (purpose-based values) */
+@import './tokens/semantic.css';
+
+/* Layout tokens (AppLayout system) */
+@import './tokens/layout.css';
+
+/* Visual polish tokens (Phase 3) */
+@import './tokens/polish.css';
+
+/* ============================================
+   ANIMATIONS
+   Micro-interactions and transitions
+   ============================================ */
+
+@import './animations.css';
+
+/* ============================================
+   THEMES
+   Theme-specific overrides for semantic tokens
+   ============================================ */
+
+/* Default theme (Purple - Light) */
+@import './themes/default.css';
+
+/* Light theme variant */
+@import './themes/light.css';
+
+/* Dark theme (True dark mode) */
+@import './themes/dark.css';
+
+/* Vibrant theme (Harley Davidson inspired) */
+@import './themes/vibrant.css';
+
+/* ============================================
+   BASE STYLES
+   Global resets and defaults
+   ============================================ */
+
+* {
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+}
+
+html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: var(--font-family-primary);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-normal);
+	color: var(--text-primary);
+	letter-spacing: var(--letter-spacing-tightest); /* -0.3px for Inter font */
+	/* Page background color (theme-aware) */
+	background-color: var(--bg-page);
+	/* Ensure background covers full viewport */
+	min-height: 100vh;
+}
+
+/* Apply Poppins to all headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.ant-typography h1,
+.ant-typography h2,
+.ant-typography h3,
+.ant-typography h4,
+.ant-typography h5,
+.ant-typography h6,
+h1.ant-typography,
+h2.ant-typography,
+h3.ant-typography,
+h4.ant-typography,
+h5.ant-typography,
+h6.ant-typography,
+.ant-typography.ant-typography-h1,
+.ant-typography.ant-typography-h2,
+.ant-typography.ant-typography-h3,
+.ant-typography.ant-typography-h4,
+.ant-typography.ant-typography-h5 {
+	font-family: var(--font-family-heading);
+	letter-spacing: var(
+		--letter-spacing-normal
+	); /* Reset Inter's tight spacing for Poppins */
+}
+
+/* ============================================
+   UTILITY CLASSES
+   Reusable helper classes
+   ============================================ */
+
+/* Text utilities */
+.text-primary {
+	color: var(--text-primary);
+}
+.text-secondary {
+	color: var(--text-secondary);
+}
+.text-tertiary {
+	color: var(--text-tertiary);
+}
+.text-brand {
+	color: var(--text-brand);
+}
+.text-error {
+	color: var(--text-error);
+}
+.text-success {
+	color: var(--text-success);
+}
+.text-warning {
+	color: var(--text-warning);
+}
+
+/* Background utilities */
+.bg-surface-primary {
+	background-color: var(--surface-primary);
+}
+.bg-surface-secondary {
+	background-color: var(--surface-secondary);
+}
+.bg-brand {
+	background-color: var(--surface-brand);
+}
+.bg-page {
+	background-color: var(--bg-page);
+}
+
+/* Border utilities */
+.border-subtle {
+	border-color: var(--border-subtle);
+}
+.border-default {
+	border-color: var(--border-default);
+}
+.border-strong {
+	border-color: var(--border-strong);
+}
+.border-brand {
+	border-color: var(--border-brand);
+}
+
+/* Shadow utilities */
+.shadow-card {
+	box-shadow: var(--card-shadow);
+}
+.shadow-modal {
+	box-shadow: var(--modal-shadow);
+}
+.shadow-dropdown {
+	box-shadow: var(--dropdown-shadow);
+}
+
+/* Interactive state utilities */
+.interactive-surface {
+	background-color: var(--surface-interactive);
+	transition: background-color var(--transition-base);
+}
+
+.interactive-surface:hover {
+	background-color: var(--surface-interactive-hover);
+}
+
+.interactive-surface:active {
+	background-color: var(--surface-interactive-active);
+}
+
+/* Focus styles */
+.focus-ring:focus {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+}
+
+/* Accessibility */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: var(--border-width-0);
+}
+
+/* ============================================
+   TRANSITIONS
+   Smooth animations for theme switching
+   ============================================ */
+
+:root {
+	/* Enable smooth transitions for theme changes */
+	--theme-transition: background-color 200ms ease-in-out,
+		color 200ms ease-in-out, border-color 200ms ease-in-out;
+}
+
+/* Apply transitions to common elements */
+body,
+.surface,
+.card,
+.button,
+.input {
+	transition: var(--theme-transition);
+}
+
+/* ============================================
+   PRINT STYLES
+   Optimized for printing
+   ============================================ */
+
+@media print {
+	body {
+		background-color: var(--surface-primary);
+		color: var(--text-primary) /* TODO: Verify context */;
+	}
+
+	.no-print {
+		display: none !important;
+	}
+}

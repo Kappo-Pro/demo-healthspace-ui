@@ -1,0 +1,240 @@
+/* Splash Page Layout - Uses Ant Design Row/Col/Card */
+.orom-splash-wrapper {
+	width: 100%;
+	flex: 1;
+	height: 100%;
+	padding: 20px 12px;
+	margin: 0 !important;
+	box-sizing: border-box;
+}
+
+.splash-row-css {
+	height: 100%;
+}
+
+/* Exercise List Panel - Constrain height */
+.orom-splash-wrapper .splash-header {
+	display: flex;
+	flex-direction: column;
+	transition: height 0.3s ease;
+	overflow: hidden;
+}
+
+.orom-splash-wrapper .splash-header .ant-card-body {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	flex: 1;
+	min-height: 0;
+}
+
+/* Body Points Visualization - Parent Col */
+.orom-splash-wrapper > .ant-col:nth-child(2) {
+	height: 100%;
+}
+
+.orom-splash-wrapper .body-points > div {
+	height: 100%;
+}
+
+.body-shape-front {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-shrink: 0;
+}
+
+/* Hotspot Icons */
+.hotspot-icon {
+	cursor: pointer;
+	transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.hotspot-icon:hover {
+	transform: scale(1.1);
+}
+
+.hotspot-circle {
+	width: var(--spacing-5);
+	height: var(--spacing-5);
+	background: var(--surface-tertiary);
+	border-radius: var(--radius-full);
+	position: absolute;
+	cursor: pointer;
+}
+
+.orom-splash-wrapper .hotspot-circle.active {
+	background: var(--color-success-600);
+	border: var(--border-width-2) solid var(--color-success-200);
+	box-shadow: var(--shadow-sm);
+	cursor: default;
+}
+
+/* Area Highlight */
+.area-highlight {
+	background: var(--splash-area-highlight);
+	position: absolute;
+	z-index: 9999;
+	opacity: var(--opacity-10);
+	border-radius: var(--radius-full);
+	pointer-events: none;
+}
+
+/* Exercise List Container */
+.exercise-list-container {
+	flex: 1;
+	min-height: 0; /* Allow flex shrinking */
+	overflow-y: auto;
+	border-radius: var(--radius-lg);
+	padding: var(--spacing-2);
+	background-color: var(--surface-secondary);
+	margin-top: var(--spacing-2);
+	transition: max-height 0.3s ease;
+}
+
+/* Smooth list appearance */
+.exercises-list {
+	animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Exercise List Items - Ant Design List overrides */
+.exercises-list .ant-list-item {
+	padding: var(--spacing-2) var(--spacing-3);
+	margin-bottom: var(--spacing-1);
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	transition: all var(--motion-duration-fast) var(--motion-ease-in-out);
+	color: var(--text-secondary);
+	background-color: var(--surface-primary);
+	border: none !important;
+}
+
+.exercises-list .ant-list-item:hover {
+	background-color: var(--surface-hover);
+	color: var(--text-primary);
+	transform: translateX(var(--spacing-1));
+}
+
+.exercise-item.selected {
+	background-color: var(--brand-primary) !important;
+	color: var(--text-on-brand) !important;
+	font-weight: var(--font-weight-semibold);
+}
+
+.exercise-item.selected:hover {
+	background-color: var(--brand-primary-hover) !important;
+}
+
+/* Exercise Preview Panel - Thumbnails */
+.exercise-thumbnail {
+	width: 64px;
+	height: 64px;
+	flex-shrink: 0;
+	position: relative;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	cursor: pointer;
+	background-color: var(--surface-secondary);
+}
+
+.exercise-thumbnail:hover .exercise-thumbnail-overlay {
+	opacity: 1;
+}
+
+.exercise-thumbnail-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: var(--radius-lg);
+}
+
+/* Ant Design Image wrapper adjustment */
+.exercise-thumbnail .ant-image {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.exercise-thumbnail .ant-image-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: var(--radius-lg);
+}
+
+/* Skeleton placeholder in thumbnail */
+.exercise-thumbnail .ant-skeleton-image {
+	width: 64px !important;
+	height: 64px !important;
+	border-radius: var(--radius-lg);
+}
+
+.exercise-thumbnail-placeholder {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--surface-tertiary);
+	color: var(--text-tertiary);
+}
+
+.exercise-thumbnail-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--color-gray-alpha-40);
+	opacity: 0;
+	transition: opacity var(--motion-duration-fast) var(--motion-ease-in-out);
+	border-radius: var(--radius-lg);
+}
+
+.exercise-preview-content {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.exercise-preview-title {
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-snug);
+	color: var(--text-primary);
+}
+
+.exercise-preview-description {
+	font-size: var(--font-size-xs);
+	line-height: var(--line-height-snug);
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	max-width: 100%;
+	min-width: 0;
+	word-break: break-word;
+}
+
+/* Start Scan Button - Remove click scale animation */
+.exercise-preview-panel .ant-btn-primary:active {
+	transform: none;
+}
+
+/* Estimated Time */
+.orom-estimated-time {
+	color: var(--text-tertiary);
+	margin-top: var(--spacing-2);
+	font-size: var(--font-size-xs);
+}

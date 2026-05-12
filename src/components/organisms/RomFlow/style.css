@@ -1,0 +1,527 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+html,
+#demo,
+.App {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	height: 100%;
+}
+
+#demo {
+	background: var(--color-purple-400);
+	background: linear-gradient(
+		130deg,
+		var(--color-purple-400) 0%,
+		var(--color-purple-700) 100%
+	);
+}
+
+.btn-solid-green {
+	border-radius: var(--radius-full) !important;
+	padding: 7px 42px;
+	background: var(--color-success-600);
+	border: 2px solid var(--color-success-600);
+	color: var(--text-on-brand);
+	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-sm);
+}
+
+button.btn-solid-green:hover {
+	border: 2px solid var(--color-success-500);
+	background: var(--color-success-500);
+}
+
+.btn-outline {
+	border-radius: var(--radius-full);
+	padding: var(--spacing-2) 42px;
+	background: transparent;
+	border: 2px solid var(--text-on-brand);
+	color: var(--text-on-brand);
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.cancel-btn-outline {
+	border-radius: var(--radius-full);
+	padding: var(--spacing-2) 42px;
+	background: transparent;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+button.btn-outline:hover {
+	background: var(--brand-primary);
+	border-color: var(--brand-primary);
+}
+
+.btn-solid-purpple {
+	border-radius: var(--radius-md);
+	padding: var(--spacing-2);
+	background: var(--brand-primary);
+	border: 2px solid var(--brand-primary);
+	color: var(--text-on-brand);
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+button.btn-solid-purpple:hover {
+	background: var(--brand-primary-hover);
+	border-color: var(--brand-primary-hover);
+	color: var(--text-on-brand);
+}
+
+canvas {
+	width: 100%;
+}
+
+.coach-container {
+	position: relative;
+	max-width: 1280px;
+	max-height: 720px;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.overlay-container {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.main-video {
+	width: 100%;
+}
+
+canvas.overlay-canvas {
+	width: 100%;
+	height: 100%;
+}
+
+.overlay-coach {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	top: 0;
+	overflow: hidden;
+}
+
+.overlay-top {
+	background: var(--color-black);
+	background: linear-gradient(
+		180deg,
+		var(--color-black-alpha-70) 0%,
+		transparent 100%
+	);
+	z-index: 101;
+	position: absolute;
+	height: 85px;
+}
+
+.overlay-bottom {
+	background: var(--color-black);
+	background: linear-gradient(
+		180deg,
+		transparent 0%,
+		var(--color-black-alpha-70) 100%
+	);
+	z-index: 101;
+	position: absolute;
+	width: 100%;
+
+	position: absolute;
+	bottom: 0;
+	text-align: right;
+}
+
+.overlay-top > svg {
+	width: 100%;
+	display: block;
+	height: 85px;
+	margin: 0 auto;
+}
+
+.overlay-bottom svg {
+	width: 98%;
+	margin-bottom: var(--spacing-5);
+}
+
+h1.exercise-desc {
+	position: absolute;
+	top: 0;
+	left: 37%;
+	color: var(--text-on-brand);
+	font-size: 22px;
+	margin-top: var(--spacing-5);
+	font-weight: var(--font-weight-normal);
+}
+
+h2.exercise-result-range {
+	position: absolute;
+	top: 220px;
+	right: 8%;
+	color: var(--text-on-brand);
+	font-size: 27px;
+	margin-top: var(--spacing-5);
+	font-weight: var(--font-weight-light);
+	font-size: 62px;
+}
+
+h2.exercise-result-range:before {
+	content: '';
+}
+
+.rom-container .overlay-content {
+	width: 40%;
+	position: absolute;
+	top: 90px;
+	left: 0;
+	z-index: 101;
+}
+
+.rom-container .instruction-actions .ant-btn {
+	background: none;
+}
+
+.instruction-video {
+	width: 100%;
+	position: absolute;
+}
+
+@media screen and (max-width: 1024px) {
+	h1.exercise-desc {
+		font-size: 17px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	h1.exercise-desc {
+		font-size: 15px;
+		margin-top: 15px;
+	}
+
+	.overlay-content {
+		bottom: 47px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	h1.exercise-desc {
+		font-size: 13px;
+	}
+
+	.overlay-top svg {
+		height: 65px;
+	}
+
+	.overlay-content {
+		bottom: 47px;
+	}
+}
+
+.overlay-bottom circle {
+	cx: 107;
+}
+
+.estimator-template {
+	background: inherit;
+	margin: 0 auto;
+}
+
+.btn-outline.replay {
+	position: absolute;
+	z-index: 105;
+	top: 55px;
+	left: 25px;
+}
+
+img.icon-play {
+	width: var(--spacing-5);
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+button.btn-icon.btn-menu {
+	position: absolute;
+	border: none;
+	z-index: 101;
+}
+
+img.icon-menu {
+	width: var(--spacing-5);
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+button.btn-icon.btn-menu:hover i.material-icons {
+	color: var(--color-white-alpha-50) !important;
+}
+
+.main-menu {
+	background: var(--brand-primary);
+	opacity: 0.9;
+	width: 100%;
+	max-width: 430px;
+	height: 100%;
+	z-index: 1006;
+	position: absolute;
+	left: -430px;
+	transition: 850ms;
+	overflow-y: auto;
+}
+
+.main-menu.active {
+	transition: 550ms;
+	left: 0;
+	top: 0;
+}
+
+.overlay-menu {
+	width: 100%;
+	height: 100%;
+	background: var(--color-black-alpha-60);
+	position: relative;
+	z-index: 1004;
+	overflow: hidden;
+	display: none;
+}
+
+.overlay-menu.active {
+	display: block;
+}
+
+ul.exercise-list {
+	list-style: none;
+	padding: 0 0 0 0;
+}
+
+ul.exercise-list li {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-normal);
+	color: var(--color-white-alpha-50);
+	text-transform: uppercase;
+	border-bottom: 1px solid var(--color-white-alpha-20);
+	cursor: pointer;
+	padding: var(--spacing-2-5) var(--spacing-5) var(--spacing-2-5)
+		var(--spacing-10);
+	display: flex;
+	justify-content: space-between;
+	line-height: var(--line-height-relaxed);
+}
+
+.exercise-list .md-icon {
+	vertical-align: middle;
+	padding-right: var(--spacing-1-5);
+}
+
+.btn-menu svg.md-icon {
+	fill: var(--text-on-brand);
+}
+
+svg.exercise-check.md-icon {
+	fill: var(--color-white-alpha-50);
+}
+
+@media only screen and (min-width: 1200px) {
+	ul.exercise-list li svg.md-icon.compare-icon {
+		display: none;
+	}
+
+	ul.exercise-list li:hover svg.md-icon.compare-icon {
+		display: initial;
+	}
+}
+
+svg.md-icon:hover {
+	fill: var(--color-white-alpha-50);
+}
+
+ul.exercise-list li.primary-links {
+	display: block;
+	color: var(--text-on-brand);
+}
+
+ul.exercise-list .menu-subtitle {
+	font-weight: var(--font-weight-semibold);
+	cursor: default;
+	margin-top: 25px;
+	color: var(--color-white-alpha-50);
+}
+
+ul.exercise-list .menu-subtitle:hover {
+	background: transparent;
+}
+
+ul.exercise-list li:hover {
+	background: var(--color-white-alpha-10);
+}
+
+ul.exercise-list li.done {
+	color: var(--text-on-brand);
+}
+
+.bar-container {
+	background: var(--color-white-alpha-20);
+	width: 100%;
+	height: 5px;
+}
+
+a.btn-play-pause {
+	position: absolute;
+	right: 25px;
+	bottom: 70px;
+	color: var(--text-on-brand);
+	z-index: 140;
+}
+
+.rom .coach-container.fullscreen,
+.rom .estimator-template.fullscreen {
+	background: inherit;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.rom .fullscreen .videoRecord {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.rom .fullscreen .main-video {
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+}
+
+.progress-bar {
+	position: relative;
+	z-index: 101;
+	color: var(--text-on-brand);
+	top: var(--spacing-1-5);
+	left: 34px;
+}
+
+.area-highlight {
+	background: var(--surface-primary);
+	width: var(--spacing-0);
+	height: var(--spacing-0);
+	position: absolute;
+	z-index: 9999;
+	opacity: 0.1;
+	border-radius: 1000px;
+	left: 25px;
+	top: 195px;
+}
+
+.area-highlight.upper {
+	top: var(--spacing-5);
+}
+
+.area-highlight.upper.right {
+	left: 95px;
+	top: var(--spacing-20);
+	width: 190px;
+	height: 190px;
+}
+
+.area-highlight.upper.left {
+	left: -38px;
+	top: var(--spacing-20);
+	width: 190px;
+	height: 190px;
+}
+
+.area-highlight.lower {
+	left: 25px;
+	top: 195px;
+	width: 200px;
+	height: 200px;
+}
+
+.area-highlight.full {
+	left: -50px;
+	top: var(--spacing-14);
+	width: 350px;
+	height: 350px;
+}
+
+.area-highlight.spine {
+	left: var(--spacing-10);
+	top: var(--spacing-16);
+	width: 170px;
+	height: 170px;
+}
+
+.instructional-active {
+	position: absolute;
+	z-index: 111;
+	width: 40%;
+	top: 30px;
+}
+
+.main-action {
+	position: absolute;
+	background: var(--brand-primary);
+	bottom: var(--spacing-1-5);
+	right: 0;
+}
+
+.main-action button.ant-btn {
+	background: none;
+	color: var(--text-on-brand);
+}
+
+.single-result .rom-header .btn-submit-record,
+.single-result .rom-header .btn-delete-record {
+	position: relative;
+	bottom: unset;
+	right: unset;
+	vertical-align: top;
+}
+
+.upload-progress-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: var(--surface-primary);
+	padding: var(--spacing-5);
+}
+
+.upload-message {
+	font-size: 26px;
+	margin-bottom: var(--spacing-5);
+	color: var(--surface-primary);
+	text-align: center;
+}
+
+.upload-progress-bar .ant-progress-bg {
+	border-radius: var(--radius-md);
+	text-align: center;
+	transition: width 0.2s ease;
+}
+
+.upload-progress-bar .ant-progress-outer {
+	width: 100%;
+	max-width: 500px;
+}
+
+.progress-percentage {
+	font-size: 21px;
+	color: var(--surface-primary);
+	margin-top: var(--spacing-2-5);
+	font-weight: bold;
+	transition: color 0.4s ease;
+}
+
+.progress-percentage::after {
+	content: ' completed';
+	font-size: 15px;
+	color: var(--surface-primary);
+}

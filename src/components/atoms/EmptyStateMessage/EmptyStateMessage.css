@@ -1,0 +1,122 @@
+/**
+ * EmptyStateMessage Styles
+ * Uses design system tokens for consistent theming
+ */
+
+.empty-state-message {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: var(--spacing-12) var(--spacing-6);
+	min-height: 300px;
+}
+
+/* Icon */
+.empty-state-message__icon {
+	font-size: 64px;
+	margin-bottom: var(--spacing-6);
+	color: var(--text-tertiary);
+	transition: color 0.2s ease;
+}
+
+/* Type-specific icon colors */
+.empty-state-message--no-data .empty-state-message__icon {
+	color: var(--text-tertiary);
+}
+
+.empty-state-message--no-results .empty-state-message__icon {
+	color: var(--color-warning-500);
+}
+
+.empty-state-message--error .empty-state-message__icon {
+	color: var(--color-error-500);
+}
+
+.empty-state-message--permission-denied .empty-state-message__icon {
+	color: var(--color-warning-600);
+}
+
+/* Title */
+.empty-state-message__title {
+	margin: 0 0 var(--spacing-3) 0;
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	line-height: var(--line-height-snug);
+}
+
+/* Description */
+.empty-state-message__description {
+	margin: 0 0 var(--spacing-6) 0;
+	font-size: 15px;
+	color: var(--text-secondary);
+	line-height: var(--line-height-relaxed);
+	max-width: 400px;
+}
+
+/* Call to Action Button */
+.empty-state-message__cta {
+	margin-top: var(--spacing-2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.empty-state-message {
+		padding: var(--spacing-8) var(--spacing-4);
+		min-height: 250px;
+	}
+
+	.empty-state-message__icon {
+		font-size: var(--font-size-4xl);
+		margin-bottom: var(--spacing-4);
+	}
+
+	.empty-state-message__title {
+		font-size: var(--font-size-base);
+	}
+
+	.empty-state-message__description {
+		font-size: var(--font-size-sm);
+	}
+}
+
+/* Small variant (for compact spaces) */
+.empty-state-message--small {
+	padding: var(--spacing-6) var(--spacing-4);
+	min-height: 200px;
+}
+
+.empty-state-message--small .empty-state-message__icon {
+	font-size: var(--font-size-4xl);
+	margin-bottom: var(--spacing-4);
+}
+
+.empty-state-message--small .empty-state-message__title {
+	font-size: var(--font-size-sm);
+	margin-bottom: var(--spacing-2);
+}
+
+.empty-state-message--small .empty-state-message__description {
+	font-size: 13px;
+	margin-bottom: var(--spacing-4);
+}
+
+/* Accessibility - high contrast mode */
+@media (prefers-contrast: high) {
+	.empty-state-message__icon {
+		opacity: 1;
+	}
+
+	.empty-state-message__title {
+		font-weight: var(--font-weight-bold);
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.empty-state-message__icon {
+		transition: none;
+	}
+}

@@ -1,0 +1,33 @@
+.onboard-footer {
+	display: flex;
+	justify-content: center;
+	padding: var(--spacing-6) 0;
+	margin-top: auto;
+}
+
+/* Figma: 640px width, 40px height, borderRadiusLG (16px) */
+.onboard-footer-btn {
+	width: 640px;
+	min-width: 258px;
+	height: var(--spacing-10); /* 40px */
+	border-radius: var(--radius-2xl); /* 16px - Figma borderRadiusLG */
+	font-size: var(--font-size-base); /* 16px */
+	line-height: var(--line-height-normal); /* 24px */
+	letter-spacing: -0.48px;
+}
+
+.onboard-footer-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Reduce click animation - subtle scale instead of default */
+.onboard-footer-btn:active {
+	transform: scale(0.99);
+	transition: transform 0.1s ease;
+}
+
+/* Disable Ant Design wave effect */
+.onboard-footer-btn .ant-wave {
+	display: none;
+}

@@ -1,0 +1,266 @@
+/**
+ * Vibrant Theme (Harley Davidson Inspired)
+ *
+ * Bold orange and black color scheme inspired by
+ * Harley Davidson's iconic branding.
+ */
+
+[data-theme='vibrant'] {
+	/* ============================================
+     BRAND
+     Orange and black color scheme
+     ============================================ */
+	--brand-primary: var(--color-orange-500);
+	--brand-primary-hover: var(--color-orange-600);
+	--brand-primary-light: var(--color-orange-100);
+	--brand-secondary: var(--color-orange-400);
+	--brand-accent: var(--color-orange-300);
+
+	/* ============================================
+     SURFACES & BACKGROUNDS
+     ============================================ */
+
+	--surface-primary: var(--color-white);
+	--rom-card-primary: var(--color-white);
+	--pie-chart-text-color: var(--color-black);
+	--surface-secondary: var(--color-gray-50);
+	--surface-tertiary: var(--color-gray-100);
+	--surface-elevated: var(--color-white);
+	--surface-overlay: var(--color-white);
+
+	--surface-interactive: var(--color-gray-50);
+	--surface-interactive-hover: var(--color-gray-100);
+	--surface-interactive-active: var(--color-gray-200);
+
+	--surface-brand: var(--color-orange-50);
+	--surface-brand-subtle: var(--color-orange-25);
+
+	/* Interactive surface states */
+	--surface-hover: var(--color-purple-100);
+	--surface-active: var(--color-purple-200);
+	--surface-error: var(--color-red-100);
+
+	--bg-page: var(--color-gray-50);
+	--bg-canvas: var(--color-white);
+	--bg-input: var(--color-white);
+	--bg-disabled: var(--color-gray-100);
+
+	/* ============================================
+     TEXT COLORS
+     ============================================ */
+
+	--text-primary: var(--color-black);
+	--text-secondary: var(--color-gray-700);
+	--text-tertiary: var(--color-gray-600);
+	--text-quaternary: var(--color-gray-500);
+	--text-placeholder: var(--color-gray-400);
+	--text-disabled: var(--color-gray-400);
+
+	--text-on-brand: var(--color-white);
+	--text-on-dark: var(--color-white);
+	--text-on-light: var(--color-black);
+
+	--text-brand: var(--color-orange-600);
+	--text-link: var(--color-orange-600);
+	--text-link-hover: var(--color-orange-700);
+
+	/* ============================================
+     ICON COLORS
+     Default icon color for light theme
+     ============================================ */
+	--icon-color: var(--color-neutral-800);
+
+	/* ============================================
+     BORDERS
+     ============================================ */
+
+	--border-subtle: var(--color-gray-200);
+	--border-default: var(--color-gray-300);
+	--border-strong: var(--color-gray-400);
+	--border-brand: var(--color-orange-500);
+	--border-focus: var(--color-orange-500);
+
+	/* ============================================
+     INTERACTIVE STATES
+     ============================================ */
+
+	/* Primary Button */
+	--button-primary-bg: var(--color-orange-500);
+	--button-primary-bg-hover: var(--color-orange-600);
+	--button-primary-bg-active: var(--color-orange-700);
+	--button-primary-bg-disabled: var(--color-orange-200);
+	--button-primary-text: var(--color-white);
+	--button-primary-text-disabled: var(--color-white);
+
+	/* Secondary Button */
+	--button-secondary-bg: var(--color-black);
+	--button-secondary-bg-hover: var(--color-gray-900);
+	--button-secondary-bg-active: #333333;
+	--button-secondary-text: var(--color-white);
+	--button-secondary-border: var(--color-black);
+
+	/* Tertiary Button */
+	--button-tertiary-bg: transparent;
+	--button-tertiary-bg-hover: var(--color-orange-50);
+	--button-tertiary-bg-active: var(--color-orange-100);
+	--button-tertiary-text: var(--color-black);
+
+	/* Destructive Button */
+	--button-destructive-bg: var(--color-error-600);
+	--button-destructive-bg-hover: var(--color-error-700);
+	--button-destructive-bg-active: var(--color-error-800);
+	--button-destructive-text: var(--color-white);
+
+	/* ============================================
+     FORM ELEMENTS
+     ============================================ */
+	/* Form components now use Ant Design defaults for automatic light/dark mode support */
+
+	/* --input-bg: var(--color-white); */
+	/* --input-bg-disabled: var(--color-gray-50); */
+	--input-border: var(--color-gray-300);
+	--input-border-hover: var(--color-gray-400); 
+ --input-border-focus: var(--color-orange-500);
+	 --input-border-error: var(--color-error-500);
+	/* --input-text: var(--color-black); */
+	/* --input-text-placeholder: var(--color-gray-400); */
+	/* --input-text-disabled: var(--color-gray-500); */
+
+	/* --checkbox-bg: var(--color-white); */
+	/* --checkbox-bg-checked: var(--color-orange-500); */
+	/* --checkbox-bg-disabled: var(--color-gray-100); */
+	/* --checkbox-border: var(--color-gray-300); */
+	/* --checkbox-border-checked: var(--color-orange-500); */
+	/* --checkbox-checkmark: var(--color-white); */
+
+	/* ============================================
+     COMPONENT-SPECIFIC
+     ============================================ */
+
+	/* Navigation */
+	--nav-bg: var(--color-black);
+	--nav-text: var(--color-white);
+	--nav-text-hover: var(--color-orange-300);
+	--nav-item-active-bg: var(--color-orange-500);
+	--nav-item-hover-bg: var(--color-gray-900);
+	--nav-divider: #333333;
+
+	/* Sidebar */
+	--sidebar-bg: var(--color-white);
+	--sidebar-border: var(--color-gray-200);
+	--sidebar-item-hover-bg: var(--color-orange-50);
+	--sidebar-item-active-bg: var(--color-orange-100);
+	--sidebar-item-active-text: var(--color-orange-600);
+
+	/* Cards */
+	--card-bg: var(--color-white);
+	--stroke-default-white: var(--color-white);
+	--card-border: var(--color-gray-200);
+	--card-shadow: var(--shadow-sm);
+	--card-header-bg: var(--color-gray-50);
+	--card-header-border: var(--color-gray-200);
+
+	/* Modal */
+	--modal-bg: var(--color-white);
+	--modal-overlay: rgba(0, 0, 0, 0.6);
+	--modal-border: var(--color-gray-200);
+	--modal-shadow: var(--shadow-2xl);
+
+	/* Dropdown */
+	/* Dropdown components now use Ant Design defaults */
+	/* --dropdown-bg: var(--color-white); */
+	/* --dropdown-border: var(--color-gray-200); */
+	/* --dropdown-shadow: var(--shadow-lg); */
+	/* --dropdown-item-hover-bg: var(--color-orange-50); */
+	/* --dropdown-item-active-bg: var(--color-orange-100); */
+
+	/* Tooltip */
+	--tooltip-bg: var(--color-black);
+	--tooltip-text: var(--color-white);
+	--tooltip-shadow: var(--shadow-lg);
+
+	/* Badge */
+	--badge-bg-default: var(--color-gray-100);
+	--badge-text-default: var(--color-gray-700);
+	--badge-bg-brand: var(--color-orange-100);
+	--badge-text-brand: var(--color-orange-700);
+	--badge-bg-success: var(--color-success-100);
+	--badge-text-success: var(--color-success-700);
+	--badge-bg-warning: var(--color-warning-100);
+	--badge-text-warning: var(--color-warning-700);
+	--badge-bg-error: var(--color-error-100);
+	--badge-text-error: var(--color-error-700);
+
+	/* Progress */
+	--progress-bg: var(--color-gray-200);
+	--progress-fill: var(--color-orange-500);
+	--progress-text: var(--color-gray-700);
+
+	/* Tabs */
+	--tab-border: var(--color-gray-200);
+	--tab-text: var(--color-gray-600);
+	--tab-text-hover: var(--color-gray-800);
+	--tab-text-active: var(--color-orange-600);
+	--tab-indicator: var(--color-orange-500);
+	--tab-bg-active: var(--color-orange-50);
+
+	/* Table */
+	/* --table-border: Uses Ant Design default for proper light/dark mode support */
+	--table-header-bg: var(--color-gray-50);
+	--table-header-text: var(--color-gray-700);
+	--table-row-bg: var(--surface-elevated);
+	--table-row-hover-bg: var(--color-orange-50);
+	--table-row-selected-bg: var(--color-orange-100);
+
+	/* Stepper */
+	--stepper-active-bg: var(--color-orange-500);
+	--stepper-active-text: var(--color-white);
+	--stepper-inactive-bg: var(--color-gray-200);
+	--stepper-inactive-text: var(--color-gray-600);
+	--stepper-completed-bg: var(--color-orange-400);
+	--stepper-line: var(--color-gray-300);
+
+	/* Loader/Spinner */
+	--loader-primary: var(--color-orange-500);
+	--loader-secondary: var(--color-orange-200);
+
+	/* Divider */
+	--divider-color: var(--color-gray-200);
+	--divider-strong: var(--color-gray-300);
+
+	/* Status */
+	--status-success-bg: var(--color-success-500);
+	--status-warning-bg: var(--color-warning-500);
+	--status-error-bg: var(--color-error-500);
+	--status-info-bg: var(--color-info-500);
+
+	/* ============================================
+     LEGACY COMPATIBILITY
+     ============================================ */
+
+	--layout-bg-color: var(--color-white);
+	--mainmenu-bg-color: var(--color-black);
+	--adminmenu-bg-color: #0d0f0f;
+	--stepper-color: var(--color-orange-500);
+	--stepper-secondary-color: var(--color-orange-400);
+	--text-color: var(--color-black);
+	--text-color-root: var(--color-black);
+	--evaluation-bg-colors: var(--color-gray-50);
+	--evaluation-title-color: var(--color-gray-700);
+	--bodyPoint-label-color: var(--color-orange-500);
+	--settings-button-bg-color: var(--color-orange-500);
+	--settings-button-text-color: var(--color-white);
+	--content-manager-card-bg-color: var(--color-white);
+	--content-manager-card-header-bg-color: var(--color-gray-50);
+	--content-manager-card-header-text-color: var(--color-gray-900);
+	--tabs-text-color: rgba(0, 0, 0, 0.88);
+	--button-color-primary: var(--color-orange-500);
+	--loader-bg-color: var(--color-orange-500);
+	--session-bg-color: var(--color-orange-500);
+	--wellness-button-color: var(--color-orange-500);
+	--reference-bg: var(--color-black);
+	--suggested-card-bg: var(--color-black);
+	--color-background-video-element: var(--color-black);
+	--functional-goal-color: var(--color-black);
+	--functional-goal-color-unslected: var(--color-gray-300);
+}

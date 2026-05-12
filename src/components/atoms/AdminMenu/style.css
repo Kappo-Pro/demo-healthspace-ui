@@ -1,0 +1,443 @@
+.admin-menu-main-container {
+	position: relative;
+}
+
+.admin-menu {
+	position: absolute;
+	margin-top: 0.5rem;
+	left: 24px;
+}
+
+.logo {
+	cursor: pointer;
+	margin-bottom: 1rem;
+	margin-top: 0.75rem;
+	margin-left: 0.75rem;
+}
+
+.admin-profile {
+	position: absolute;
+	bottom: 40px;
+	left: 22px;
+}
+
+.menu-item {
+	cursor: pointer;
+	margin-bottom: 1rem;
+	margin-top: 0.75rem;
+	margin-left: 1rem;
+	padding: 0.5rem;
+	text-align: center;
+	border-radius: 0.375rem;
+	width: 2.5rem;
+}
+
+.menu-item:hover {
+	background-color: var(--nav-item-hover-bg);
+}
+
+.profile-item {
+	cursor: pointer;
+	margin-bottom: 1rem;
+	margin-top: 0.75rem;
+	margin-left: 1rem;
+	padding: 0.5rem;
+	text-align: center;
+	border-radius: 0.375rem;
+	width: 2.5rem;
+}
+
+.profile-item:hover {
+	background-color: var(--nav-item-hover-bg);
+}
+
+.menu-item-active {
+	background-color: var(--nav-item-active-bg);
+}
+
+.popup-label-capitalize {
+	text-transform: capitalize;
+}
+
+.admin-menu-content {
+	padding: 16px;
+	background-color: var(--adminmenu-bg-color);
+	margin-left: 6.25rem;
+	height: 100vh;
+	width: 20rem;
+	display: grid;
+	align-items: stretch;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.submenu-title {
+	font-size: 20px;
+	color: var(--text-on-dark) /* TODO: Verify context */;
+	margin-bottom: 1.25rem;
+}
+
+.submenu-list {
+	margin-top: 0.75rem;
+}
+
+.submenu-item {
+	cursor: pointer;
+	border-radius: 0.375rem;
+	font-size: 18px;
+	margin-bottom: 0.25rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+	line-height: 1.5rem;
+}
+
+.submenu-item-active,
+.submenu-item:hover {
+	background-color: var(--nav-item-active-bg);
+}
+
+.icon-container {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 0.5rem;
+	padding-right: 0.25rem;
+	padding-left: 0.25rem;
+}
+
+.label-container {
+	display: inline-block;
+	font-weight: 600;
+	font-size: 18px;
+	vertical-align: middle;
+	margin-left: 0.75rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+	padding-right: 0.25rem;
+	padding-left: 0.25rem;
+}
+
+.custom-badge .ant-badge-count {
+	background-color: var(--badge-bg-brand);
+	color: var(--badge-text-brand);
+	box-shadow: none;
+	font-size: 14px;
+}
+
+.user-info-list {
+	margin-top: 20px;
+	align-self: end;
+}
+
+.user-info-item {
+	background-color: var(--brand-secondary);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.user-details {
+	display: inline-block;
+	vertical-align: middle;
+	width: 80%;
+	font-size: 16px;
+	line-height: 1.25rem;
+	background-color: var(--brand-secondary);
+}
+
+.user-name-label {
+	font-weight: 500;
+}
+
+.user-email-label {
+	font-weight: 400;
+}
+
+.logout-button {
+	background-color: transparent !important;
+	border: transparent !important;
+	padding: 0 !important;
+}
+
+.logout-button:hover {
+	background-color: var(--nav-item-hover-bg) !important;
+}
+
+.admin-menu-contacts-data {
+	text-align: right;
+	display: block;
+	margin-bottom: 10px;
+}
+
+.admin-menu-contacts-data h3 {
+	font-size: 20px;
+	color: var(--text-on-dark) /* TODO: Verify context */;
+}
+
+.select-container {
+	color: var(--text-primary) /* TODO: Verify context */;
+}
+
+.user-main-container {
+	position: relative;
+}
+
+.user-container {
+	display: flex;
+	flex-direction: column;
+	margin-top: 1.25rem;
+	margin-bottom: 0.8rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.edit-container {
+	position: absolute;
+	left: 63%;
+	top: 2.5rem;
+	border-radius: 9999px;
+	cursor: pointer;
+}
+
+.user-name-contact {
+	font-weight: 600;
+	margin-top: 0.5rem;
+	font-size: 22px;
+	text-align: center;
+}
+
+.user-email-contact {
+	color: var(--text-tertiary);
+	margin-bottom: 0.5rem;
+	white-space: normal;
+	word-break: break-all;
+}
+
+.activity-container {
+	text-align: right;
+	display: block !important;
+}
+
+.flex-container-message {
+	margin-top: 12px;
+}
+
+.flex-container-message h3 {
+	color: var(--text-on-dark) /* TODO: Verify context */;
+	font-size: 20px;
+}
+
+.scroll-messagebox {
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-top: 12px;
+}
+
+.inbox-item-info {
+	width: 66.66%;
+	display: flex;
+	flex-direction: column;
+}
+
+.name-label {
+	font-size: 16px;
+	line-height: 1.25rem;
+	font-weight: 600;
+}
+
+.email-label {
+	font-size: 16px;
+	line-height: 1.25rem;
+	font-weight: 400;
+	text-align: left;
+}
+
+.inbox-item-time {
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+}
+
+.empty-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--text-on-dark) /* TODO: Verify context */;
+}
+
+.border-primary-300 {
+	border-color: var(--color-purple-300);
+}
+
+.popover-content-div {
+	color: var(--text-on-dark);
+	user-select: none;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 8px;
+	justify-content: center;
+	align-items: center;
+	padding: 8px;
+}
+
+.functional-goal-css {
+	border-radius: 9999px;
+	background-color: var(--surface-primary);
+	color: var(--text-primary) /* TODO: Verify context */;
+	height: 0.5rem;
+	width: 0.5rem;
+	margin-top: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-details-main-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.user-details-sub-container {
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	gap: 0.5rem;
+	border-radius: 0.5rem;
+	background-color: var(--brand-secondary);
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+.user-form-titles {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 1.25rem;
+}
+
+.user-form-item {
+	font-weight: 600;
+	font-size: 16px;
+	color: var(--text-on-dark) /* TODO: Verify context */;
+}
+
+.user-form-item-result {
+	color: var(--color-gray-400);
+	font-size: 14px;
+	align-items: center;
+	font-weight: 400;
+}
+
+.user-between-container {
+	display: flex;
+	gap: 40px;
+	margin-top: 8px;
+	justify-content: space-around;
+}
+
+.user-between-container li {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.valid-birthdate-css {
+	margin-top: -18px;
+}
+
+.non-valid-birthdate-css {
+	margin-top: -8px;
+	margin-left: 40px;
+}
+
+.functional-button-css {
+	background-color: var(--brand-secondary) !important;
+	width: 100% !important;
+	height: 2.5rem !important;
+	color: var(--text-on-dark) /* TODO: Verify context */ !important;
+	border-radius: 0.5rem !important;
+}
+
+.functional-button-css:hover {
+	border-color: var(--color-white) !important;
+}
+
+.functional-button-div {
+	display: flex;
+	padding: 0.25rem;
+	margin-top: 12px;
+	align-items: center;
+}
+
+.functional-title {
+	font-size: 16px;
+	font-weight: 600;
+	margin-left: 0.5rem;
+	margin-top: -2px;
+	line-height: 1.25rem;
+}
+
+.wellness-button-css {
+	background: var(--button-primary-bg) !important;
+	color: var(--button-primary-text) !important;
+	width: 90%;
+	height: 36px;
+	border: none;
+	border-radius: 20px;
+}
+
+.function-goal-icon-css {
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: 9999px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: all;
+	padding: 8px;
+}
+
+.function-goal-icon-css:hover {
+	background-color: var(--nav-item-hover-bg);
+	opacity: 1;
+}
+
+.function-goal-icon-selected {
+	background-color: var(--adminmenu-bg-color);
+}
+
+.function-goal-icon-non-selected {
+	background-color: var(--surface-interactive);
+	opacity: 0.5;
+}
+
+.user-container .start-session-css {
+	background-color: var(--button-primary-bg) !important;
+}
+
+/* Consent Form Checkbox Styles */
+.consent-checkbox .ant-checkbox-inner {
+	border-color: var(--text-on-dark) /* TODO: Verify context */ !important;
+	background-color: transparent !important;
+}
+
+.consent-checkbox .ant-checkbox-inner:hover {
+	border-color: var(--text-on-dark) /* TODO: Verify context */ !important;
+}
+
+.consent-checkbox .ant-checkbox-checked .ant-checkbox-inner {
+	background-color: var(--checkbox-bg-checked) !important;
+	border-color: var(--checkbox-border-checked) !important;
+}
+
+.consent-checkbox .ant-checkbox-checked .ant-checkbox-inner:hover {
+	background-color: var(--checkbox-bg-checked) !important;
+	border-color: var(--checkbox-border-checked) !important;
+}
+
+.consent-checkbox .ant-checkbox-checked .ant-checkbox-inner::after {
+	border-color: var(--checkbox-checkmark) !important;
+}

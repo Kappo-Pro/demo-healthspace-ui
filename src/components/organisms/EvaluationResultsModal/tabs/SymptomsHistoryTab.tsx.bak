@@ -1,0 +1,607 @@
+/**
+ * SymptomsHistoryTab Component
+ *
+ * Displays patient symptoms and medical history in a combined, organized layout.
+ * Includes severity indicators, categorized symptoms, and comprehensive medical history sections.
+ *
+ * @example
+ * ```tsx
+ * <SymptomsHistoryTab symptoms={symptomsData} history={medicalHistoryData} />
+ * ```
+ */
+
+import React from 'react';
+import { Tag, Divider } from 'antd';
+import { WarningOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
+import { SeverityIndicator } from '../components/SeverityIndicator';
+
+/**
+ * Health signs/symptoms data structure
+ */
+export interface THealthSigns {
+	name: string;
+	category?: 'Musculoskeletal' | 'Neurological' | 'Functional' | 'Other';
+	severity?: 'low' | 'medium' | 'high';
+	duration?: string;
+	frequency?: string;
+	functionalLimitations?: string;
+}
+
+/**
+ * Medical history data structure
+ */
+export interface TMedicalHistories {
+	diagnoses?: Array<{
+		name: string;
+		icdCode?: string;
+		dateDiagnosed?: string;
+		status?: 'Active' | 'Resolved' | 'Managed';
+	}>;
+	medications?: Array<{
+		name: string;
+		dosage?: string;
+		frequency?: string;
+		route?: string;
+		startDate?: string;
+	}>;
+	previousTreatments?: Array<{
+		type: string;
+		duration?: string;
+		outcome?: string;
+		dateCompleted?: string;
+	}>;
+	comorbidities?: Array<{
+		name: string;
+		status?: string;
+		icdCode?: string;
+	}>;
+	contraindications?: Array<{
+		type: string;
+		description: string;
+		severity?: 'low' | 'medium' | 'high';
+	}>;
+}
+
+/**
+ * Props interface for SymptomsHistoryTab component
+ */
+export interface SymptomsHistoryTabProps {
+	/** Symptoms data to display */
+	symptoms: THealthSigns[];
+
+	/** Medical history data to display */
+	history: TMedicalHistories;
+}
+
+/**
+ * SymptomsHistoryTab - Displays symptoms and medical history in combined view
+ *
+ * Features:
+ * - Organized symptom categorization with severity indicators
+ * - Complete medical history including diagnoses, medications, treatments
+ * - Clear section divider between symptoms and history
+ * - Responsive layout optimized for clinical review
+ * - Design system token integration
+ */
+export const SymptomsHistoryTab: React.FC<SymptomsHistoryTabProps> = ({
+	symptoms,
+	history,
+}) => {
+	// Check if we have any data
+	const hasSymptoms = symptoms && symptoms.length > 0;
+	const hasHistory = history && Object.keys(history).length > 0;
+
+	if (!hasSymptoms && !hasHistory) {
+		return (
+			<EmptyContainer>
+				<EmptyMessage>No symptoms or medical history available</EmptyMessage>
+			</EmptyContainer>
+		);
+	}
+
+	// Organize symptoms by category
+	const symptomsByCategory = organizeSymptomsByCategory(symptoms);
+
+	return (
+		<SymptomsHistoryContainer>
+			{/* Symptoms Section */}
+			{hasSymptoms && (
+				<SymptomsSection>
+					<SectionTitle>Current Symptoms</SectionTitle>
+
+					{Object.entries(symptomsByCategory).map(([category, categorySymptoms]) => (
+						<SymptomCategory key={category}>
+							<CategoryTitle>{category}</CategoryTitle>
+							<SymptomsList>
+								{categorySymptoms.map((symptom, index) => (
+									<SymptomItem key={index}>
+										<SymptomName>{symptom.name}</SymptomName>
+										{symptom.severity && (
+											<SeverityIndicator level={symptom.severity} />
+										)}
+										{symptom.duration && (
+											<SymptomDetail>Duration: {symptom.duration}</SymptomDetail>
+										)}
+										{symptom.frequency && (
+											<SymptomDetail>Frequency: {symptom.frequency}</SymptomDetail>
+										)}
+										{symptom.functionalLimitations && (
+											<FunctionalLimitations>
+												<LimitationLabel>Impact:</LimitationLabel>
+												{symptom.functionalLimitations}
+											</FunctionalLimitations>
+										)}
+									</SymptomItem>
+								))}
+							</SymptomsList>
+						</SymptomCategory>
+					))}
+				</SymptomsSection>
+			)}
+
+			{/* Section Divider */}
+			{hasSymptoms && hasHistory && <StyledDivider>Medical History</StyledDivider>}
+
+			{/* Medical History Section */}
+			{hasHistory && (
+				<HistorySection>
+					{/* Diagnoses */}
+					{history.diagnoses && history.diagnoses.length > 0 && (
+						<HistorySubsection>
+							<SubsectionTitle>Diagnoses</SubsectionTitle>
+							<DiagnosesList>
+								{history.diagnoses.map((diagnosis, index) => (
+									<DiagnosisItem key={index}>
+										<DiagnosisName>{diagnosis.name}</DiagnosisName>
+										{diagnosis.icdCode && <ICDCode>{diagnosis.icdCode}</ICDCode>}
+										{diagnosis.dateDiagnosed && (
+											<DiagnosisDate>
+												Diagnosed: {formatDate(diagnosis.dateDiagnosed)}
+											</DiagnosisDate>
+										)}
+										{diagnosis.status && (
+											<StatusTag status={diagnosis.status}>{diagnosis.status}</StatusTag>
+										)}
+									</DiagnosisItem>
+								))}
+							</DiagnosesList>
+						</HistorySubsection>
+					)}
+
+					{/* Current Medications */}
+					{history.medications && history.medications.length > 0 && (
+						<HistorySubsection>
+							<SubsectionTitle>Current Medications</SubsectionTitle>
+							<MedicationsList>
+								{history.medications.map((medication, index) => (
+									<MedicationItem key={index}>
+										<MedicationName>{medication.name}</MedicationName>
+										<MedicationDetails>
+											{medication.dosage && <span>{medication.dosage}</span>}
+											{medication.frequency && <span> · {medication.frequency}</span>}
+											{medication.route && <span> · {medication.route}</span>}
+										</MedicationDetails>
+										{medication.startDate && (
+											<MedicationDate>Started: {formatDate(medication.startDate)}</MedicationDate>
+										)}
+									</MedicationItem>
+								))}
+							</MedicationsList>
+						</HistorySubsection>
+					)}
+
+					{/* Previous Treatments */}
+					{history.previousTreatments && history.previousTreatments.length > 0 && (
+						<HistorySubsection>
+							<SubsectionTitle>Previous Treatments</SubsectionTitle>
+							<TreatmentsList>
+								{history.previousTreatments.map((treatment, index) => (
+									<TreatmentItem key={index}>
+										<TreatmentType>{treatment.type}</TreatmentType>
+										{treatment.duration && (
+											<TreatmentDetail>Duration: {treatment.duration}</TreatmentDetail>
+										)}
+										{treatment.outcome && (
+											<TreatmentOutcome outcome={treatment.outcome}>
+												Outcome: {treatment.outcome}
+											</TreatmentOutcome>
+										)}
+										{treatment.dateCompleted && (
+											<TreatmentDate>Completed: {formatDate(treatment.dateCompleted)}</TreatmentDate>
+										)}
+									</TreatmentItem>
+								))}
+							</TreatmentsList>
+						</HistorySubsection>
+					)}
+
+					{/* Comorbidities */}
+					{history.comorbidities && history.comorbidities.length > 0 && (
+						<HistorySubsection>
+							<SubsectionTitle>Comorbidities</SubsectionTitle>
+							<ComorbiditiesList>
+								{history.comorbidities.map((comorbidity, index) => (
+									<ComorbidityItem key={index}>
+										<ComorbidityName>{comorbidity.name}</ComorbidityName>
+										{comorbidity.status && (
+											<ComorbidityStatus>{comorbidity.status}</ComorbidityStatus>
+										)}
+										{comorbidity.icdCode && <ICDCode>{comorbidity.icdCode}</ICDCode>}
+									</ComorbidityItem>
+								))}
+							</ComorbiditiesList>
+						</HistorySubsection>
+					)}
+
+					{/* Contraindications */}
+					{history.contraindications && history.contraindications.length > 0 && (
+						<HistorySubsection>
+							<SubsectionTitle>
+								<WarningOutlined style={{ marginRight: '8px', color: 'var(--color-warning)' }} />
+								Contraindications & Precautions
+							</SubsectionTitle>
+							<ContraindicationsList>
+								{history.contraindications.map((contraindication, index) => (
+									<ContraindicationItem key={index} severity={contraindication.severity || 'medium'}>
+										<ContraindicationType>{contraindication.type}</ContraindicationType>
+										<ContraindicationDescription>
+											{contraindication.description}
+										</ContraindicationDescription>
+										{contraindication.severity && (
+											<SeverityIndicator level={contraindication.severity} />
+										)}
+									</ContraindicationItem>
+								))}
+							</ContraindicationsList>
+						</HistorySubsection>
+					)}
+				</HistorySection>
+			)}
+		</SymptomsHistoryContainer>
+	);
+};
+
+/**
+ * Organize symptoms by clinical category
+ * Groups symptoms into Musculoskeletal, Neurological, Functional, and Other categories
+ */
+function organizeSymptomsByCategory(symptoms: THealthSigns[]): Record<string, THealthSigns[]> {
+	const categories: Record<string, THealthSigns[]> = {
+		Musculoskeletal: [],
+		Neurological: [],
+		Functional: [],
+		Other: [],
+	};
+
+	symptoms.forEach((symptom) => {
+		const category = symptom.category || 'Other';
+		if (categories[category]) {
+			categories[category].push(symptom);
+		} else {
+			categories.Other.push(symptom);
+		}
+	});
+
+	// Remove empty categories
+	Object.keys(categories).forEach((key) => {
+		if (categories[key].length === 0) {
+			delete categories[key];
+		}
+	});
+
+	return categories;
+}
+
+/**
+ * Format date string to readable format (e.g., "Jan 15, 2024")
+ */
+function formatDate(dateString: string): string {
+	const date = new Date(dateString);
+	return date.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+	});
+}
+
+// ============================================================================
+// Styled Components
+// ============================================================================
+
+const SymptomsHistoryContainer = styled.div`
+	padding: var(--spacing-6);
+	background: var(--color-background-primary);
+`;
+
+const SymptomsSection = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-6);
+`;
+
+const HistorySection = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-6);
+`;
+
+const SectionTitle = styled.h2`
+	margin: 0 0 var(--spacing-4) 0;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+	color: var(--text-primary);
+`;
+
+const StyledDivider = styled(Divider)`
+	margin: var(--spacing-8) 0;
+	border-top: 2px solid var(--border-subtle);
+	font-size: var(--font-size-h4);
+	font-weight: 600;
+	color: var(--text-secondary);
+`;
+
+const SymptomCategory = styled.div`
+	padding: var(--spacing-4);
+	background: var(--color-background-secondary);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border-subtle);
+`;
+
+const CategoryTitle = styled.h4`
+	margin: 0 0 var(--spacing-2) 0;
+	font-size: var(--font-size-h5);
+	font-weight: 600;
+	color: var(--text-secondary);
+`;
+
+const SymptomsList = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+`;
+
+const SymptomItem = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	padding: var(--spacing-2);
+	background: var(--color-background-primary);
+	border-radius: var(--radius-sm);
+	border-left: 3px solid var(--brand-primary);
+`;
+
+const SymptomName = styled.span`
+	font-weight: 600;
+	color: var(--text-primary);
+`;
+
+const SymptomDetail = styled.span`
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+`;
+
+const FunctionalLimitations = styled.div`
+	display: flex;
+	gap: var(--spacing-1);
+	font-size: var(--font-size-sm);
+	color: var(--text-primary);
+	font-style: italic;
+`;
+
+const LimitationLabel = styled.span`
+	font-weight: 500;
+	color: var(--text-secondary);
+`;
+
+const HistorySubsection = styled.div`
+	padding: var(--spacing-4);
+	background: var(--color-background-secondary);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border-subtle);
+`;
+
+const SubsectionTitle = styled.h4`
+	margin: 0 0 var(--spacing-4) 0;
+	font-size: var(--font-size-h5);
+	font-weight: 600;
+	color: var(--text-primary);
+	display: flex;
+	align-items: center;
+`;
+
+const DiagnosesList = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+`;
+
+const DiagnosisItem = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--spacing-2);
+	padding: var(--spacing-2);
+	background: var(--color-background-primary);
+	border-radius: var(--radius-sm);
+`;
+
+const DiagnosisName = styled.span`
+	font-weight: 600;
+	color: var(--text-primary);
+`;
+
+const ICDCode = styled(Tag)`
+	margin: 0;
+	font-family: monospace;
+	background: var(--color-background-tertiary);
+	border: 1px solid var(--border-default);
+`;
+
+const DiagnosisDate = styled.span`
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+`;
+
+const StatusTag = styled(Tag)<{ status: string }>`
+	margin: 0;
+	${({ status }) => {
+		const statusColors: Record<string, string> = {
+			active: 'var(--color-success)',
+			resolved: 'var(--color-info)',
+			managed: 'var(--color-warning)',
+		};
+		const color = statusColors[status.toLowerCase()] || 'var(--color-default)';
+		return `background: ${color}; border: none; color: white;`;
+	}}
+`;
+
+const MedicationsList = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+`;
+
+const MedicationItem = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	padding: var(--spacing-2);
+	background: var(--color-background-primary);
+	border-radius: var(--radius-sm);
+`;
+
+const MedicationName = styled.span`
+	font-weight: 600;
+	color: var(--text-primary);
+`;
+
+const MedicationDetails = styled.div`
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+`;
+
+const MedicationDate = styled.span`
+	font-size: var(--font-size-sm);
+	color: var(--text-tertiary);
+`;
+
+const TreatmentsList = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+`;
+
+const TreatmentItem = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	padding: var(--spacing-2);
+	background: var(--color-background-primary);
+	border-radius: var(--radius-sm);
+`;
+
+const TreatmentType = styled.span`
+	font-weight: 600;
+	color: var(--text-primary);
+`;
+
+const TreatmentDetail = styled.span`
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+`;
+
+const TreatmentOutcome = styled.span<{ outcome: string }>`
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	${({ outcome }) => {
+		const outcomeColors: Record<string, string> = {
+			effective: 'var(--color-success)',
+			'minimal improvement': 'var(--color-warning)',
+			'no change': 'var(--color-error)',
+		};
+		const color = outcomeColors[outcome.toLowerCase()] || 'var(--color-text-secondary)';
+		return `color: ${color};`;
+	}}
+`;
+
+const TreatmentDate = styled.span`
+	font-size: var(--font-size-sm);
+	color: var(--text-tertiary);
+`;
+
+const ComorbiditiesList = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+`;
+
+const ComorbidityItem = styled.div`
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	padding: var(--spacing-2);
+	background: var(--color-background-primary);
+	border-radius: var(--radius-sm);
+`;
+
+const ComorbidityName = styled.span`
+	font-weight: 600;
+	color: var(--text-primary);
+`;
+
+const ComorbidityStatus = styled.span`
+	font-size: var(--font-size-sm);
+	color: var(--text-secondary);
+`;
+
+const ContraindicationsList = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+`;
+
+const ContraindicationItem = styled.div<{ severity: string }>`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	padding: var(--spacing-2);
+	background: var(--color-background-primary);
+	border-radius: var(--radius-sm);
+	border-left: 4px solid
+		${({ severity }) => {
+			const severityColors: Record<string, string> = {
+				high: 'var(--color-error)',
+				medium: 'var(--color-warning)',
+				low: 'var(--color-info)',
+			};
+			return severityColors[severity] || severityColors.medium;
+		}};
+`;
+
+const ContraindicationType = styled.span`
+	font-weight: 600;
+	color: var(--text-primary);
+	text-transform: uppercase;
+	font-size: var(--font-size-sm);
+`;
+
+const ContraindicationDescription = styled.span`
+	color: var(--text-primary);
+	line-height: 1.5;
+`;
+
+const EmptyContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 300px;
+	padding: var(--spacing-8);
+`;
+
+const EmptyMessage = styled.p`
+	margin: 0;
+	font-size: var(--font-size-lg);
+	color: var(--text-tertiary);
+	font-style: italic;
+`;

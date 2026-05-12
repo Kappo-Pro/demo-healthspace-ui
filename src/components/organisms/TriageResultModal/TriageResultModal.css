@@ -1,0 +1,1339 @@
+/**
+ * TriageResultModal Styles
+ *
+ * Styles for the triage result bottom sheet modal
+ */
+
+/* ============================================
+   MODAL HEADER
+   ============================================ */
+
+.triage-modal-header {
+	width: 100%;
+	padding: var(--spacing-3) var(--spacing-4);
+	background: var(--surface-tertiary);
+	border-radius: var(--radius-lg);
+}
+
+.triage-modal-header__left {
+	min-width: 0;
+}
+
+.triage-modal-header__title {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	margin: 0;
+	white-space: nowrap;
+}
+
+.triage-modal-header__date {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary);
+	white-space: nowrap;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	line-height: 1;
+}
+
+.triage-modal-header__date svg {
+	flex-shrink: 0;
+	vertical-align: middle;
+}
+
+/* ROM Icon Container */
+.triage-modal-header__icon-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border-radius: var(--radius-lg);
+	background: var(--gradient-rom-icon);
+	flex-shrink: 0;
+}
+
+.triage-modal-header__actions {
+	flex-shrink: 0;
+	align-self: center;
+}
+
+.triage-modal-header__action-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	border: none;
+	border-radius: var(--radius-md);
+	background: transparent;
+	color: var(--icon-action);
+	cursor: pointer;
+	transition: all var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.triage-modal-header__action-btn:hover {
+	background: var(--surface-secondary);
+	color: var(--text-primary);
+}
+
+.triage-modal-header__action-btn:active {
+	transform: scale(0.95);
+}
+
+/* ============================================
+   MODAL HEADER LAYOUT - BENTO GRID (Header Card + Close)
+   ============================================ */
+
+.triage-result-modal.ant-modal .ant-modal-content {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-template-rows: auto 1fr auto;
+	gap: var(--spacing-3);
+	padding: var(--spacing-6);
+	background: var(--bg-page);
+}
+
+/* Header takes first column */
+.triage-result-modal.ant-modal .ant-modal-header {
+	grid-column: 1;
+	grid-row: 1;
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	border: none;
+}
+
+.triage-result-modal.ant-modal .ant-modal-title {
+	width: 100%;
+}
+
+/* Close button takes second column, same row as header */
+.triage-result-modal.ant-modal .ant-modal-close {
+	position: static;
+	grid-column: 2;
+	grid-row: 1;
+	width: 48px;
+	height: 48px;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--radius-full);
+	background: var(--surface-tertiary);
+	align-self: center;
+}
+
+.triage-result-modal.ant-modal .ant-modal-close:hover {
+	background: var(--surface-secondary);
+}
+
+.triage-result-modal.ant-modal .ant-modal-close .ant-modal-close-x {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Body spans full width */
+.triage-result-modal.ant-modal .ant-modal-body {
+	grid-column: 1 / -1;
+	grid-row: 2;
+}
+
+/* Footer spans full width */
+.triage-result-modal.ant-modal .ant-modal-footer {
+	grid-column: 1 / -1;
+	grid-row: 3;
+}
+
+/* ============================================
+   MODAL CONTENT
+   ============================================ */
+
+.triage-result-modal .triage-result-content {
+	/* Content determines height - no max-height */
+	/* Scroll is handled by the modal wrapper, not here */
+	min-height: 400px;
+}
+
+/* Evaluation Result Styles */
+.triage-result-modal .evaluation-result-wrapper {
+	padding: var(--spacing-4) 0;
+}
+
+/* User header container for Evaluation (same as ROM) */
+.triage-result-modal .evaluation-result-wrapper .triage-user-header {
+	background: var(--surface-tertiary);
+	padding: var(--spacing-4);
+	border-radius: var(--radius-xl);
+	margin-bottom: var(--spacing-4);
+}
+
+/* Override SummaryReview card backgrounds */
+.triage-result-modal
+	.evaluation-result-wrapper
+	.summary-review
+	.associated-card {
+	background: var(--surface-tertiary) !important;
+}
+
+/* ROM Result Styles */
+
+/* Bento Grid Layout (6 columns for persona cards)
+   Layout (ROM):
+   [     Persona Banner (4 cols)    ] [ Chart (2 cols) ]
+   [  Overview  ] [  Did You Know   ] [ Chart          ]
+   [      What This Means (4 cols)  ] [ Chart          ]
+   [           Full width items (6 cols)               ]
+   [ Card 1 ][ Card 2 ][ Card 3 ][ Card 4 ][ Card 5 ][ Card 6 ]
+*/
+.triage-result-modal .rom-bento-grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: auto auto auto;
+	gap: var(--spacing-3);
+	margin-bottom: var(--spacing-6);
+}
+
+.triage-result-modal .rom-bento-item {
+	border-radius: var(--radius-xl);
+}
+
+/* Full width items */
+.triage-result-modal .rom-bento-full {
+	grid-column: 1 / -1;
+}
+
+/* Posture joints container - appears after persona banner */
+.triage-result-modal .posture-bento-grid .rom-bento-full {
+	grid-row: 2 / 3;
+}
+
+/* Persona Banner - left of chart, first row (4 cols) */
+.triage-result-modal .rom-bento-persona {
+	grid-column: 1 / 5;
+	grid-row: 1 / 2;
+}
+
+/* Chart - right columns, spans 3 rows (2 cols) */
+.triage-result-modal .rom-bento-chart {
+	grid-column: 5 / 7;
+	grid-row: 1 / 4;
+}
+
+/* Your Mobility Overview - below persona banner (2 cols) */
+.triage-result-modal .rom-bento-overview {
+	grid-column: 1 / 3;
+	grid-row: 2 / 3;
+}
+
+/* Did You Know - next to overview (2 cols) */
+.triage-result-modal .rom-bento-didyouknow {
+	grid-column: 3 / 5;
+	grid-row: 2 / 3;
+}
+
+/* What This Means - below overview and didyouknow (4 cols) */
+.triage-result-modal .rom-bento-whatthismeans {
+	grid-column: 1 / 5;
+	grid-row: 3 / 4;
+}
+
+/* ============================================
+   POSTURE-SPECIFIC BENTO GRID LAYOUT
+   ============================================ */
+
+/* Posture Grid - overrides for posture modal only */
+.triage-result-modal .posture-bento-grid.rom-bento-grid {
+	/* Same base grid */
+}
+
+/* User Info Card - far left, first row (2 cols = 33%) - POSTURE ONLY */
+.triage-result-modal .posture-bento-grid .rom-bento-user-info {
+	grid-column: 1 / 3;
+	grid-row: 1 / 2;
+	background: var(--surface-tertiary);
+	padding: var(--spacing-4);
+	min-height: 120px;
+}
+
+.triage-result-modal .posture-bento-grid .rom-bento-user-info .ant-card-body {
+	padding: 0;
+}
+
+/* Persona Banner - extends to right (4 cols = 67%) - POSTURE ONLY */
+.triage-result-modal .posture-bento-grid .rom-bento-persona {
+	grid-column: 3 / 7;
+	grid-row: 1 / 2;
+}
+
+/* Chart hidden for posture - POSTURE ONLY */
+.triage-result-modal .posture-bento-grid .rom-bento-chart {
+	display: none;
+}
+
+/* What This Means - right side of row 3 - POSTURE ONLY */
+.triage-result-modal .posture-bento-grid .rom-bento-whatthismeans {
+	grid-column: 5 / 7;
+	grid-row: 3 / 4;
+}
+
+/* Did You Know Unified - spans full row 3 (6 cols) - POSTURE ONLY */
+.triage-result-modal .posture-bento-grid .rom-bento-didyouknow-unified {
+	grid-column: 1 / 7;
+	grid-row: 3 / 4;
+}
+
+/* Posture Categories Rule - spans full width after persona cards - POSTURE ONLY */
+.triage-result-modal .posture-bento-grid .rom-bento-posture-categories {
+	grid-column: 1 / 7;
+	padding: var(--spacing-4);
+}
+
+.triage-result-modal
+	.posture-bento-grid
+	.rom-bento-posture-categories
+	.rom-rule-categories__image {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* Recommended Programs - spans full width after categories rule - POSTURE ONLY */
+.triage-result-modal .posture-bento-grid .rom-bento-recommended-programs {
+	grid-column: 1 / 7;
+}
+
+/* Recommended Programs Grid - 2 columns, 2 rows */
+.triage-result-modal .recommended-programs-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--spacing-4);
+}
+
+/* Individual program card - horizontal layout */
+.triage-result-modal .recommended-program-card {
+	display: grid;
+	grid-template-columns: 120px 1fr auto;
+	gap: var(--spacing-3);
+	padding: var(--spacing-4);
+	background: var(--bg-page);
+	border-radius: var(--radius-lg);
+	position: relative;
+	align-items: start;
+}
+
+/* Program card image */
+.triage-result-modal .recommended-program-card__image {
+	width: 120px;
+	height: 120px;
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	background: var(--surface-tertiary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.triage-result-modal .recommended-program-card__image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.triage-result-modal .recommended-program-card__image-placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	color: var(--text-tertiary);
+}
+
+/* Program card content */
+.triage-result-modal .recommended-program-card__content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+}
+
+.triage-result-modal .recommended-program-card__title {
+	margin: 0 !important;
+	font-weight: var(--font-weight-semibold) !important;
+	color: var(--text-primary) !important;
+	line-height: var(--line-height-tight) !important;
+}
+
+.triage-result-modal .recommended-program-card__description {
+	margin: 0 !important;
+	font-size: var(--font-size-sm) !important;
+	color: var(--text-secondary) !important;
+	line-height: var(--line-height-normal) !important;
+}
+
+/* Program card button */
+.triage-result-modal .recommended-program-card__button {
+	align-self: start;
+	background: var(--brand-primary) !important;
+	border: none !important;
+	color: var(--color-white) !important;
+	font-weight: var(--font-weight-semibold) !important;
+	padding: var(--spacing-2) var(--spacing-5) !important;
+	height: auto !important;
+	border-radius: var(--radius-full) !important;
+}
+
+.triage-result-modal .recommended-program-card__button:hover {
+	background: var(--brand-primary-hover) !important;
+}
+
+/* Responsive - stack programs on smaller screens */
+@media (max-width: 1024px) {
+	.triage-result-modal .recommended-programs-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Posture Benefits Grid - 2 columns, 3 rows (5 items) */
+.triage-result-modal .posture-benefits-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--spacing-4);
+}
+
+/* Individual benefit card */
+.triage-result-modal .posture-benefit-card {
+	padding: var(--spacing-4);
+	background: var(--bg-page);
+	border-radius: var(--radius-lg);
+}
+
+/* Responsive - stack benefits on mobile */
+@media (max-width: 768px) {
+	.triage-result-modal .posture-benefits-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Persona Cards Container - spans full width with 5-column grid inside */
+.triage-result-modal .rom-bento-persona-cards-container {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: var(--spacing-3);
+}
+
+/* Persona cards - natural flow in 5-column grid */
+.triage-result-modal .rom-persona-card {
+	/* No grid-column needed - flows naturally in parent grid */
+}
+
+/* Card Icon Container (36x36) */
+.triage-result-modal .rom-card-icon-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: var(--radius-lg);
+	background: var(--gradient-rom-icon);
+	flex-shrink: 0;
+}
+
+.triage-result-modal .rom-user-header-container {
+	background: var(--surface-tertiary);
+	padding: 0 var(--spacing-4);
+}
+
+.triage-result-modal .rom-mobility-card,
+.triage-result-modal .rom-joints-container {
+	padding: var(--spacing-5);
+	background: var(--surface-tertiary);
+}
+
+/* Posture screenshot container - force image to fill height */
+.posture-screenshot-container,
+.posture-screenshot-container .ant-image,
+.posture-screenshot-container .ant-image-mask-info,
+.posture-screenshot-container .ant-image-img {
+	width: 100% !important; /* stylelint-disable-line */
+	height: 100% !important; /* stylelint-disable-line */
+}
+
+.posture-screenshot-container .ant-image-img {
+	object-fit: cover;
+	object-position: center center;
+	display: block;
+}
+
+.posture-screenshot-container .ant-image-mask-info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Custom border color for light theme - modal bg makes default border invisible */
+.triage-result-modal .rom-joints-container .ant-table-tbody > tr > td {
+	border-bottom-color: rgba(5, 21, 130, 0.09); /* stylelint-disable-line */
+}
+
+[data-theme='dark']
+	.triage-result-modal
+	.rom-joints-container
+	.ant-table-tbody
+	> tr
+	> td {
+	border-bottom-color: var(--ant-table-border-color);
+}
+
+.triage-result-modal .rom-mobility-card .ant-card-body {
+	padding: 0;
+}
+
+.triage-result-modal .rom-meaning-card {
+	flex: 1 1 calc(50% - var(--spacing-2));
+	min-width: 150px;
+	background: var(--bg-page);
+}
+
+.triage-result-modal .rom-meaning-card .ant-card-body {
+	padding: var(--spacing-3);
+}
+
+.triage-result-modal .rom-chart-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 300px;
+}
+
+/* ROM Categories Collapse */
+.triage-result-modal .collapse-categories-results .ant-collapse-item {
+	background: var(--surface-tertiary);
+}
+
+.triage-result-modal
+	.collapse-categories-results
+	.ant-collapse-item.collapse-panel-empty {
+	background: color-mix(in srgb, var(--surface-tertiary) 82%, black);
+}
+
+.triage-result-modal
+	.collapse-categories-results
+	.ant-collapse-item.collapse-panel-empty
+	.ant-collapse-header {
+	cursor: not-allowed;
+}
+
+.triage-result-modal .rom-categories-container .ant-collapse-item:last-child {
+	margin-bottom: 0;
+}
+
+/* ROM Table inside collapse - transparent background */
+.triage-result-modal .collapse-categories-results .rom-table .ant-table {
+	background: transparent;
+}
+
+.triage-result-modal
+	.collapse-categories-results
+	.rom-table
+	.ant-table-thead
+	> tr
+	> th {
+	background: transparent;
+	border-bottom: 1px solid var(--ant-table-border-color);
+	padding: var(--spacing-3) var(--spacing-4);
+}
+
+.triage-result-modal
+	.collapse-categories-results
+	.rom-table
+	.ant-table-thead
+	> tr
+	> th::before {
+	display: none;
+}
+
+/* Custom border color for light theme - modal bg makes default border invisible */
+.triage-result-modal
+	.collapse-categories-results
+	.rom-table
+	.ant-table-tbody
+	> tr
+	> td {
+	background: transparent;
+	padding: var(--spacing-2) var(--spacing-4);
+	border-bottom-color: rgba(5, 21, 130, 0.09); /* stylelint-disable-line */
+}
+
+[data-theme='dark']
+	.triage-result-modal
+	.collapse-categories-results
+	.rom-table
+	.ant-table-tbody
+	> tr
+	> td {
+	border-bottom-color: var(--ant-table-border-color);
+}
+
+.triage-result-modal
+	.collapse-categories-results
+	.rom-table
+	.ant-table-tbody
+	> tr:last-child
+	> td {
+	border-bottom: none;
+}
+
+/* ROM Persona Banner - Hero card above user header */
+.triage-result-modal .rom-persona-banner {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-5);
+	padding: var(--spacing-5) var(--spacing-6);
+	background: var(--surface-tertiary);
+}
+
+.triage-result-modal .rom-persona-banner__avatar {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--radius-full);
+	background: var(--gradient-avatar-border);
+	padding: 4px;
+}
+
+.triage-result-modal .rom-persona-banner__avatar .ant-avatar {
+	width: 48px;
+	height: 48px;
+}
+
+.triage-result-modal .rom-persona-banner__title {
+	font-size: var(--font-size-2xl);
+	font-weight: var(--font-weight-semibold);
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	color: var(--color-white);
+	margin: 0;
+}
+
+.triage-result-modal .rom-persona-banner__subtitle {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-normal);
+	color: var(--color-white);
+	opacity: 0.9;
+	margin: 0;
+	margin-top: 2px;
+}
+
+.triage-result-modal .rom-persona-banner__description {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-normal);
+	line-height: var(--line-height-relaxed);
+	color: var(--color-white);
+	margin: 0;
+	margin-top: var(--spacing-2);
+}
+
+.triage-result-modal .rom-persona-banner__title-highlight {
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-white);
+}
+
+.triage-result-modal .rom-persona-banner__btn {
+	margin-left: auto;
+	background: var(--surface-primary);
+	border: none;
+	color: var(--text-primary);
+	font-weight: var(--font-weight-medium);
+}
+
+.triage-result-modal .rom-persona-banner__btn:hover {
+	background: var(--surface-interactive-hover);
+	color: var(--text-primary);
+}
+
+/* ROM Persona Banner - Category Gradients */
+/* Same rich gradients for both light and dark themes */
+
+/* Limitless Performer (Optimal Mobility - score >= 90) */
+.triage-result-modal .rom-persona-banner--limitless {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-green-dark-3) 14.33%,
+		var(--color-green-dark-6) 110.59%
+	)!important;
+}
+
+/* Agile Mover (Functional Mobility - score 75-89) */
+.triage-result-modal .rom-persona-banner--agile {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-blue-dark-3) 14.33%,
+		var(--color-blue-dark-6) 110.59%
+	)!important;
+}
+
+/* Functional Explorer (Moderate Restriction - score 60-74) */
+.triage-result-modal .rom-persona-banner--functional {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-warning-700) 14.33%,
+		var(--color-warning-400) 110.59%
+	)!important;
+}
+
+/* Steady Progressor (Restricted Mobility - score 40-59) */
+.triage-result-modal .rom-persona-banner--steady {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-error-800) 14.33%,
+		var(--color-error-500) 110.59%
+	)!important;
+}
+
+/* Resilient Fighter (Severely Restricted - score 20-39) */
+.triage-result-modal .rom-persona-banner--resilient {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-error-700) 14.33%,
+		var(--color-error-400) 110.59%
+	)!important;
+}
+
+/* Determined Warrior (Critically Impaired - score < 20) */
+.triage-result-modal .rom-persona-banner--determined {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-magenta-dark-3) 14.33%,
+		var(--color-magenta-dark-7) 110.59%
+	)!important;
+}
+
+/* ============================================
+   POSTURE PERSONA BANNER GRADIENTS
+   ============================================ */
+
+/* Agile Achiever (score 0-1) */
+.triage-result-modal .posture-persona-banner--agile {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-green-dark-3) 14.33%,
+		var(--color-green-dark-6) 110.59%
+	)!important;
+}
+
+/* Balanced Mover (score 2-4) */
+.triage-result-modal .posture-persona-banner--balanced {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-blue-dark-3) 14.33%,
+		var(--color-blue-dark-6) 110.59%
+	)!important;
+}
+
+/* Compensating Contender (score 5-7) */
+.triage-result-modal .posture-persona-banner--compensating {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-warning-700) 14.33%,
+		var(--color-warning-400) 110.59%
+	)!important;
+}
+
+/* Stiff Struggler (score 8-10) */
+.triage-result-modal .posture-persona-banner--stiff {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-error-800) 14.33%,
+		var(--color-error-500) 110.59%
+	)!important;
+}
+
+/* Collapsed Coper (score 11-14) */
+.triage-result-modal .posture-persona-banner--collapsed {
+	border-radius: var(--radius-lg);
+	background: linear-gradient(
+		228deg,
+		var(--color-magenta-dark-3) 14.33%,
+		var(--color-magenta-dark-7) 110.59%
+	)!important;
+}
+
+/* Posture Persona Card Gradients - Light theme */
+.triage-result-modal .posture-persona-card--agile {
+	background: linear-gradient(
+		228deg,
+		var(--color-green-dark-9) 14.33%,
+		var(--color-green-dark-6) 110.59%
+	)!important;
+}
+
+.triage-result-modal .posture-persona-card--balanced {
+	background: linear-gradient(
+		230deg,
+		var(--color-blue-3) 1.11%,
+		var(--color-blue-7) 96.5%
+	)!important;
+}
+
+.triage-result-modal .posture-persona-card--compensating {
+	background: linear-gradient(
+		230deg,
+		var(--color-warning-200) 1.11%,
+		var(--color-warning-600) 96.5%
+	)!important;
+}
+
+.triage-result-modal .posture-persona-card--stiff {
+	background: linear-gradient(
+		230deg,
+		var(--color-error-200) 1.11%,
+		var(--color-error-500) 96.5%
+	)!important;
+}
+
+.triage-result-modal .posture-persona-card--collapsed {
+	background: linear-gradient(
+		230deg,
+		var(--color-magenta-3) 4.17%,
+		var(--color-magenta-dark-3) 95.62%
+	)!important;
+}
+
+/* Posture Persona Card Gradients - Dark theme */
+[data-theme='dark'] .triage-result-modal .posture-persona-card--agile {
+	background: linear-gradient(
+		228deg,
+		var(--color-green-dark-3) 14.33%,
+		var(--color-green-dark-6) 110.59%
+	)!important;
+}
+
+[data-theme='dark'] .triage-result-modal .posture-persona-card--balanced {
+	background: linear-gradient(
+		228deg,
+		var(--color-blue-dark-3) 14.33%,
+		var(--color-blue-dark-6) 110.59%
+	)!important;
+}
+
+[data-theme='dark'] .triage-result-modal .posture-persona-card--compensating {
+	background: linear-gradient(
+		228deg,
+		var(--color-warning-700) 14.33%,
+		var(--color-warning-400) 110.59%
+	)!important;
+}
+
+[data-theme='dark'] .triage-result-modal .posture-persona-card--stiff {
+	background: linear-gradient(
+		228deg,
+		var(--color-error-800) 14.33%,
+		var(--color-error-500) 110.59%
+	)!important;
+}
+
+[data-theme='dark'] .triage-result-modal .posture-persona-card--collapsed {
+	background: linear-gradient(
+		228deg,
+		var(--color-magenta-dark-3) 14.33%,
+		var(--color-magenta-dark-7) 110.59%
+	)!important;
+}
+
+/* ROM Mobility Personas - removed, now using individual rom-persona-card items */
+
+/* ============================================
+   ROM PERSONA CARDS (Bento Grid Items)
+   ============================================ */
+
+.triage-result-modal .rom-persona-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: var(--spacing-4);
+	background: var(--surface-tertiary);
+	min-height: 200px;
+}
+
+/* Header container - icon + title horizontal */
+.triage-result-modal .rom-persona-card__header {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	margin-bottom: var(--spacing-3);
+}
+
+.triage-result-modal .rom-persona-card__icon {
+	flex-shrink: 0;
+}
+
+.triage-result-modal .rom-persona-card__icon .ant-avatar {
+	background: transparent;
+}
+
+.triage-result-modal .rom-persona-card__title {
+	margin: 0 !important;
+	font-size: var(--font-size-sm) !important;
+	font-weight: var(--font-weight-semibold) !important;
+	color: var(--text-primary);
+	line-height: 1.3 !important;
+	flex: 1;
+}
+
+.triage-result-modal .rom-persona-card__tagline {
+	display: block;
+	font-size: var(--ant-font-size);
+	font-family: var(--font-family-base);
+	color: var(--color-black);
+	line-height: var(--line-height-normal);
+	margin-bottom: var(--spacing-2);
+}
+
+[data-theme='dark'] .triage-result-modal .rom-persona-card__tagline {
+	color: var(--color-white);
+}
+
+.triage-result-modal .rom-persona-card__description {
+	display: block;
+	font-size: var(--ant-font-size);
+	font-family: var(--font-family-base);
+	color: var(--ant-color-text-description);
+	line-height: var(--line-height-normal);
+	flex: 1;
+}
+
+/* Score Badge (hidden) */
+.triage-result-modal .rom-persona-card__score {
+	display: none;
+}
+
+.triage-result-modal .rom-persona-card__score-label {
+	font-size: var(--font-size-lg);
+	color: var(--text-primary);
+}
+
+.triage-result-modal .rom-persona-card__score-value {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+}
+
+[data-theme='dark'] .triage-result-modal .rom-persona-card__score-label {
+	color: var(--color-white);
+	opacity: 0.8;
+}
+
+[data-theme='dark'] .triage-result-modal .rom-persona-card__score-value {
+	color: var(--color-white);
+}
+
+/* Active Card Styles */
+[data-theme='dark'] .triage-result-modal .rom-persona-card--active {
+	color: var(--color-white);
+}
+
+[data-theme='dark']
+	.triage-result-modal
+	.rom-persona-card--active
+	.rom-persona-card__title {
+	color: var(--color-white) !important;
+}
+
+.triage-result-modal .rom-persona-card--active .rom-persona-card__content {
+	padding: var(--spacing-4);
+	border-radius: var(--radius-xl);
+	background: var(--color-white-alpha-40);
+}
+
+[data-theme='dark']
+	.triage-result-modal
+	.rom-persona-card--active
+	.rom-persona-card__content {
+	background: var(--color-black-alpha-20);
+}
+
+.triage-result-modal .rom-persona-card--active .rom-persona-card__description {
+	font-size: var(--font-size-sm);
+	color: var(--text-primary);
+}
+
+[data-theme='dark']
+	.triage-result-modal
+	.rom-persona-card--active
+	.rom-persona-card__description {
+	color: var(--color-white);
+	opacity: 0.9;
+}
+
+/* Active card icon - no special styling needed */
+
+/* Persona Card Gradients - Light theme (lighter gradients) */
+
+.triage-result-modal .rom-persona-card--limitless {
+	background: linear-gradient(
+		228deg,
+		var(--color-green-dark-9) 14.33%,
+		var(--color-green-dark-6) 110.59%
+	);
+}
+
+.triage-result-modal .rom-persona-card--agile {
+	background: linear-gradient(
+		230deg,
+		var(--color-blue-3) 1.11%,
+		var(--color-blue-7) 96.5%
+	);
+}
+
+.triage-result-modal .rom-persona-card--functional {
+	background: linear-gradient(
+		230deg,
+		var(--color-warning-200) 1.11%,
+		var(--color-warning-600) 96.5%
+	);
+}
+
+.triage-result-modal .rom-persona-card--steady {
+	background: linear-gradient(
+		230deg,
+		var(--color-error-200) 1.11%,
+		var(--color-error-500) 96.5%
+	);
+}
+
+.triage-result-modal .rom-persona-card--resilient {
+	background: linear-gradient(
+		230deg,
+		var(--color-error-100) 1.11%,
+		var(--color-error-700) 96.5%
+	);
+}
+
+.triage-result-modal .rom-persona-card--determined {
+	background: linear-gradient(
+		230deg,
+		var(--color-magenta-3) 4.17%,
+		var(--color-magenta-dark-3) 95.62%
+	);
+}
+
+/* Persona Card Gradients - Dark theme (darker gradients) */
+[data-theme='dark'] .triage-result-modal .rom-persona-card--limitless {
+	background: linear-gradient(
+		228deg,
+		var(--color-green-dark-3) 14.33%,
+		var(--color-green-dark-6) 110.59%
+	);
+}
+
+[data-theme='dark'] .triage-result-modal .rom-persona-card--agile {
+	background: linear-gradient(
+		228deg,
+		var(--color-blue-dark-3) 14.33%,
+		var(--color-blue-dark-6) 110.59%
+	);
+}
+
+[data-theme='dark'] .triage-result-modal .rom-persona-card--functional {
+	background: linear-gradient(
+		228deg,
+		var(--color-warning-700) 14.33%,
+		var(--color-warning-400) 110.59%
+	);
+}
+
+[data-theme='dark'] .triage-result-modal .rom-persona-card--steady {
+	background: linear-gradient(
+		228deg,
+		var(--color-error-800) 14.33%,
+		var(--color-error-500) 110.59%
+	);
+}
+
+[data-theme='dark'] .triage-result-modal .rom-persona-card--resilient {
+	background: linear-gradient(
+		228deg,
+		var(--color-error-700) 14.33%,
+		var(--color-error-400) 110.59%
+	);
+}
+
+[data-theme='dark'] .triage-result-modal .rom-persona-card--determined {
+	background: linear-gradient(
+		228deg,
+		var(--color-magenta-dark-3) 14.33%,
+		var(--color-magenta-dark-7) 110.59%
+	);
+}
+
+/* Rule Categories Card */
+.triage-result-modal .rom-rule-categories {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: var(--spacing-4);
+	background: var(--surface-tertiary);
+}
+
+.triage-result-modal .rom-rule-categories__image {
+	width: 100%;
+	height: auto;
+	max-width: 100%;
+}
+
+/* ============================================
+   NEW COLLAPSE PANEL DESIGN (inside modal)
+   ============================================ */
+
+/* Header Layout */
+.triage-result-modal .collapse-header-new {
+	width: 100%;
+}
+
+.triage-result-modal .collapse-header-new__left {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+}
+
+.triage-result-modal .collapse-header-new__right {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: var(--spacing-2);
+}
+
+/* Score Display */
+.triage-result-modal .collapse-header-new__score {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	padding: var(--spacing-1) var(--spacing-3);
+	background: var(--surface-secondary);
+	border-radius: var(--radius-md);
+}
+
+.triage-result-modal .collapse-header-new__score-label {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary);
+}
+
+.triage-result-modal .collapse-header-new__score-value {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+}
+
+/* Progress Bar */
+.triage-result-modal .collapse-header-new__progress {
+	display: flex;
+	align-items: center;
+	min-width: 180px;
+}
+
+/* Content Cards Grid */
+.triage-result-modal .collapse-content-cards {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: var(--spacing-3);
+}
+
+.triage-result-modal .collapse-content-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: var(--spacing-3) var(--spacing-4);
+	background: var(--bg-page);
+	border-radius: var(--radius-lg);
+}
+
+.triage-result-modal .collapse-content-card__name {
+	font-size: var(--font-size-sm);
+	color: var(--text-primary);
+}
+
+.triage-result-modal .collapse-content-card__score {
+	margin-inline-end: 0 !important;
+	font-weight: var(--font-weight-semibold);
+}
+
+/* Panel Styles */
+.triage-result-modal .collapse-panel-new .ant-collapse-content-box {
+	padding: var(--spacing-4) !important;
+}
+
+/* Program Result Styles */
+.triage-result-modal .program-result-wrapper {
+	padding: var(--spacing-4);
+}
+
+.triage-result-modal .program-collapse-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.triage-result-modal .program-session-info {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+}
+
+.triage-result-modal .program-pain-indicator {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.triage-result-modal .program-status-tag {
+	margin-left: auto;
+}
+
+/* Survey Result Styles */
+.triage-result-modal .survey-result-wrapper {
+	padding: var(--spacing-4);
+}
+
+.triage-result-modal .pain-assessment-item {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	padding: var(--spacing-3);
+	background: var(--surface-secondary);
+	border-radius: var(--radius-md);
+	margin-bottom: var(--spacing-2);
+}
+
+.triage-result-modal .pain-level-indicator {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	font-weight: var(--font-weight-medium);
+}
+
+/* Collapse customization */
+.triage-result-modal .ant-collapse {
+	background: transparent;
+	border: none;
+}
+
+.triage-result-modal .ant-collapse-item {
+	margin-bottom: var(--spacing-3);
+	border-radius: var(--radius-xl) !important;
+	overflow: hidden;
+	border-bottom: none;
+}
+
+.triage-result-modal .ant-collapse-content-box {
+	padding: var(--spacing-4) !important;
+}
+
+/* ============================================
+   WIDE MODAL VARIANT (95% viewport width)
+   Used for ROM Summary modal - fullscreen width
+   ============================================ */
+
+.triage-result-modal--wide.ant-modal.bottom-sheet-modal {
+	max-width: 95vw !important;
+	width: 95vw !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+/* Responsive */
+
+/* Tablet: persona cards 3 columns */
+@media (max-width: 1200px) {
+	.triage-result-modal .rom-persona-card {
+		min-height: 180px;
+	}
+}
+
+@media (max-width: 768px) {
+	.triage-result-modal .rom-bento-grid {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+	}
+
+	.triage-result-modal .rom-bento-persona,
+	.triage-result-modal .rom-bento-chart,
+	.triage-result-modal .rom-bento-overview,
+	.triage-result-modal .rom-bento-didyouknow,
+	.triage-result-modal .rom-bento-whatthismeans,
+	.triage-result-modal .rom-persona-card {
+		grid-column: 1 / -1;
+		grid-row: auto;
+	}
+
+	/* Posture-specific mobile */
+	.triage-result-modal .posture-bento-grid .rom-bento-user-info {
+		grid-column: 1 / -1;
+		grid-row: auto;
+	}
+
+	.triage-result-modal .rom-chart-container {
+		min-height: 200px;
+	}
+
+	.triage-result-modal .rom-persona-card {
+		min-height: auto;
+		padding: var(--spacing-3);
+	}
+
+	.triage-result-modal .rom-persona-card__title {
+		font-size: var(--font-size-sm) !important;
+	}
+
+	.triage-result-modal .rom-persona-card__description {
+		font-size: var(--font-size-xs);
+	}
+
+	.triage-result-modal--wide.ant-modal.bottom-sheet-modal {
+		max-width: 100vw !important;
+		width: 100vw !important;
+	}
+}
+
+/* ============================================
+   HIDDEN ELEMENTS
+   ============================================ */
+
+/* Hide Pie/Radar chart toggle - radar chart temporarily disabled */
+.rom-chart-toggle--hidden {
+	display: none;
+}
+
+/* Start Session – SUCCESS button */
+.start-session-btn {
+  background-color: var(--color-success-500) !important;
+  border-color: var(--color-success-500) !important;
+  color: var(--color-white) !important;
+	border-radius: 20px;
+}
+
+.start-session-btn:hover,
+.start-session-btn:focus {
+  background-color: var(--color-success-600) !important;
+  border-color: var(--color-success-600) !important;
+  color: var(--color-white) !important;
+}
+

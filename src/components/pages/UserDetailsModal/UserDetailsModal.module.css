@@ -1,0 +1,505 @@
+/**
+ * UserDetailsModal Styles
+ * Matching CommandPalette design pattern
+ */
+
+.userDetailsModal :global(.ant-modal-content) {
+	padding: 0;
+	border-radius: var(--radius-xl);
+	overflow: hidden;
+	box-shadow: var(--shadow-lg);
+}
+
+.commandPalette {
+	display: flex;
+	flex-direction: column;
+	background: var(--bg-page);
+	max-height: 600px;
+}
+
+/* Search Container */
+.searchContainer {
+	display: flex;
+	align-items: center;
+	padding: var(--spacing-4) var(--spacing-5);
+	gap: var(--spacing-3);
+	background: transparent;
+	flex-shrink: 0;
+}
+
+.backIcon {
+	font-size: var(--font-size-base);
+	color: var(--text-secondary, var(--color-gray-500));
+	cursor: pointer;
+	transition: color 150ms ease;
+	flex-shrink: 0;
+}
+
+.backIcon:hover {
+	color: var(--brand-primary, var(--color-brand-primary));
+}
+
+.searchInput {
+	flex: 1;
+	border-radius: var(--radius-lg);
+}
+
+.searchInput :global(.ant-input) {
+	background: transparent !important;
+	color: var(--text-primary, var(--color-gray-900));
+}
+
+.searchInput :global(.ant-input)::placeholder {
+	color: var(--text-placeholder, var(--color-gray-400));
+}
+
+.searchInput :global(.ant-input-prefix) {
+	color: var(--text-tertiary, var(--color-gray-400));
+	margin-inline-end: var(--spacing-2);
+}
+
+/* Command List */
+.commandList {
+	overflow-y: auto;
+	max-height: 250px;
+	padding: var(--spacing-2);
+	overscroll-behavior: contain;
+}
+
+.commandList::-webkit-scrollbar {
+	width: var(--spacing-2);
+}
+
+.commandList::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.commandList::-webkit-scrollbar-thumb {
+	background: var(--border-default, var(--color-gray-200));
+	border-radius: var(--radius-sm);
+}
+
+.commandList::-webkit-scrollbar-thumb:hover {
+	background: var(--border-strong, var(--color-gray-300));
+}
+
+/* Command Group */
+.commandGroup {
+	margin-bottom: var(--spacing-3);
+}
+
+.commandGroup:last-child {
+	margin-bottom: 0;
+}
+
+/* User Header Item */
+.userHeaderItem {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	padding: var(--spacing-4) var(--spacing-5);
+	background: transparent;
+}
+
+.userInfo {
+	flex: 1;
+	min-width: 0;
+}
+
+.actionButtons {
+	flex-shrink: 0;
+}
+
+.iconButton {
+	width: var(--spacing-8);
+	height: var(--spacing-8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--radius-md);
+	transition: all var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.iconButton:hover {
+	background: var(--nav-hover-bg, var(--color-gray-100));
+}
+
+/* Command Item */
+.commandItem {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	padding: var(--spacing-2-5) var(--spacing-3);
+	border-radius: var(--radius-md);
+	background-color: var(--surface-tertiary);
+	cursor: pointer;
+	transition:
+		background-color 150ms ease-out,
+		transform 100ms ease-out;
+	user-select: none;
+	margin-bottom: var(--spacing-2);
+}
+
+.commandItem:hover {
+	background-color: var(
+		--sidebar-item-hover-bg,
+		var(--nav-hover-bg, var(--color-gray-100))
+	);
+}
+
+.commandItem.selected {
+	background-color: var(--sidebar-item-active-bg, var(--surface-brand));
+}
+
+.commandItem:active {
+	transform: scale(0.98);
+}
+
+.commandItem:last-child {
+	margin-bottom: 0;
+}
+
+.commandIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--spacing-8);
+	height: var(--spacing-8);
+	border-radius: var(--radius-full);
+	background: var(--sidebar-item-active-bg, var(--surface-brand));
+	color: var(--icon-color);
+	font-size: var(--font-size-sm);
+	flex-shrink: 0;
+}
+
+.commandIcon svg {
+	width: 16px;
+	height: 16px;
+}
+
+.commandItem.selected .commandIcon {
+	background: var(--brand-primary);
+	color: var(--text-on-brand);
+	transition:
+		background-color 150ms ease-out,
+		color 150ms ease-out;
+}
+
+.commandContent {
+	flex: 1;
+	min-width: 0;
+}
+
+.commandLabel {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--text-primary, var(--color-gray-900));
+	line-height: var(--line-height-snug);
+}
+
+.commandDescription {
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary, var(--color-gray-500));
+	line-height: var(--line-height-snug);
+	margin-top: var(--spacing-0-5);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* No Results */
+.noResults {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-10) var(--spacing-5);
+	text-align: center;
+	color: var(--text-tertiary, var(--color-gray-500));
+}
+
+.noResults p {
+	margin: 0;
+	font-size: var(--font-size-sm);
+}
+
+/* Footer */
+.footer {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-4);
+	padding: var(--spacing-3) var(--spacing-5);
+	background: transparent;
+}
+
+.footerHint {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1-5);
+	font-size: var(--font-size-xs);
+	color: var(--text-tertiary, var(--color-gray-500));
+}
+
+/* Keyboard Badge */
+.kbd {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: var(--spacing-6);
+	height: var(--spacing-5);
+	padding: 0 var(--spacing-1-5);
+	border-radius: var(--radius-sm);
+	background: var(--surface-tertiary, var(--color-gray-100));
+	border: var(--border-width-1) solid var(--border-subtle, var(--color-gray-200));
+	font-size: 0.688rem;
+	font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+	font-weight: var(--font-weight-medium);
+	color: var(--text-secondary, var(--color-gray-500));
+	box-shadow: var(--shadow-xs);
+	flex-shrink: 0;
+}
+
+/* Resize kbd in content (32px container, 16px icon) */
+.commandList .kbd,
+.commandItem .kbd {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	min-width: 32px;
+	padding: 0;
+}
+
+.commandList .kbd svg,
+.commandItem .kbd svg {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	color: currentColor;
+}
+
+/* Footer kbd elements */
+.footer .kbd {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	min-width: var(--spacing-6);
+	height: var(--spacing-6);
+	padding: 0 var(--spacing-1-5);
+}
+
+.footer .kbd svg {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	color: currentColor;
+}
+
+/* Animations */
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.userDetailsModal :global(.ant-modal-content) {
+	animation: slideDown 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive - Mobile */
+@media (max-width: 639px) {
+	.userDetailsModal {
+		width: 100vw !important;
+		margin: 0;
+	}
+
+	.userDetailsModal :global(.ant-modal-content) {
+		border-radius: 0;
+	}
+
+	.userHeaderItem {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.commandItem {
+		flex-wrap: wrap;
+	}
+
+	.commandItem button {
+		width: 100%;
+		margin-top: var(--spacing-2);
+	}
+}
+
+/* Dark Theme Support */
+[data-theme='dark'] .userDetailsModal :global(.ant-modal-content) {
+	background: var(--bg-page);
+	box-shadow:
+		0 12px 28px 0 var(--color-black-alpha-40),
+		0 2px 4px 0 var(--color-black-alpha-30),
+		inset 0 0 0 1px var(--color-white-alpha-10);
+}
+
+[data-theme='dark'] .commandPalette {
+	background: var(--bg-page);
+}
+
+[data-theme='dark'] .searchContainer {
+	background: transparent;
+}
+
+[data-theme='dark'] .searchInput :global(.ant-input) {
+	color: var(--text-primary);
+}
+
+[data-theme='dark'] .searchInput :global(.ant-input)::placeholder {
+	color: var(--text-placeholder);
+}
+
+[data-theme='dark'] .searchInput :global(.ant-input-prefix) {
+	color: var(--text-tertiary);
+}
+
+[data-theme='dark'] .userHeaderItem {
+	background: transparent;
+}
+
+[data-theme='dark'] .iconButton:hover {
+	background: var(--sidebar-item-hover-bg);
+}
+
+[data-theme='dark'] .commandItem {
+	background-color: var(--surface-tertiary);
+}
+
+[data-theme='dark'] .commandItem:hover {
+	background-color: var(--sidebar-item-hover-bg);
+}
+
+[data-theme='dark'] .commandItem.selected {
+	background-color: var(--sidebar-item-active-bg);
+}
+
+[data-theme='dark'] .commandItem.selected .commandIcon {
+	background: var(--brand-primary);
+	color: var(--text-on-brand);
+}
+
+[data-theme='dark'] .commandIcon {
+	background: var(--sidebar-item-active-bg, var(--surface-brand));
+	color: var(--icon-color);
+}
+
+[data-theme='dark'] .commandLabel {
+	color: var(--text-primary);
+}
+
+[data-theme='dark'] .commandDescription {
+	color: var(--text-tertiary);
+}
+
+[data-theme='dark'] .footer {
+	background: transparent;
+}
+
+[data-theme='dark'] .kbd {
+	background: var(--surface-tertiary);
+	border-color: var(--border-subtle);
+	color: var(--text-secondary);
+}
+
+/* Popconfirm Styles - Light Theme (Default) */
+.adminPopconfirm :global(.ant-popconfirm-inner) {
+	background: var(--bg-primary, #fff);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-lg);
+}
+
+.adminPopconfirm :global(.ant-popconfirm-title) {
+	color: var(--text-primary, var(--color-gray-900));
+	font-weight: var(--font-weight-semibold);
+}
+
+.adminPopconfirm :global(.ant-popconfirm-description) {
+	color: var(--text-secondary, var(--color-gray-600));
+}
+
+.adminPopconfirm :global(.ant-popconfirm-buttons) {
+	margin-top: var(--spacing-3);
+}
+
+.adminPopconfirm :global(.ant-btn-default) {
+	background: var(--surface-secondary, var(--color-gray-100));
+	border-color: var(--border-default, var(--color-gray-200));
+	color: var(--text-primary, var(--color-gray-900));
+}
+
+.adminPopconfirm :global(.ant-btn-default:hover) {
+	background: var(--surface-tertiary, var(--color-gray-200));
+	border-color: var(--border-strong, var(--color-gray-300));
+	color: var(--text-primary, var(--color-gray-900));
+}
+
+.adminPopconfirm :global(.ant-btn-primary) {
+	background: var(--brand-primary);
+	border-color: var(--brand-primary);
+}
+
+.adminPopconfirm :global(.ant-btn-primary:hover) {
+	background: var(--color-primary-600);
+	border-color: var(--color-primary-600);
+}
+
+.adminPopconfirm :global(.ant-popover-arrow::before) {
+	background: var(--bg-primary, #fff);
+}
+
+/* Popconfirm Styles - Dark Theme */
+[data-theme='dark'] .adminPopconfirm :global(.ant-popconfirm-inner) {
+	background: var(--bg-elevated, var(--color-gray-800));
+	box-shadow:
+		0 12px 28px 0 var(--color-black-alpha-40),
+		0 2px 4px 0 var(--color-black-alpha-30),
+		inset 0 0 0 1px var(--color-white-alpha-10);
+}
+
+[data-theme='dark'] .adminPopconfirm :global(.ant-popconfirm-title) {
+	color: var(--text-primary);
+}
+
+[data-theme='dark'] .adminPopconfirm :global(.ant-popconfirm-description) {
+	color: var(--text-secondary);
+}
+
+[data-theme='dark'] .adminPopconfirm :global(.ant-btn-default) {
+	background: var(--surface-tertiary);
+	border-color: var(--border-subtle);
+	color: var(--text-primary);
+}
+
+[data-theme='dark'] .adminPopconfirm :global(.ant-btn-default:hover) {
+	background: var(--surface-secondary);
+	border-color: var(--border-default);
+	color: var(--text-primary);
+}
+
+[data-theme='dark'] .adminPopconfirm :global(.ant-popover-arrow::before) {
+	background: var(--bg-elevated, var(--color-gray-800));
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+	.commandItem,
+	.userDetailsModal :global(.ant-modal-content) {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+}

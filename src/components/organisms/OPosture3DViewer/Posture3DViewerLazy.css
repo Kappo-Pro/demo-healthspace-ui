@@ -1,0 +1,71 @@
+.posture-3d-viewer-lazy {
+	width: 100%;
+	height: 100%;
+}
+
+.posture-3d-loading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 400px;
+	padding: var(--spacing-8);
+	gap: var(--spacing-4);
+}
+
+.posture-3d-loading-spinner {
+	width: var(--spacing-12);
+	height: var(--spacing-12);
+	border: 4px solid var(--border-default);
+	border-top-color: var(--brand-primary);
+	border-radius: var(--radius-full);
+	animation: posture-3d-spin 1s linear infinite;
+}
+
+.posture-3d-loading-text {
+	margin: 0;
+	color: var(--text-secondary);
+	font-size: var(--font-size-sm);
+}
+
+@keyframes posture-3d-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.posture-3d-error {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 400px;
+	padding: var(--spacing-8);
+	text-align: center;
+	gap: var(--spacing-4);
+}
+
+.posture-3d-error-message {
+	margin: 0;
+	color: var(--text-error);
+	font-size: var(--font-size-sm);
+}
+
+.posture-3d-error-button {
+	padding: var(--spacing-2) var(--spacing-4);
+	background-color: var(--brand-primary);
+	color: var(--color-white);
+	border: none;
+	border-radius: var(--radius-sm);
+	cursor: pointer;
+	font-size: var(--font-size-sm);
+	transition: background-color var(--transition-normal);
+}
+
+.posture-3d-error-button:hover {
+	background-color: var(--brand-primary-hover);
+}
+
+.posture-3d-error-button:active {
+	background-color: var(--brand-primary-active);
+}

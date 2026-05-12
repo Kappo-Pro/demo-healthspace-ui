@@ -1,0 +1,140 @@
+import { Radar } from '@ant-design/plots';
+import { Card } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { CustomRomSession } from '@types';
+import { evalScore } from './jointsTemplateData';
+import { useMemo } from 'react';
+
+interface OldRadarChartProps{
+	selectedRom: CustomRomSession | null;
+	persona: {
+		color: string;
+	}; 
+	avgScore : number
+	isPdf?: boolean
+}
+const OldRadarChart = (props: OldRadarChartProps) => {
+const { selectedRom, persona, avgScore } = props;
+
+	const { t } = useTranslation();
+
+	const calculateAverageScoresByJointAndSide = () => {
+		const joints: Record<string, { total: number; count: number }> = {};
+
+		selectedRom?.romPatientResults?.forEach(item => {
+			item?.results?.map(data => {
+				const measure =
+					data?.romProgramExercise?.strapiOmniRomExercise?.name ||
+					data?.romProgramExercise?.exerciseLibrary?.title ||
+					t('Patient.data.omnirom.noTitle');
+				const joint = measure;
+				const score = evalScore(data) || 0;
+
+				if (!joints[joint]) {
+					joints[joint] = { total: 0, count: 0 };
+				}
+				joints[joint].total += score;
+				joints[joint].count += 1;
+			});
+		});
+
+		return Object.keys(joints).map(joint => ({
+			joint,
+			score: (joints[joint].total / joints[joint].count).toFixed(2),
+		}));
+	};
+
+	const averageScores = calculateAverageScoresByJointAndSide();
+
+	const maxScore = Math.max(
+		...(selectedRom?.romPatientResults.flatMap(
+			item => (item?.results ? item.results.map(data => evalScore(data) || 100) : []),
+		) || [0]),
+	);
+
+	const memoizedConfig = useMemo(() => ({
+ data: averageScores
+	.filter(item => parseFloat(item.score) > 0.49)
+	.map(item => ({
+		...item,
+		score: Math.round(Math.min(100, parseFloat(item.score))),
+	})),
+	xField: 'joint',
+	yField: 'score',
+	meta: {
+		score: {
+			min: 0,
+			max: maxScore,
+		},
+	},
+	xAxis: {
+		line: null,
+		grid: null,
+		tickLine: null,
+		label:null
+	},
+	yAxis: {
+		label: null,
+		line: null,
+		tickLine: null,
+		grid: {
+			lineStyle: {
+				lineDash: null,
+			},
+			alternateColor: 'rgb(0, 0, 0, 0.05)',
+		},
+	},
+	area: {
+		style: {
+			fillOpacity: 0.7,
+		},
+	},
+	tooltip: {
+		showTitle: true,
+		showMarkers: false,
+		domStyles: {
+			'g2-tooltip': {
+				padding: '0px 12px 12px',
+				backgroundcolor: 'var(--text-on-dark)',
+				boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+				borderRadius: '6px',
+			},
+			'g2-tooltip-title': {
+				fontSize: '16px',
+				fontWeight: 'bold',
+			},
+			'g2-tooltip-list-item': {
+				fontSize: '14px',
+				marginBottom: '4px',
+			},
+		},
+	},
+	annotations: [
+		{
+			type: 'text',
+			position: { x: '50%', y: '50%' },
+			content: `${avgScore}`,
+			style: {
+				fill: 'var(--color-black)',
+				fontSize: 30,
+				fontWeight: 'bold',
+				textAlign: 'center',
+				textBaseline: 'middle',
+				shadowColor: 'rgba(0, 0, 0, 0.4)',
+				shadowBlur: 4,
+			},
+		},
+	],
+	color: persona?.color,
+}), [avgScore, averageScores, maxScore, persona?.color]);
+
+	return (
+		<Card
+			className="radar-chart"
+			style={{ height: '400px', border: 'none', position: 'relative' }}>
+			<Radar {...memoizedConfig}/>
+		</Card>
+	);
+};
+
+export default OldRadarChart;

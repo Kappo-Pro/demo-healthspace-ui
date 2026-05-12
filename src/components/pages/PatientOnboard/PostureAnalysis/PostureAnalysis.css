@@ -1,0 +1,106 @@
+.posture-medical-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.posture-header-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.posture-intakeing-container {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 30px;
+	text-align: center;
+}
+
+.posture-intakeing-heading {
+	font-size: var(--font-size-xl);
+	font-weight: bold;
+	color: var(--color-purple-700);
+	margin-bottom: var(--spacing-5);
+}
+
+.posture-intakeing-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: var(--radius-2xl);
+	padding: var(--spacing-5);
+	margin-bottom: var(--spacing-5);
+	color: var(--surface-primary);
+}
+
+.posture-intake-card {
+	position: relative;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: var(--spacing-8);
+	border-radius: var(--radius-2xl);
+	overflow: hidden;
+	background-size: cover;
+	background-position: center;
+}
+
+.posture-intake-content {
+	position: relative;
+	z-index: 1;
+	color: var(--surface-primary);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-20);
+}
+
+.acknowledge-box {
+	background: var(--bg-page);
+	border-radius: 30px;
+	padding: 15px var(--spacing-5);
+	display: inline-block;
+	margin-bottom: var(--spacing-5);
+}
+
+.posture-intake-acknowledge {
+	background: var(--surface-primary) fffad 50%;
+	padding: var(--spacing-3) var(--spacing-4);
+	border-radius: 20px;
+	align-self: flex-start;
+}
+
+.posture-intake-checkbox-label {
+	font-weight: var(--font-weight-medium);
+	font-style: normal;
+	font-size: var(--font-size-base);
+	line-height: var(--spacing-6);
+	letter-spacing: 0;
+	text-align: start;
+	padding-left: var(--spacing-2-5);
+	display: flex;
+	color: var(--color-purple-700);
+}
+
+.posture-intake-divider {
+	border-color: var(--gray-300, #d2d2d2) !important;
+	border-width: var(--border-width-1) !important;
+	margin: 0 !important;
+}
+
+.posture-intakeing-button-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: var(--spacing-5);
+	justify-content: end;
+	display: flex;
+}
+
+.button-row {
+	display: flex;
+	justify-content: center;
+	gap: var(--spacing-5);
+}

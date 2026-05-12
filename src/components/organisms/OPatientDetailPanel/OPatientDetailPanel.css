@@ -1,0 +1,70 @@
+/**
+ * Patient Detail Panel Styles
+ *
+ * Story 3.2: Clinical Analytics & Detailed Metrics
+ */
+
+.patient-detail-drawer {
+	--drawer-header-height: 60px;
+}
+
+.patient-detail-section {
+	margin-bottom: var(--spacing-6);
+}
+
+.patient-detail-section:last-child {
+	margin-bottom: 0;
+}
+
+/* Enhanced Metric Card Styles */
+.enhanced-metric-card {
+	border-radius: var(--border-radius-lg);
+	box-shadow: var(--shadow-sm);
+	transition: all var(--transition-base);
+}
+
+.enhanced-metric-card:hover {
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px);
+}
+
+.posture-metric-card__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--spacing-4);
+}
+
+.posture-metric-card__trend {
+	display: flex;
+	align-items: center;
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+}
+
+.posture-metric-card__value {
+	margin: var(--spacing-4) 0;
+}
+
+.posture-metric-card__details {
+	padding-top: var(--spacing-3);
+	border-top: 1px solid var(--color-border);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.patient-detail-drawer {
+		width: 100% !important;
+	}
+
+	.patient-detail-section .ant-col {
+		margin-bottom: var(--spacing-4);
+	}
+}
+
+/* Print Styles */
+@media print {
+	.patient-detail-drawer .ant-drawer-extra {
+		display: none;
+	}
+}

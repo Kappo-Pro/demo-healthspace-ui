@@ -1,0 +1,107 @@
+/**
+ * PostureViewSelector Styles
+ *
+ * Design: Segmented control / toggle switch
+ * Accessibility: WCAG 2.1 AA compliant focus indicators
+ * Animation: Smooth 200ms transitions
+ */
+
+.posture-view-selector {
+	display: inline-flex;
+	gap: 0;
+	background: var(--surface-secondary);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-1);
+	box-shadow: var(--shadow-xs);
+}
+
+.view-option {
+	padding: var(--spacing-2-5) var(--spacing-6);
+	border: none;
+	background: transparent;
+	color: var(--text-secondary);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-semibold);
+	border-radius: var(--radius-sm);
+	cursor: pointer;
+	transition: all var(--transition-normal);
+	position: relative;
+	white-space: nowrap;
+}
+
+/* Hover state - only for non-disabled buttons */
+.view-option:hover:not(.disabled):not(:disabled) {
+	background: var(--surface-hover);
+	color: var(--text-primary);
+}
+
+/* Active state - currently selected view */
+.view-option.active {
+	background: var(--brand-primary);
+	color: var(--color-white);
+	box-shadow: var(--shadow-sm);
+}
+
+/* Focus state - WCAG 2.1 AA compliant */
+.view-option:focus-visible {
+	outline: 2px solid var(--border-focus);
+	outline-offset: 2px;
+	z-index: 1;
+}
+
+/* Disabled state - 3D unavailable (no WebGL) */
+.view-option.disabled,
+.view-option:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	color: var(--text-disabled);
+}
+
+/* Remove default button focus outline (we use focus-visible) */
+.view-option:focus {
+	outline: none;
+}
+
+/* Smooth entry animation */
+.view-option {
+	animation: fade-in 0.2s ease;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Responsive design - mobile */
+@media (max-width: 768px) {
+	.view-option {
+		padding: var(--spacing-2) var(--spacing-4);
+		font-size: 13px;
+	}
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.view-option {
+		border: 2px solid currentColor;
+	}
+
+	.view-option.active {
+		border-color: var(--color-white);
+	}
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	.view-option,
+	.view-option.active {
+		transition: none;
+		animation: none;
+	}
+}

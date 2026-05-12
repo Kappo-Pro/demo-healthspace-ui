@@ -1,0 +1,39 @@
+.video-height-css {
+	height: 90px;
+}
+
+.video-modal-height {
+	width: 100%;
+}
+
+/* Override image-wrapper styles to constrain to video height */
+.video-height-css .image-wrapper {
+	position: relative;
+	height: 90px;
+	cursor: pointer;
+}
+
+.video-height-css .image-wrapper::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 90px;
+	background-color: transparent;
+	border-radius: var(--radius-lg);
+	transition: background-color var(--motion-duration-base);
+}
+
+.video-height-css .image-wrapper:hover::after {
+	background-color: var(--color-black-alpha-5);
+}
+
+.video-height-css .image-wrapper:hover .play-button {
+	opacity: 1;
+}
+
+/* Saving progress container styling */
+.saving-progress-container {
+	padding-top: var(--spacing-3);
+}

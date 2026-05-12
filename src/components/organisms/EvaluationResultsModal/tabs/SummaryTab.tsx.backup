@@ -1,0 +1,453 @@
+/**
+ * SummaryTab - Displays evaluation summary with metadata and quick actions
+ *
+ * This is the first tab users see when opening an evaluation. It provides a quick overview
+ * with key findings extracted from the evaluation, metadata (date, status, completion %),
+ * and quick action buttons for status management and PDF export.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <SummaryTab
+ *   data={evaluationData}
+ *   onStatusChange={handleStatusChange}
+ *   onExport={handleExport}
+ * />
+ *
+ * // With export loading state
+ * <SummaryTab
+ *   data={evaluationData}
+ *   onStatusChange={handleStatusChange}
+ *   onExport={handleExport}
+ *   exportLoading={isExporting}
+ * />
+ * ```
+ *
+ * @param {TDataProps} data - Evaluation data to display
+ * @param {function} onStatusChange - Callback when status changes via StatusDropdown
+ * @param {function} onExport - Callback when export PDF button clicked
+ * @param {boolean} [exportLoading=false] - Optional loading state for export button
+ *
+ * @returns {JSX.Element} Summary tab component with 2-column layout (metadata + actions)
+ *
+ * @see {@link StatusDropdown} - Status management dropdown with confirmation
+ * @see {@link ExportButton} - PDF export button with loading state
+ *
+ * @features
+ * - Evaluation metadata (date, status, completion %, provider, duration)
+ * - Key findings (3-5 bullets extracted from pain assessments, health signs, medical history)
+ * - Status dropdown with smart confirmation for backward changes
+ * - Export PDF button with loading state
+ * - Responsive 2-column layout (stacks on mobile)
+ * - Completion percentage calculated from 5 core data sections
+ * - Empty states for missing data
+ *
+ * @businessLogic
+ * - Completion % = (painAssessments + healthSigns + medicalHistories + active + userId) / 5
+ * - Key findings extracted from top 3 pain assessments + 2 health signs + 2 medical histories
+ * - Maximum 5 key findings displayed
+ * - Status defaults to 'pending' if not provided in data
+ *
+ * @responsive
+ * - Mobile (<768px): Single column (metadata stacked above actions)
+ * - Tablet/Desktop (≥768px): Two columns (metadata 60%, actions 40%)
+ *
+ * @author Winston (Tech Lead)
+ * @since October 2025
+ * @version 2.2.0 (Story 5.2: Comprehensive JSDoc documentation)
+ * @story Story 2.1 - Create SummaryTab Component
+ * @story Story 5.2 - Documentation
+ */
+
+import React from 'react';
+import { Progress, Tag } from 'antd';
+import styled from 'styled-components';
+import { StatusDropdown, Status } from '../components/StatusDropdown';
+import { ExportButton } from '../components/ExportButton';
+import { TDataProps } from '@types';
+
+/**
+ * Props interface for SummaryTab component
+ *
+ * @interface SummaryTabProps
+ */
+export interface SummaryTabProps {
+	/**
+	 * Evaluation data object to display in summary
+	 * @type {TDataProps}
+	 * @required
+	 * @see {@link TDataProps} for full data structure
+	 */
+	data: TDataProps;
+
+	/**
+	 * Callback when status changes via StatusDropdown
+	 * @param {string} id - Evaluation ID
+	 * @param {Status} status - New status value ('pending' | 'in-review' | 'completed' | 'archived')
+	 * @returns {void}
+	 * @required
+	 * @example
+	 * ```tsx
+	 * onStatusChange={(id, status) => {
+	 *   updateEvaluationStatus(id, status);
+	 * }}
+	 * ```
+	 */
+	onStatusChange: (id: string, status: Status) => void;
+
+	/**
+	 * Callback when export PDF button clicked
+	 * @param {string} id - Evaluation ID to export
+	 * @returns {void}
+	 * @required
+	 * @example
+	 * ```tsx
+	 * onExport={(id) => {
+	 *   exportEvaluationPDF(id);
+	 * }}
+	 * ```
+	 */
+	onExport: (id: string) => void;
+
+	/**
+	 * Optional loading state for export button
+	 * Shows spinner and "Exporting..." text when true
+	 * @type {boolean}
+	 * @default false
+	 */
+	exportLoading?: boolean;
+}
+
+/**
+ * SummaryTab - Displays evaluation summary with metadata and quick actions
+ *
+ * Features:
+ * - Evaluation metadata (date, status, completion %, provider, duration)
+ * - Key findings section with bullet points
+ * - Status dropdown with smart confirmation
+ * - Export PDF button
+ * - Responsive layout (mobile/tablet/desktop)
+ *
+ * Business Logic:
+ * - Completion % calculated from 5 core data sections
+ * - Key findings extracted from pain assessments
+ * - Empty states for missing data
+ */
+export const SummaryTab: React.FC<SummaryTabProps> = ({
+	data,
+	onStatusChange,
+	onExport,
+	exportLoading = false,
+}) => {
+	// Format evaluation date
+	const formattedDate = new Date(data.createdAt).toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
+
+	// Extract key findings from pain assessments
+	const keyFindings = extractKeyFindings(data);
+
+	// Calculate completion percentage
+	const completionPercentage = calculateCompletionPercentage(data);
+
+	// Get current status (default to 'pending' if missing)
+	const currentStatus: Status = 'pending'; // TODO: Add status field to TDataProps
+
+	return (
+		<SummaryContainer>
+			<ContentGrid>
+				{/* Left Column: Metadata */}
+				<MetadataSection>
+					<SectionTitle>Evaluation Details</SectionTitle>
+
+					<MetadataRow>
+						<Label>Date:</Label>
+						<Value>{formattedDate}</Value>
+					</MetadataRow>
+
+					<MetadataRow>
+						<Label>Status:</Label>
+						<Value>
+							<StatusTag status={currentStatus}>{getStatusLabel(currentStatus)}</StatusTag>
+						</Value>
+					</MetadataRow>
+
+					<MetadataRow>
+						<Label>Completion:</Label>
+						<Value>
+							<Progress
+								percent={completionPercentage}
+								size="small"
+								status={completionPercentage === 100 ? 'success' : 'active'}
+							/>
+						</Value>
+					</MetadataRow>
+
+					{/* Provider and Duration are not in TDataProps - show N/A for now */}
+					<MetadataRow>
+						<Label>Provider:</Label>
+						<Value>N/A</Value>
+					</MetadataRow>
+
+					<MetadataRow>
+						<Label>Duration:</Label>
+						<Value>N/A</Value>
+					</MetadataRow>
+				</MetadataSection>
+
+				{/* Right Column: Actions */}
+				<ActionsSection>
+					<SectionTitle>Quick Actions</SectionTitle>
+
+					<ActionGroup>
+						<ActionLabel>Change Status:</ActionLabel>
+						<StatusDropdown
+							currentStatus={currentStatus}
+							onChange={(newStatus) => onStatusChange(data.id, newStatus)}
+						/>
+					</ActionGroup>
+
+					<ActionGroup>
+						<ActionLabel>Export:</ActionLabel>
+						<ExportButton
+							onClick={() => onExport(data.id)}
+							loading={exportLoading}
+							disabled={!data.id}
+						/>
+					</ActionGroup>
+				</ActionsSection>
+			</ContentGrid>
+
+			{/* Key Findings Section (Full Width) */}
+			<KeyFindingsSection>
+				<SectionTitle>Key Findings</SectionTitle>
+				{keyFindings.length > 0 ? (
+					<FindingsList>
+						{keyFindings.map((finding, index) => (
+							<FindingItem key={index}>{finding}</FindingItem>
+						))}
+					</FindingsList>
+				) : (
+					<EmptyState>No key findings available</EmptyState>
+				)}
+			</KeyFindingsSection>
+		</SummaryContainer>
+	);
+};
+
+/**
+ * Extract key findings from evaluation data
+ *
+ * @param data - Evaluation data
+ * @returns Array of 3-5 key findings strings
+ */
+function extractKeyFindings(data: TDataProps): string[] {
+	const findings: string[] = [];
+
+	// Extract from pain assessments
+	if (data.painAssessments && data.painAssessments.length > 0) {
+		data.painAssessments.slice(0, 3).forEach((assessment) => {
+			if (assessment.painIntensity !== undefined && assessment.painIntensity !== null) {
+				const bodyPart = assessment.strapiBodyPoint?.attributes?.name || 'Unknown area';
+				findings.push(
+					`Patient reports pain in ${bodyPart} (${assessment.painIntensity}/10 severity)`
+				);
+			}
+		});
+	}
+
+	// Extract from health signs
+	if (data.healthSigns?.strapiHealthSigns && data.healthSigns.strapiHealthSigns.length > 0) {
+		const healthSignNames = data.healthSigns.strapiHealthSigns
+			.slice(0, 2)
+			.map((sign) => sign.attributes.name)
+			.join(', ');
+		if (healthSignNames) {
+			findings.push(`Health signs: ${healthSignNames}`);
+		}
+	}
+
+	// Extract from medical history
+	if (
+		data.medicalHistories?.strapiMedicalHistories &&
+		data.medicalHistories.strapiMedicalHistories.length > 0
+	) {
+		const medicalHistoryNames = data.medicalHistories.strapiMedicalHistories
+			.slice(0, 2)
+			.map((history) => history.attributes.name)
+			.join(', ');
+		if (medicalHistoryNames) {
+			findings.push(`Medical history: ${medicalHistoryNames}`);
+		}
+	}
+
+	return findings.slice(0, 5); // Return max 5 findings
+}
+
+/**
+ * Calculate completion percentage based on completed data sections
+ *
+ * @param data - Evaluation data
+ * @returns Percentage (0-100)
+ */
+function calculateCompletionPercentage(data: TDataProps): number {
+	const fields = [
+		data.painAssessments && data.painAssessments.length > 0,
+		data.healthSigns?.strapiHealthSigns && data.healthSigns.strapiHealthSigns.length > 0,
+		data.medicalHistories?.strapiMedicalHistories &&
+			data.medicalHistories.strapiMedicalHistories.length > 0,
+		data.active !== undefined,
+		data.userId !== undefined && data.userId !== '',
+	];
+
+	const completedFields = fields.filter(Boolean).length;
+	return Math.round((completedFields / fields.length) * 100);
+}
+
+/**
+ * Format duration from minutes to "Xh Ym" format
+ *
+ * @param minutes - Duration in minutes
+ * @returns Formatted duration string
+ */
+export function formatDuration(minutes: number): string {
+	if (minutes < 60) return `${minutes}m`;
+	const hours = Math.floor(minutes / 60);
+	const mins = minutes % 60;
+	return mins > 0 ? `${hours}h ${mins}m` : `${hours}h`;
+}
+
+/**
+ * Get human-readable label for status
+ *
+ * @param status - Status value
+ * @returns Status label
+ */
+function getStatusLabel(status: Status): string {
+	const labels: Record<Status, string> = {
+		pending: 'Pending',
+		'in-review': 'In Review',
+		completed: 'Completed',
+		archived: 'Archived',
+	};
+	return labels[status] || status;
+}
+
+// ============================================================================
+// STYLED COMPONENTS
+// ============================================================================
+
+const SummaryContainer = styled.div`
+	padding: var(--spacing-lg);
+	background: var(--color-background-primary);
+`;
+
+const ContentGrid = styled.div`
+	display: grid;
+	gap: var(--spacing-xl);
+	margin-bottom: var(--spacing-xl);
+
+	/* Mobile: Stacked */
+	@media (max-width: 767px) {
+		grid-template-columns: 1fr;
+	}
+
+	/* Tablet/Desktop: Two columns */
+	@media (min-width: 768px) {
+		grid-template-columns: 1.5fr 1fr;
+	}
+`;
+
+const MetadataSection = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-md);
+`;
+
+const ActionsSection = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-lg);
+	padding: var(--spacing-md);
+	background: var(--color-background-secondary);
+	border-radius: var(--border-radius-md);
+`;
+
+const SectionTitle = styled.h3`
+	margin: 0 0 var(--spacing-md) 0;
+	font-size: var(--font-size-h4);
+	font-weight: 600;
+	color: var(--color-text-primary);
+`;
+
+const MetadataRow = styled.div`
+	display: flex;
+	align-items: flex-start;
+	gap: var(--spacing-sm);
+`;
+
+const Label = styled.span`
+	min-width: 120px;
+	font-weight: 500;
+	color: var(--color-text-secondary);
+`;
+
+const Value = styled.span`
+	flex: 1;
+	color: var(--color-text-primary);
+`;
+
+const StatusTag = styled(Tag)<{ status: Status }>`
+	${({ status }) => {
+		const statusColors: Record<Status, string> = {
+			pending: 'var(--status-pending, #F57C00)',
+			'in-review': 'var(--status-in-review, #1976D2)',
+			completed: 'var(--status-completed, #388E3C)',
+			archived: 'var(--status-archived, #757575)',
+		};
+		return `
+      background: ${statusColors[status]};
+      border: none;
+      color: var(--color-text-inverse, #fff);
+    `;
+	}}
+`;
+
+const ActionGroup = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-sm);
+`;
+
+const ActionLabel = styled.span`
+	font-weight: 500;
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-sm);
+`;
+
+const KeyFindingsSection = styled.div`
+	padding-top: var(--spacing-lg);
+	border-top: 1px solid var(--color-border-secondary);
+`;
+
+const FindingsList = styled.ul`
+	margin: 0;
+	padding-left: var(--spacing-lg);
+	color: var(--color-text-primary);
+`;
+
+const FindingItem = styled.li`
+	margin-bottom: var(--spacing-sm);
+	line-height: 1.6;
+`;
+
+const EmptyState = styled.p`
+	margin: 0;
+	padding: var(--spacing-lg);
+	text-align: center;
+	color: var(--color-text-tertiary);
+	font-style: italic;
+`;

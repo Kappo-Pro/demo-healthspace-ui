@@ -1,0 +1,264 @@
+import { XCircle } from '@vitalflow-icons/general/xCircle';
+import { StopCircle } from '@vitalflow-icons/media/stopCircle';
+import { VideoRecorder } from '@vitalflow-icons/media/videoRecorder';
+import { RehabVideoHeaderProps, RehabVideoState } from '@types';
+import { Button, Divider, Flex, Space, Tooltip, Typography } from 'antd';
+
+const { Paragraph } = Typography;
+import { useTranslation } from 'react-i18next';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+import { useEffect, useRef } from 'react';
+import checkLogo from './VoiceRecordingLogo.json';
+import { CheckCircle } from '@vitalflow-icons/general/checkCircle';
+import { MdOutlineSwitchCamera } from 'react-icons/md';
+import { useTypedSelector } from '@stores/index';
+import { ArrowRight } from '@vitalflow-icons/arrows/arrowRight';
+
+const controlInstructions = {
+	[RehabVideoState.START.toString()]: {
+		text1: "Say 'RECORD' or 'YES' to start recording",
+		text2: "Say 'RECORD' or 'YES' or wave with an open hand to start recording",
+		icon: <img src={`/images/openHand.svg`} />,
+	},
+	[RehabVideoState.RECORDING.toString()]: {
+		text1: "Say 'STOP' to stop the recording",
+		text2: "Say 'STOP' or extend an open hand to stop the recording",
+		icon: <img src={`/images/openHand.svg`} />,
+	},
+	[RehabVideoState.REPLAYING.toString()]: {
+		text1: "Say 'NO' to redo or 'YES' to save the recording",
+		text2:
+			"Say 'NO' to redo or 'YES' to save, or gesture 'THUMBS DOWN' or 'THUMBS UP'",
+		icon: (
+			<div>
+				<img src={`/images/thumbDown.svg`} />
+				<img src={`/images/thumbUp.svg`} />
+			</div>
+		),
+	},
+	[RehabVideoState.RATING.toString()]: {
+		text1: 'Choose a number and say it aloud',
+		text2: 'Choose a number and say it aloud.',
+	},
+};
+
+export default function ProgramVideoHeaderContent(
+	props: RehabVideoHeaderProps,
+) {
+	const {
+		videoState,
+		onStopRecord,
+		onStartRecord,
+		onStopRating,
+		autoStopRecord,
+		onDiscardRecord,
+		onSubmitRecord,
+		isGestureEnabled,
+		flipCamera,
+		switchCamera,
+	} = props;
+	const { t } = useTranslation();
+	const micRef = useRef<LottieRefCurrentProps>(null);
+	const { isAuto } = useTypedSelector(state => state.patientDetail.program.main);
+	const isFullScreenInstructional = useTypedSelector(
+		state => state.rehab.main.fullScreen,
+	);
+
+	useEffect(() => {
+		if (videoState === RehabVideoState.RATING) {
+			onStopRating();
+		}
+	}, [videoState]);
+
+	return (
+		<Flex justify="flex-end" style={{ textAlign: 'end', lineHeight: '35px' }}>
+			<div>
+				<Flex justify="end" align="center" className="h-[35px]">
+				{videoState === RehabVideoState.READY && (
+					<Tooltip title={t('Patient.data.rehab.getReady')}>
+						<Button
+							style={{
+								height: '35px',
+								border: 0,
+								borderRadius: 0,
+								backgroundcolor: 'var(--color-warning-500)',
+								color: 'var(--text-on-dark)',
+							}}>
+							{t('Patient.data.rehab.getReady')}
+						</Button>
+					</Tooltip>
+				)}
+				{videoState === RehabVideoState.RECORDING && (
+					<Tooltip title={t('Patient.data.rehab.stop')}>
+						<Button
+							onClick={() => (isAuto ? autoStopRecord() : onStopRecord())}
+							style={{
+								height: '35px',
+								border: 0,
+								borderRadius: 0,
+								backgroundColor: 'var(--color-error-600)',
+								color: 'var(--text-on-dark)',
+							}}>
+							<Space align="center">
+								{isAuto ? (
+									<ArrowRight width={21} height={21} />
+								) : (
+									<StopCircle width={21} height={21} />
+								)}
+								{isAuto
+									? t('Patient.data.omnirom.next')
+									: t('Patient.data.rehab.stop')}
+							</Space>
+						</Button>
+					</Tooltip>
+				)}
+				{!isAuto &&
+					videoState === RehabVideoState.START &&
+					!isFullScreenInstructional && (
+						<Tooltip title={t('Patient.data.rehab.record')}>
+							<Button
+								onClick={onStartRecord}
+								style={{
+									height: '35px',
+									border: 0,
+									borderRadius: 0,
+									backgroundcolor: 'var(--text-success)',
+									color: 'var(--brand-primary)',
+								}}>
+								<Space align="center">
+									<VideoRecorder width={21} height={21} color="var(--brand-primary-hover)" />
+									{t('Patient.data.rehab.record')}
+								</Space>
+							</Button>
+						</Tooltip>
+					)}
+				{/* {videoState === RehabVideoState.RATING && (
+          <div className='bg-black bg-opacity-60 absolute z-10 top-60 right-0 py-4 px-7 rounded-s-full'>
+            <RatingFeedback onStopRating={onStopRating} selectedRating={selectedRating} setSelectedRating={setSelectedRating} />
+          </div>
+        )} */}
+				{!isAuto &&
+					controlInstructions[videoState] &&
+					!isFullScreenInstructional && (
+						<Flex align="center" justify="end" gap={16} className="bg-black bg-opacity-60 max-w-[500px] absolute z-10 top-20 right-0 py-4 px-7 rounded-s-full">
+							<div>
+								<Flex justify="end" align="center">
+									<Flex align="center" justify="center" className="align-middle md:w-20 md:h-5 lg:w-36 lg:h-12">
+										<Lottie
+											lottieRef={micRef}
+											animationData={checkLogo}
+											loop={true}
+											autoplay={true}
+										/>
+									</Flex>
+									<img src="/images/microphone.svg" />
+								</Flex>
+								<Paragraph className="font-semibold md:text-sm lg:text-lg text-white">
+									{isGestureEnabled
+										? controlInstructions[videoState]?.text2
+										: controlInstructions[videoState]?.text1}
+								</Paragraph>
+							</div>
+							{isGestureEnabled && controlInstructions[videoState]?.icon}
+						</Flex>
+					)}
+				{!isAuto && videoState === RehabVideoState.REPLAYING && (
+					<>
+						<Tooltip title={t('Patient.data.rehab.discard')}>
+							<Button
+								onClick={onDiscardRecord}
+								style={{
+									height: '35px',
+									border: 0,
+									borderRadius: 0,
+									backgroundColor: 'var(--color-error-600)',
+									color: 'var(--text-on-dark)',
+								}}>
+								<Space align="center">
+									<XCircle width={21} height={21} />
+									{t('Patient.data.rehab.discard')}
+								</Space>
+							</Button>
+						</Tooltip>
+						<Tooltip title={t('Patient.data.rehab.submit')}>
+							<Button
+								onClick={onSubmitRecord}
+								style={{
+									height: '35px',
+									border: 0,
+									borderRadius: 0,
+									backgroundcolor: 'var(--text-success)',
+									color: 'var(--brand-primary)',
+								}}>
+								<Space align="center">
+									<CheckCircle width={21} height={21} color="stroke-black" />
+									{t('Patient.data.rehab.submit')}
+								</Space>
+							</Button>
+						</Tooltip>
+					</>
+				)}
+				{/* {
+          videoState === RehabVideoState.RATING ? '' :
+            <Tooltip title={t('Patient.data.rehab.record')}>
+              <CountDownTimer limit={patientTimeLimit} isStartingTimer={isStartingTimer} endedTimer={onEndedTimer} />
+            </Tooltip>
+        } */}
+				{/* <Tooltip title="Fullscreen">
+          {isFullscreen ? (
+            <MdFullscreenExit
+              size={30}
+              className="align-middle cursor-pointer"
+              onClick={onFullscreen}
+              color='var(--color-gray-600)'
+            />
+          ) : (
+            <MdFullscreen
+              size={30}
+              className="align-middle cursor-pointer"
+              onClick={onFullscreen}
+              color='var(--color-gray-600)'
+            />
+          )}
+        </Tooltip>
+        <Divider
+          type="vertical"
+          className="h-[34px]" style={{ bordercolor: 'var(--color-gray-900)' }}
+        /> */}
+				{flipCamera && (
+					<>
+						<Divider
+							type="vertical"
+							className="h-[34px]" style={{ bordercolor: 'var(--color-gray-900)' }}
+						/>
+						<Tooltip
+							title={
+								videoState === RehabVideoState.RECORDING ||
+								videoState === RehabVideoState.READY
+									? ' (Disabled during recording)'
+									: t('Patient.data.omnirom.flipCamera')
+							}>
+							<MdOutlineSwitchCamera
+								size={30}
+								className="align-middle cursor-pointer"
+								onClick={
+									videoState === RehabVideoState.RECORDING ||
+									videoState === RehabVideoState.READY
+										? () => {}
+										: switchCamera
+								}
+								color="var(--color-gray-600)"
+								//disabled={videoState === RehabVideoState.RECORDING}
+							/>
+						</Tooltip>
+						<Divider
+							type="vertical"
+							className="h-[34px]" style={{ borderColor: 'transparent' }}
+						/>
+					</>
+				)}
+				</Flex>
+			</div>
+		</Flex>
+	);
+}

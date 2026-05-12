@@ -1,0 +1,44 @@
+/**
+ * Performance Monitor Styles
+ *
+ * @since EPIC-001-S12
+ */
+
+.performance-monitor {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	padding: 8px 12px;
+	background: var(--surface-overlay, rgba(0, 0, 0, 0.7));
+	border-radius: 4px;
+	font-family: 'Monaco', 'Courier New', monospace;
+	font-size: 14px;
+	font-weight: 600;
+	z-index: 1000;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.performance-monitor__label {
+	color: var(--text-secondary, #999);
+}
+
+.performance-monitor__value {
+	color: var(--text-color-root, #fff);
+	min-width: 32px;
+	text-align: right;
+}
+
+/* Status-based coloring */
+.performance-monitor--good .performance-monitor__value {
+	color: var(--success-500, #10b981);
+}
+
+.performance-monitor--acceptable .performance-monitor__value {
+	color: var(--warning-500, #f59e0b);
+}
+
+.performance-monitor--poor .performance-monitor__value {
+	color: var(--error-500, #ef4444);
+}

@@ -1,0 +1,69 @@
+/**
+ * PostureStatusBadge Styles
+ * Uses design system tokens for consistent theming
+ */
+
+.posture-status-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--spacing-1-5);
+	font-weight: var(--font-weight-medium);
+	transition: all var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+/* Size variants */
+.posture-status-badge--small {
+	font-size: var(--font-size-xs);
+	gap: var(--spacing-1);
+}
+
+.posture-status-badge--small .posture-status-badge__icon {
+	font-size: var(--font-size-sm);
+}
+
+.posture-status-badge--default {
+	font-size: var(--font-size-sm);
+	gap: var(--spacing-1-5);
+}
+
+.posture-status-badge--default .posture-status-badge__icon {
+	font-size: var(--font-size-sm);
+}
+
+.posture-status-badge--large {
+	font-size: var(--font-size-sm);
+	gap: var(--spacing-2);
+}
+
+.posture-status-badge--large .posture-status-badge__icon {
+	font-size: var(--font-size-lg);
+}
+
+/* Icon styling */
+.posture-status-badge__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: var(--line-height-none);
+}
+
+/* Label styling */
+.posture-status-badge__label {
+	line-height: var(--line-height-none);
+	white-space: nowrap;
+}
+
+/* Accessibility - high contrast mode */
+@media (prefers-contrast: high) {
+	.posture-status-badge {
+		font-weight: var(--font-weight-semibold);
+		border-bottom: var(--spacing-0-5) solid currentColor;
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.posture-status-badge {
+		transition: none;
+	}
+}

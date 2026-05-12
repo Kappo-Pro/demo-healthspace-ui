@@ -1,0 +1,28 @@
+.scrollable-calendar {
+	margin-left: -var(--spacing-6);
+	width: 425px;
+	overflow: auto;
+	position: relative;
+	--tw-bg-opacity: 1;
+	background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+	z-index: 40;
+	height: 482px;
+	padding-left: var(--spacing-5);
+}
+.scrollable-calendar-container {
+	position: absolute;
+	padding-right: var(--spacing-2);
+}
+.scrollable-calendar-monthly-year {
+	--tw-text-opacity: 1;
+	color: var(--mainmenu-bg-color);
+	font-weight: var(--font-weight-bold);
+	margin-top: var(--spacing-8);
+}
+.scrollable-calendar-days {
+	display: block;
+	text-align: center;
+	font-size: var(--font-size-base);
+	line-height: var(--spacing-6);
+	padding-bottom: var(--spacing-3);
+}

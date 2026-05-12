@@ -1,0 +1,160 @@
+/* CompareSlider container */
+.compare-slider-container {
+	position: relative;
+	width: 100%;
+	height: auto;
+	max-height: 90vh;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	cursor: ew-resize;
+	user-select: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--input-border);
+	border-radius: var(--radius-lg);
+}
+
+/* Right image */
+.compare-slider-right-image {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: contain;
+	background: var(--ant-modal-content-bg);
+}
+
+/* Left image (clipped) */
+.compare-slider-left-image {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: var(--ant-modal-content-bg);
+	object-fit: contain;
+}
+
+/* White center line */
+.compare-slider-center-line {
+	position: absolute;
+	top: 0;
+	transform: translateX(-50%);
+	width: var(--spacing-0-5);
+	height: 100%;
+	background: var(--color-white);
+	z-index: 20;
+}
+
+/* Drag handle circle */
+.compare-slider-handle {
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: var(--spacing-11);
+	height: var(--spacing-11);
+	border-radius: 50%;
+	background: var(--color-black-alpha-70);
+	box-shadow: 0 var(--spacing-0-5) var(--spacing-2) var(--color-black-alpha-30);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 30;
+	cursor: ew-resize;
+}
+
+/* Left arrow */
+.compare-slider-arrow-left {
+	font-size: 24px;
+	color: var(--text-secondary);
+	margin-right: 4px;
+	font-weight: bold;
+}
+
+/* Right arrow */
+.compare-slider-arrow-right {
+	font-size: 24px;
+	color: var(--text-secondary);
+	margin-left: 4px;
+	font-weight: bold;
+}
+
+/* Label base */
+.compare-slider-label {
+	position: absolute;
+	top: 50%;
+	padding: var(--spacing-1) var(--spacing-2);
+	background: var(--color-black-alpha-60);
+	color: var(--color-white);
+	border-radius: 4px;
+	font-size: 12px;
+	z-index: 40;
+}
+
+/* Label left */
+.compare-slider-label-left {
+	left: var(--spacing-2-5);
+}
+
+/* Label right */
+.compare-slider-label-right {
+	right: var(--spacing-2-5);
+}
+
+/* Screenshot overlay on hover */
+.screenshot-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-black-alpha-60);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-white);
+	cursor: pointer;
+}
+
+/* Screenshot preview with date and score overlays */
+.screenshot-preview {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 90vw;
+	max-height: 90vh;
+}
+
+.screenshot-preview img {
+	max-width: 100%;
+	max-height: 90vh;
+	object-fit: contain;
+	border-radius: var(--radius-lg);
+}
+
+.screenshot-preview-date {
+	position: absolute;
+	top: var(--spacing-3);
+	right: var(--spacing-3);
+	background: var(--color-white-alpha-80);
+	color: var(--mainmenu-bg-color);
+	padding: var(--spacing-1-5) var(--spacing-2);
+	border-radius: var(--radius-md);
+	font-size: 14px;
+	white-space: pre-line;
+}
+
+.screenshot-preview-score {
+	position: absolute;
+	bottom: var(--spacing-3);
+	right: var(--spacing-3);
+	background: var(--mainmenu-bg-color);
+	color: var(--text-on-dark);
+	padding: var(--spacing-1-5) var(--spacing-2);
+	border-radius: var(--radius-md);
+	font-size: 20px;
+	font-weight: 700;
+}

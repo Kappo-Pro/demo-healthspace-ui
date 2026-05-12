@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TabLoadingSkeleton matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-bRKDuR kaXnNO"
+    data-testid="tab-loading-skeleton"
+  >
+    <div
+      class="ant-skeleton ant-skeleton-active css-dev-only-do-not-override-1cj4ms"
+    >
+      <div
+        class="ant-skeleton-content"
+      >
+        <h3
+          class="ant-skeleton-title"
+          style="width: 38%;"
+        />
+        <ul
+          class="ant-skeleton-paragraph"
+        >
+          <li />
+          <li />
+          <li />
+          <li
+            style="width: 61%;"
+          />
+        </ul>
+      </div>
+    </div>
+    <div
+      class="ant-skeleton ant-skeleton-element ant-skeleton-active css-dev-only-do-not-override-1cj4ms"
+    >
+      <span
+        class="ant-skeleton-button"
+        style="width: 120px; margin-top: 16px; height: 32px;"
+      />
+    </div>
+  </div>
+</div>
+`;

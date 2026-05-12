@@ -1,0 +1,100 @@
+/* DraggableProgramCard Styles */
+
+.draggable-program-card {
+	cursor: move;
+	user-select: none;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	border: 2px solid transparent;
+	margin-bottom: var(--spacing-2);
+}
+
+.draggable-program-card:hover {
+	border-color: var(--color-primary-500);
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px);
+}
+
+.draggable-program-card.dragging {
+	opacity: 0.5;
+	box-shadow: var(--shadow-lg);
+	z-index: 1000;
+}
+
+.draggable-program-card__content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.draggable-program-card__header {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.draggable-program-card__drag-icon {
+	color: var(--color-text-tertiary);
+	font-size: var(--font-size-sm);
+	flex-shrink: 0;
+}
+
+.draggable-program-card__description {
+	font-size: var(--font-size-sm);
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.draggable-program-card__meta {
+	font-size: var(--font-size-xs);
+	color: var(--color-text-secondary);
+}
+
+.draggable-program-card__meta span {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
+}
+
+.draggable-program-card__category {
+	align-self: flex-start;
+}
+
+/* Dark Mode Support */
+[data-theme='dark'] .draggable-program-card {
+	background: var(--color-background-secondary);
+}
+
+[data-theme='dark'] .draggable-program-card:hover {
+	background: var(--color-background-tertiary);
+}
+
+/* Touch Support */
+@media (hover: none) and (pointer: coarse) {
+	.draggable-program-card {
+		cursor: grab;
+	}
+
+	.draggable-program-card:active {
+		cursor: grabbing;
+	}
+}
+
+/* Accessibility */
+.draggable-program-card:focus-visible {
+	outline: 2px solid var(--color-primary-500);
+	outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.draggable-program-card {
+		margin-bottom: var(--spacing-3);
+	}
+
+	.draggable-program-card__description {
+		-webkit-line-clamp: 1;
+	}
+}

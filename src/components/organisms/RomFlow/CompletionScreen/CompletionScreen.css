@@ -1,0 +1,71 @@
+.completion-screen-vitalscan-rom-wrapper {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-3);
+	user-select: none;
+	padding-bottom: var(--spacing-5);
+}
+
+.completion-screen-vitalscan-rom-content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.completion-screen-vitalscan-rom-logo-container {
+	background-color: var(--brand-primary-hover);
+	border-radius: var(--radius-full);
+	padding: var(--spacing-5);
+	height: 60px;
+	width: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.completion-screen-vitalscan-rom-title {
+	color: var(--brand-primary-hover);
+	font-size: 32px;
+	font-weight: bold;
+}
+
+.completion-screen-vitalscan-rom-description {
+	color: var(--color-gray-400);
+	font-size: var(--font-size-lg);
+}
+
+.completion-screen-vitalscan-rom-spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.completion-screen-vitalscan-rom-summary {
+	padding-left: var(--spacing-5);
+	padding-right: var(--spacing-5);
+	padding-top: var(--spacing-2-5);
+	padding-bottom: var(--spacing-2-5);
+	height: calc(100vh - 320px);
+	width: 90vw;
+	overflow-y: auto;
+}
+
+.completion-screen-vitalscan-rom-next-button {
+	background-color: var(--color-success-500) !important;
+	position: fixed;
+	bottom: var(--spacing-5);
+	color: var(--text-on-dark) /* TODO: Verify context */ !important;
+	padding-top: var(--spacing-2-5);
+	padding-bottom: var(--spacing-2-5);
+	padding-left: var(--spacing-4);
+	padding-right: var(--spacing-4);
+	border-radius: var(--radius-lg);
+	height: var(--spacing-10);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

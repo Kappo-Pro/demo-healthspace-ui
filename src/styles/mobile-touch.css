@@ -1,0 +1,437 @@
+/**
+ * Mobile Touch Optimization Styles
+ * Story 2.6: Mobile Touch Optimization (FR10)
+ *
+ * Provides:
+ * - Active state feedback for touch interactions
+ * - Ripple effect animations
+ * - Touch-specific optimizations
+ * - Smooth scroll behavior
+ *
+ * WCAG Compliance:
+ * - Respects prefers-reduced-motion
+ * - Maintains focus visibility
+ * - No forced animations
+ */
+
+/* ===========================
+ * Touch Target Sizing
+ * =========================== */
+
+/**
+ * Ensure minimum touch targets (WCAG 2.5.5 AA)
+ * Minimum: 44x44px
+ * Recommended: 48x48px
+ */
+.touch-target {
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0.5rem 0.75rem;
+}
+
+.touch-target-large {
+	min-width: 48px;
+	min-height: 48px;
+	padding: 0.75rem 1rem;
+}
+
+/* ===========================
+ * Active State Feedback
+ * =========================== */
+
+/**
+ * Button active states
+ * Provides immediate visual feedback on tap
+ */
+button:active,
+.button:active,
+[role='button']:active {
+	transform: scale(0.95);
+	transition: transform 0.1s ease-out;
+}
+
+/* Primary buttons */
+.ant-btn-primary:active {
+	background-color: var(--brand-primary);
+	border-color: var(--brand-primary);
+}
+
+/* Default buttons */
+.ant-btn-default:active {
+	background-color: var(--color-gray-100);
+	border-color: var(--color-gray-300);
+}
+
+/* Text/link buttons */
+.ant-btn-text:active,
+.ant-btn-link:active {
+	color: var(--brand-primary);
+}
+
+/**
+ * Card active states
+ * Provides feedback on interactive cards
+ */
+.ant-card:active,
+.card:active,
+[role='article']:active {
+	box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+	transform: translateY(1px);
+	transition:
+		transform 0.1s ease-out,
+		box-shadow 0.1s ease-out;
+}
+
+/**
+ * Link active states
+ */
+a:active {
+	opacity: 0.7;
+	transition: opacity 0.1s ease-out;
+}
+
+/**
+ * Input active states
+ */
+input:active,
+textarea:active,
+select:active {
+	border-color: var(--brand-primary);
+	box-shadow: 0 0 0 2px var(--color-purple-100);
+	transition:
+		border-color 0.2s ease-out,
+		box-shadow 0.2s ease-out;
+}
+
+/* ===========================
+ * Ripple Effect
+ * =========================== */
+
+/**
+ * Ripple container
+ * Positioned relative to contain ripple effect
+ */
+.ripple-container {
+	position: relative;
+	overflow: hidden;
+}
+
+/**
+ * Ripple effect animation
+ * Creates expanding circle on tap
+ *
+ * NOTE: Literal alpha token usage is acceptable here.
+ * Rationale: Touch ripple effects require precise opacity control for
+ * visual feedback. The effect needs consistent 50% opacity regardless
+ * of theme context. Semantic tokens would add unnecessary abstraction
+ * without improving theme adaptability.
+ */
+.ripple {
+	position: absolute;
+	border-radius: 50%;
+	/* Acceptable literal: Ripple effects need precise opacity control */
+	background-color: var(--color-white-alpha-50);
+	transform: scale(0);
+	animation: ripple-animation 0.6s ease-out;
+	pointer-events: none;
+}
+
+@keyframes ripple-animation {
+	0% {
+		transform: scale(0);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(4);
+		opacity: 0;
+	}
+}
+
+/* Dark mode ripple - uses lighter opacity for dark backgrounds */
+.dark .ripple {
+	/* Acceptable literal: Dark theme ripple needs different opacity for visibility */
+	background-color: var(--color-black-alpha-20);
+}
+
+/* ===========================
+ * Scroll Performance
+ * =========================== */
+
+/**
+ * Momentum scrolling (iOS)
+ * Enables inertia-based scrolling
+ */
+.scroll-container {
+	overflow-x: auto;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+}
+
+/**
+ * Timeline horizontal scroll
+ */
+.timeline-container {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+	scroll-snap-type: x proximity;
+}
+
+.timeline-item {
+	scroll-snap-align: start;
+}
+
+/**
+ * Hardware acceleration
+ * Forces GPU acceleration for smooth animations
+ */
+.animated-element {
+	transform: translateZ(0);
+	will-change: transform;
+	backface-visibility: hidden;
+}
+
+/* ===========================
+ * Touch-Specific Optimizations
+ * =========================== */
+
+/**
+ * Disable text selection on buttons
+ * Prevents accidental selection during tap
+ */
+button,
+.button,
+[role='button'] {
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/**
+ * Custom tap highlight color
+ * Provides visual feedback on tap
+ *
+ * NOTE: Literal alpha token usage is acceptable here.
+ * Rationale: Touch highlight requires precise 10% brand color opacity
+ * for optimal visual feedback without obscuring content. This is a
+ * browser-level touch effect that needs consistent cross-theme behavior.
+ */
+a,
+button,
+.button,
+[role='button'] {
+	/* Acceptable literal: Browser tap highlight needs precise opacity */
+	-webkit-tap-highlight-color: var(--color-purple-alpha-10);
+}
+
+/**
+ * Smooth font rendering on mobile
+ */
+@media (max-width: 768px) {
+	body {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+/* ===========================
+ * Gesture Support
+ * =========================== */
+
+/**
+ * Touch action properties
+ * Controls browser gesture behavior
+ */
+
+/* Pan horizontal only (for timeline) */
+.pan-x {
+	touch-action: pan-x;
+}
+
+/* Pan vertical only (for lists) */
+.pan-y {
+	touch-action: pan-y;
+}
+
+/* Pinch-zoom enabled (for images) */
+.pinch-zoom {
+	touch-action: pinch-zoom;
+}
+
+/* No touch actions (for custom gestures) */
+.touch-none {
+	touch-action: none;
+}
+
+/**
+ * Swipeable container
+ */
+.swipeable {
+	position: relative;
+	touch-action: pan-y;
+}
+
+/* ===========================
+ * Pull-to-Refresh
+ * =========================== */
+
+/**
+ * Pull-to-refresh indicator
+ */
+.ptr-indicator {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	color: var(--gray-500);
+}
+
+.ptr-loading {
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* ===========================
+ * Responsive Touch Targets
+ * =========================== */
+
+/**
+ * Status badges and tags - ensure minimum touch target ONLY for clickable/interactive ones
+ *
+ * Usage: Add .clickable class or use button/a element wrappers for interactive badges
+ * Examples:
+ *   <Tag className="clickable" onClick={...}>...</Tag>
+ *   <Badge className="clickable" onClick={...}>...</Badge>
+ *   <button><Badge>...</Badge></button>
+ */
+.ant-badge.clickable,
+.ant-tag.clickable,
+button .ant-badge,
+button .ant-tag,
+a .ant-badge,
+a .ant-tag,
+.ant-badge-clickable,
+.ant-tag-clickable {
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0.5rem 0.75rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/**
+ * Icon buttons - ensure minimum touch target
+ */
+.ant-btn-icon-only {
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0.5rem;
+}
+
+/**
+ * Close buttons - minimum 44px
+ */
+.ant-modal-close,
+.ant-drawer-close {
+	width: 44px;
+	height: 44px;
+}
+
+/* ===========================
+ * Reduced Motion Support
+ * =========================== */
+
+/**
+ * Disable animations for users who prefer reduced motion
+ */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	.ripple {
+		animation: none;
+		display: none;
+	}
+
+	.animated-element {
+		animation: none;
+	}
+}
+
+/* ===========================
+ * Mobile-Specific Styles
+ * =========================== */
+
+/**
+ * Mobile viewport fixes
+ */
+@media (max-width: 768px) {
+	/* Prevent zoom on input focus (iOS) */
+	input[type='text'],
+	input[type='email'],
+	input[type='tel'],
+	input[type='number'],
+	textarea {
+		font-size: 16px; /* iOS requires 16px to prevent zoom */
+	}
+
+	/* Larger touch targets on mobile */
+	.ant-btn {
+		min-height: 44px;
+		padding: 0.5rem 1rem;
+	}
+
+	/* More padding for cards on mobile */
+	.ant-card-body {
+		padding: 1rem;
+	}
+
+	/* Sticky elements offset for mobile keyboards */
+	.sticky-bottom {
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+}
+
+/* ===========================
+ * Safe Area Support (iOS)
+ * =========================== */
+
+/**
+ * Respect iOS safe areas (notch, home indicator)
+ */
+@supports (padding: env(safe-area-inset-top)) {
+	.safe-area-top {
+		padding-top: env(safe-area-inset-top);
+	}
+
+	.safe-area-bottom {
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+
+	.safe-area-left {
+		padding-left: env(safe-area-inset-left);
+	}
+
+	.safe-area-right {
+		padding-right: env(safe-area-inset-right);
+	}
+}

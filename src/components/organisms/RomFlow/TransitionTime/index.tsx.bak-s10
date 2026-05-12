@@ -1,0 +1,164 @@
+import { VoiceControl } from '@atoms/RehabPreAssessment/VoiceControl';
+import { Flex, Typography } from 'antd';
+
+const { Paragraph } = Typography;
+import Lottie from 'lottie-react';
+import { useEffect } from 'react';
+import checkLogo from './VoiceRecordingLogo.json';
+import { PiMicrophoneFill } from 'react-icons/pi';
+import { useTranslation } from 'react-i18next';
+
+interface ExerciseTransitionTimeProps {
+	transitionTime: number;
+	setTransitionTime: (value: number) => void;
+	setIsManual: (value: boolean) => void;
+	setSavedVoice: (value: string) => void;
+	savedVoice: string;
+	onFullscreen: () => void;
+}
+
+export const ExerciseTransitionTime = ({
+	transitionTime,
+	setSavedVoice,
+	savedVoice,
+	setTransitionTime,
+	onFullscreen,
+	setIsManual,
+}: ExerciseTransitionTimeProps) => {
+	const transitionOptions = [3, 5, 8, 10];
+	const { t } = useTranslation();
+
+	useEffect(() => {
+		onFullscreen();
+	}, []);
+
+	useEffect(() => {
+		const voiceLowerCase = savedVoice.toLowerCase();
+		if (savedVoice) {
+			if (voiceLowerCase.includes('3') || voiceLowerCase.includes('three')) {
+				setTransitionTime(3);
+			} else if (
+				voiceLowerCase.includes('5') ||
+				voiceLowerCase.includes('five')
+			) {
+				setTransitionTime(5);
+			} else if (
+				voiceLowerCase.includes('8') ||
+				voiceLowerCase.includes('eight')
+			) {
+				setTransitionTime(8);
+			} else if (
+				voiceLowerCase.includes('10') ||
+				voiceLowerCase.includes('ten')
+			) {
+				setTransitionTime(10);
+			} else if (voiceLowerCase.includes('manual')) {
+				setIsManual(true);
+				setTransitionTime(3);
+			}
+		}
+	}, [savedVoice]);
+
+	VoiceControl((updatedTranscript: string) => {
+		setSavedVoice(updatedTranscript);
+	});
+
+	return (
+		<Flex
+			vertical
+			justify="center"
+			align="center"
+			className="w-full h-full"
+			style={{
+				position: 'absolute',
+				background: 'var(--mainmenu-bg-color-player-bg)',
+				zIndex: 10,
+				color: 'white',
+			}}>
+			<Flex
+				vertical
+				justify="center"
+				align="center"
+				gap={10}
+				className="md:scale-[60%] lg:scale-[70%] xl:scale-[90%] 2xl:scale-[100%]"
+				style={{
+					width: 551,
+					zIndex: 10,
+					fontSize: 20,
+					padding: 20,
+				}}>
+				<Paragraph className="font-semibold">
+					{t('Patient.data.omnirom.transitionTime')}
+				</Paragraph>
+				<p>
+					{t('Patient.data.omnirom.transitionExercise')}{' '}
+					<span className="font-semibold">
+						{transitionTime} {t('Patient.data.omnirom.seconds')}
+					</span>
+					.
+				</p>
+				<Paragraph>{t('Patient.data.omnirom.keepTime')}:</Paragraph>
+
+				<Flex
+					justify="space-between"
+					style={{
+						width: '100%',
+						marginBottom: 40,
+						marginTop: 20,
+					}}>
+					{transitionOptions.map(time => {
+						return (
+							<span
+								onClick={() => {
+									setTransitionTime(time);
+									setIsManual(false);
+								}}
+								style={{
+									paddingTop: 5,
+									paddingLeft: 10,
+									paddingRight: 10,
+									paddingBottom: 5,
+									borderRadius: 8,
+									cursor: 'pointer',
+									border:
+										transitionTime == time
+											? '2px solid #85E13A'
+											: '2px solid white',
+									color: transitionTime == time ? '#85E13A' : 'white',
+								}}>
+								{time} {t('Patient.data.omnirom.sec')}
+							</span>
+						);
+					})}
+					<span
+						onClick={() => {
+							setIsManual(true);
+							setTransitionTime(-1);
+						}}
+						style={{
+							paddingTop: 5,
+							paddingLeft: 10,
+							paddingRight: 10,
+							paddingBottom: 5,
+							borderRadius: 8,
+							cursor: 'pointer',
+							border: '2px solid white',
+							color: 'white',
+						}}>
+						{t('Patient.data.omnirom.manualOpt')}
+					</span>
+				</Flex>
+				<Flex className="mt-9" justify="flex-end" align="center">
+					<Flex
+						align="center"
+						justify="center"
+						className="h-[50px] w-[150px]">
+						<Lottie animationData={checkLogo} loop={true} autoplay={true} />
+					</Flex>
+					<PiMicrophoneFill className="text-primary-400 w-7 h-7" />
+				</Flex>
+				<Paragraph className="font-semibold">{t('Patient.data.omnirom.sayLoud')}</Paragraph>
+			</Flex>
+		</Flex>
+	);
+};
