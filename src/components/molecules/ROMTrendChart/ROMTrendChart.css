@@ -10,6 +10,7 @@
    ============================================ */
 
 .rom-trend-chart {
+	
 	padding: var(--spacing-md);
 	background: var(--surface-elevated);
 	border-radius: var(--border-radius-md);
